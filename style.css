@@ -1,0 +1,918 @@
+﻿/* --- CẤU HÌNH CHUNG --- */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* --- BANNER ẤN TƯỢNG (NEW HERO SECTION) --- */
+/* Wrapper giữ chiều cao và vị trí */
+.hero-wrapper {
+    position: relative;
+    height: 700px; /* Tăng chiều cao để thoáng hơn */
+    overflow: hidden; /* Cắt phần ảnh zoom ra ngoài */
+    display: flex;
+    align-items: center;
+}
+
+/* Lớp ảnh nền có hiệu ứng Zoom */
+.hero-bg-animated {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Ảnh nền của bạn */
+    background-image: url('images/14.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: 0; /* Nằm dưới cùng */
+    /* Hiệu ứng zoom vào rồi zoom ra chậm rãi trong 30s */
+    animation: kenBurns 30s ease-in-out infinite alternate;
+}
+
+
+
+
+
+/* Định nghĩa Animation Zoom */
+@keyframes kenBurns {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.15);
+    }
+}
+
+/* Animation chữ trượt lên */
+.animate-fade-up {
+    animation: fadeUp 1s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- MENU ĐIỀU HƯỚNG --- */
+.nav-link {
+    position: relative;
+    color: #334155;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .nav-link:hover, .nav-link.active {
+        color: #D6001C;
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 3px;
+        bottom: -4px;
+        left: 0;
+        background: #D6001C;
+        transition: 0.3s;
+    }
+
+    .nav-link:hover::after, .nav-link.active::after {
+        width: 100%;
+    }
+
+/* --- CÁC PHẦN KHÁC (Giữ nguyên) --- */
+.page-section {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+    .page-section.active {
+        display: block;
+        opacity: 1;
+    }
+
+.product-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        border-bottom: 3px solid #D6001C;
+    }
+
+/* --- GIAO DIỆN SẢN PHẨM MỚI --- */
+
+/* 1. Layout Sidebar */
+.products-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+@media (min-width: 1024px) {
+    .products-layout {
+        flex-direction: row;
+    }
+    
+    .sidebar-col {
+        width: 250px;
+        flex-shrink: 0;
+    }
+    
+    .content-col {
+        flex-grow: 1;
+    }
+}
+
+/* 2. Menu Sidebar */
+.category-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    text-align: left;
+    font-weight: 600;
+    color: #475569;
+    transition: all 0.3s;
+}
+
+.category-btn:hover, .category-btn.active {
+    background: #D6001C;
+    color: white;
+    border-color: #D6001C;
+    padding-left: 20px; /* Hiệu ứng trượt nhẹ */
+    box-shadow: 0 4px 6px -1px rgba(214, 0, 28, 0.2);
+}
+
+.category-btn i {
+    opacity: 0.5;
+}
+.category-btn:hover i, .category-btn.active i {
+    opacity: 1;
+}
+
+/* 4. Custom Size Banner */
+.custom-size-banner {
+    background: linear-gradient(135deg, #0F172A 0%, #1e293b 100%);
+    border-radius: 12px;
+    padding: 30px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.custom-size-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(214, 0, 28, 0.1));
+    transform: skewX(-20deg);
+}
+
+.custom-size-banner i.big-icon {
+    font-size: 4rem;
+    opacity: 0.1;
+    position: absolute;
+    right: 20px;
+    bottom: -10px;
+}    
+
+.section-title {
+    position: relative;
+    margin-bottom: 2rem;
+    display: inline-block;
+}
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: #D6001C;
+    }
+
+.text-center .section-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.lang-btn {
+    cursor: pointer;
+    opacity: 0.5;
+    transition: 0.3s;
+}
+
+    .lang-btn:hover {
+        opacity: 1;
+    }
+
+    .lang-btn.active {
+        color: #D6001C;
+        font-weight: 800;
+        opacity: 1;
+        border-bottom: 2px solid #D6001C;
+    }
+
+.swiper-button-next-custom, .swiper-button-prev-custom {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #64748b;
+    transition: 0.3s;
+}
+
+    .swiper-button-next-custom:hover, .swiper-button-prev-custom:hover {
+        background: #D6001C;
+        color: white;
+        border-color: #D6001C;
+    }
+
+.partner-logo {
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+    .partner-logo:hover {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+/* --- TIMELINE HISTORY (MỚI - ẤN TƯỢNG) --- */
+
+/* Khung bao quanh Timeline */
+.timeline-section {
+    position: relative;
+    padding: 60px 0;
+    overflow: hidden;
+}
+
+/* Đường kẻ dọc nối các mốc */
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #e2e8f0;
+    transform: translateX(-50%);
+    z-index: 1;
+    border-radius: 4px;
+}
+
+/* Item từng mốc thời gian */
+.timeline-item {
+    position: relative;
+    width: 50%;
+    padding: 20px 40px;
+    z-index: 2;
+}
+
+    /* Định vị trái phải cho desktop */
+    .timeline-item.left {
+        left: 0;
+        text-align: right;
+    }
+
+    .timeline-item.right {
+        left: 50%;
+        text-align: left;
+    }
+
+/* Dấu chấm tròn trên dòng kẻ */
+.timeline-dot {
+    position: absolute;
+    top: 30px;
+    width: 24px;
+    height: 24px;
+    background: #fff;
+    border: 4px solid #D6001C; /* Đỏ VAF */
+    border-radius: 50%;
+    z-index: 3;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.7);
+}
+
+.timeline-item.left .timeline-dot {
+    right: -12px;
+}
+
+.timeline-item.right .timeline-dot {
+    left: -12px;
+}
+
+/* Hiệu ứng khi lướt chuột vào chấm tròn */
+.timeline-item:hover .timeline-dot {
+    background: #D6001C;
+    transform: scale(1.3);
+    box-shadow: 0 0 15px rgba(214, 0, 28, 0.5);
+}
+
+/* Hộp nội dung (Card) */
+.timeline-content {
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px -5px rgba(0,0,0,0.08);
+    border: 1px solid #f1f5f9;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+    .timeline-content:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px -5px rgba(214, 0, 28, 0.15); /* Bóng đỏ khi hover */
+        border-color: #D6001C;
+    }
+
+/* Số Năm in mờ làm nền */
+.timeline-year-bg {
+    position: absolute;
+    top: -15px;
+    font-size: 5rem;
+    font-weight: 900;
+    color: #d8d8d8;
+    z-index: 0;
+    line-height: 1;
+    pointer-events: none;
+    transition: color 0.3s;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.timeline-item.left .timeline-year-bg {
+    right: 20px;
+}
+
+.timeline-item.right .timeline-year-bg {
+    left: 20px;
+}
+
+.timeline-content:hover .timeline-year-bg {
+    color: #fee2e2;
+}
+
+/* Nội dung text đè lên số năm */
+.timeline-body {
+    position: relative;
+    z-index: 1;
+}
+
+/* --- RESPONSIVE CHO MOBILE (Dưới 768px) --- */
+/* --- RESPONSIVE CHO MOBILE (Dưới 768px) - ĐÃ SỬA LỖI BỊ KHUẤT --- */
+@media (max-width: 768px) {
+    /* 1. Đẩy đường kẻ sát lề trái hơn để tiết kiệm không gian */
+    .timeline-line {
+        left: 15px; /* Cũ là 30px -> Giảm xuống 15px */
+        transform: translateX(0);
+    }
+
+    /* 2. Các item đều nằm bên phải đường kẻ */
+    .timeline-item {
+        width: 100%;
+        left: 0;
+        /* Giảm khoảng cách đệm: Từ 70px xuống 45px để nội dung có chỗ hiển thị */
+        padding-left: 45px; 
+        padding-right: 10px;
+        text-align: left;
+        margin-bottom: 10px; /* Khoảng cách giữa các mốc */
+    }
+
+    /* Đảm bảo cả item trái và phải đều căn trái giống nhau */
+    .timeline-item.left, .timeline-item.right {
+        text-align: left;
+        left: 0;
+    }
+
+    /* 3. Chỉnh lại vị trí chấm tròn cho khớp với đường kẻ mới */
+    /* Đường kẻ ở 15px, Dot rộng 24px -> Căn giữa dot vào khoảng 15px */
+    .timeline-item.left .timeline-dot, 
+    .timeline-item.right .timeline-dot {
+        left: 5px !important; /* Căn chỉnh lại vị trí chấm tròn */
+        right: auto !important;
+        top: 20px; /* Chỉnh lại độ cao chấm tròn cho cân đối */
+    }
+
+    /* 4. Giảm kích thước số năm nền (VD: 2020) kẻo bị to quá làm vỡ khung */
+    .timeline-year-bg {
+        font-size: 3rem; /* Giảm từ 5rem xuống 3rem */
+        top: 0;
+        left: 10px !important; /* Đẩy sát vào góc */
+        right: auto !important;
+    }
+
+    /* 5. Giảm padding trong hộp nội dung cho gọn */
+    .timeline-content {
+        padding: 15px; /* Giảm từ 25px xuống 15px */
+    }
+}
+
+/* Chỉnh kích thước cho logo ảnh */
+.logo .img-logo {
+    max-height: 70px; /* Điều chỉnh số này to/nhỏ tùy theo menu của bạn */
+    width: auto; /* Giữ nguyên tỷ lệ ảnh, không bị méo */
+    display: block; /* Giúp căn chỉnh tốt hơn */
+}
+
+/* (Tùy chọn) Nếu logo bị dính sát lề quá thì thêm margin */
+.logo {
+    display: flex;
+    align-items: center; /* Căn giữa logo theo chiều dọc */
+}
+
+/* Màu cho menu khi được chọn (đang ở trang đó) */
+.main-menu a.active {
+    color: red !important; /* Đổi thành mã màu đỏ bạn thích */
+    font-weight: bold; /* In đậm lên cho rõ (tùy chọn) */
+}
+
+/* Hiệu ứng khi di chuột vào (hover) - Tùy chọn thêm */
+.main-menu a:hover {
+    color: red;
+}
+
+/* --- CSS CHO SLIDER TRANG CHỦ (MŨI TÊN 2 BÊN) --- */
+.news-slider-wrapper {
+    position: relative;
+    padding: 0 20px; /* Tạo khoảng trống 2 bên để chứa nút */
+}
+
+/* Nút mũi tên custom nằm giữa theo chiều dọc */
+.home-slider-prev, .home-slider-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 45px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 50%;
+    color: #D6001C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+    .home-slider-prev:hover, .home-slider-next:hover {
+        background: #D6001C;
+        color: white;
+        box-shadow: 0 6px 16px rgba(214, 0, 28, 0.3);
+    }
+
+.home-slider-prev {
+    left: -10px;
+}
+/* Đẩy ra mép trái */
+.home-slider-next {
+    right: -10px;
+}
+/* Đẩy ra mép phải */
+
+/* Ẩn mũi tên trên mobile để đỡ vướng */
+@media (max-width: 768px) {
+    .home-slider-prev, .home-slider-next {
+        display: none;
+    }
+
+    .news-slider-wrapper {
+        padding: 0;
+    }
+}
+
+/* --- CSS CHO TRANG TIN TỨC RIÊNG (GRID CHUYÊN NGHIỆP) --- */
+.news-grid-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #f1f5f9;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+    .news-grid-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+    }
+
+/* 2. Các khối thông tin (Tính năng, Thiết kế...) */
+.info-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 20px;
+    height: 100%;
+    transition: transform 0.2s;
+}
+
+.info-card:hover {
+    border-color: #D6001C;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.info-card h5 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #334155;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 8px;
+}
+
+/* Banner Kích thước theo yêu cầu */
+.custom-size-banner {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-radius: 12px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #334155;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+}
+
+.custom-size-banner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(214, 0, 28, 0.1));
+    transform: skewX(-20deg) translateX(50px);
+}
+
+.custom-size-banner .big-icon {
+    position: absolute;
+    right: 30px;
+    bottom: -20px;
+    font-size: 8rem;
+    color: white;
+    opacity: 0.05;
+    transform: rotate(-15deg);
+}
+
+/* --- MENU ACCORDION SIDEBAR --- */
+.rotate-180 {
+    transform: rotate(180deg);
+}
+
+.menu-item button:focus {
+    outline: none;
+}
+
+/* Banner Custom Size */
+.custom-size-banner {
+    background: linear-gradient(135deg, #0F172A 0%, #334155 100%);
+    border-radius: 12px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.custom-size-banner .big-icon {
+    position: absolute;
+    right: 20px;
+    bottom: -20px;
+    font-size: 8rem;
+    color: white;
+    opacity: 0.05;
+    transform: rotate(-15deg);
+    pointer-events: none;
+}
+
+/* --- BẢNG DỮ LIỆU KỸ THUẬT (MODERN PRO STYLE) --- */
+
+/* 1. Khung chứa bảng */
+.tech-table-container {
+    overflow-x: auto; /* Cho phép trượt ngang trên mobile */
+    border-radius: 12px; /* Bo góc mềm mại */
+    background: #ffffff;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025); /* Bóng đổ xịn mịn */
+    margin-top: 24px;
+    border: 1px solid #f1f5f9; /* Viền siêu mờ bao quanh */
+}
+
+/* 2. Thiết lập bảng chung */
+.tech-table {
+    width: 100%;
+    border-collapse: separate; /* Để border-radius hoạt động tốt hơn */
+    border-spacing: 0; /* Không có khoảng hở giữa các ô */
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: #475569; /* Màu chữ xám đen dễ đọc */
+    white-space: nowrap; /* Mặc định 1 dòng cho đẹp, nếu dài quá mới xuống dòng ở dưới */
+}
+
+/* 3. Phần Tiêu Đề (Header) */
+.tech-table th {
+    background-color: #0F172A; /* Màu xanh đen thương hiệu */
+    color: #ffffff;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    padding: 16px 20px; /* Tăng padding cho thoáng */
+    text-align: center;
+    border-bottom: 2px solid #334155;
+    white-space: normal; /* Cho phép tiêu đề xuống dòng */
+    vertical-align: bottom;
+}
+
+/* 4. Phần Nội Dung (Body) */
+.tech-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #e2e8f0; /* Chỉ kẻ ngang, BỎ kẻ dọc */
+    vertical-align: middle;
+    transition: all 0.2s;
+    text-align: center
+}
+
+/* 5. Cột Mã Sản Phẩm (Cột đầu tiên - Sticky) */
+.tech-table td:first-child,
+.tech-table th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 10;
+}
+
+/* Style riêng cho ô Mã SP (Để nó nổi bật) */
+.tech-table td:first-child {
+    background-color: #ffffff; /* Nền trắng đè lên nội dung khi cuộn */
+    font-weight: 700;
+    color: #D6001C; /* Màu đỏ VAF */
+    border-right: 1px solid #e2e8f0; /* Đường kẻ ngăn cách với phần còn lại */
+    box-shadow: 4px 0 6px -2px rgba(0, 0, 0, 0.05); /* Bóng đổ nhẹ sang phải tạo chiều sâu */
+    text-align: center
+}
+
+/* Style riêng cho Header của cột đầu tiên */
+.tech-table th:first-child {
+    background-color: #0F172A;
+    z-index: 20; /* Luôn nằm trên cùng */
+    border-right: 1px solid #334155;
+}
+
+/* 6. Hiệu ứng Hover dòng (Làm sáng cả dòng khi di chuột) */
+.tech-table tbody tr:hover td {
+    background-color: #ffaaaa; /* Màu nền xám siêu nhạt */
+}
+
+/* Khi hover, ô đầu tiên cũng phải đổi màu theo */
+.tech-table tbody tr:hover td:first-child {
+    background-color: #ffaaaa;
+}
+
+/* 7. Xử lý hàng cuối cùng (Bỏ viền đáy) */
+.tech-table tbody tr:last-child td {
+    border-bottom: none;
+}
+/* Banner Custom Size */
+.custom-size-banner {
+    background: linear-gradient(135deg, #0F172A 0%, #334155 100%);
+    border-radius: 12px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.custom-size-banner .big-icon {
+    position: absolute;
+    right: 20px;
+    bottom: -20px;
+    font-size: 8rem;
+    color: white;
+    opacity: 0.05;
+    transform: rotate(-15deg);
+    pointer-events: none;
+}
+
+/* --- HIỆU ỨNG NỀN "RỒNG VIỆT NAM VƯƠN LÊN" --- */
+
+/* 1. Nền màu xanh siêu nhạt */
+.vaf-dragon-bg {
+    /* Màu xanh da trời cực nhạt, gần như trắng */
+    background-color: #f5fdff; 
+    position: relative;
+}
+
+/* 2. Container chứa ảnh rồng */
+.dragon-bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0; /* Nằm dưới nội dung chữ */
+    pointer-events: none; /* Không chặn chuột */
+}
+
+/* 3. Xử lý ảnh rồng */
+.dragon-image {
+    width: 100%;
+    height: 100%;
+    /* Đổi vị trí về center để rồng nằm giữa */
+    background-position: center center; 
+    
+    /* SỬA THÀNH COVER ĐỂ PHỦ KÍN TOÀN BỘ KHUNG */
+    background-size: cover; 
+    
+    background-repeat: no-repeat;
+    opacity: 0.15; /* Giữ độ mờ để không rối mắt */
+    
+    /* Nếu muốn ảnh đứng yên khi cuộn trang (Hiệu ứng Parallax), bỏ comment dòng dưới */
+    /* background-attachment: fixed; */
+
+    animation: dragonRiseSlow 60s linear infinite alternate;
+}
+
+/* Animation bay lên siêu chậm (Tùy chọn) */
+@keyframes dragonRiseSlow {
+    from { transform: translateY(0) scale(1); }
+    to { transform: translateY(-5%) scale(1.05); }
+}
+
+/* Tinh chỉnh lại nền của nội dung timeline cho rõ trên nền mới */
+.timeline-content {
+    background: rgba(255, 255, 255, 0.9); /* Nền trắng đục hơn */
+    border: 1px solid #eef9ff;
+    box-shadow: 0 4px 25px -5px rgba(186, 230, 253, 0.3); /* Bóng màu xanh dương nhạt */
+}
+
+/* --- TRANG GIỚI THIỆU (ABOUT PAGE STYLE) --- */
+
+/* Hiệu ứng Parallax cố định cho Hero */
+.fixed-parallax-bg {
+    /* Mẹo: Scale ảnh lên một chút để tạo cảm giác sâu hơn */
+    transform: scale(1.1);
+    transition: transform 0.5s ease-out;
+}
+
+/* Hiệu ứng đếm số (Counters) */
+.counter-box {
+    padding: 20px;
+    transition: transform 0.3s;
+}
+
+.counter-box:hover {
+    transform: translateY(-5px);
+}
+
+/* Card chứng chỉ */
+.cert-item {
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.cert-item:hover {
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient text cho tiêu đề Hero */
+.text-gradient-gold {
+    background: linear-gradient(135deg, #FFD700 0%, #FDB931 100%);
+    -webkit-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* --- CSS CHO LOGO ĐỐI TÁC (CẬP NHẬT MỚI) --- */
+
+/* 1. Xóa bỏ hiệu ứng trượt đều (QUAN TRỌNG ĐỂ TRƯỢT TỪNG CÁI) */
+.partner-swiper .swiper-wrapper {
+    transition-timing-function: ease-in-out !important; /* Trượt mềm mại tự nhiên */
+}
+
+/* 2. Căn giữa và tăng chiều cao khung chứa */
+.partner-swiper .swiper-slide {
+    height: 200px; /* Tăng chiều cao khung chứa */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 3. Chỉnh kích thước Logo to hơn */
+.partner-swiper img {
+    max-width: 100%;
+    height: 200px;
+    width: auto;
+    object-fit: contain; /* Đảm bảo logo không bị méo */
+    
+    /* Hiển thị màu gốc, rõ nét */
+    filter: none !important; 
+    opacity: 1 !important;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+/* 4. Hiệu ứng Hover: Phóng to */
+.partner-swiper .swiper-slide:hover img {
+    transform: scale(1.15); 
+}
+
+/* 5. Mũi tên điều hướng */
+.partner-prev, .partner-next {
+    width: 40px !important;
+    height: 40px !important;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border: 1px solid #f1f5f9;
+    color: #0F172A !important;
+    transition: all 0.3s ease;
+}
+
+.partner-prev:hover, .partner-next:hover {
+    background: #D6001C;
+    color: white !important;
+    border-color: #D6001C;
+}
+
+/* Hiệu ứng nền lưới cho bản vẽ kỹ thuật */
+.bg-grid-pattern {
+    background-image: linear-gradient(to right, #f1f5f9 1px, transparent 1px), linear-gradient(to bottom, #f1f5f9 1px, transparent 1px);
+    background-size: 20px 20px; /* Tạo ô lưới 20px */
+    background-color: #ffffff;
+}
+
+/* --- CSS CHO BẢN VẼ KỸ THUẬT (XỬ LÝ ẢNH CẮT TỪ CATALOG) --- */
+
+.drawing-container {
+    background-color: #ffffff;
+    /* Tạo nền lưới ô vuông mờ (giống giấy kỹ thuật) để nhìn chuyên nghiệp hơn */
+    background-image: linear-gradient(to right, #f1f5f9 1px, transparent 1px), linear-gradient(to bottom, #f1f5f9 1px, transparent 1px);
+    background-size: 20px 20px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.drawing-img {
+    max-width: 100%;
+    height: auto;
+    max-height: 500px;
+    /* --- MẸO XỬ LÝ ẢNH CẮT --- */
+    /* 1. Làm nền trắng của ảnh trở nên trong suốt */
+    mix-blend-mode: multiply;
+    /* 2. Biến thành đen trắng và tăng độ nét */
+    filter: grayscale(100%) contrast(1.2);
+    transition: transform 0.3s ease;
+    cursor: zoom-in;
+}
+
+
+
