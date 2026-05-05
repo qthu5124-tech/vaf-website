@@ -1,0 +1,14 @@
+{
+	"redirects": [
+		{
+			"source": "/post/:path*",
+			"destination": "/",
+			"permanent": true
+		},
+		{
+			"source": "/:path((?!index\\.html|images|css|js).*)",
+			"destination": "/",
+			"permanent": false
+		}
+	]
+}
