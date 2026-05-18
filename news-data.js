@@ -29,6 +29,82 @@
 
 const newsData = [
 
+    // --- BÀI 11: HƯỚNG DẪN TEST RÒ RỈ HEPA --- 
+    {
+        id: 'huong-dan-quy-trinh-test-ro-ri-hepa-pao-dop',
+        title: "Hướng dẫn quy trình test rò rỉ (DOP Test / PAO Test) màng lọc HEPA chuẩn xác nhất",
+        date: "06/05/2026",
+        cat: "Hướng dẫn",
+        img: "images/anh-tulieu/dop-test.jpg",
+        desc: "Khám phá chi tiết 4 bước quy trình test rò rỉ màng lọc HEPA bằng phương pháp PAO/DOP chuẩn quốc tế dành cho phòng sạch dược phẩm và điện tử.",
+        content: `
+            <p class="mb-4">Trong các hệ thống phòng sạch đạt chuẩn GMP (Dược phẩm, Điện tử, Thực phẩm, Y tế), màng lọc HEPA đóng vai trò như "lá phổi" quyết định trực tiếp đến cấp độ sạch của môi trường. Tuy nhiên, một màng lọc HEPA dù chất lượng đến đâu cũng có thể bị rò rỉ do quá trình vận chuyển, lắp đặt hoặc suy giảm tuổi thọ. Việc xuất hiện dù chỉ một lỗ thủng nhỏ cỡ sợi tóc cũng đủ để phá vỡ toàn bộ tiêu chuẩn phòng sạch, gây thiệt hại nặng nề cho sản phẩm.</p>
+            
+            <p class="mb-4">Đó là lý do quy trình <strong>kiểm tra rò rỉ (Leakage Test)</strong> bằng phương pháp DOP Test hay PAO Test là bắt buộc. Bài viết dưới đây của các kỹ sư Viet Air Filter (VAF) sẽ hướng dẫn chi tiết quy trình này.</p>
+            
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">1. DOP Test và PAO Test màng lọc HEPA là gì?</h3>
+            <p class="mb-4">Bản chất của phương pháp này là sử dụng một hệ thống tạo ra khói nhân tạo (Aerosol) ở phía trước màng lọc (Upstream), sau đó dùng máy đo quang kế (Photometer) rà soát phía sau màng lọc (Downstream) để xem có hạt khói nào xuyên qua được hay không.</p>
+            
+            <ul class="list-disc pl-6 space-y-3 mb-6 text-slate-700">
+                <li><strong>DOP Test:</strong> Sử dụng dung môi <em>Dioctyl Phthalate</em>. Đây là phương pháp đời đầu, tạo ra kích thước hạt sương rất chuẩn (khoảng 0.3 micron). Tuy nhiên, hóa chất DOP bị Cục Bảo vệ Môi trường (EPA) đánh giá là có khả năng gây ung thư và độc hại cho kỹ sư vận hành.</li>
+                <li><strong>PAO Test:</strong> Sử dụng dung môi <em>Poly-Alpha-Olefin</em>. Đây là phương pháp thay thế hoàn hảo cho DOP hiện nay. PAO là một loại dầu tổng hợp an toàn, không độc hại, không gây ung thư, được FDA và các tiêu chuẩn phòng sạch hiện đại khuyên dùng. <em>(Ngày nay, khi nhắc đến DOP Test, các kỹ sư ngầm hiểu là đang sử dụng hóa chất PAO).</em></li>
+            </ul>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">2. Khi nào nhà máy cần tiến hành test rò rỉ PAO/DOP?</h3>
+            <p class="mb-4">Theo tiêu chuẩn ISO 14644-3 và các hướng dẫn GMP, việc test rò rỉ màng lọc HEPA (kiểm tra tính toàn vẹn) cần được thực hiện trong các trường hợp sau:</p>
+            <ul class="list-disc pl-6 space-y-3 mb-6 text-slate-700">
+                <li><strong>Lắp đặt mới:</strong> Ngay sau khi lắp đặt màng lọc HEPA vào hệ thống AHU, máy FFU, Hepa Box hoặc Passbox.</li>
+                <li><strong>Kiểm tra định kỳ:</strong> Thường là 6 tháng/lần đối với phòng sạch cấp độ cao (Class 100, Class 1000) và 12 tháng/lần với các cấp độ thấp hơn.</li>
+                <li><strong>Bảo trì, sự cố:</strong> Sau khi hệ thống bị ngưng hoạt động kéo dài, có sự cố về rung lắc mạnh, hoặc khi kết quả đo lường tiểu phân trong phòng sạch có dấu hiệu vượt mức cho phép.</li>
+            </ul>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">3. Các thiết bị cần thiết để đo kiểm PAO</h3>
+            <p class="mb-4">Để thực hiện quy trình này, đội ngũ kỹ thuật QA/QC cần trang bị 2 thiết bị cốt lõi:</p>
+            <ul class="list-disc pl-6 space-y-3 mb-6 text-slate-700">
+                <li><strong>Máy tạo khói (Aerosol Generator):</strong> Chức năng gia nhiệt và phun sương dung dịch PAO thành các hạt tiểu phân có kích thước từ 0.3 µm với mật độ cao vào dòng khí thổi tới màng lọc.</li>
+                <li><strong>Máy quang kế (Aerosol Photometer):</strong> Thiết bị có gắn đầu dò (Probe) để hút mẫu khí và phân tích quang học, từ đó đo lường nồng độ hạt khói lọt qua màng lọc với độ nhạy cực cao.</li>
+            </ul>
+            
+            <img src="images/anh-tulieu/test-loc-2.jpg" class="w-full rounded-xl shadow-lg my-8" alt="Kỹ sư VAF sử dụng máy Photometer test rò rỉ màng lọc HEPA">
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">4. Chi tiết 4 bước quy trình test rò rỉ màng lọc HEPA chuẩn quốc tế</h3>
+            
+            <h4 class="text-xl font-bold text-primary mt-6 mb-3">Bước 1: Đo nồng độ hạt đầu nguồn (Upstream)</h4>
+            <p class="mb-4">Kỹ sư sẽ bơm khói PAO vào phía trước màng lọc (từ ống gió AHU hoặc ngay trên lưng máy FFU). Nồng độ hạt khói đầu nguồn tiêu chuẩn cần đạt từ <strong>10 mg/m³ đến 20 mg/m³</strong> (hoặc 10 µg/L – 100 µg/L). Thiết lập nồng độ này làm mốc chuẩn 100% trên máy Photometer.</p>
+            
+            <h4 class="text-xl font-bold text-primary mt-6 mb-3">Bước 2: Quét bề mặt màng lọc (Downstream)</h4>
+            <p class="mb-4">Kỹ sư sử dụng đầu dò của Photometer quét đều trên toàn bộ bề mặt lưới bảo vệ của màng lọc HEPA. Yêu cầu kỹ thuật cực kỳ nghiêm ngặt:</p>
+            <ul class="list-disc pl-6 space-y-3 mb-6 text-slate-700">
+                <li>Khoảng cách từ đầu dò đến bề mặt lọc: <strong>Khoảng 2.5 cm - 3.0 cm.</strong></li>
+                <li>Tốc độ quét: Chậm và đều, <strong>không vượt quá 5 cm/giây.</strong></li>
+                <li>Đường quét phải gối lên nhau một chút để đảm bảo không bỏ sót bất kỳ diện tích nào.</li>
+            </ul>
+            
+            <h4 class="text-xl font-bold text-primary mt-6 mb-3">Bước 3: Quét khu vực gioăng (Gasket) và khung</h4>
+            <p class="mb-4">Rất nhiều sự cố rò rỉ không đến từ giấy lọc màng HEPA mà đến từ điểm tiếp xúc giữa khung lọc và vỏ thiết bị (Housing), hoặc do gioăng cao su (Gasket/Gel seal) bị lão hóa, méo mó khi siết ốc. Kỹ sư phải quét kỹ các mép khung này.</p>
+            
+            <h4 class="text-xl font-bold text-primary mt-6 mb-3">Bước 4: Đánh giá kết quả và lập báo cáo</h4>
+            <p class="mb-4">Theo tiêu chuẩn quốc tế, một màng lọc HEPA H13/H14 được đánh giá là <strong>ĐẠT (PASS)</strong> khi tỷ lệ rò rỉ đo được tại bất kỳ điểm nào trên bề mặt <strong>không vượt quá 0.01%</strong> (so với nồng độ 100% đầu nguồn).</p>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">5. Lọc HEPA VAF - 100% Kiểm định PAO trước khi xuất xưởng</h3>
+            <p class="mb-4">Thấu hiểu sự khắt khe của hệ thống phòng sạch, <strong>Viet Air Filter (VAF)</strong> tự hào là nhà máy sản xuất thiết bị lọc khí hàng đầu tại Việt Nam áp dụng quy trình kiểm soát chất lượng chuẩn quốc tế.</p>
+            <p class="mb-4">Không giống như các sản phẩm trôi nổi không rõ nguồn gốc, 100% màng lọc HEPA (H13, H14) và ULPA do VAF sản xuất tại nhà máy Bình Dương đều được đưa vào buồng test độc lập, thực hiện <strong>quét PAO Test/ DOP Test từng tấm một</strong> trước khi đóng gói.</p>
+            <p class="mb-4">Sản phẩm khi giao đến tay khách hàng và các nhà thầu thi công luôn đi kèm đầy đủ <strong>Chứng nhận xuất xưởng (CO, CQ)</strong> và <strong>Giấy Test Report</strong> ghi rõ các thông số chênh áp, lưu lượng gió và kết quả kiểm tra tính toàn vẹn (Leak test).</p>
+            
+            <div class="bg-slate-50 p-8 rounded-2xl border-l-4 border-primary mt-10 shadow-sm">
+                <h4 class="font-bold text-xl text-secondary mb-3">Câu hỏi thường gặp (FAQ)</h4>
+                
+                <p class="font-bold text-slate-800 mt-4 mb-2">Màng lọc HEPA bị thủng có vá được không hay phải thay mới?</p>
+                <p class="text-slate-600 mb-4">Theo tiêu chuẩn IEST-RP-CC034, nếu màng lọc HEPA bị thủng, bạn có thể dùng keo Silicone chuyên dụng cho phòng sạch để vá. Tuy nhiên, tổng diện tích các vết vá <strong>không được vượt quá 5%</strong> tổng diện tích bề mặt màng lọc, và không có vết vá nào rộng quá 3.8 cm. Nếu vượt quá giới hạn này, bắt buộc phải thay màng lọc mới để đảm bảo lưu lượng và độ sạch.</p>
+                
+                <p class="font-bold text-slate-800 mt-4 mb-2">Bao lâu thì nên thay màng lọc HEPA một lần?</p>
+                <p class="text-slate-600">Tuổi thọ trung bình của lọc HEPA từ 1 - 3 năm tùy vào môi trường. Thay vì đếm thời gian, các kỹ sư bảo trì sẽ nhìn vào đồng hồ chênh áp (Magnehelic). Khi độ chênh áp qua màng lọc HEPA <strong>đạt gấp đôi (hoặc mức giới hạn) so với chênh áp ban đầu lúc mới lắp</strong>, đó là lúc lõi lọc đã nghẹt bụi và cần được thay thế ngay lập tức.</p>
+            </div>
+        `
+    },
+
+
+
     // --- BÀI MỚI: BÀI VIẾT PR CHUẨN SEO GIỚI THIỆU VAF ---
     {
         id: 'vaf-hanh-trinh-18-nam-dinh-hinh-chuan-muc',
@@ -338,9 +414,7 @@ const newsData = [
             </ul>
         `
     }
+    ]
 
-    //Bài 11: 
-
-];
 
 

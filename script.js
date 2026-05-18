@@ -1153,12 +1153,52 @@ function handleRouting() {
     }
 }
 // Render Dự án & Tin tức (Giữ nguyên)
-function renderProjectGrid() {
+// --- BỘ LỌC DỰ ÁN ---
+function renderProjectFilters(activeCat = 'all') {
+    const filterContainer = document.getElementById('project-filters');
+    if (!filterContainer) return;
+
+    // Tự động gom các ngành nghề đang có trong mảng projects
+    const categories = [...new Set(projects.map(p => p.cat))];
+
+    // Nút "Tất cả"
+    let html = `<button onclick="filterProjects('all')" class="px-6 py-2 rounded-full font-bold text-sm transition shadow-sm ${activeCat === 'all' ? 'bg-primary text-white border-primary' : 'bg-white text-gray-600 border border-gray-200 hover:text-primary hover:border-primary'}">Tất cả</button>`;
+
+    // Các nút ngành nghề khác
+    categories.forEach(cat => {
+        html += `<button onclick="filterProjects('${cat}')" class="px-6 py-2 rounded-full font-bold text-sm transition shadow-sm ${activeCat === cat ? 'bg-primary text-white border-primary' : 'bg-white text-gray-600 border border-gray-200 hover:text-primary hover:border-primary'}">${cat}</button>`;
+    });
+
+    filterContainer.innerHTML = html;
+}
+
+// --- HIỂN THỊ DỰ ÁN ---
+function filterProjects(cat) {
+    renderProjectFilters(cat); // Đổi màu nút đang chọn
     const grid = document.getElementById('projects-grid');
-    if(grid) grid.innerHTML = projects.map(p => `
-        <div class="product-card bg-white border rounded-lg overflow-hidden cursor-pointer h-full flex flex-col shadow hover:shadow-lg transition" onclick="openProjectDetail('${p.id}')">
-            <div class="h-56 bg-gray-100 relative"><img src="${p.img}" class="w-full h-full object-cover"><div class="absolute top-2 left-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded shadow">${p.cat}</div></div>
-            <div class="p-4 flex-grow"><h3 class="font-bold text-lg text-secondary mb-1">${p.title}</h3><p class="text-sm text-gray-500 mb-2 line-clamp-2">${p.desc}</p></div>
+    if (!grid) return;
+
+    const filteredProjects = cat === 'all' ? projects : projects.filter(p => p.cat === cat);
+
+    if (filteredProjects.length === 0) {
+        grid.innerHTML = '<div class="col-span-full text-center py-10 text-gray-400">Chưa có dự án nào trong danh mục này.</div>';
+        return;
+    }
+
+    grid.innerHTML = filteredProjects.map(p => `
+        <div class="product-card bg-white border rounded-xl overflow-hidden cursor-pointer h-full flex flex-col shadow-sm hover:shadow-xl transition-all duration-300 group" onclick="openProjectDetail('${p.id}')">
+            <div class="h-56 bg-gray-100 relative overflow-hidden">
+                <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                <div class="absolute top-3 left-3 bg-primary/90 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded uppercase tracking-wide shadow">${p.cat}</div>
+            </div>
+            <div class="p-6 flex-grow flex flex-col">
+                <h3 class="font-bold text-lg text-secondary mb-2 group-hover:text-primary transition leading-snug line-clamp-2">${p.title}</h3>
+                <p class="text-sm text-gray-500 mb-4 line-clamp-2 leading-relaxed flex-grow">${p.desc}</p>
+                <div class="pt-4 border-t border-gray-50 text-xs font-bold text-gray-400 flex justify-between items-center group-hover:text-primary transition">
+                    <span>Xem chi tiết</span>
+                    <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition"></i>
+                </div>
+            </div>
         </div>`).join('');
 }
 
