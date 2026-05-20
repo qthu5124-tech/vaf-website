@@ -832,9 +832,9 @@ function setLang(lang) {
 const projects = [
     { id: 'p1', title: 'BV Đa Khoa Lâm Đồng', cat: 'Y Tế', img: 'images/anh-du-an/bvld.png', client: 'BV Lâm Đồng', loc: 'Lâm Đồng', scale: '3 Phòng sạch', year: '2022', desc: 'Cung cấp thiết bị phòng mổ áp lực âm.', scope: ['HVAC', 'HEPA Box'] },
     { id: 'p2', title: 'Nhà Máy D PACK', cat: 'Công Nghiệp', img: 'images/anh-du-an/dpack.jpg', client: 'D PACK', loc: 'Bình Định', scale: 'Nhà máy', year: '2023', desc: 'Tổng thầu thiết kế thi công phòng sạch.', scope: ['Thiết kế', 'Thi công'] },
-    { id: 'p3', title: 'Samsung Thái Nguyên', cat: 'Điện Tử', img: 'images/anh-du-an/sstn.webp', client: 'Samsung', loc: 'Thái Nguyên', scale: 'Dây chuyền', year: '2023', desc: 'Cung cấp vật tư tiêu hao lọc khí.', scope: ['Cung cấp lọc', 'FFU'] },
+    { id: 'p3', title: 'Samsung Thái Nguyên', cat: 'Điện Tử', img: 'images/anh-du-an/sstn.jpg', client: 'Samsung', loc: 'Thái Nguyên', scale: 'Dây chuyền', year: '2023', desc: 'Cung cấp vật tư tiêu hao lọc khí.', scope: ['Cung cấp lọc', 'FFU'] },
     { id: 'p4', title: 'BV Grand Mandalay', cat: 'Quốc Tế', img: 'images/anh-du-an/gm.jpg', client: 'Mandalay', loc: 'Myanmar', scale: '2 Phòng mổ', year: '2022', desc: 'Xuất khẩu thiết bị phòng mổ.', scope: ['Xuất khẩu', 'Thi công'] },
-    { id: 'p5', title: 'Trung Tâm DIAG', cat: 'Y Tế', img: 'images/anh-du-an/diag.png', client: 'DIAG', loc: 'TP.HCM', scale: 'Lab xét nghiệm', year: '2022', desc: 'Lắp đặt thiết bị phòng xét nghiệm.', scope: ['Pass Box', 'Air Shower'] },
+    { id: 'p5', title: 'Trung Tâm DIAG', cat: 'Y Tế', img: 'images/anh-du-an/diag.jpg', client: 'DIAG', loc: 'TP.HCM', scale: 'Lab xét nghiệm', year: '2022', desc: 'Lắp đặt thiết bị phòng xét nghiệm.', scope: ['Pass Box', 'Air Shower'] },
     { id: 'p6', title: 'BV Nhân Dân 115', cat: 'Y Tế', img: 'images/anh-du-an/115.jpg', client: 'BV 115', loc: 'TP.HCM', scale: 'Khu cách ly', year: '2021', desc: 'Cải tạo phòng áp lực âm.', scope: ['Cải tạo', 'HEPA'] }
 ];
 
@@ -1126,7 +1126,7 @@ function handleRouting() {
     else if (path === 'projects') {
         document.title = 'Dự Án Tiêu Biểu & Khách Hàng - VAF';
         switchView('view-projects');
-        renderProjectGrid();
+        filterProjects('all'); // <--- Đã sửa thành tên hàm mới
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     else if (path === 'project-detail' && param) {
@@ -1378,14 +1378,11 @@ document.addEventListener('DOMContentLoaded', () => {
         renderSidebarMenu();
         // Không gọi trực tiếp các view ở đây nữa, hệ thống URL sẽ quyết định
         handleRouting();
-        filterProducts('all');    // <--- SỬA THÀNH: filterProducts('all')
-        renderProjectGrid();
+        filterProjects('all'); // <--- Đã sửa thành tên hàm mới
         renderHomeNews();
         renderNewsPage();
 
-        // --- THÊM DÒNG NÀY ĐỂ BẮT BUỘC VỀ TRANG CHỦ KHI LOAD XONG ---
-        switchView('view-home'); 
-        window.scrollTo(0, 0);
+      
 
     } catch (e) { console.error(e); }
     
