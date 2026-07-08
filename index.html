@@ -5,6 +5,8 @@
     <link rel="icon" type="image/webp" href="/images/VAF-LOGOfav.webp">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preload" as="image" href="/images/14.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="/images/VAF-LOGO.webp">
     <meta name="description" content="VAF - Viet Air Filter: Nhà sản xuất lọc khí công nghiệp, thiết bị phòng sạch hàng đầu Việt Nam.">
     <title>VAF - Nhà Sản Xuất Lọc Khí & Thiết Bị Phòng Sạch Chuẩn Quốc Tế</title>
 
@@ -90,7 +92,7 @@
                 <!-- Logo -->
                 <div class="logo">
                     <a href="/" onclick="navigate('home'); return false;">
-                        <img src="images/VAF-LOGO.webp" alt="VAF Logo" class="img-logo">
+                        <img src="images/VAF-LOGO.webp" alt="VAF Logo" class="img-logo" loading="eager" decoding="async" fetchpriority="high">
                     </a>
                 </div>
                 <!-- Desktop Menu -->
@@ -1807,13 +1809,13 @@
         </div>
     </footer>
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
-    <script src="/news-data.js"></script>
+    <script defer src="/news-data.js"></script>
 
-    <script src="/products-data.js"></script>
+    <script defer src="/products-data.js"></script>
 
-    <script src="/script.js"></script>
+    <script defer src="/script.js"></script>
 
     <div id="coming-soon-modal" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
     

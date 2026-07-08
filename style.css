@@ -37,6 +37,31 @@ h1, h2, h3, h4, h5, h6 {
     animation: kenBurns 30s ease-in-out infinite alternate;
 }
 
+@media (max-width: 767px) {
+    .hero-wrapper {
+        height: 620px;
+    }
+
+    .hero-bg-animated {
+        animation: none;
+        transform: none;
+    }
+
+    #view-home > section:not(.hero-wrapper) {
+        content-visibility: auto;
+        contain-intrinsic-size: 800px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-bg-animated,
+    .animate-fade-up {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+}
+
 
 
 

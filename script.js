@@ -1097,6 +1097,18 @@ function resolveNewsContentAssets(html) {
         .replace(/src='images\//g, "src='/images/");
 }
 
+function applyImageLoadingHints(scope = document) {
+    scope.querySelectorAll('img').forEach(img => {
+        img.decoding = 'async';
+        if (img.classList.contains('img-logo')) {
+            img.loading = 'eager';
+            img.fetchPriority = 'high';
+            return;
+        }
+        if (!img.hasAttribute('loading')) img.loading = 'lazy';
+    });
+}
+
 function scrollToElement(id) {
     const el = document.getElementById(id);
     if (el) {
@@ -1209,7 +1221,7 @@ function filterProducts(cat, noScroll = false) {
                 <div class="product-card bg-white border rounded-lg overflow-hidden cursor-pointer h-full flex flex-col shadow-sm hover:shadow-xl transition-all duration-300 group" onclick="openProductDetail('${p.id}')">
                     
                     <div class="relative w-full aspect-[2400/1792] overflow-hidden bg-white">
-                        <img src="${p.img}" class="absolute inset-0 w-full h-full object-cover" alt="${pName}" onerror="this.src='https://placehold.co/2400x1792?text=VAF+Product'">
+                        <img src="${p.img}" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" alt="${pName}" onerror="this.src='https://placehold.co/2400x1792?text=VAF+Product'">
                         <div class="absolute top-2 left-2">
                             <span class="text-[10px] font-bold text-white bg-primary/90 px-2 py-1 rounded shadow uppercase tracking-wide backdrop-blur-sm">${translatedCat}</span>
                         </div>
@@ -1424,6 +1436,7 @@ if (page === "project") activeTarget = "projects";
     if (page === 'home') {
         document.title = 'VAF - Nhà Sản Xuất Lọc Khí & Thiết Bị Phòng Sạch Hàng Đầu';
         switchView('view-home');
+        renderHomeNews();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     else if (page === 'about') {
@@ -1578,7 +1591,7 @@ function filterProjects(cat) {
     grid.innerHTML = filteredProjects.map(p => `
         <div class="product-card bg-white border rounded-xl overflow-hidden cursor-pointer h-full flex flex-col shadow-sm hover:shadow-xl transition-all duration-300 group" onclick="openProjectDetail('${p.id}')">
             <div class="h-56 bg-gray-100 relative overflow-hidden">
-                <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                <img src="${p.img}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                 <div class="absolute top-3 left-3 bg-primary/90 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded uppercase tracking-wide shadow">${p.cat}</div>
             </div>
             <div class="p-5">
@@ -1619,9 +1632,10 @@ function renderHomeNews() {
     if (!container || typeof newsData === 'undefined') return;
     container.innerHTML = newsData.map(n => `
         <div class="swiper-slide h-auto"><article class="bg-white h-full rounded-xl overflow-hidden border hover:shadow-lg transition cursor-pointer flex flex-col" onclick="openNewsDetail('${n.id}')">
-            <div class="h-48 relative overflow-hidden"><img src="${resolveAssetPath(n.img)}?w=600" class="w-full h-full object-cover transition duration-500 hover:scale-110"></div>
+            <div class="h-48 relative overflow-hidden"><img src="${resolveAssetPath(n.img)}?w=600" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 hover:scale-110"></div>
             <div class="p-5 flex-grow flex flex-col"><h3 class="font-bold text-lg mb-2 text-secondary leading-tight line-clamp-2">${n.title}</h3></div>
         </article></div>`).join('');
+    if (window.homeNewsSwiper) window.homeNewsSwiper.update();
 }
 
 // --- CẤU HÌNH PHÂN TRANG ---
@@ -1653,7 +1667,7 @@ function renderNewsPage(page = 1) {
     container.innerHTML = itemsToShow.map(n => `
         <article class="news-grid-card group cursor-pointer h-full flex flex-col" onclick="openNewsDetail('${n.id}')">
             <div class="h-56 relative overflow-hidden">
-                <img src="${resolveAssetPath(n.img)}?w=800" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=VAF+News'">
+                <img src="${resolveAssetPath(n.img)}?w=800" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=VAF+News'">
                 <div class="absolute top-4 left-4">
                     <span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-wide">${n.cat}</span>
                 </div>
@@ -1692,7 +1706,7 @@ function renderSidebarNews() {
     container.innerHTML = featuredNews.map(n => `
         <div class="flex gap-4 group cursor-pointer border-b border-gray-100 pb-4 last:border-0 last:pb-0" onclick="openNewsDetail('${n.id}')">
             <div class="w-24 h-20 flex-shrink-0 rounded-lg overflow-hidden relative">
-                <img src="${resolveAssetPath(n.img)}?w=200" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/200?text=News'">
+                <img src="${resolveAssetPath(n.img)}?w=200" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/200?text=News'">
             </div>
             
             <div class="flex-grow flex flex-col justify-between">
@@ -1811,20 +1825,17 @@ function executeProjectDetail(id) {
 // --- 5. KHỞI TẠO ---
 document.addEventListener('DOMContentLoaded', () => {
     try {
+        applyImageLoadingHints();
         renderSidebarMenu();
         // Không gọi trực tiếp các view ở đây nữa, hệ thống URL sẽ quyết định
         handleRouting();
-        filterProjects('all'); // <--- Đã sửa thành tên hàm mới
-        renderHomeNews();
-        renderNewsPage();
-        renderAllProjects();
       
 
     } catch (e) { console.error(e); }
     
     const swiperEl = document.querySelector('.news-swiper-home');
     if (swiperEl) {
-        new Swiper('.news-swiper-home', {
+        window.homeNewsSwiper = new Swiper('.news-swiper-home', {
             slidesPerView: 1, spaceBetween: 24, loop: true,
             pagination: { el: '.swiper-pagination', clickable: true },
             navigation: { nextEl: '.home-slider-next', prevEl: '.home-slider-prev' },
@@ -1835,7 +1846,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // KHỞI TẠO SLIDER ĐỐI TÁC (TRƯỢT TỪNG LOGO - VÒNG LẶP CHUẨN)
     const partnerSwiperEl = document.querySelector('.partner-swiper');
     if (partnerSwiperEl) {
-        new Swiper('.partner-swiper', {
+        window.partnerSwiper = new Swiper('.partner-swiper', {
             // Số lượng logo hiển thị
             slidesPerView: 2, 
             spaceBetween: 30,
