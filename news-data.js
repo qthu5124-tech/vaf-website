@@ -32,7 +32,7 @@ const newsData = [
         {
         id: 'hepa-filter-la-gi',
         title: 'HEPA Filter Là Gì? Cấu Tạo, Nguyên Lý Hoạt Động Và Ứng Dụng',
-        category: 'Kiến Thức',
+        cat: 'Kiến Thức',
         img: "images/anh-tin-tin/loc-hepa-la-gi.webp",
         author: 'VAF Technical Team',
         date: '07/07/2026',
