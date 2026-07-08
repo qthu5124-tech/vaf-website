@@ -1131,6 +1131,25 @@ function switchView(viewId) {
 
 // --- 3. LOGIC SẢN PHẨM & MENU ---
 
+function loadProductsScript() {
+    if (window.products) return Promise.resolve(window.products);
+
+    return new Promise((resolve, reject) => {
+        const existing = document.querySelector('script[src="/products-data.js"]');
+        if (existing) {
+            existing.addEventListener('load', () => resolve(window.products || []), { once: true });
+            existing.addEventListener('error', reject, { once: true });
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = '/products-data.js';
+        script.onload = () => resolve(window.products || []);
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+}
+
 // Render Menu Danh Mục (Sidebar)
 function renderSidebarMenu() {
     const container = document.getElementById('product-filters');
@@ -1155,7 +1174,7 @@ function renderSidebarMenu() {
         'Thiết Bị': 'fa-box-open'
     };
 
-    const categories = [...new Set(projects.map(p => p.cat))];
+    const categories = [...new Set((window.products || []).map(p => p.cat))];
     const currentCat = window.currentFilterCat || 'all';
 
     // 1. Nút "Tất cả sản phẩm"
@@ -1186,14 +1205,21 @@ function renderSidebarMenu() {
 // Lọc và Hiển thị Sản phẩm (Grid View)
 // Lọc và Hiển thị Sản phẩm (Grid View)
 // Lọc và Hiển thị Sản phẩm (Grid View) - ĐÃ SỬA LỖI SONG NGỮ
-function filterProducts(cat, noScroll = false) {
-    window.currentFilterCat = cat; // Lưu lại danh mục đang xem
+async function filterProducts(cat, noScroll = false) {
+
+    await loadProductsScript();
+
+    const products = window.products || [];
+
+    window.currentFilterCat = cat;
+
     switchView('view-products');
 
-    // Cập nhật lại màu sắc của Sidebar
     renderSidebarMenu();
 
-    const list = cat === 'all' ? products : products.filter(p => p.cat === cat);
+    const list = cat === 'all'
+        ? products
+        : products.filter(p => p.cat === cat);
     const grid = document.getElementById('products-grid');
     
     if (grid) {
@@ -1238,6 +1264,7 @@ function filterProducts(cat, noScroll = false) {
                 </div>
             `}).join('');
         }
+        applyImageLoadingHints(grid);
     }
 
     // Nếu người dùng chủ động bấm thì cuộn chuột lên đầu lưới, nếu do hệ thống auto-đổi ngôn ngữ thì giữ yên
@@ -1279,6 +1306,7 @@ function executeProductDetail(id) {
     document.title = pName + " | VAF";
     const imgEl = document.getElementById('pd-img');
     imgEl.src = "/" + p.img;
+    imgEl.alt = pName;
     imgEl.onerror = function () { this.src = 'https://placehold.co/800x600?text=VAF+Product'; };
 
     document.getElementById('pd-cat').innerText = p.cat;
@@ -1339,6 +1367,7 @@ function executeProductDetail(id) {
 
     if (p.drawing && drawingWrapper && drawingImg) {
         drawingImg.src = p.drawing;
+        drawingImg.alt = `${pName} technical drawing`;
         drawingWrapper.classList.remove('hidden');
     } else if (drawingWrapper) {
         drawingWrapper.classList.add('hidden');
@@ -1591,7 +1620,7 @@ function filterProjects(cat) {
     grid.innerHTML = filteredProjects.map(p => `
         <div class="product-card bg-white border rounded-xl overflow-hidden cursor-pointer h-full flex flex-col shadow-sm hover:shadow-xl transition-all duration-300 group" onclick="openProjectDetail('${p.id}')">
             <div class="h-56 bg-gray-100 relative overflow-hidden">
-                <img src="${p.img}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                <img src="${p.img}" alt="${p.title}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                 <div class="absolute top-3 left-3 bg-primary/90 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded uppercase tracking-wide shadow">${p.cat}</div>
             </div>
             <div class="p-5">
@@ -1604,6 +1633,7 @@ function filterProjects(cat) {
 </div>
             </div>
         </div>`).join('');
+    applyImageLoadingHints(grid);
 }
 
 function showAllProjects() {
@@ -1632,9 +1662,10 @@ function renderHomeNews() {
     if (!container || typeof newsData === 'undefined') return;
     container.innerHTML = newsData.map(n => `
         <div class="swiper-slide h-auto"><article class="bg-white h-full rounded-xl overflow-hidden border hover:shadow-lg transition cursor-pointer flex flex-col" onclick="openNewsDetail('${n.id}')">
-            <div class="h-48 relative overflow-hidden"><img src="${resolveAssetPath(n.img)}?w=600" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 hover:scale-110"></div>
+            <div class="h-48 relative overflow-hidden"><img src="${resolveAssetPath(n.img)}?w=600" alt="${n.title}" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 hover:scale-110"></div>
             <div class="p-5 flex-grow flex flex-col"><h3 class="font-bold text-lg mb-2 text-secondary leading-tight line-clamp-2">${n.title}</h3></div>
         </article></div>`).join('');
+    applyImageLoadingHints(container);
     if (window.homeNewsSwiper) window.homeNewsSwiper.update();
 }
 
@@ -1667,7 +1698,7 @@ function renderNewsPage(page = 1) {
     container.innerHTML = itemsToShow.map(n => `
         <article class="news-grid-card group cursor-pointer h-full flex flex-col" onclick="openNewsDetail('${n.id}')">
             <div class="h-56 relative overflow-hidden">
-                <img src="${resolveAssetPath(n.img)}?w=800" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=VAF+News'">
+                <img src="${resolveAssetPath(n.img)}?w=800" alt="${n.title}" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=VAF+News'">
                 <div class="absolute top-4 left-4">
                     <span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-wide">${n.cat}</span>
                 </div>
@@ -1689,6 +1720,7 @@ function renderNewsPage(page = 1) {
             </div>
         </article>
     `).join('');
+    applyImageLoadingHints(container);
 
     // B. Render Nút Phân Trang
     renderPaginationControls(totalPages, page);
@@ -1706,7 +1738,7 @@ function renderSidebarNews() {
     container.innerHTML = featuredNews.map(n => `
         <div class="flex gap-4 group cursor-pointer border-b border-gray-100 pb-4 last:border-0 last:pb-0" onclick="openNewsDetail('${n.id}')">
             <div class="w-24 h-20 flex-shrink-0 rounded-lg overflow-hidden relative">
-                <img src="${resolveAssetPath(n.img)}?w=200" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/200?text=News'">
+                <img src="${resolveAssetPath(n.img)}?w=200" alt="${n.title}" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/200?text=News'">
             </div>
             
             <div class="flex-grow flex flex-col justify-between">
@@ -1722,6 +1754,7 @@ function renderSidebarNews() {
             </div>
         </div>
     `).join('');
+    applyImageLoadingHints(container);
 }
 
 // 2. Hàm tạo nút bấm (1, 2, 3, Next, Prev)
@@ -1784,8 +1817,12 @@ function executeNewsDetail(id) {
     document.getElementById('nd-date').innerText = n.date;
     document.getElementById('nd-title').innerText = n.title;
     document.getElementById('nd-desc').innerText = cleanText(n.desc);
-    document.getElementById("nd-img").src = resolveAssetPath(n.img);
-    document.getElementById('nd-content').innerHTML = resolveNewsContentAssets(n.content);
+    const newsImage = document.getElementById("nd-img");
+    newsImage.src = resolveAssetPath(n.img);
+    newsImage.alt = n.title;
+    const newsContent = document.getElementById('nd-content');
+    newsContent.innerHTML = resolveNewsContentAssets(n.content);
+    applyImageLoadingHints(newsContent);
     switchView('view-news-detail');
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -1813,7 +1850,9 @@ function executeProjectDetail(id) {
     document.title = "Dự Án: " + p.title + " | VAF";
     document.getElementById('pjd-title').innerText = p.title;
     document.getElementById('pjd-desc').innerText = p.desc;
-    document.getElementById('pjd-img').src = p.img;
+    const projectImage = document.getElementById('pjd-img');
+    projectImage.src = p.img;
+    projectImage.alt = p.title;
     document.getElementById('pjd-client').innerText = p.client;
     document.getElementById('pjd-loc').innerText = p.loc;
     document.getElementById('pjd-scale').innerText = p.scale;
@@ -1852,10 +1891,44 @@ function runWhenNearViewport(element, callback) {
     observer.observe(element);
 }
 
+let swiperAssetPromise;
+function loadSwiperAssets() {
+    if (window.Swiper) return Promise.resolve();
+    if (swiperAssetPromise) return swiperAssetPromise;
+
+    swiperAssetPromise = new Promise((resolve, reject) => {
+        if (!document.querySelector('link[data-swiper-css]')) {
+            const css = document.createElement('link');
+            css.rel = 'stylesheet';
+            css.href = 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css';
+            css.dataset.swiperCss = 'true';
+            document.head.appendChild(css);
+        }
+
+        const existingScript = document.querySelector('script[data-swiper-js]');
+        if (existingScript) {
+            existingScript.addEventListener('load', resolve, { once: true });
+            existingScript.addEventListener('error', reject, { once: true });
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js';
+        script.async = true;
+        script.dataset.swiperJs = 'true';
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+
+    return swiperAssetPromise;
+}
+
 function lazyInitSwipers() {
     const swiperEl = document.querySelector('.news-swiper-home');
-    runWhenNearViewport(swiperEl, () => {
-        if (window.homeNewsSwiper || typeof Swiper === 'undefined') return;
+    runWhenNearViewport(swiperEl, async () => {
+        if (window.homeNewsSwiper) return;
+        await loadSwiperAssets();
         window.homeNewsSwiper = new Swiper('.news-swiper-home', {
             slidesPerView: 1, spaceBetween: 24, loop: false,
             pagination: { el: '.swiper-pagination', clickable: true },
@@ -1866,8 +1939,9 @@ function lazyInitSwipers() {
 
     // KHỞI TẠO SLIDER ĐỐI TÁC KHI GẦN TỚI SECTION ĐỂ GIẢM MAIN THREAD BAN ĐẦU
     const partnerSwiperEl = document.querySelector('.partner-swiper');
-    runWhenNearViewport(partnerSwiperEl, () => {
-        if (window.partnerSwiper || typeof Swiper === 'undefined') return;
+    runWhenNearViewport(partnerSwiperEl, async () => {
+        if (window.partnerSwiper) return;
+        await loadSwiperAssets();
         window.partnerSwiper = new Swiper('.partner-swiper', {
             // Số lượng logo hiển thị
             slidesPerView: 2, 

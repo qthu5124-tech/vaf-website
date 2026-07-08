@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preload" as="image" href="/images/14.webp" fetchpriority="high">
-    <meta name="description" content="VAF - Viet Air Filter: Nhà sản xuất lọc khí công nghiệp, thiết bị phòng sạch hàng đầu Việt Nam.">
     <title>VAF - Nhà Sản Xuất Lọc Khí & Thiết Bị Phòng Sạch Chuẩn Quốc Tế</title>
 
     <meta name="description" content="Viet Air Filter (VAF) tự hào là nhà sản xuất tiên phong tại Việt Nam, cung cấp giải pháp lọc khí toàn diện (HEPA, ULPA) và thiết bị phòng sạch (FFU, AHU) chuẩn ISO 16890 & EN 1822.">
@@ -41,7 +40,6 @@
     <!-- Fonts: Liên kết font chữ Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -50,10 +48,6 @@
     <!-- Icons: Thư viện icon FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-
-    <!-- Swiper CSS: Thư viện slider -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"></noscript>
 
     <!-- Tailwind CSS: Thư viện CSS Utility-first -->
     <script defer src="https://cdn.tailwindcss.com"></script>
@@ -66,9 +60,8 @@
                     colors: {
                         primary: '#D6001C',
                         primaryDark: '#B00015',
-                        // Cấu hình lại màu Secondary cho nhẹ nhàng hơn
-                        secondary: '#1E293B', // Xanh đá đậm chỉ dùng cho chữ, không dùng làm nền khối lớn
-                        lightBg: '#F8FAFC',  // Màu nền xanh cực nhạt cho các section
+                        secondary: '#1E293B',
+                        lightBg: '#F8FAFC',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -110,12 +103,12 @@
                 </div>
                 <!-- Desktop Menu -->
                 <div class="hidden lg:flex items-center space-x-8">
-                    <a onclick="navigate('home');return false;" class="nav-link active" data-target="home" data-i18n="nav_home">Trang chủ</a>
-                    <a onclick="navigate('about');return false;" class="nav-link" data-target="about" data-i18n="nav_about">Về VAF</a>
-                    <a onclick="navigate('products');return false;" class="nav-link" data-target="products" data-i18n="nav_products">Sản phẩm</a>
-                    <a onclick="navigate('projects');return false;" class="nav-link" data-target="projects" data-i18n="nav_projects">Dự án</a>
-                    <a onclick="navigate('news');return false;" class="nav-link" data-target="news" data-i18n="nav_news">Tin tức</a>
-                    <a onclick="navigate('contact');return false;" class="nav-link" data-target="contact" data-i18n="nav_contact">Liên hệ</a>
+                    <a href="/" onclick="navigate('home');return false;" class="nav-link active" data-target="home" data-i18n="nav_home">Trang chủ</a>
+                    <a href="/about" onclick="navigate('about');return false;" class="nav-link" data-target="about" data-i18n="nav_about">Về VAF</a>
+                    <a href="/products" onclick="navigate('products');return false;" class="nav-link" data-target="products" data-i18n="nav_products">Sản phẩm</a>
+                    <a href="/projects" onclick="navigate('projects');return false;" class="nav-link" data-target="projects" data-i18n="nav_projects">Dự án</a>
+                    <a href="/news" onclick="navigate('news');return false;" class="nav-link" data-target="news" data-i18n="nav_news">Tin tức</a>
+                    <a href="/contact" onclick="navigate('contact');return false;" class="nav-link" data-target="contact" data-i18n="nav_contact">Liên hệ</a>
                 </div>
                 <!-- Bên phải: Ngôn ngữ & Nút bấm -->
                 <div class="flex items-center gap-4">
@@ -124,7 +117,7 @@
                         <span class="text-gray-300">|</span>
                         <button class="lang-btn p-1" onclick="setLang('en')">EN</button>
                     </div>
-                    <a href="javascript:void(0)" onclick="showComingSoon()" class="hidden lg:flex bg-primary hover:bg-primaryDark text-white px-5 py-2 rounded-full font-bold text-xs uppercase shadow-lg items-center transition">
+                    <a href="/profile" onclick="showComingSoon(); return false;" class="hidden lg:flex bg-primary hover:bg-primaryDark text-white px-5 py-2 rounded-full font-bold text-xs uppercase shadow-lg items-center transition">
     <i class="fas fa-file-download mr-2"></i> <span data-i18n="btn_profile">Hồ sơ năng lực</span>
 </a>
                     <button id="mobile-menu-btn" class="lg:hidden text-2xl text-primary"><i class="fas fa-bars"></i></button>
@@ -134,14 +127,14 @@
         <!-- Mobile Menu (Ẩn hiện) -->
         <div id="mobile-menu" class="lg:hidden hidden bg-white border-t absolute w-full left-0 top-full shadow-xl z-50">
             <div class="p-4 flex flex-col space-y-4 font-bold text-slate-700">
-                <a onclick="handleNav('home')" data-i18n="nav_home">Trang chủ</a>
-                <a onclick="handleNav('about')" data-i18n="nav_about">Về VAF</a>
-                <a onclick="handleNav('products')" data-i18n="nav_products">Sản phẩm</a>
-                <a onclick="handleNav('projects')" data-i18n="nav_projects">Dự án</a>
-                <a onclick="handleNav('news')" data-i18n="nav_news">Tin tức</a>
-                <a onclick="handleNav('contact')" data-i18n="nav_contact">Liên hệ</a>
+                <a href="/" onclick="handleNav('home'); return false;" data-i18n="nav_home">Trang chủ</a>
+                <a href="/about" onclick="handleNav('about'); return false;" data-i18n="nav_about">Về VAF</a>
+                <a href="/products" onclick="handleNav('products'); return false;" data-i18n="nav_products">Sản phẩm</a>
+                <a href="/projects" onclick="handleNav('projects'); return false;" data-i18n="nav_projects">Dự án</a>
+                <a href="/news" onclick="handleNav('news'); return false;" data-i18n="nav_news">Tin tức</a>
+                <a href="/contact" onclick="handleNav('contact'); return false;" data-i18n="nav_contact">Liên hệ</a>
                 <div class="pt-2 border-t mt-2">
-                    <a onclick="showComingSoon()" class="block text-center text-primary" data-i18n="btn_profile">Hồ sơ năng lực</a>
+                    <a href="/profile" onclick="showComingSoon(); return false;" class="block text-center text-primary" data-i18n="btn_profile">Hồ sơ năng lực</a>
                 </div>
             </div>
         </div>
@@ -400,8 +393,8 @@
                     <div class="text-center mb-16">
                         <h2 class="text-2xl font-bold text-secondary mb-8" data-i18n="member_title">Thành Viên Hiệp Hội</h2>
                         <div class="flex justify-center gap-16 flex-wrap">
-                            <div class="text-center group cursor-pointer"><img src="images/NAFA-logo.webp" class="h-36 object-contain group-hover:grayscale-0 transition mb-2 mx-auto transform group-hover:scale-110" loading="lazy" decoding="async"><p class="text-xs font-bold text-primary-500 group-hover:text-primary transition" data-i18n="member_nafa">NAFA (USA)</p></div>
-                            <div class="text-center group cursor-pointer"><img src="images/SACA-logo.webp" class="h-36 object-contain  group-hover:grayscale-0 transition mb-2 mx-auto transform group-hover:scale-110" loading="lazy" decoding="async"><p class="text-xs font-bold text-primary-500 group-hover:text-primary transition" data-i18n="member_saca">SACA (VN)</p></div>
+                            <div class="text-center group cursor-pointer"><img src="images/NAFA-logo.webp" alt="NAFA member logo" class="h-36 object-contain group-hover:grayscale-0 transition mb-2 mx-auto transform group-hover:scale-110" loading="lazy" decoding="async"><p class="text-xs font-bold text-primary-500 group-hover:text-primary transition" data-i18n="member_nafa">NAFA (USA)</p></div>
+                            <div class="text-center group cursor-pointer"><img src="images/SACA-logo.webp" alt="SACA member logo" class="h-36 object-contain  group-hover:grayscale-0 transition mb-2 mx-auto transform group-hover:scale-110" loading="lazy" decoding="async"><p class="text-xs font-bold text-primary-500 group-hover:text-primary transition" data-i18n="member_saca">SACA (VN)</p></div>
                         </div>
                     </div>
                     <div class="text-center mb-16">
@@ -1524,7 +1517,7 @@
                     <span id="pjd-tag" class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full"></span>
                     <span id="pjd-year" class="bg-gray-100 text-gray-800 text-xs font-bold px-3 py-1 rounded-full"></span>
                 </div>
-                <div class="rounded-xl overflow-hidden shadow-lg mb-10 h-[400px] md:h-[500px]"><img id="pjd-img" class="w-full h-full object-cover"></div>
+                <div class="rounded-xl overflow-hidden shadow-lg mb-10 h-[400px] md:h-[500px]"><img id="pjd-img" alt="" class="w-full h-full object-cover"></div>
                 <div class="grid md:grid-cols-3 gap-8">
                     <div class="md:col-span-2">
                         <h3 class="font-bold text-lg mb-2 text-secondary" data-i18n="proj_desc_title">Mô tả</h3><p id="pjd-desc" class="text-gray-600 mb-6 leading-relaxed"></p>
@@ -1559,7 +1552,7 @@
                 </header>
 
                 <div class="rounded-2xl overflow-hidden shadow-2xl mb-12">
-                    <img id="nd-img" class="w-full h-auto object-cover max-h-[500px]">
+                    <img id="nd-img" alt="" class="w-full h-auto object-cover max-h-[500px]">
                 </div>
 
                 <article id="nd-content" class="prose prose-lg max-w-none text-slate-700 leading-8">
@@ -1651,9 +1644,6 @@
                             <input type="hidden" name="access_key" value="74715d24-cfc0-456a-96cd-6efcd5a221d5">
                             <input type="hidden" name="subject" value="🔔 Có yêu cầu tư vấn mới từ Website VAF">
                             <input type="hidden" name="from_name" value="Hệ Thống Website VAF">
-
-                            <h3 class="text-3xl font-black text-secondary font-heading mb-2" data-i18n="form_pro_title">Gửi Yêu Cầu Chuyên Gia</h3>
-                            <p class="text-slate-500 text-sm mb-10" data-i18n="form_pro_desc">Vui lòng cung cấp chi tiết nhu cầu, VAF sẽ phản hồi bảng vẽ và báo giá trong 24 giờ.</p>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
@@ -1796,9 +1786,9 @@
                                     <span data-i18n="contact_add">KCN Đồng An 2, Bình Dương,TP HCM</span>
                                 </div>
                                 <div class="flex items-center gap-6 pt-6">
-                                    <a href="#" class="w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-[#1877F2] hover:bg-[#1877F2] hover:text-white transition-all shadow-sm"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#" class="w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-[#FF0000] hover:bg-[#FF0000] hover:text-white transition-all shadow-sm"><i class="fab fa-youtube text-lg"></i></a>
-                                    <a href="#" class="w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-[#0A66C2] hover:bg-[#0A66C2] hover:text-white transition-all shadow-sm"><i class="fab fa-linkedin-in text-lg"></i></a>
+                                    <a href="#" aria-label="Facebook VAF" class="w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-[#1877F2] hover:bg-[#1877F2] hover:text-white transition-all shadow-sm"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" aria-label="YouTube VAF" class="w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-[#FF0000] hover:bg-[#FF0000] hover:text-white transition-all shadow-sm"><i class="fab fa-youtube text-lg"></i></a>
+                                    <a href="#" aria-label="LinkedIn VAF" class="w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-[#0A66C2] hover:bg-[#0A66C2] hover:text-white transition-all shadow-sm"><i class="fab fa-linkedin-in text-lg"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -1822,11 +1812,9 @@
         </div>
     </footer>
     <!-- Scripts -->
-    <script defer src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-
     <script defer src="/news-data.js"></script>
-
     <script defer src="/products-data.js"></script>
+
 
     <script defer src="/script.js"></script>
 
@@ -1849,6 +1837,7 @@
         <button onclick="closeComingSoon()" class="w-full bg-secondary hover:bg-primary text-white font-bold py-3 px-6 rounded-lg transition transform active:scale-95 shadow-lg">
             Đóng Thông Báo
         </button>
+    </div>
     </div>
 
 </body>

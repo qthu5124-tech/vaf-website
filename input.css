@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@source "./index.html";
+@source "./script.js";
+@source "./products-data.js";
+@source "./news-data.js";
+
+@theme {
+    --color-primary: #D6001C;
+    --color-primaryDark: #B00015;
+    --color-secondary: #1E293B;
+    --color-lightBg: #F8FAFC;
+    --font-sans: "Inter", sans-serif;
+    --font-heading: "Montserrat", sans-serif;
+}
