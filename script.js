@@ -1150,6 +1150,39 @@ function loadProductsScript() {
     });
 }
 
+function hydrateDeferredImages(scope = document) {
+    const images = [...scope.querySelectorAll('img[data-src]')];
+    if (!images.length) return;
+
+    const loadImage = img => {
+        if (!img.dataset.src) return;
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+    };
+
+    if (!('IntersectionObserver' in window)) {
+        images.forEach(loadImage);
+        return;
+    }
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            observer.unobserve(entry.target);
+            loadImage(entry.target);
+        });
+    }, { rootMargin: '120px 0px' });
+
+    images.forEach(img => observer.observe(img));
+}
+
+function loadDeferredImagesNow(scope = document) {
+    scope.querySelectorAll('img[data-src]').forEach(img => {
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+    });
+}
+
 function loadNewsScript() {
     if (window.newsData) return Promise.resolve(window.newsData);
 
@@ -1485,6 +1518,7 @@ if (page === "project") activeTarget = "projects";
     if (page === 'home') {
         document.title = 'VAF - Nhà Sản Xuất Lọc Khí & Thiết Bị Phòng Sạch Hàng Đầu';
         switchView('view-home');
+        hydrateDeferredImages(document.getElementById('view-home') || document);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     else if (page === 'about') {
@@ -1893,6 +1927,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if ('requestIdleCallback' in window) requestIdleCallback(prepareBelowFoldImages, { timeout: 2000 });
     else setTimeout(prepareBelowFoldImages, 1200);
 
+    hydrateDeferredImages();
     lazyInitSwipers();
 });    
 
