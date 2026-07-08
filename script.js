@@ -1832,20 +1832,42 @@ document.addEventListener('DOMContentLoaded', () => {
       
 
     } catch (e) { console.error(e); }
-    
+
+    lazyInitSwipers();
+});    
+
+function runWhenNearViewport(element, callback) {
+    if (!element) return;
+    if (!('IntersectionObserver' in window)) {
+        callback();
+        return;
+    }
+
+    const observer = new IntersectionObserver(entries => {
+        if (!entries.some(entry => entry.isIntersecting)) return;
+        observer.disconnect();
+        callback();
+    }, { rootMargin: '400px 0px' });
+
+    observer.observe(element);
+}
+
+function lazyInitSwipers() {
     const swiperEl = document.querySelector('.news-swiper-home');
-    if (swiperEl) {
+    runWhenNearViewport(swiperEl, () => {
+        if (window.homeNewsSwiper || typeof Swiper === 'undefined') return;
         window.homeNewsSwiper = new Swiper('.news-swiper-home', {
-            slidesPerView: 1, spaceBetween: 24, loop: true,
+            slidesPerView: 1, spaceBetween: 24, loop: false,
             pagination: { el: '.swiper-pagination', clickable: true },
             navigation: { nextEl: '.home-slider-next', prevEl: '.home-slider-prev' },
             breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
         });
-    }
+    });
 
-// KHỞI TẠO SLIDER ĐỐI TÁC (TRƯỢT TỪNG LOGO - VÒNG LẶP CHUẨN)
+    // KHỞI TẠO SLIDER ĐỐI TÁC KHI GẦN TỚI SECTION ĐỂ GIẢM MAIN THREAD BAN ĐẦU
     const partnerSwiperEl = document.querySelector('.partner-swiper');
-    if (partnerSwiperEl) {
+    runWhenNearViewport(partnerSwiperEl, () => {
+        if (window.partnerSwiper || typeof Swiper === 'undefined') return;
         window.partnerSwiper = new Swiper('.partner-swiper', {
             // Số lượng logo hiển thị
             slidesPerView: 2, 
@@ -1854,8 +1876,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // QUAN TRỌNG: Vòng lặp vô tận
             loop: true,
             
-            // QUAN TRỌNG: Nhân bản thật nhiều logo để không bao giờ bị dừng ở cuối
-            loopAdditionalSlides: 100, 
+            // Giữ vòng lặp nhẹ hơn để mobile không phải clone quá nhiều logo lúc đầu.
+            loopAdditionalSlides: 8, 
             
             // Tốc độ trượt: 600ms (Trượt dứt khoát, không lề mề)
             speed: 600, 
@@ -1889,8 +1911,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
             }
         });
-    }
-});    
+    });
+}
 
 // Mobile menu & Scroll effect
 document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
