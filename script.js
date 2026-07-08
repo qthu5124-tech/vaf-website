@@ -830,16 +830,272 @@ function setLang(lang) {
 
 
 const projects = [
-    { id: 'p1', title: 'BV Đa Khoa Lâm Đồng', cat: 'Y Tế', img: 'images/anh-du-an/bvld.png', client: 'BV Lâm Đồng', loc: 'Lâm Đồng', scale: '3 Phòng sạch', year: '2022', desc: 'Cung cấp thiết bị phòng mổ áp lực âm.', scope: ['HVAC', 'HEPA Box'] },
-    { id: 'p2', title: 'Nhà Máy D PACK', cat: 'Công Nghiệp', img: 'images/anh-du-an/dpack.jpg', client: 'D PACK', loc: 'Bình Định', scale: 'Nhà máy', year: '2023', desc: 'Tổng thầu thiết kế thi công phòng sạch.', scope: ['Thiết kế', 'Thi công'] },
-    { id: 'p3', title: 'Samsung Thái Nguyên', cat: 'Điện Tử', img: 'images/anh-du-an/sstn.jpg', client: 'Samsung', loc: 'Thái Nguyên', scale: 'Dây chuyền', year: '2023', desc: 'Cung cấp vật tư tiêu hao lọc khí.', scope: ['Cung cấp lọc', 'FFU'] },
-    { id: 'p4', title: 'BV Grand Mandalay', cat: 'Quốc Tế', img: 'images/anh-du-an/gm.jpg', client: 'Mandalay', loc: 'Myanmar', scale: '2 Phòng mổ', year: '2022', desc: 'Xuất khẩu thiết bị phòng mổ.', scope: ['Xuất khẩu', 'Thi công'] },
-    { id: 'p5', title: 'Trung Tâm DIAG', cat: 'Y Tế', img: 'images/anh-du-an/diag.jpg', client: 'DIAG', loc: 'TP.HCM', scale: 'Lab xét nghiệm', year: '2022', desc: 'Lắp đặt thiết bị phòng xét nghiệm.', scope: ['Pass Box', 'Air Shower'] },
-    { id: 'p6', title: 'BV Nhân Dân 115', cat: 'Y Tế', img: 'images/anh-du-an/115.jpg', client: 'BV 115', loc: 'TP.HCM', scale: 'Khu cách ly', year: '2021', desc: 'Cải tạo phòng áp lực âm.', scope: ['Cải tạo', 'HEPA'] }
+
+    // =========================
+    // ĐIỆN TỬ / BÁN DẪN
+    // =========================
+
+    {
+        id: 'p20',
+        title: 'Samsung Display Vietnam (SDV)',
+        cat: 'Điện Tử',
+        img: 'images/anh-du-an/ssdisplay.webp',
+        client: 'Samsung Display Vietnam',
+        loc: 'Bắc Ninh',
+        scale: 'Nhà máy màn hình OLED',
+        year: '2023',
+        desc: 'Cung cấp giải pháp lọc khí và vật tư phòng sạch cho dây chuyền sản xuất màn hình điện tử.',
+        scope: ['HEPA Filter', 'ULPA Filter', 'FFU'],
+        featured: true
+    },
+
+    {
+        id: 'p17',
+        title: 'Samsung Electronics Vietnam (SEMV)',
+        cat: 'Điện Tử',
+        img: 'images/anh-du-an/sev.webp',
+        client: 'Samsung Electronics Vietnam',
+        loc: 'Bắc Ninh',
+        scale: 'Nhà máy điện tử',
+        year: '2023',
+        desc: 'Cung cấp lọc khí và vật tư phòng sạch cho nhà máy sản xuất điện tử.',
+        scope: ['HEPA Filter', 'Pre Filter', 'Fine Filter']
+     
+    },
+
+    {
+        id: 'p18',
+        title: 'Samsung Electronics Vietnam Thai Nguyen (SEVT)',
+        cat: 'Điện Tử',
+        img: 'images/anh-du-an/sevt.webp',
+        client: 'Samsung Electronics Vietnam Thai Nguyen',
+        loc: 'Thái Nguyên',
+        scale: 'Nhà máy điện tử',
+        year: '2023',
+        desc: 'Cung cấp vật tư tiêu hao lọc khí và thiết bị phòng sạch.',
+        scope: ['HEPA Filter', 'FFU', 'Bag Filter'],
+        featured: true
+    },
+
+    {
+        id: 'p19',
+        title: 'Samsung CE Complex (SEHC)',
+        cat: 'Điện Tử',
+        img: 'images/anh-du-an/sehc.webp',
+        client: 'Samsung CE Complex',
+        loc: 'TP.HCM',
+        scale: 'Nhà máy điện tử',
+        year: '2023',
+        desc: 'Cung cấp giải pháp lọc khí và vật tư phòng sạch cho nhà máy điện tử.',
+        scope: ['HEPA Filter', 'AHU Filter', 'FFU'],
+        featured: true
+    },
+
+  
+    // =========================
+    // Y TẾ
+    // =========================
+
+    {
+        id: 'p01',
+        title: 'Bệnh Viện Gia An 115',
+        cat: 'Y Tế',
+        img: 'images/anh-du-an/ga115.webp',
+        client: 'Bệnh Viện Gia An 115',
+        loc: 'TP HCM',
+        scale: 'Phòng Sạch',
+        year: '2023',
+        desc: 'Thi công phòng LAF ISO CLASS 5 Viện Tế Bào Gốc.',
+        scope: ['HVAC', 'HEPA Box'],
+        featured: true
+    },
+
+    {
+        id: 'p1',
+        title: 'Bệnh Viện Đa Khoa Lâm Đồng',
+        cat: 'Y Tế',
+        img: 'images/anh-du-an/bvld.png',
+        client: 'Bệnh Viện Lâm Đồng',
+        loc: 'Lâm Đồng',
+        scale: '3 Phòng sạch',
+        year: '2022',
+        desc: 'Cung cấp thiết bị phòng mổ áp lực âm.',
+        scope: ['HVAC', 'HEPA Box']
+    },
+
+    {
+        id: 'p5',
+        title: 'Trung Tâm DIAG',
+        cat: 'Y Tế',
+        img: 'images/anh-du-an/diag.webp',
+        client: 'DIAG',
+        loc: 'TP.HCM',
+        scale: 'Lab xét nghiệm',
+        year: '2022',
+        desc: 'Lắp đặt thiết bị phòng xét nghiệm.',
+        scope: ['Pass Box', 'Air Shower']
+    },
+
+    {
+        id: 'p6',
+        title: 'Bệnh Viện Nhân Dân 115',
+        cat: 'Y Tế',
+        img: 'images/anh-du-an/115.webp',
+        client: 'Bệnh Viện 115',
+        loc: 'TP.HCM',
+        scale: 'Khu cách ly',
+        year: '2021',
+        desc: 'Cải tạo phòng áp lực âm.',
+        scope: ['Cải tạo', 'HEPA']
+    },
+
+    {
+        id: 'p7',
+        title: 'Bệnh Viện Long Khánh',
+        cat: 'Y Tế',
+        img: 'images/anh-du-an/bvlk.webp',
+        client: 'Bệnh Viện Long Khánh',
+        loc: 'Đồng Nai',
+        scale: 'Phòng DSA',
+        year: '2021',
+        desc: 'Thi công phòng DSA và khu can thiệp tim mạch.',
+        scope: ['Laminar', 'HVAC', 'Panel']
+    },
+
+    {
+        id: 'p8',
+        title: 'Bệnh Viện Mắt Hải Yến',
+        cat: 'Y Tế',
+        img: 'images/anh-du-an/hy.webp',
+        client: 'Bệnh Viện Mắt Hải Yến',
+        loc: 'TP.HCM',
+        scale: 'Phòng mổ',
+        year: '2021',
+        desc: 'Thi công phòng mổ và khu vô trùng.',
+        scope: ['Laminar', 'HVAC', 'Medical Gas']
+    },
+
+    {
+        id: 'p10',
+        title: 'Bệnh Viện Quân Y 13',
+        cat: 'Y Tế',
+        img: 'images/anh-du-an/qy13.webp',
+        client: 'Bệnh Viện Quân Y 13',
+        loc: 'Bình Định',
+        scale: 'Khu phẫu thuật',
+        year: '2021',
+        desc: 'Thi công HVAC và BMS.',
+        scope: ['HVAC', 'BMS']
+    },
+
+    {
+        id: 'p11',
+        title: 'Bệnh Viện 30/4',
+        cat: 'Y Tế',
+        img: 'images/anh-du-an/bv304.webp',
+        client: 'Bệnh Viện 30/4',
+        loc: 'TP.HCM',
+        scale: 'Khu điều trị',
+        year: '2021',
+        desc: 'Thi công hệ thống HVAC và AHU Housing.',
+        scope: ['HVAC', 'AHU Housing']
+    },
+
+    // =========================
+    // CÔNG NGHIỆP
+    // =========================
+
+    {
+        id: 'p2',
+        title: 'Nhà Máy D PACK',
+        cat: 'Công Nghiệp',
+        img: 'images/anh-du-an/dpack.webp',
+        client: 'D PACK',
+        loc: 'Bình Định',
+        scale: 'Nhà máy',
+        year: '2023',
+        desc: 'Tổng thầu thiết kế thi công phòng sạch.',
+        scope: ['Thiết kế', 'Thi công'],
+        featured: true
+    },
+
+    {
+        id: 'p12',
+        title: 'Daiwa Plastics',
+        cat: 'Công Nghiệp',
+        img: 'images/anh-du-an/daiwa.webp',
+        client: 'Daiwa Plastics',
+        loc: 'TP.HCM',
+        scale: 'Nhà máy',
+        year: '2022',
+        desc: 'Thi công HVAC, Chiller và hệ Panel.',
+        scope: ['HVAC', 'Chiller', 'Panel']
+    },
+
+    {
+        id: 'p13',
+        title: 'Trường Thọ',
+        cat: 'Công Nghiệp',
+        img: 'images/anh-du-an/truongtho.webp',
+        client: 'Trường Thọ',
+        loc: 'TP.HCM',
+        scale: 'Phòng sạch',
+        year: '2022',
+        desc: 'Thi công phòng sạch công nghiệp.',
+        scope: ['Panel', 'HVAC', 'Điện']
+    },
+
+    // =========================
+    // NĂNG LƯỢNG
+    // =========================
+
+    {
+        id: 'p21',
+        title: 'Nhà Máy Nhiệt Điện Phú Mỹ',
+        cat: 'Năng Lượng',
+        img: 'images/anh-du-an/phumy.webp',
+        client: 'Nhiệt Điện Phú Mỹ',
+        loc: 'Bà Rịa - Vũng Tàu',
+        scale: 'Nhà máy điện',
+        year: '2022',
+        desc: 'Cung cấp giải pháp lọc khí công nghiệp cho hệ thống vận hành nhà máy điện.',
+        scope: ['Lọc Khí Công Nghiệp', 'HVAC', 'AHU Filter'],
+        featured: true,
+    },
+
+    // =========================
+    // QUỐC TẾ
+    // =========================
+
+    {
+        id: 'p4',
+        title: 'Bệnh Viện Grand Mandalay',
+        cat: 'Quốc Tế',
+        img: 'images/anh-du-an/gm.webp',
+        client: 'Grand Mandalay Hospital',
+        loc: 'Myanmar',
+        scale: '2 Phòng mổ',
+        year: '2022',
+        desc: 'Xuất khẩu thiết bị phòng mổ và giải pháp phòng sạch.',
+        scope: ['Xuất khẩu', 'Thi công']
+    }
+
 ];
 
 // --- 2. HÀM TIỆN ÍCH ---
 function cleanText(text) { return text ? text.replace(/<[^>]*>?/gm, '') : ''; }
+
+function resolveAssetPath(path) {
+    if (!path || /^(https?:)?\/\//.test(path) || path.startsWith('/')) return path;
+    return '/' + path;
+}
+
+function resolveNewsContentAssets(html) {
+    if (!html) return '';
+    return html
+        .replace(/src="images\//g, 'src="/images/')
+        .replace(/src='images\//g, "src='/images/");
+}
 
 function scrollToElement(id) {
     const el = document.getElementById(id);
@@ -887,7 +1143,7 @@ function renderSidebarMenu() {
         'Thiết Bị': 'fa-box-open'
     };
 
-    const categories = [...new Set(products.map(p => p.cat))];
+    const categories = [...new Set(projects.map(p => p.cat))];
     const currentCat = window.currentFilterCat || 'all';
 
     // 1. Nút "Tất cả sản phẩm"
@@ -983,13 +1239,26 @@ function filterProducts(cat, noScroll = false) {
 }
 // --- CHI TIẾT SẢN PHẨM (FINAL VERSION - FIX LỖI) ---
 function openProductDetail(id) {
-    window.location.hash = `product/${id}`; // Đổi URL
+
+    history.pushState(
+        {},
+        "",
+        "/product/" + id
+    );
+
+    handleRouting();
 }
 
 function executeProductDetail(id) {
     window.currentProductId = id;
     const p = products.find(x => x.id === id);
-    if (!p) { window.location.hash = 'products'; return; } // Lỗi thì về lại danh sách
+    if (!p) {
+        history.replaceState({}, "", "/products");
+
+        switchView("view-products");
+
+        return;
+    }
 
     const lang = currentLang;
     const pName = (typeof p.name === 'object') ? p.name[lang] : p.name;
@@ -997,7 +1266,7 @@ function executeProductDetail(id) {
 
     document.title = pName + " | VAF";
     const imgEl = document.getElementById('pd-img');
-    imgEl.src = p.img;
+    imgEl.src = "/" + p.img;
     imgEl.onerror = function () { this.src = 'https://placehold.co/800x600?text=VAF+Product'; };
 
     document.getElementById('pd-cat').innerText = p.cat;
@@ -1047,7 +1316,7 @@ function executeProductDetail(id) {
                     <i class="fas fa-ruler-combined text-primary"></i> ${txtTitle}
                 </h4>
                 <p class="text-gray-300 text-sm mb-4 max-w-3xl">${txtDesc}</p>
-                <button onclick="handleNav('contact')" class="bg-white text-secondary hover:bg-primary hover:text-white px-6 py-2 rounded font-bold text-sm transition shadow-lg uppercase">
+                <button onclick="navigate('contact')" class="bg-white text-secondary hover:bg-primary hover:text-white px-6 py-2 rounded font-bold text-sm transition shadow-lg uppercase">
                     ${txtBtn}
                 </button>
             </div>
@@ -1068,25 +1337,74 @@ function executeProductDetail(id) {
 }
 
 /// --- 4. HỆ THỐNG ĐỊNH TUYẾN (ROUTING) TẠO URL RIÊNG ---
+function navigate(target) {
+
+    let url = "/";
+
+    switch (target) {
+
+        case "home":
+            url = "/";
+            break;
+
+        case "about":
+            url = "/about";
+            break;
+
+        case "products":
+            url = "/products";
+            break;
+
+        case "projects":
+            url = "/projects";
+            break;
+
+        case "news":
+            url = "/news";
+            break;
+
+        case "contact":
+            url = "/contact";
+            break;
+
+        default:
+            url = "/" + target;
+            break;
+    }
+
+    history.pushState({}, "", url);
+
+    handleRouting();
+}
+
 function handleNav(target) {
-    window.location.hash = target; // Chỉ cần đổi URL, hệ thống routing sẽ tự lo phần còn lại
+    navigate(target);
 }
 
 // Lắng nghe sự kiện khi URL thay đổi (Bấm nút Back/Forward trình duyệt)
-window.addEventListener('hashchange', handleRouting);
+window.addEventListener('popstate', handleRouting);
 
 function handleRouting() {
-    let hash = window.location.hash.replace('#', '');
+    const path = location.pathname;
+
+    let hash = "";
+
+    if (path === "/")
+        hash = "home";
+    else
+        hash = path.substring(1);
 
     // Nếu không có hash (mới vào web), mặc định là home
     if (!hash) {
-        history.replaceState(null, null, '#home');
-        hash = 'home';
+        history.replaceState({}, "", "/");
+        hash = "home";
     }
 
-    const parts = hash.split('/');
-    const path = parts[0]; // Trang chính (home, about, product...)
-    const param = parts[1]; // Tham số (id sản phẩm, id tin tức...)
+    const parts = hash.split("/");
+
+    const page = parts[0];
+    const param = parts[1];
+    
 
     // 1. Ẩn menu mobile nếu đang mở
     const mobileMenu = document.getElementById('mobile-menu');
@@ -1094,63 +1412,79 @@ function handleRouting() {
 
     // 2. Active màu đỏ cho menu trên thanh điều hướng
     document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-    let activeTarget = path;
-    if (path === 'product') activeTarget = 'products';
-    if (path === 'news-detail') activeTarget = 'news';
-    if (path === 'project-detail') activeTarget = 'projects';
+let activeTarget = page;
+
+if (page === "product") activeTarget = "products";
+if (page === "project") activeTarget = "projects";
 
     const activeLink = document.querySelector(`.nav-link[data-target="${activeTarget}"]`);
     if (activeLink) activeLink.classList.add('active');
 
     // 3. Xử lý hiển thị trang tương ứng
-    if (path === 'home') {
+    if (page === 'home') {
         document.title = 'VAF - Nhà Sản Xuất Lọc Khí & Thiết Bị Phòng Sạch Hàng Đầu';
         switchView('view-home');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    else if (path === 'about') {
+    else if (page === 'about') {
         document.title = 'Về VAF - Hồ Sơ Năng Lực & Nhà Máy Sản Xuất';
         switchView('view-about');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         setTimeout(() => runCounterAnimation(), 500);
     }
-    else if (path === 'products') {
+    else if (page === 'products') {
         document.title = 'Danh Mục Sản Phẩm Lọc Khí - VAF';
         switchView('view-products');
         if (!window.currentFilterCat) filterProducts('all', true);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    else if (path === 'product' && param) {
+    else if (page === 'product' && param) {
         executeProductDetail(param);
     }
-    else if (path === 'projects') {
+    else if (page === 'projects') {
+
         document.title = 'Dự Án Tiêu Biểu & Khách Hàng - VAF';
         switchView('view-projects');
         filterProjects('all'); // <--- Đã sửa thành tên hàm mới
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    else if (path === 'project-detail' && param) {
-        executeProjectDetail(param);
+    else if (page === 'projects-all') {
+
+        document.title = 'Tất Cả Dự Án - VAF';
+            
+        switchView('view-projects-all');
+
+        renderAllProjects(1);
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     }
-    else if (path === 'news') {
-        document.title = 'Tin Tức & Kiến Thức Phòng Sạch - VAF';
-        switchView('view-news');
-        renderNewsPage();
-        renderSidebarNews();
-        renderHomeNews();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    else if (path === 'news-detail' && param) {
+    else if (page === 'project' && param) {
+    executeProjectDetail(param);
+}
+    else if (page === "news" && param) {
+    executeNewsDetail(param);
+}
+else if (page === "news") {
+    document.title = 'Tin Tức & Kiến Thức Phòng Sạch - VAF';
+    switchView('view-news');
+    renderNewsPage();
+    renderSidebarNews();
+    renderHomeNews();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+    else if (page === "news-detail" && param) {
         executeNewsDetail(param);
     }
-    else if (path === 'contact') {
+    else if (page === 'contact') {
         document.title = 'Liên Hệ Tư Vấn & Báo Giá - VAF';
         switchView('view-contact');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    else {
-        window.location.hash = 'home'; // Fallback nếu URL sai
-    }
+// Render Dự án & Tin tức (Giữ nguyên)
+
 }
 // Render Dự án & Tin tức (Giữ nguyên)
 // --- BỘ LỌC DỰ ÁN ---
@@ -1172,13 +1506,69 @@ function renderProjectFilters(activeCat = 'all') {
     filterContainer.innerHTML = html;
 }
 
+const projectsPerPage = 9;
+let currentPage = 1;
+
+function renderAllProjects(page = 1) {
+
+    const grid =
+        document.getElementById('all-projects-grid');
+
+    if (!grid) {
+        console.error('Không tìm thấy all-projects-grid');
+        return;
+    }
+
+    const projectsPerPage = 9;
+
+    currentPage = page;
+
+    const start = (page - 1) * projectsPerPage;
+    const end = start + projectsPerPage;
+
+    const paginatedProjects =
+        projects.slice(start, end);
+
+    grid.innerHTML = `
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            ${paginatedProjects.map(p => `
+                <div class="bg-white rounded-xl border p-5">
+
+                    <h3 class="font-bold text-lg text-secondary">
+                        ${p.title}
+                    </h3>
+
+                    <div class="text-sm text-gray-500 mt-2">
+                        ${p.client}
+                    </div>
+
+                    <div class="text-sm text-gray-400">
+                        ${p.loc} • ${p.year}
+                    </div>
+
+                </div>
+            `).join('')}
+        </div>
+    `;
+
+    renderPagination();
+}
+
 // --- HIỂN THỊ DỰ ÁN ---
 function filterProjects(cat) {
     renderProjectFilters(cat); // Đổi màu nút đang chọn
     const grid = document.getElementById('projects-grid');
     if (!grid) return;
+        
+    const featuredProjects = projects.filter(p => p.featured);
 
-    const filteredProjects = cat === 'all' ? projects : projects.filter(p => p.cat === cat);
+    const filteredProjects =
+        cat === 'all'
+            ? featuredProjects
+            : projects.filter(p => p.cat === cat);
+   
+
+    
 
     if (filteredProjects.length === 0) {
         grid.innerHTML = '<div class="col-span-full text-center py-10 text-gray-400">Chưa có dự án nào trong danh mục này.</div>';
@@ -1191,23 +1581,45 @@ function filterProjects(cat) {
                 <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                 <div class="absolute top-3 left-3 bg-primary/90 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded uppercase tracking-wide shadow">${p.cat}</div>
             </div>
-            <div class="p-6 flex-grow flex flex-col">
+            <div class="p-5">
                 <h3 class="font-bold text-lg text-secondary mb-2 group-hover:text-primary transition leading-snug line-clamp-2">${p.title}</h3>
-                <p class="text-sm text-gray-500 mb-4 line-clamp-2 leading-relaxed flex-grow">${p.desc}</p>
-                <div class="pt-4 border-t border-gray-50 text-xs font-bold text-gray-400 flex justify-between items-center group-hover:text-primary transition">
-                    <span>Xem chi tiết</span>
-                    <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition"></i>
-                </div>
+                <p class="text-sm text-gray-500 mb-2 leading-5">${p.desc}</p>
+               <div class="mt-2 pt-2 border-t border-gray-100 text-xs text-slate-500 space-y-0">
+    <p><strong>Khách hàng:</strong> ${p.client}</p>
+    <p><strong>Địa điểm:</strong> ${p.loc}</p>
+    <p><strong>Năm:</strong> ${p.year}</p>
+</div>
             </div>
         </div>`).join('');
 }
+
+function showAllProjects() {
+
+    const grid = document.getElementById('projects-grid');
+
+    grid.innerHTML = projects.map(p => `
+        <div class="project-row border-b py-3">
+
+            <div class="font-bold text-secondary">
+                ${p.title}
+            </div>
+
+            <div class="text-sm text-gray-500">
+                ${p.client} • ${p.loc} • ${p.year}
+            </div>
+
+        </div>
+    `).join('');
+
+}
+
 
 function renderHomeNews() {
     const container = document.getElementById('home-news-slider-content');
     if (!container || typeof newsData === 'undefined') return;
     container.innerHTML = newsData.map(n => `
         <div class="swiper-slide h-auto"><article class="bg-white h-full rounded-xl overflow-hidden border hover:shadow-lg transition cursor-pointer flex flex-col" onclick="openNewsDetail('${n.id}')">
-            <div class="h-48 relative overflow-hidden"><img src="${n.img}?w=600" class="w-full h-full object-cover transition duration-500 hover:scale-110"></div>
+            <div class="h-48 relative overflow-hidden"><img src="${resolveAssetPath(n.img)}?w=600" class="w-full h-full object-cover transition duration-500 hover:scale-110"></div>
             <div class="p-5 flex-grow flex flex-col"><h3 class="font-bold text-lg mb-2 text-secondary leading-tight line-clamp-2">${n.title}</h3></div>
         </article></div>`).join('');
 }
@@ -1241,7 +1653,7 @@ function renderNewsPage(page = 1) {
     container.innerHTML = itemsToShow.map(n => `
         <article class="news-grid-card group cursor-pointer h-full flex flex-col" onclick="openNewsDetail('${n.id}')">
             <div class="h-56 relative overflow-hidden">
-                <img src="${n.img}?w=800" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=VAF+News'">
+                <img src="${resolveAssetPath(n.img)}?w=800" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=VAF+News'">
                 <div class="absolute top-4 left-4">
                     <span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-wide">${n.cat}</span>
                 </div>
@@ -1280,7 +1692,7 @@ function renderSidebarNews() {
     container.innerHTML = featuredNews.map(n => `
         <div class="flex gap-4 group cursor-pointer border-b border-gray-100 pb-4 last:border-0 last:pb-0" onclick="openNewsDetail('${n.id}')">
             <div class="w-24 h-20 flex-shrink-0 rounded-lg overflow-hidden relative">
-                <img src="${n.img}?w=200" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/200?text=News'">
+                <img src="${resolveAssetPath(n.img)}?w=200" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/200?text=News'">
             </div>
             
             <div class="flex-grow flex flex-col justify-between">
@@ -1333,32 +1745,56 @@ function renderPaginationControls(totalPages, currentPage) {
 }
 
 function openNewsDetail(id) {
-    window.location.hash = `news-detail/${id}`;
+    history.pushState(
+        {},
+        "",
+        "/news/" + id
+    );
+
+    handleRouting();
 }
 
 function executeNewsDetail(id) {
     if (typeof newsData === 'undefined') return;
     const n = newsData.find(x => x.id === id);
-    if (!n) { window.location.hash = 'news'; return; }
+    if (!n) {
+        history.replaceState({}, "", "/news");
+
+        switchView("view-news");
+
+        return;
+    }
 
     document.title = n.title + " | Tin Tức VAF";
     document.getElementById('nd-cat').innerText = n.cat;
     document.getElementById('nd-date').innerText = n.date;
     document.getElementById('nd-title').innerText = n.title;
     document.getElementById('nd-desc').innerText = cleanText(n.desc);
-    document.getElementById('nd-img').src = n.img;
-    document.getElementById('nd-content').innerHTML = n.content;
+    document.getElementById("nd-img").src = resolveAssetPath(n.img);
+    document.getElementById('nd-content').innerHTML = resolveNewsContentAssets(n.content);
     switchView('view-news-detail');
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function openProjectDetail(id) {
-    window.location.hash = `project-detail/${id}`;
+    history.pushState(
+        {},
+        "",
+        "/project/" + id
+    );
+
+    handleRouting();
 }
 
 function executeProjectDetail(id) {
     const p = projects.find(x => x.id === id);
-    if (!p) { window.location.hash = 'projects'; return; }
+    if (!p) {
+        history.replaceState({}, "", "/projects");
+
+        switchView("view-projects");
+
+        return;
+    }
 
     document.title = "Dự Án: " + p.title + " | VAF";
     document.getElementById('pjd-title').innerText = p.title;
@@ -1381,7 +1817,7 @@ document.addEventListener('DOMContentLoaded', () => {
         filterProjects('all'); // <--- Đã sửa thành tên hàm mới
         renderHomeNews();
         renderNewsPage();
-
+        renderAllProjects();
       
 
     } catch (e) { console.error(e); }
@@ -1564,4 +2000,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+
 });

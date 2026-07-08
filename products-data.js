@@ -9,7 +9,7 @@ const products = [
     {
     id: 'v-roll', 
         cat: 'Lọc Thô',
-        img: 'images/san-pham/vroll.jpg', 
+        img: 'images/san-pham/vroll.webp', 
         
         name: { 
             vi: 'V-Roll (Bông lọc bụi)', 
@@ -36,7 +36,7 @@ const products = [
     {
         id: 'v-f', 
         cat: 'Lọc Thô',
-        img: 'images/san-pham/vf.jpg',
+        img: 'images/san-pham/vf.webp',
 
         name: {
             vi: 'V-F (Lọc trần phòng sơn)',
@@ -61,7 +61,7 @@ const products = [
     {
         id: 'v-r28', 
         cat: 'Lọc Thô',
-        img: 'images/san-pham/vr28.jpg',
+        img: 'images/san-pham/vr28.webp',
 
         name: {
             vi: 'V-R28 (Lọc sàn phòng sơn)',
@@ -86,7 +86,7 @@ const products = [
     {
         id: 'v-ra', 
         cat: 'Lọc Thô',
-        img: 'images/san-pham/vra.jpg',
+        img: 'images/san-pham/vra.webp',
 
         name: {
             vi: 'V-RA (Lọc lưới kim loại)',
@@ -192,7 +192,7 @@ const products = [
     {
         id: 'v-r', 
         cat: 'Lọc Thô',
-        img: 'images/san-pham/vr.jpg',
+        img: 'images/san-pham/vr.webp',
 
         name: {
             vi: 'V-R (Lọc tấm giặt được)',
@@ -319,7 +319,7 @@ const products = [
     {
         id: 'v-rw', 
         cat: 'Lọc Thô',
-        img: 'images/san-pham/vrw.jpg',
+        img: 'images/san-pham/vrw.webp',
 
         name: {
             vi: 'V-RW (Lọc tấm giặt được)',
@@ -417,7 +417,7 @@ const products = [
     {
         id: 'v-rz', 
         cat: 'Lọc Thô',
-        img: 'images/san-pham/vrz.jpg',
+        img: 'images/san-pham/vrz.webp',
 
         name: {
             vi: 'V-RZ (Lọc tấm giặt được)',
@@ -514,7 +514,7 @@ const products = [
     {
         id: 'v-di', 
         cat: 'Lọc Thô',
-        img: 'images/san-pham/vdi.jpg',
+        img: 'images/san-pham/vdi.webp',
 
         name: {
             vi: 'V-DI (Lọc thô khung giấy)',
@@ -651,7 +651,7 @@ const products = [
     {
         id: 'v-ht', 
         cat: 'Lọc Thô',
-        img: 'images/san-pham/vht.jpg',
+        img: 'images/san-pham/vht.webp',
 
         name: {
             vi: 'V-HT (Lọc thô chịu nhiệt)',
@@ -720,7 +720,7 @@ const products = [
     {
         id: 'v-pakm5', 
         cat: 'Lọc Tinh',
-        img: 'images/san-pham/vpm5.jpg',
+        img: 'images/san-pham/vpm5.webp',
 
         name: {
             vi: 'V-PAK M5 (Túi lọc khí)',
@@ -891,7 +891,7 @@ const products = [
     {
         id: 'v-pakm6', 
         cat: 'Lọc Tinh',
-        img: 'images/san-pham/vpm6.jpg',
+        img: 'images/san-pham/vpm6.webp',
 
         name: {
             vi: 'V-PAK M6 (Túi lọc khí)',
@@ -1051,7 +1051,7 @@ const products = [
     {
         id: 'v-pakf7', 
         cat: 'Lọc Tinh',
-        img: 'images/san-pham/vpf7.jpg',
+        img: 'images/san-pham/vpf7.webp',
 
         name: {
             vi: 'V-PAK F7 (Túi lọc khí)',
@@ -1310,7 +1310,7 @@ const products = [
     {
         id: 'v-pakf8', 
         cat: 'Lọc Tinh',
-        img: 'images/san-pham/vpf8.jpg',
+        img: 'images/san-pham/vpf8.webp',
 
         name: {
             vi: 'V-PAK F8 (Túi lọc khí)',
@@ -1482,7 +1482,7 @@ const products = [
         <td>3400</td>
         <td>F8</td>
         <td>2.5</td>
-        <td>140</td>
+        <td>.webp</td>
         <td>450</td>
         <td>7.10</td>
     </tr>
@@ -1493,7 +1493,7 @@ const products = [
         <td>1700</td>
         <td>F8</td>
         <td>2.5</td>
-        <td>140</td>
+        <td>.webp</td>
         <td>450</td>
         <td>3.55</td>
     </tr>
@@ -1569,7 +1569,7 @@ const products = [
     {
         id: 'v-pakf9', 
         cat: 'Lọc Tinh',
-        img: 'images/san-pham/vpf9.jpg',
+        img: 'images/san-pham/vpf9.webp',
 
         name: {
             vi: 'V-PAK F9 (Túi lọc khí)',
@@ -1696,7 +1696,7 @@ const products = [
     {
         id: 'v-dura', 
         cat: 'Lọc Tinh',
-        img: 'images/san-pham/vduraa.jpg',
+        img: 'images/san-pham/vduraa.webp',
 
         name: {
             vi: 'V-DURA (V-Bank Nhựa)',
@@ -1824,7 +1824,7 @@ const products = [
     {
         id: 'v-dura-carbon', 
         cat: 'Lọc Tinh',
-        img: 'images/san-pham/vduraC.jpg',
+        img: 'images/san-pham/vduraC.webp',
 
         name: {
             vi: 'V-DURA CARBON (Khử mùi)',
@@ -1858,7 +1858,7 @@ const products = [
     {
         id: 'vmi', 
         cat: 'Lọc Tinh',
-        img: 'images/san-pham/vm1ht.jpg',
+        img: 'images/san-pham/vm1ht.webp',
 
         name: {
             vi: 'VMI (Lọc Hộp Nhôm)',
@@ -2003,7 +2003,7 @@ const products = [
     {
         id: 'vmi-ht', 
         cat: 'Lọc Tinh',
-        img: 'images/san-pham/vm1ht.jpg',
+        img: 'images/san-pham/vm1ht.webp',
 
         name: {
             vi: 'VMI-HT (Chịu nhiệt 250°C)',
@@ -2139,7 +2139,7 @@ const products = [
     {
         id: 'vm-ii', 
         cat: 'Lọc Tinh',
-        img: 'images/san-pham/vm2.jpg',
+        img: 'images/san-pham/vm2.webp',
 
         name: {
             vi: 'VM II (Lọc Mini-pleat)',
@@ -2286,7 +2286,7 @@ const products = [
     {
         id: 'ultracel-i-sc', 
         cat: 'Phòng Sạch',
-        img: 'images/san-pham/u1s.jpg',
+        img: 'images/san-pham/u1s.webp',
 
         name: {
             vi: 'Ultracel I - SC (HEPA Tiêu Chuẩn)',
@@ -2515,7 +2515,7 @@ const products = [
     {
         iid: 'ultracel-i-hc', 
         cat: 'Phòng Sạch',
-        img: 'images/san-pham/u1s.jpg',
+        img: 'images/san-pham/u1s.webp',
 
         name: {
             vi: 'Ultracel I - HC (HEPA Lưu Lượng Cao)',
@@ -2743,7 +2743,7 @@ const products = [
     {
         id: 'ultracel-i-ht', 
         cat: 'Phòng Sạch',
-        img: 'images/san-pham/u1ht.jpg',
+        img: 'images/san-pham/u1ht.webp',
 
         name: {
             vi: 'Ultracel I - HT (HEPA Chịu Nhiệt)',
@@ -2971,7 +2971,7 @@ const products = [
     {
         id: 'ultracel-ii-sc', 
         cat: 'Phòng Sạch',
-        img: 'images/san-pham/u2hc.jpg',
+        img: 'images/san-pham/u2hc.webp',
 
         name: {
             vi: 'Ultracel II - SC (HEPA Mini-pleat)',
@@ -3175,7 +3175,7 @@ const products = [
     {
         id: 'ultracel-ii-mc', 
         cat: 'Phòng Sạch',
-        img: 'images/san-pham/u2hc.jpg',
+        img: 'images/san-pham/u2hc.webp',
 
         name: {
             vi: 'Ultracel II - MC (HEPA Mini-pleat)',
@@ -3371,7 +3371,7 @@ const products = [
     {
         id: 'ultracel-ii-hc', 
         cat: 'Phòng Sạch',
-        img: 'images/san-pham/u2hc.jpg',
+        img: 'images/san-pham/u2hc.webp',
 
         name: {
             vi: 'Ultracel II - HC (HEPA Mini-pleat)',
@@ -3574,7 +3574,7 @@ const products = [
     {
         id: 'ultracel-ii-gel', 
         cat: 'Phòng Sạch',
-        img: 'images/san-pham/u2gel.jpg',
+        img: 'images/san-pham/u2gel.webp',
 
         name: {
             vi: 'Ultracel II - GEL (Gel Seal)',
@@ -3778,7 +3778,7 @@ const products = [
      {
         id: 'ultracel-ii-gelt2', 
         cat: 'Phòng Sạch',
-        img: 'images/san-pham/u2gel2.jpg',
+        img: 'images/san-pham/u2gel2.webp',
 
         name: {
             vi: 'Ultracel II - GEL TYPE 2 (Gel Seal)',
@@ -3981,7 +3981,7 @@ const products = [
     {
         id: 'ultracel-v-abs', 
         cat: 'Phòng Sạch',
-        img: 'images/san-pham/uv.jpg',
+        img: 'images/san-pham/uv.webp',
 
         name: {
             vi: 'Ultracel V - ABS (HEPA V-Bank)',
@@ -4117,7 +4117,7 @@ const products = [
     {
         id: 'ultracel-v-gi', 
         cat: 'Phòng Sạch',
-        img: 'images/san-pham/uvg.jpg',
+        img: 'images/san-pham/uvg.webp',
 
         name: {
             vi: 'Ultracel V - GI (HEPA V-Bank Tôn)',
@@ -4262,7 +4262,7 @@ const products = [
     {
         id: 'ffu', 
         cat: 'Thiết Bị', 
-        img: 'images/san-pham/ffu.jpg',
+        img: 'images/san-pham/ffu.webp',
         
         name: {
             vi: 'Fan Filter Unit (FFU)',
@@ -4276,7 +4276,7 @@ const products = [
             vi: ['Phòng sạch điện tử, Dược phẩm', 'Lắp ghép thành trần phòng sạch (Clean ceiling)'],
             en: ['Electronics, Pharma cleanrooms', 'Cleanroom ceiling grid installation']
         },
-        drawing: 'images/ban-ve/ffu-drawing.png',
+        drawing: 'images/ban-ve/ffu-drawing.webp',
         specs: [
             [{vi: 'Vật liệu', en: 'Housing Material'}, {vi: 'Thép sơn tĩnh điện / Inox 304', en: 'Powder Coated Steel / SS304'}],
             [{vi: 'Lưu lượng gió', en: 'Airflow'}, {vi: '0.45 m/s ± 20%', en: '0.45 m/s ± 20%'}],
@@ -4290,7 +4290,7 @@ const products = [
     {
         id: 'bfu', 
         cat: 'Thiết Bị', 
-        img: 'images/san-pham/bfu.jpg',
+        img: 'images/san-pham/bfu.webp',
 
         name: {
             vi: 'Blower Filter Unit (BFU)',
@@ -4304,7 +4304,7 @@ const products = [
             vi: ['Hệ thống cần áp suất gió lớn', 'Dược phẩm, Phòng thí nghiệm'],
             en: ['High pressure requirements', 'Pharmaceuticals, Labs']
         },
-        drawing: 'images/ban-ve/BFU-drawing.png',
+        drawing: 'images/ban-ve/BFU-drawing.webp',
         specs: [
             [{vi: 'Vật liệu', en: 'Housing Material'}, {vi: 'Thép sơn tĩnh điện / Inox 304', en: 'Powder Coated Steel / SS304'}],
             [{vi: 'Quạt', en: 'Fan Type'}, {vi: 'Ly tâm', en: 'Centrifugal'}],
@@ -4317,7 +4317,7 @@ const products = [
     {
         id: 'static-pass-box', 
         cat: 'Thiết Bị', 
-        img: 'images/san-pham/spb.jpg',
+        img: 'images/san-pham/spb.webp',
 
         name: {
             vi: 'Static Pass Box (Hộp chuyển hàng)',
@@ -4331,7 +4331,7 @@ const products = [
             vi: ['Chuyển hàng giữa các phòng sạch', 'Dược phẩm, Điện tử'],
             en: ['Material transfer between cleanrooms', 'Pharma, Electronics']
         },
-        drawing: 'images/ban-ve/Staticpassbox-drawing.png',
+        drawing: 'images/ban-ve/Staticpassbox-drawing.webp',
         specs: [
             [{vi: 'Vật liệu', en: 'Material'}, 'SS304 / Powder Coated Steel'],
             [{vi: 'Khóa liên động', en: 'Interlock'}, {vi: 'Cơ / Điện tử', en: 'Mechanical / Electronic'}],
@@ -4342,7 +4342,7 @@ const products = [
      {
         id: 'dynamic-pass-box', 
         cat: 'Thiết Bị', 
-        img: 'images/san-pham/dpb.jpg',
+        img: 'images/san-pham/dpb.webp',
 
         name: {
             vi: 'Dynamic Pass Box (Tự làm sạch)',
@@ -4356,7 +4356,7 @@ const products = [
             vi: ['Chuyển hàng từ khu bẩn sang khu sạch', 'Yêu cầu vô trùng cao'],
             en: ['Dirty to clean area transfer', 'High sterility requirements']
         },
-        drawing: 'images/ban-ve/Dynamicpassbox-drawing.png',
+        drawing: 'images/ban-ve/Dynamicpassbox-drawing.webp',
         specs: [
             [{vi: 'Vật liệu', en: 'Material'}, 'SS304 / Powder Coated Steel'],
             [{vi: 'Bộ lọc', en: 'Filter'}, 'HEPA H13 (99.99%)'],
@@ -4368,7 +4368,7 @@ const products = [
     {
         id: 'air-shower', 
         cat: 'Thiết Bị', 
-        img: 'images/san-pham/as.jpg',
+        img: 'images/san-pham/as.webp',
 
         name: {
             vi: 'Air Shower (Buồng tắm khí)',
@@ -4382,7 +4382,7 @@ const products = [
             vi: ['Cửa ra vào phòng sạch', 'Nhà máy điện tử, Thực phẩm'],
             en: ['Cleanroom entrance', 'Electronics, Food processing']
         },
-        drawing: 'images/ban-ve/Airshower-drawing.png',
+        drawing: 'images/ban-ve/Airshower-drawing.webp',
         specs: [
             [{vi: 'Vật liệu', en: 'Material'}, 'SS304 / Powder Coated Steel'],
             [{vi: 'Vận tốc gió', en: 'Jet Velocity'}, '> 22 m/s'],
@@ -4394,7 +4394,7 @@ const products = [
     {
         id: 'hepa-box', 
         cat: 'Thiết Bị', 
-        img: 'images/san-pham/HB.jpg',
+        img: 'images/san-pham/HB.webp',
 
         name: {
             vi: 'HEPA Box (Hộp lọc cửa gió)',
@@ -4408,7 +4408,7 @@ const products = [
             vi: ['Phòng sạch dược phẩm, Điện tử', 'Bệnh viện (Phòng mổ)'],
             en: ['Pharmaceutical, Electronics', 'Hospital Operating Theatres']
         },
-        drawing: 'images/ban-ve/hepabox-drawing.png',
+        drawing: 'images/ban-ve/hepabox-drawing.webp',
         specs: [
             [{vi: 'Vật liệu', en: 'Material'}, 'SS304 / Powder Coated Steel'],
             [{vi: 'Kết nối', en: 'Connection'}, {vi: 'Ống gió mềm / Cổ tròn', en: 'Flexible duct / Round collar'}],
@@ -4421,7 +4421,7 @@ const products = [
     {
         id: 'filter-box', 
         cat: 'Thiết Bị', 
-        img: 'images/san-pham/FB.jpg',
+        img: 'images/san-pham/FB.webp',
 
         name: {
             vi: 'Filter Box (Hộp lọc ống gió)',
@@ -4435,7 +4435,7 @@ const products = [
             vi: ['Hệ thống thông gió tòa nhà', 'Cấp khí tươi sạch'],
             en: ['Building ventilation', 'Fresh air supply systems']
         },
-        drawing: 'images/ban-ve/bvftbox.png',
+        drawing: 'images/ban-ve/bvftbox.webp',
         specs: [
             [{vi: 'Vật liệu', en: 'Material'}, 'Powder Coated Steel / SS304'],
             [{vi: 'Cấu hình lọc', en: 'Filter Stage'}, 'G4 + F8 (2 cấp)'],
@@ -4447,7 +4447,7 @@ const products = [
         {
         id: 'laf', 
         cat: 'Thiết Bị', 
-        img: 'images/san-pham/lmnaf.jpg',
+        img: 'images/san-pham/lmnaf.webp',
 
         name: {
             vi: 'LAF (Laminar Air Flow Unit)',
@@ -4461,7 +4461,7 @@ const products = [
             vi: ['Dây chuyền chiết rót', 'Khu vực cân, pha chế', 'Phòng thí nghiệm'],
             en: ['Filling lines', 'Weighing/Dispensing booths', 'Laboratories']
         },
-        drawing: 'images/ban-ve/LAF-drawing.png',
+        drawing: 'images/ban-ve/LAF-drawing.webp',
         specs: [
             [{vi: 'Vật liệu', en: 'Material'}, 'SS304 / Powder Coated Steel'],
             [{vi: 'Màn che', en: 'Curtain'}, {vi: 'Rèm nhựa PVC chống tĩnh điện', en: 'Anti-static PVC Strip'}],
@@ -4473,7 +4473,7 @@ const products = [
      {
         id: 'lafc', 
         cat: 'Thiết Bị', 
-        img: 'images/san-pham/lmnh.jpg',
+        img: 'images/san-pham/lmnh.webp',
 
         name: {
             vi: 'LAF Ceiling (Trần khí sạch phòng mổ)',
@@ -4487,7 +4487,7 @@ const products = [
             vi: ['Phòng mổ (Operating Theatre)', 'Phòng hồi sức tích cực'],
             en: ['Operating Theatres', 'ICU / Recovery rooms']
         },
-        drawing: 'images/ban-ve/LAFHOS-drawing.png',
+        drawing: 'images/ban-ve/LAFHOS-drawing.webp',
         specs: [
             [{vi: 'Vật liệu', en: 'Material'}, 'SS304 / SS316'],
             [{vi: 'Vận tốc gió', en: 'Air Velocity'}, '0.25 - 0.45 m/s'],
@@ -4499,7 +4499,7 @@ const products = [
     {
         id: 'bibo', 
         cat: 'Thiết Bị', 
-        img: 'images/san-pham/bibo.jpg',
+        img: 'images/san-pham/bibo.webp',
 
         name: {
             vi: 'BIBO (Bag In Bag Out)',
@@ -4513,7 +4513,7 @@ const products = [
             vi: ['Phòng thí nghiệm an toàn sinh học (BSL-3, BSL-4)', 'Bệnh viện truyền nhiễm', 'Nhà máy hạt nhân'],
             en: ['Bio-safety labs (BSL-3/4)', 'Isolation wards', 'Nuclear facilities']
         },
-        drawing: 'images/ban-ve/BIBO-drawing.png',
+        drawing: 'images/ban-ve/BIBO-drawing.webp',
         specs: [
             [{vi: 'Vật liệu', en: 'Material'}, 'SS304 / SS316 (Kín khí)'],
             [{vi: 'Túi thay thế', en: 'Bagging System'}, {vi: 'Túi PVC kèm dây đai', en: 'PVC Bag with O-ring'}],
