@@ -1150,6 +1150,25 @@ function loadProductsScript() {
     });
 }
 
+function loadNewsScript() {
+    if (window.newsData) return Promise.resolve(window.newsData);
+
+    return new Promise((resolve, reject) => {
+        const existing = document.querySelector('script[src="/news-data.js"]');
+        if (existing) {
+            existing.addEventListener('load', () => resolve(window.newsData || []), { once: true });
+            existing.addEventListener('error', reject, { once: true });
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = '/news-data.js';
+        script.onload = () => resolve(window.newsData || []);
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+}
+
 // Render Menu Danh Mục (Sidebar)
 function renderSidebarMenu() {
     const container = document.getElementById('product-filters');
@@ -1288,9 +1307,10 @@ function openProductDetail(id) {
     handleRouting();
 }
 
-function executeProductDetail(id) {
+async function executeProductDetail(id) {
+    await loadProductsScript();
     window.currentProductId = id;
-    const p = products.find(x => x.id === id);
+    const p = (window.products || []).find(x => x.id === id);
     if (!p) {
         history.replaceState({}, "", "/products");
 
@@ -1425,7 +1445,7 @@ function handleNav(target) {
 // Lắng nghe sự kiện khi URL thay đổi (Bấm nút Back/Forward trình duyệt)
 window.addEventListener('popstate', handleRouting);
 
-function handleRouting() {
+async function handleRouting() {
     const path = location.pathname;
 
     let hash = "";
@@ -1465,7 +1485,6 @@ if (page === "project") activeTarget = "projects";
     if (page === 'home') {
         document.title = 'VAF - Nhà Sản Xuất Lọc Khí & Thiết Bị Phòng Sạch Hàng Đầu';
         switchView('view-home');
-        renderHomeNews();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     else if (page === 'about') {
@@ -1477,11 +1496,11 @@ if (page === "project") activeTarget = "projects";
     else if (page === 'products') {
         document.title = 'Danh Mục Sản Phẩm Lọc Khí - VAF';
         switchView('view-products');
-        if (!window.currentFilterCat) filterProducts('all', true);
+        if (!window.currentFilterCat) await filterProducts('all', true);
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     else if (page === 'product' && param) {
-        executeProductDetail(param);
+        await executeProductDetail(param);
     }
     else if (page === 'projects') {
 
@@ -1507,18 +1526,18 @@ if (page === "project") activeTarget = "projects";
     executeProjectDetail(param);
 }
     else if (page === "news" && param) {
-    executeNewsDetail(param);
+    await executeNewsDetail(param);
 }
 else if (page === "news") {
     document.title = 'Tin Tức & Kiến Thức Phòng Sạch - VAF';
     switchView('view-news');
+    await loadNewsScript();
     renderNewsPage();
     renderSidebarNews();
-    renderHomeNews();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
     else if (page === "news-detail" && param) {
-        executeNewsDetail(param);
+        await executeNewsDetail(param);
     }
     else if (page === 'contact') {
         document.title = 'Liên Hệ Tư Vấn & Báo Giá - VAF';
@@ -1659,8 +1678,9 @@ function showAllProjects() {
 
 function renderHomeNews() {
     const container = document.getElementById('home-news-slider-content');
-    if (!container || typeof newsData === 'undefined') return;
-    container.innerHTML = newsData.map(n => `
+    const news = window.newsData || [];
+    if (!container || !news.length) return;
+    container.innerHTML = news.map(n => `
         <div class="swiper-slide h-auto"><article class="bg-white h-full rounded-xl overflow-hidden border hover:shadow-lg transition cursor-pointer flex flex-col" onclick="openNewsDetail('${n.id}')">
             <div class="h-48 relative overflow-hidden"><img src="${resolveAssetPath(n.img)}?w=600" alt="${n.title}" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 hover:scale-110"></div>
             <div class="p-5 flex-grow flex flex-col"><h3 class="font-bold text-lg mb-2 text-secondary leading-tight line-clamp-2">${n.title}</h3></div>
@@ -1677,11 +1697,12 @@ let currentNewsPage = 1; // Trang hiện tại
 function renderNewsPage(page = 1) {
     const container = document.getElementById('news-page-grid');
     const paginationContainer = document.getElementById('news-pagination');
+    const news = window.newsData || [];
     
-    if (!container || typeof newsData === 'undefined') return;
+    if (!container || !news.length) return;
 
     // Tính toán cắt mảng dữ liệu
-    const totalItems = newsData.length;
+    const totalItems = news.length;
     const totalPages = Math.ceil(totalItems / NEWS_PER_PAGE);
     
     // Đảm bảo trang hợp lệ
@@ -1692,7 +1713,7 @@ function renderNewsPage(page = 1) {
     // Vị trí bắt đầu và kết thúc
     const start = (page - 1) * NEWS_PER_PAGE;
     const end = start + NEWS_PER_PAGE;
-    const itemsToShow = newsData.slice(start, end);
+    const itemsToShow = news.slice(start, end);
 
     // A. Render Bài viết
     container.innerHTML = itemsToShow.map(n => `
@@ -1729,11 +1750,12 @@ function renderNewsPage(page = 1) {
 // --- HÀM RENDER SIDEBAR TIN TỨC (CỘT PHẢI) ---
 function renderSidebarNews() {
     const container = document.getElementById('sidebar-featured');
-    if (!container || typeof newsData === 'undefined') return;
+    const news = window.newsData || [];
+    if (!container || !news.length) return;
 
     // Lấy 5 bài viết bất kỳ (hoặc lấy 5 bài đầu tiên làm tin nổi bật)
     // Ở đây mình lấy 5 bài đầu tiên cho đơn giản
-    const featuredNews = newsData.slice(0, 5); 
+    const featuredNews = news.slice(0, 5); 
 
     container.innerHTML = featuredNews.map(n => `
         <div class="flex gap-4 group cursor-pointer border-b border-gray-100 pb-4 last:border-0 last:pb-0" onclick="openNewsDetail('${n.id}')">
@@ -1801,9 +1823,9 @@ function openNewsDetail(id) {
     handleRouting();
 }
 
-function executeNewsDetail(id) {
-    if (typeof newsData === 'undefined') return;
-    const n = newsData.find(x => x.id === id);
+async function executeNewsDetail(id) {
+    await loadNewsScript();
+    const n = (window.newsData || []).find(x => x.id === id);
     if (!n) {
         history.replaceState({}, "", "/news");
 
@@ -1864,13 +1886,12 @@ function executeProjectDetail(id) {
 // --- 5. KHỞI TẠO ---
 document.addEventListener('DOMContentLoaded', () => {
     try {
-        applyImageLoadingHints();
-        renderSidebarMenu();
-        // Không gọi trực tiếp các view ở đây nữa, hệ thống URL sẽ quyết định
         handleRouting();
-      
-
     } catch (e) { console.error(e); }
+
+    const prepareBelowFoldImages = () => applyImageLoadingHints();
+    if ('requestIdleCallback' in window) requestIdleCallback(prepareBelowFoldImages, { timeout: 2000 });
+    else setTimeout(prepareBelowFoldImages, 1200);
 
     lazyInitSwipers();
 });    
@@ -1928,6 +1949,8 @@ function lazyInitSwipers() {
     const swiperEl = document.querySelector('.news-swiper-home');
     runWhenNearViewport(swiperEl, async () => {
         if (window.homeNewsSwiper) return;
+        await loadNewsScript();
+        renderHomeNews();
         await loadSwiperAssets();
         window.homeNewsSwiper = new Swiper('.news-swiper-home', {
             slidesPerView: 1, spaceBetween: 24, loop: false,

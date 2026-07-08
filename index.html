@@ -18,7 +18,10 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         window.addEventListener('load', function () {
+            let gtagLoaded = false;
             const loadGtag = function () {
+                if (gtagLoaded) return;
+                gtagLoaded = true;
                 const script = document.createElement('script');
                 script.async = true;
                 script.src = 'https://www.googletagmanager.com/gtag/js?id=G-Q5Q0R6KXGW';
@@ -26,8 +29,10 @@
                 gtag('js', new Date());
                 gtag('config', 'G-Q5Q0R6KXGW');
             };
-            if ('requestIdleCallback' in window) requestIdleCallback(loadGtag);
-            else setTimeout(loadGtag, 1500);
+            ['pointerdown', 'keydown', 'scroll'].forEach(eventName => {
+                window.addEventListener(eventName, loadGtag, { once: true, passive: true });
+            });
+            setTimeout(loadGtag, 8000);
         });
     </script>
 
@@ -1812,10 +1817,6 @@
         </div>
     </footer>
     <!-- Scripts -->
-    <script defer src="/news-data.js"></script>
-    <script defer src="/products-data.js"></script>
-
-
     <script defer src="/script.js"></script>
 
     <div id="coming-soon-modal" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4">

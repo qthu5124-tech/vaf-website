@@ -1079,3 +1079,5 @@ Liên hệ VAF ngay
 
 
 ]
+
+window.newsData = newsData;
