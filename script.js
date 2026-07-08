@@ -2,784 +2,53 @@
 let currentLang = localStorage.getItem('vaf_lang') || 'vi'; // Mặc định lấy từ bộ nhớ hoặc là tiếng Việt
 
 // 2. TỪ ĐIỂN UI (Giao diện)
-const translations = {
-    'vi': {
-        // Menu
-        'nav_home': 'Trang chủ',
-        'nav_about': 'Về VAF',
-        'nav_products': 'Sản phẩm',
-        'nav_projects': 'Dự án',
-        'nav_news': 'Tin tức',
-        'nav_contact': 'Liên hệ',
-        'btn_profile': 'Hồ sơ năng lực',
-        
-        // Trang chủ
-        'hero_badge': 'Tiêu chuẩn Quốc Tế ISO 16890 & EN 1822',
-        'hero_title': '<span class="text-[#9badba]">Giải Pháp Lọc Khí &</span> <br><span class="text-transparent bg-clip-text bg-[#9badba]">Phòng Sạch Toàn Diện </span>',
-        'hero_desc': 'VAF - Viet Air Filter là nhà sản xuất tiên phong tại Việt Nam, cung cấp giải pháp không khí sạch cho các nhà máy điện tử, dược phẩm, bệnh viện và tòa nhà thương mại.',
-        'btn_view_prod': 'Xem Sản Phẩm',
-        'btn_view_proj': 'Dự Án Tiêu Biểu',
-        
-        // Về VAF (Trang chủ)
-        'sect_about': 'Câu Chuyện Của VAF',
-        'about_title': 'Tiên Phong Kiến Tạo Khí Sạch <br><span class="relative inline-block mt-2"><span class="relative z-10 text-primary">Tại Việt Nam</span><span class="absolute bottom-2 left-0 w-full h-3 bg-primary/10 -z-0"></span></span>',
-        'about_desc_1': 'Được thành lập vào <strong>Tháng 1/2008</strong>, Công ty Cổ phần Sản xuất Lọc Khí Việt (VAF) tự hào là đơn vị tiên phong đặt nền móng cho ngành sản xuất lọc khí công nghiệp tại Việt Nam. Từ khởi đầu khiêm tốn, chúng tôi đã vươn mình trở thành "cánh chim đầu đàn" với hơn <strong>200 nhân sự và kỹ thuật có kinh nghiệm</strong>, vận hành nhà máy quy mô lớn với dây chuyền hiện đại bậc nhất tại Bình Dương.',
-        'about_desc_2': 'VAF là đơn vị duy nhất tại Việt Nam làm chủ hoàn toàn quy trình sản xuất thiết bị phòng sạch đạt chuẩn <strong>ISO 14644-1</strong>. Sứ mệnh của chúng tôi là cung cấp giải pháp không khí sạch đẳng cấp thế giới, bảo vệ sức khỏe con người và tối ưu hóa quy trình sản xuất cho các đối tác toàn cầu như Samsung, Intel, và các bệnh viện tuyến đầu.',
-        
-        // Lịch sử (Trang chủ)
-        'milestone_2008_desc': 'Thành lập nhà máy đầu tiên tại Bình Dương với 11 nhân sự nòng cốt. Đánh dấu cột mốc đầu tiên của ngành sản xuất lọc khí công nghiệp Việt Nam.',
-        'milestone_2010_desc': 'Đầu tư chiến lược vào dây chuyền sản xuất Mini-pleat tự động. Chính thức đạt chứng nhận <strong>ISO 9001:2008</strong>. Trở thành nhà sản xuất trong nước đầu tiên cung cấp trọn gói thiết bị phòng sạch.',
-        'milestone_2020_desc': 'Xuất khẩu thành công lọc HEPA sang thị trường khó tính như Hoa Kỳ và Thái Lan. Thương hiệu VAF chính thức được bảo hộ tại <strong>Mỹ</strong>, khẳng định chất lượng Việt Nam trên bản đồ thế giới.',
-        'milestone_2023_desc': 'Đạt chứng nhận quản lý chất lượng cho thiết bị y tế. Mở rộng thêm phạm vi cung cấp để phục vụ các đối tác lớn phía Bắc như Samsung.',
-        
-        // Nút bấm & Nhãn
-        'lbl_view_all': 'Xem tất cả',
-        'btn_quote': 'Yêu Cầu Báo Giá',
-        'btn_submit': 'Gửi Yêu Cầu',
-        'contact_hq': 'Trụ sở chính',
-        'contact_hotline': 'Hotline Tư Vấn',
-        
-        // Chi tiết sản phẩm
-        'prod_specs': 'Thông số kỹ thuật',
-        'prod_apps': 'Ứng dụng',
-        'tab_dat': 'Bảng Dữ Liệu Kỹ Thuật (Data Sheet)',
-        'tab_dwg': 'Bản Vẽ Kỹ Thuật (Drawing)',
-        'contact_consult': 'Tư vấn kỹ thuật',
-
-        'filter_title': 'Danh mục',
-        'cat_all': 'Tất cả sản phẩm',
-        'cat_pre_filter': 'Lọc Thô',
-        'cat_fine_filter': 'Lọc Tinh',
-        'cat_hepa': 'Lọc HEPA / ULPA',
-        'cat_equip': 'Thiết bị phòng sạch',
-        'prod_need_consult': 'Cần tư vấn chọn lọc?',
-        'prod_call_now': 'Gọi 1900 8949',
-        'btn_back': 'Quay lại',
-        'btn_view_detail': 'Xem chi tiết',
-        'prod_click_zoom': '* Nhấn vào ảnh để xem kích thước đầy đủ',
-        'prod_custom_title': 'Sản xuất kích thước theo yêu cầu',
-        'prod_custom_desc': 'Ngoài quy cách chuẩn, VAF nhận sản xuất theo thực tế.',
-
-        // =====================================
-        // TRANG GIỚI THIỆU (ABOUT US)
-        // =====================================
-        
-        // 1. Header (Hero)
-        'abt_hero_sub': 'Thương Hiệu Tiên Phong',
-        'abt_hero_title': 'Định Chuẩn <span class="text-primary">Khí Sạch</span><br>Tại Việt Nam',
-        'abt_hero_desc': 'Nhà sản xuất thiết bị phòng sạch và lọc khí công nghiệp tiên phong tại Việt Nam, sở hữu nhà máy tự động hóa và phòng sản xuất chuẩn Class 100.000.',
-        'abt_hero_btn': 'Khám Phá Các Giải Pháp',
-
-        // 2. Câu Chuyện & Vật Liệu
-        'abt_story_title': 'Hành Trình Phát Triển',
-        'abt_story_1': 'Thành lập từ tháng 1/2008, <strong>Viet Air Filter (VAF)</strong> khởi đầu với sứ mệnh tiên phong đặt nền móng cho ngành sản xuất thiết bị lọc khí công nghiệp tại Việt Nam. Trải qua hơn 18 năm phát triển, từ một xưởng sản xuất nhỏ, VAF đã vươn mình thành nhà máy tự động hóa quy mô 5.000m².',
-        'abt_story_2': 'Chúng tôi tự hào là đơn vị nội địa duy nhất làm chủ công nghệ lõi sản xuất màng lọc HEPA/ULPA bằng dây chuyền Mini-pleat. Toàn bộ quá trình lắp ráp và kiểm định được thực hiện khép kín trong <strong>Phòng sạch Class 100.000 (ISO 8)</strong>, đảm bảo tiêu chuẩn vô trùng.',
-        'abt_story_3': 'Không chỉ phục vụ thị trường nội địa với các đối tác chiến lược như Samsung, Intel hay hệ thống bệnh viện tuyến đầu, sản phẩm của VAF hiện đã chinh phục thành công các thị trường khó tính như Hoa Kỳ và Nhật Bản.',
-        'abt_material': 'Vật Liệu Nhập Khẩu',
-        'abt_mat_desc': '100% giấy lọc sợi thủy tinh cao cấp từ tập đoàn Hollingsworth & Vose (Mỹ), đảm bảo hiệu suất và tuổi thọ vượt trội.',
-        'abt_hv_1': 'Hiệu suất bắt bụi tĩnh cực cao',
-        'abt_hv_2': 'Chênh áp thấp, tiết kiệm điện năng',
-        'abt_hv_3': 'Độ bền kéo vượt trội, chống rách nát',
-
-        // 3. Những con số (Numbers)
-        'abt_num_1': 'Năm Kinh Nghiệm',
-        'abt_num_2': 'Mét Vuông Sản Xuất',
-        'abt_num_3': 'Kỹ Sư & Chuyên Gia',
-        'abt_num_4': 'Leak Test HEPA',
-
-        // 4. Công Nghệ Cốt Lõi
-        'abt_cap_sub': 'Công Nghệ Cốt Lõi',
-        'abt_cap_title': 'Năng Lực Sản Xuất Tự Động',
-        'cap_1_title': 'Dây Chuyền Mini-pleat',
-        'cap_1_desc': 'Hệ thống châm keo tự động hoàn toàn (Hot-melt), đảm bảo nếp gấp đều, giảm chênh áp gió và tiết kiệm năng lượng LCC cho hệ thống HVAC.',
-        'cap_2_title': 'Phòng Lab Chuẩn EN 1822',
-        'cap_2_desc': 'Trang bị máy Scan Test rò rỉ tự động bằng hạt Sol khí (Aerosol). Đảm bảo mỗi màng lọc HEPA/ULPA không có bất kỳ lỗ thủng nào trước khi giao hàng.',
-        'cap_3_title': 'Sản Xuất Trong Phòng Sạch',
-        'cap_3_desc': 'Khu vực lắp ráp và đóng gói được đặt hoàn toàn trong phòng sạch Class 100.000 (ISO 8) để ngăn chặn nhiễm chéo bụi bẩn vào sản phẩm.',
-
-        // 5. Lịch Sử Lột Xác (Split-Screen)
-        'hist_sub': 'Hành Trình Lột Xác',
-        'hist_title': '18 Năm Kiến Tạo <br><span class="text-primary">Chuẩn Mực Sạch</span>',
-        'hist_quote': '"Sự kiên định của hàng trăm con người với một mục tiêu duy nhất: Không bao giờ thỏa hiệp với không khí bẩn."',
-        'hist_author': 'Ban Lãnh Đạo VAF',
-        'hist_2008_title': 'Những Bước Đi Đầu Tiên',
-        'h_08_lbl1': 'Nhân sự nòng cốt',
-        'h_08_lbl2': 'Dây chuyền sản xuất',
-        'h_08_val2': 'Thủ Công',
-        'h_08_lbl3': 'Sản phẩm bộ lọc',
-        'h_08_val3': 'Cơ Bản',
-        'h_08_lbl4': 'Phạm vi thị trường',
-        'h_08_val4': 'Nội Địa',
-        'hist_2026_title': 'Vị Thế Dẫn Đầu Ngành',
-        'h_26_lbl1': 'Kỹ sư & Chuyên gia',
-        'h_26_lbl2': 'Hệ thống sản xuất',
-        'h_26_val2': 'Tự Động Hóa',
-        'h_26_lbl3': 'Làm chủ công nghệ lõi',
-        'h_26_lbl4': 'Thị trường phân phối',
-        'h_26_val4': 'Quốc Tế',
-
-        // 6. Global Footprint (Bản Đồ Xuất Khẩu)
-        'gl_sub': 'Global Footprint',
-        'gl_title': 'Từ Việt Nam <br><span class="text-primary">Vươn Ra Thế Giới</span>',
-        'gl_desc': 'Khẳng định chất lượng toàn cầu. Sản phẩm VAF đã vượt qua các bài kiểm định nghiêm ngặt nhất để có mặt tại các thị trường công nghiệp hàng đầu thế giới.',
-        'gl_hub1_title': 'Việt Nam (Trụ Sở)',
-        'gl_hub1_sub': 'Sản Xuất & Phân Phối',
-        'gl_hub1_desc': 'Nhà máy tự động hóa 5.000m² tại Bình Dương. Phục vụ Samsung, Intel, và hệ thống bệnh viện toàn quốc.',
-        'gl_hub2_title': 'Hoa Kỳ (USA)',
-        'gl_hub2_sub': 'Thị Trường Xuất Khẩu',
-        'gl_hub2_desc': 'Xuất khẩu thành công các dòng lọc tinh và HEPA. Thương hiệu VAF chính thức được bảo hộ bản quyền tại Mỹ.',
-        'gl_hub3_title': 'Nhật Bản',
-        'gl_hub3_sub': 'Thị Trường Xuất Khẩu',
-        'gl_hub3_desc': 'Đáp ứng tiêu chuẩn kỹ thuật khắt khe của các đối tác Nhật Bản trong lĩnh vực điện tử bán dẫn và y tế.',
-
-        // 7. ESG (Nhà Máy Xanh)
-        'esg_sub': 'Cam Kết Bền Vững (ESG)',
-        'esg_title': 'Kiến Tạo Hệ Sinh Thái <br>Nhà Máy Xanh',
-        'esg_desc': 'Là một phần trong chuỗi cung ứng toàn cầu, VAF đặt trách nhiệm môi trường lên hàng đầu. Chúng tôi không ngừng nghiên cứu để tạo ra các thế hệ màng lọc tiết kiệm điện năng, sử dụng vật liệu có thể tái chế, đồng hành cùng chứng chỉ xanh LEED/LOTUS của đối tác.',
-        'esg_btn': 'Xem Dải Sản Phẩm V-Dura',
-        'esg_1_title': 'Tối Ưu Năng Lượng LCC',
-        'esg_1_desc': 'Thiết kế khí động học giúp giảm độ chênh áp tĩnh, tiết kiệm tới 20% điện năng tiêu thụ cho hệ thống quạt HVAC.',
-        'esg_2_title': 'Vật Liệu Đốt Hủy Hoàn Toàn',
-        'esg_2_desc': 'Sử dụng khung nhựa ABS chuyên dụng (Dòng V-Dura) thay thế cho tôn kẽm, không phát thải kim loại nặng khi xử lý rác.',
-        'esg_3_title': 'Tuổi Thọ Vượt Trội',
-        'esg_3_desc': 'Kéo dài chu kỳ thay thế lọc từ 6 tháng lên 12 tháng, giảm thiểu 50% khối lượng rác thải công nghiệp ra môi trường.',
-
-        // 8. Call To Action (Tư vấn)
-        'abt_cta_title': 'Sẵn Sàng Nâng Tầm <br><span class="text-primary">Chất Lượng Phòng Sạch?</span>',
-        'abt_cta_desc': 'Đội ngũ kỹ sư của VAF luôn sẵn sàng khảo sát, tư vấn kỹ thuật và đưa ra giải pháp tối ưu TCO cho nhà máy của bạn. Kính mời Quý đối tác đến tham quan trực tiếp dây chuyền sản xuất tại Bình Dương.',
-        'abt_cta_btn1': 'Nhận Tư Vấn Ngay',
-
-        // 9. Chứng nhận Quốc tế
-        'abt_cert': 'Tiêu Chuẩn & Chứng Nhận Quốc Tế',
-        
-        // --- BỔ SUNG CHO TIMELINE (LỊCH SỬ) ---
-        'milestone_start': 'Khởi Đầu',
-        'milestone_tech': 'Bước Nhảy Công Nghệ',
-        'milestone_global': 'Vươn Tầm Quốc Tế',
-        'milestone_med': 'Tiêu Chuẩn Y Tế',
-        'milestone_future': 'Tầm Nhìn Tương Lai',
-        'milestone_2026_title': 'Nhà Máy Thông Minh & Sản Xuất Xanh',
-        'milestone_2026_desc': 'Hướng tới mục tiêu XANH, ứng dụng AI vào kiểm soát chất lượng.',
-        'btn_capacity': 'Tìm hiểu thêm về năng lực sản xuất',
-
-        // --- BỔ SUNG CHO CÁC TIÊU ĐỀ SECTION ---
-        'featured_products_title': 'Sản phẩm chủ lực',
-        'featured_products_desc': 'Giải pháp tối ưu cho mọi nhu cầu lọc khí.',
-        'filter_fine': 'Lọc Tinh',
-        'prod_vpak_name': 'V-PAK (Túi lọc)',
-        'prod_vpak_desc': 'Hiệu suất F5-F9, dung lượng bụi lớn.',
-        'filter_vbank': 'V-Bank',
-        'prod_vdura_name': 'V-DURA',
-        'prod_vdura_desc': 'Diện tích lọc lớn, khung nhựa ABS.',
-        'filter_hepa': 'HEPA',
-        'prod_ultracel_name': 'ULTRACEL',
-        'prod_ultracel_desc': 'Lọc HEPA/ULPA H13-U15 chuẩn EN1822.',
-        'filter_equip': 'Thiết bị',
-        'prod_airshower_name': 'Air Shower',
-        'prod_airshower_desc': 'Buồng thổi khí sạch inox 304.',
-        'view_all_products': 'Xem tất cả',
-        'news_subtitle': 'Cập nhật mới nhất',
-        'news_title': 'Tin Tức & Sự Kiện',
-        'member_title': 'Thành Viên Hiệp Hội',
-        'member_nafa': 'NAFA (USA)',
-        'member_saca': 'SACA (VN)',
-        'cert_title': 'Chứng Chỉ Chất Lượng',
-        'partner_title': 'Đối tác khách hàng',
-        'contact_title': 'Liên Hệ VAF',
-        'contact_desc': 'Hãy để lại thông tin, đội ngũ kỹ thuật của chúng tôi sẽ liên hệ tư vấn giải pháp tối ưu nhất cho bạn.',
-        'form_title': 'Gửi Yêu Cầu Báo Giá',
-        'form_submit': 'Gửi Yêu Cầu Ngay',
-        'footer_company': '© 2026 CÔNG TY CỔ PHẦN SẢN XUẤT LỌC KHÍ VIỆT (VAF)',
-        
-        // Trang Sản phẩm
-        'page_products_title': 'Danh Mục Sản Phẩm',
-        'page_products_desc': 'Giải pháp lọc khí toàn diện cho mọi cấp độ sạch',
-        
-        // Trang Dự án
-        'page_projects_title': 'Dự Án Tiêu Biểu',
-        'page_projects_desc': 'Các công trình VAF đã thực hiện',
-        'back_list': 'Quay lại danh sách',
-        'proj_desc_title': 'Mô tả',
-        'proj_scope_title': 'Phạm vi công việc',
-        'proj_client': 'Khách hàng',
-        'proj_loc': 'Địa điểm',
-        'proj_scale': 'Quy mô',
-
-        // =====================================
-        // TRANG GIỚI THIỆU (ABOUT US)
-        // =====================================
-        
-        // 1. Header (Hero)
-        'abt_hero_sub': 'Thương Hiệu Tiên Phong',
-        'abt_hero_title': 'Định Chuẩn <span class="text-primary">Khí Sạch</span><br>Tại Việt Nam',
-        'abt_hero_desc': 'Nhà sản xuất thiết bị phòng sạch và lọc khí công nghiệp tiên phong tại Việt Nam, sở hữu nhà máy tự động hóa và phòng sản xuất chuẩn Class 100.000.',
-        'abt_hero_btn': 'Khám Phá Các Giải Pháp',
-
-        // 2. Câu Chuyện & Vật Liệu
-        'abt_story_title': 'Hành Trình Phát Triển',
-        'abt_story_1': 'Thành lập từ tháng 1/2008, <strong>Viet Air Filter (VAF)</strong> khởi đầu với sứ mệnh tiên phong đặt nền móng cho ngành sản xuất thiết bị lọc khí công nghiệp tại Việt Nam. Trải qua hơn 18 năm phát triển, từ một xưởng sản xuất nhỏ, VAF đã vươn mình thành nhà máy tự động hóa quy mô 5.000m².',
-        'abt_story_2': 'Chúng tôi tự hào là đơn vị nội địa duy nhất làm chủ công nghệ lõi sản xuất màng lọc HEPA/ULPA bằng dây chuyền Mini-pleat. Toàn bộ quá trình lắp ráp và kiểm định được thực hiện khép kín trong <strong>Phòng sạch Class 100.000 (ISO 8)</strong>, đảm bảo tiêu chuẩn vô trùng.',
-        'abt_story_3': 'Không chỉ phục vụ thị trường nội địa với các đối tác chiến lược như Samsung, Intel hay hệ thống bệnh viện tuyến đầu, sản phẩm của VAF hiện đã chinh phục thành công các thị trường khó tính như Hoa Kỳ và Nhật Bản.',
-        'abt_material': 'Vật Liệu Nhập Khẩu',
-        'abt_mat_desc': '100% giấy lọc sợi thủy tinh cao cấp từ tập đoàn Hollingsworth & Vose (Mỹ), đảm bảo hiệu suất và tuổi thọ vượt trội.',
-        'abt_hv_1': 'Hiệu suất bắt bụi tĩnh cực cao',
-        'abt_hv_2': 'Chênh áp thấp, tiết kiệm điện năng',
-        'abt_hv_3': 'Độ bền kéo vượt trội, chống rách nát',
-
-        // 3. Những con số (Numbers)
-        'abt_num_1': 'Năm Kinh Nghiệm',
-        'abt_num_2': 'Mét Vuông Sản Xuất',
-        'abt_num_3': 'Kỹ Sư & Chuyên Gia',
-        'abt_num_4': 'Leak Test HEPA',
-
-        // 4. Công Nghệ Cốt Lõi
-        'abt_cap_sub': 'Công Nghệ Cốt Lõi',
-        'abt_cap_title': 'Năng Lực Sản Xuất Tự Động',
-        'cap_1_title': 'Dây Chuyền Mini-pleat',
-        'cap_1_desc': 'Hệ thống châm keo tự động hoàn toàn (Hot-melt), đảm bảo nếp gấp đều, giảm chênh áp gió và tiết kiệm năng lượng LCC cho hệ thống HVAC.',
-        'cap_2_title': 'Phòng Lab Chuẩn EN 1822',
-        'cap_2_desc': 'Trang bị máy Scan Test rò rỉ tự động bằng hạt Sol khí (Aerosol). Đảm bảo mỗi màng lọc HEPA/ULPA không có bất kỳ lỗ thủng nào trước khi giao hàng.',
-        'cap_3_title': 'Sản Xuất Trong Phòng Sạch',
-        'cap_3_desc': 'Khu vực lắp ráp và đóng gói được đặt hoàn toàn trong phòng sạch Class 100.000 (ISO 8) để ngăn chặn nhiễm chéo bụi bẩn vào sản phẩm.',
-
-        // 5. Lịch Sử Lột Xác (Split-Screen)
-        'hist_sub': 'Hành Trình Lột Xác',
-        'hist_title': '18 Năm Kiến Tạo <br><span class="text-primary">Chuẩn Mực Sạch</span>',
-        'hist_quote': '"Sự kiên định của hàng trăm con người với một mục tiêu duy nhất: Không bao giờ thỏa hiệp với không khí bẩn."',
-        'hist_author': 'Ban Lãnh Đạo VAF',
-        'hist_2008_title': 'Những Bước Đi Đầu Tiên',
-        'h_08_lbl1': 'Nhân sự nòng cốt',
-        'h_08_lbl2': 'Dây chuyền sản xuất',
-        'h_08_val2': 'Thủ Công',
-        'h_08_lbl3': 'Sản phẩm bộ lọc',
-        'h_08_val3': 'Cơ Bản',
-        'h_08_lbl4': 'Phạm vi thị trường',
-        'h_08_val4': 'Nội Địa',
-        'hist_2026_title': 'Vị Thế Dẫn Đầu Ngành',
-        'h_26_lbl1': 'Kỹ sư & Chuyên gia',
-        'h_26_lbl2': 'Hệ thống sản xuất',
-        'h_26_val2': 'Tự Động Hóa',
-        'h_26_lbl3': 'Làm chủ công nghệ lõi',
-        'h_26_lbl4': 'Thị trường phân phối',
-        'h_26_val4': 'Quốc Tế',
-
-        // 6. Global Footprint (Bản Đồ Xuất Khẩu)
-        'gl_sub': 'Global Footprint',
-        'gl_title': 'Từ Việt Nam <br><span class="text-primary">Vươn Ra Thế Giới</span>',
-        'gl_desc': 'Khẳng định chất lượng toàn cầu. Sản phẩm VAF đã vượt qua các bài kiểm định nghiêm ngặt nhất để có mặt tại các thị trường công nghiệp hàng đầu thế giới.',
-        'gl_hub1_title': 'Việt Nam (Trụ Sở)',
-        'gl_hub1_sub': 'Sản Xuất & Phân Phối',
-        'gl_hub1_desc': 'Nhà máy tự động hóa 5.000m² tại Bình Dương. Phục vụ Samsung, Intel, và hệ thống bệnh viện toàn quốc.',
-        'gl_hub2_title': 'Hoa Kỳ (USA)',
-        'gl_hub2_sub': 'Thị Trường Xuất Khẩu',
-        'gl_hub2_desc': 'Xuất khẩu thành công các dòng lọc tinh và HEPA. Thương hiệu VAF chính thức được bảo hộ bản quyền tại Mỹ.',
-        'gl_hub3_title': 'Nhật Bản',
-        'gl_hub3_sub': 'Thị Trường Xuất Khẩu',
-        'gl_hub3_desc': 'Đáp ứng tiêu chuẩn kỹ thuật khắt khe của các đối tác Nhật Bản trong lĩnh vực điện tử bán dẫn và y tế.',
-
-        // 8. Call To Action (Tư vấn)
-        'abt_cta_title': 'Sẵn Sàng Nâng Tầm <br><span class="text-primary">Chất Lượng Phòng Sạch?</span>',
-        'abt_cta_desc': 'Đội ngũ kỹ sư của VAF luôn sẵn sàng khảo sát, tư vấn kỹ thuật và đưa ra giải pháp tối ưu TCO cho nhà máy của bạn. Kính mời Quý đối tác đến tham quan trực tiếp dây chuyền sản xuất tại Bình Dương.',
-        'abt_cta_btn1': 'Nhận Tư Vấn Ngay',
-
-        // 9. Chứng nhận Quốc tế
-        'abt_cert': 'Tiêu Chuẩn & Chứng Nhận Quốc Tế',
-        
-        // --- BỔ SUNG CHO TIMELINE (LỊCH SỬ) ---
-        // Lịch sử (Trang chủ)
-        'ms_2008_title': 'Khởi Đầu',
-        'ms_2008_sub': 'Thành lập Viet Air Filter Corp.',
-        'ms_2008_desc': 'Thành lập nhà máy đầu tiên tại Bình Dương với 11 nhân sự nòng cốt. Đánh dấu cột mốc đầu tiên của ngành sản xuất lọc khí công nghiệp Việt Nam.',
-        
-        'ms_2010_title': 'Bước Nhảy Công Nghệ',
-        'ms_2010_sub': 'Đầu tư dây chuyền & Đạt chuẩn ISO.',
-        'ms_2010_desc': 'Đầu tư chiến lược vào dây chuyền sản xuất Mini-pleat tự động. Chính thức đạt chứng nhận <strong>ISO 9001:2008</strong>. Trở thành nhà sản xuất trong nước đầu tiên cung cấp trọn gói thiết bị phòng sạch.',
-        
-        'ms_2020_title': 'Vươn Tầm Quốc Tế',
-        'ms_2020_sub': 'Xuất khẩu Mỹ & Thái Lan.',
-        'ms_2020_desc': 'Xuất khẩu thành công lọc HEPA sang thị trường khó tính như Hoa Kỳ và Thái Lan. Thương hiệu VAF chính thức được bảo hộ tại <strong>Mỹ</strong>, khẳng định chất lượng Việt Nam trên bản đồ thế giới.',
-        
-        'ms_2023_title': 'Tiêu Chuẩn Y Tế',
-        'ms_2023_sub': 'Đạt ISO 13485:2016.',
-        'ms_2023_desc': 'Đạt chứng nhận quản lý chất lượng cho thiết bị y tế. Mở rộng thêm phạm vi cung cấp để phục vụ các đối tác lớn phía Bắc như Samsung.',
-        
-        'ms_2026_tag': 'Mục Tiêu',
-        'ms_2026_title': 'Tầm Nhìn Tương Lai',
-        'ms_2026_sub': 'Nhà Máy Thông Minh & Sản Xuất Xanh',
-        'ms_2026_desc': 'Hướng tới mục tiêu "XANH" trong sản xuất. Ứng dụng AI vào kiểm soát chất lượng để dẫn đầu thị trường không khí sạch Đông Nam Á.',
-        
-        'btn_capacity': 'Tìm hiểu thêm về năng lực sản xuất',
-
-        // --- BỔ SUNG CHO CÁC TIÊU ĐỀ SECTION ---
-        'featured_products_title': 'Sản phẩm chủ lực',
-        'featured_products_desc': 'Giải pháp tối ưu cho mọi nhu cầu lọc khí.',
-        'view_all_products': 'Xem tất cả',
-        'news_subtitle': 'Cập nhật mới nhất',
-        'news_title': 'Tin Tức & Sự Kiện',
-        'member_title': 'Thành Viên Hiệp Hội',
-        'cert_title': 'Chứng Chỉ Chất Lượng',
-        'partner_title': 'Đối tác khách hàng',
-        'contact_title': 'Liên Hệ VAF',
-        'contact_desc': 'Hãy để lại thông tin, đội ngũ kỹ thuật của chúng tôi sẽ liên hệ tư vấn.',
-        'form_title': 'Gửi Yêu Cầu Báo Giá',
-        'form_submit': 'Gửi Yêu Cầu Ngay',
-        'footer_company': '© 2026 CÔNG TY CỔ PHẦN SẢN XUẤT LỌC KHÍ VIỆT (VAF)',
-        'cat_title': 'Danh mục',
-        'cat_all': 'Tất cả sản phẩm',
-        'cat_pre': 'Lọc Thô',
-        'cat_fine': 'Lọc Tinh',
-        'cat_hepa': 'Lọc HEPA / ULPA',
-        'cat_equip': 'Thiết bị phòng sạch',
-        'prod_need_consult': 'Cần tư vấn chọn lọc?',
-        'prod_call_now': 'Gọi 1900 8949',
-        'btn_view_detail': 'Xem chi tiết',
-
-        'pg_contact_title': 'Liên Hệ Với VAF',
-        'pg_contact_desc': 'Đội ngũ kỹ sư của chúng tôi luôn sẵn sàng hỗ trợ khảo sát và tư vấn giải pháp khí sạch tối ưu nhất cho nhà máy của bạn.',
-        'contact_add': 'Lô C3.4, đường N14, KCN Đồng An 2, TP. Thủ Dầu Một, Tỉnh Bình Dương.',
-        'form_sub': 'Vui lòng điền thông tin, chúng tôi sẽ phản hồi trong vòng 24 giờ làm việc.',
-        'lbl_name': 'Họ & Tên *',
-        'lbl_phone': 'Số Điện Thoại *',
-        'lbl_company': 'Tên Công Ty',
-        'lbl_msg': 'Nội dung yêu cầu *',
-        'btn_direct': 'Chỉ đường',
-        'ft_desc': 'Nhà sản xuất thiết bị phòng sạch và lọc khí công nghiệp tiên phong tại Việt Nam. Định chuẩn khí sạch toàn cầu.',
-        'ft_link': 'Liên Kết Nhanh',
-        'ft_contact': 'Thông Tin Liên Hệ',
-        'contact_hero_sub': 'Kết Nối Toàn Cầu',
-        'contact_hero_title': 'Khởi Đầu Dự Án <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-white">Phòng Sạch Của Bạn</span>',
-        'contact_hero_desc': 'Các kỹ sư chuyên gia của VAF luôn sẵn sàng lắng nghe, khảo sát và thiết kế giải pháp xử lý không khí tối ưu nhất (TCO) cho nhà máy của bạn.',
-        'contact_info_title': 'Thông Tin Liên Hệ',
-        'contact_info_sub': 'Trực tiếp từ Nhà máy sản xuất VAF.',
-        'contact_trust': 'Đối tác tin cậy của',
-        'form_pro_title': 'Gửi Yêu Cầu Chuyên Gia',
-        'form_pro_desc': 'Vui lòng cung cấp chi tiết nhu cầu, VAF sẽ phản hồi và báo giá trong 24 giờ.',
-        'lbl_name': 'Họ & Tên *',
-        'lbl_phone': 'Số Điện Thoại *',
-        'lbl_company': 'Tên Công Ty / Dự Án',
-        'lbl_msg': 'Chi tiết yêu cầu (Lưu lượng, cấp độ sạch...) *',
-        'form_submit': 'Gửi Yêu Cầu Cho VAF',
-        'btn_direct': 'Chỉ đường tới Nhà máy',
-
-        'ft_solutions': 'Giải Pháp Khí Sạch',
-        'ft_policy': 'Chính sách bảo mật',
-        'ft_terms': 'Điều khoản dịch vụ',
-
-        // Trang Dự án (Phần Tư vấn thiết kế mới)
-        'proj_consult_sub': 'Engineering & Consulting',
-        'proj_consult_title': 'Giải Pháp Phòng Sạch <br><span class="text-primary">Đồng Bộ & Toàn Diện</span>',
-        'proj_consult_desc': 'Hơn cả một nhà sản xuất thiết bị, VAF mang đến dịch vụ tư vấn, thiết kế và thi công hệ thống xử lý không khí đạt chuẩn quốc tế (ISO 14644, GMP, FDA).',
-        'step_1_title': 'Khảo Sát & Phân Tích',
-        'step_1_desc': 'Đánh giá hiện trạng nhà máy, đo lường nồng độ bụi, nhiệt ẩm và phân tích yêu cầu cấp độ sạch thực tế của chủ đầu tư.',
-        'step_2_title': 'Thiết Kế HVAC & CFD',
-        'step_2_desc': 'Tính toán lưu lượng gió (ACH), thiết kế sơ đồ không gian P&ID và mô phỏng luồng khí CFD để tối ưu hóa hiệu suất.',
-        'step_3_title': 'Sản Xuất & Tích Hợp',
-        'step_3_desc': 'Chế tạo thiết bị phòng sạch (AHU, FFU, Pass Box) và màng lọc HEPA/ULPA đồng bộ ngay tại nhà máy tự động VAF.',
-        'step_4_title': 'Thi Công & Kiểm Định',
-        'step_4_desc': 'Lắp đặt tận nơi, tiến hành đo đạc hạt bụi (Particle count) và rò rỉ (DOP/PAO Test) cấp chứng nhận chuẩn ISO.',
-        'proj_cta_title': 'Bắt đầu dự án phòng sạch của bạn?',
-        'proj_cta_desc': 'Đội ngũ kỹ sư chuyên gia của VAF sẵn sàng tư vấn giải pháp và tối ưu hóa chi phí (TCO). Liên hệ ngay để nhận bản vẽ sơ bộ miễn phí.',
-        'proj_cta_btn': 'Yêu Cầu Tư Vấn',
-
-
+let translations = window.translations || {
+    vi: {
+        cat_all: 'Tất cả sản phẩm',
+        cat_pre: 'Lọc Thô',
+        cat_fine: 'Lọc Tinh',
+        cat_hepa: 'Lọc HEPA / ULPA',
+        cat_equip: 'Thiết bị phòng sạch',
+        btn_view_detail: 'Xem chi tiết',
+        prod_custom_title: 'Sản xuất kích thước theo yêu cầu',
+        prod_custom_desc: 'Ngoài quy cách chuẩn, VAF nhận sản xuất theo thực tế.',
+        nav_contact: 'Liên hệ'
     },
-    'en': {
-
-
-        'ft_solutions': 'Clean Air Solutions',
-        'ft_policy': 'Privacy Policy',
-        'ft_terms': 'Terms of Service',
-
-        'pg_contact_title': 'Contact VAF',
-        'pg_contact_desc': 'Our engineering team is always ready to support surveys and provide the optimal clean air solutions for your factory.',
-        'contact_add': 'Lot C3.4, N14 St., Dong An 2 IP, Thu Dau Mot City, Binh Duong Province.',
-        'form_sub': 'Please fill out the form, we will respond within 24 working hours.',
-        'lbl_name': 'Full Name *',
-        'lbl_phone': 'Phone Number *',
-        'lbl_company': 'Company Name',
-        'lbl_msg': 'Your Message / Requirement *',
-        'btn_direct': 'Get Directions',
-        'ft_desc': 'The pioneer manufacturer of cleanroom equipment and industrial air filters in Vietnam. Defining global clean air standards.',
-        'ft_link': 'Quick Links',
-        'ft_contact': 'Contact Information',
-        'contact_hero_sub': 'Global Connection',
-        'contact_hero_title': 'Initiate Your <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-white">Cleanroom Project</span>',
-        'contact_hero_desc': 'VAF\'s expert engineers are always ready to listen, survey, and design the most optimal air treatment solution (TCO) for your factory.',
-        'contact_info_title': 'Contact Information',
-        'contact_info_sub': 'Directly from the VAF Manufacturing Plant.',
-        'contact_trust': 'Trusted partner of',
-        'form_pro_title': 'Request an Expert',
-        'form_pro_desc': 'Please provide your requirements, VAF will respond and quotation within 24 hours.',
-        'lbl_name': 'Full Name *',
-        'lbl_phone': 'Phone Number *',
-        'lbl_company': 'Company / Project Name',
-        'lbl_msg': 'Requirement details (Airflow, cleanliness class...) *',
-        'form_submit': 'Submit Request to VAF',
-        'btn_direct': 'Get Directions to Factory',
-
-        // Menu
-        'nav_home': 'Home',
-        'nav_about': 'About Us',
-        'nav_products': 'Products',
-        'nav_projects': 'Projects',
-        'nav_news': 'News',
-        'nav_contact': 'Contact',
-        'btn_profile': 'Company Profile',
-        
-        // Homepage
-        'hero_badge': 'ISO 16890 & EN 1822 International Standards',
-        'hero_title': 'Comprehensive Air Filtration & <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Cleanroom Solutions</span>',
-        'hero_title': '<span class="text-[#9badba]">Comprehensive Air Filtration &</span> <br><span class="text-transparent bg-clip-text bg-[#9badba]">Cleanroom Solutions </span>', 
-        'hero_desc': 'VAF - Viet Air Filter is the pioneer manufacturer in Vietnam, providing clean air solutions for electronics factories, pharmaceuticals, hospitals, and commercial buildings.',
-        'btn_view_prod': 'View Products',
-        'btn_view_proj': 'Featured Projects',
-        
-        // About VAF (Homepage)
-        'sect_about': 'The VAF Story',
-        'about_title': 'Pioneering Clean Air Creation <br><span class="relative inline-block mt-2"><span class="relative z-10 text-primary">In Vietnam</span><span class="absolute bottom-2 left-0 w-full h-3 bg-primary/10 -z-0"></span></span>',
-        'about_desc_1': 'Established in <strong>January 2008</strong>, Viet Air Filter Manufacturing Joint Stock Company (VAF) proudly stands as a pioneering company laying the foundation for the industrial air filtration manufacturing industry in Vietnam. From humble beginnings, we have grown into a leading company with over <strong>200 experts and engineers</strong>, operating a large-scale factory with state-of-the-art production lines in Binh Duong.',
-        'about_desc_2': 'VAF is the only company in Vietnam that fully masters the production process of cleanroom equipment meeting <strong>ISO 14644-1</strong> standards. Our mission is to provide world-class clean air solutions, protect human health, and optimize production processes for global partners such as Samsung, Intel, and leading hospitals.',
-        
-        // History (Homepage)
-        'milestone_2008_desc': 'Established the first factory in Binh Duong with 11 core personnel. Marking the first milestone of Vietnam\'s industrial air filtration manufacturing industry.',
-        'milestone_2010_desc': 'Strategic investment in an automatic Mini-pleat production line. Officially achieved <strong>ISO 9001:2008</strong> certification. Became the first domestic manufacturer to provide comprehensive cleanroom equipment.',
-        'milestone_2020_desc': 'Successfully exported HEPA filters to demanding markets such as the USA and Thailand. The VAF brand is officially protected in the <strong>US</strong>, affirming Vietnamese quality on the global map.',
-        'milestone_2023_desc': 'Achieved quality management certification for medical devices. Expanded the supply scope to serve major partners in the North, such as Samsung.',
-
-        // Buttons & Labels
-        'lbl_view_all': 'View All',
-        'btn_quote': 'Request A Quote',
-        'btn_submit': 'Submit Request',
-        'contact_hq': 'Headquarters',
-        'contact_hotline': 'Hotline',
-
-        // =====================================
-        // ABOUT US PAGE
-        // =====================================
-        
-        // 1. Hero
-        'abt_hero_sub': 'Pioneering Brand',
-        'abt_hero_title': 'Defining <span class="text-primary">Clean Air</span><br>Standards in Vietnam',
-        'abt_hero_desc': 'The pioneer manufacturer of cleanroom equipment and industrial air filters in Vietnam, owning an automated factory and Class 100,000 production cleanrooms.',
-        'abt_hero_btn': 'Explore Our Solutions',
-
-        // 2. Story & H&V Material
-        'abt_story_title': 'Our Growth Journey',
-        'abt_story_1': 'Founded in January 2008, <strong>Viet Air Filter (VAF)</strong> began with the pioneering mission of laying the foundation for the industrial air filtration industry in Vietnam. Over 18 years, we have grown from a small workshop into a 5,000m² automated smart factory.',
-        'abt_story_2': 'We are proud to be the only domestic company to fully master the core technology of HEPA/ULPA filter manufacturing using Mini-pleat lines. Assembly and testing are strictly conducted inside a <strong>Class 100,000 (ISO 8) Cleanroom</strong> to ensure sterility.',
-        'abt_story_3': 'Beyond serving strategic domestic partners like Samsung, Intel, and top-tier hospitals, VAF products have successfully conquered demanding international markets such as the USA and Japan.',
-        'abt_material': 'Imported Materials',
-        'abt_mat_desc': '100% premium glass fiber filter media from the world\'s leading corporation Hollingsworth & Vose (USA), ensuring outstanding performance and lifespan.',
-        'abt_hv_1': 'Extremely high static dust holding capacity',
-        'abt_hv_2': 'Low pressure drop, saving energy',
-        'abt_hv_3': 'Superior tensile strength, tear resistant',
-
-        // 3. Numbers
-        'abt_num_1': 'Years of Experience',
-        'abt_num_2': 'Sq. Meters of Production',
-        'abt_num_3': 'Engineers & Experts',
-        'abt_num_4': 'HEPA Leak Tested',
-
-        // 4. Core Technology
-        'abt_cap_sub': 'Core Technology',
-        'abt_cap_title': 'Automated Manufacturing',
-        'cap_1_title': 'Mini-pleat Production Line',
-        'cap_1_desc': 'Fully automated hot-melt dispensing system ensures uniform pleats, reducing air pressure drop and saving LCC energy for HVAC systems.',
-        'cap_2_title': 'EN 1822 Standard Lab',
-        'cap_2_desc': 'Equipped with automatic Aerosol leak scan test machines. Ensuring every HEPA/ULPA filter is absolutely free of leaks before delivery.',
-        'cap_3_title': 'Cleanroom Manufacturing',
-        'cap_3_desc': 'Assembly and packaging areas are strictly located inside a Class 100,000 (ISO 8) cleanroom to prevent particulate cross-contamination.',
-
-        // 5. Transformation History
-        'hist_sub': 'Transformation Journey',
-        'hist_title': '18 Years of Creating <br><span class="text-primary">Clean Standards</span>',
-        'hist_quote': '"The unwavering dedication of hundreds of individuals with a single goal: Never compromise with dirty air."',
-        'hist_author': 'VAF Board of Directors',
-        'hist_2008_title': 'The Very First Steps',
-        'h_08_lbl1': 'Core Personnel',
-        'h_08_lbl2': 'Production Line',
-        'h_08_val2': 'Manual',
-        'h_08_lbl3': 'Filter Products',
-        'h_08_val3': 'Basic',
-        'h_08_lbl4': 'Market Scope',
-        'h_08_val4': 'Domestic',
-        'hist_2026_title': 'Industry Leading Position',
-        'h_26_lbl1': 'Engineers & Experts',
-        'h_26_lbl2': 'Production System',
-        'h_26_val2': 'Automated',
-        'h_26_lbl3': 'Mastering Core Tech',
-        'h_26_lbl4': 'Distribution Market',
-        'h_26_val4': 'Global',
-
-        // 6. Global Footprint
-        'gl_sub': 'Global Footprint',
-        'gl_title': 'From Vietnam <br><span class="text-primary">To The World</span>',
-        'gl_desc': 'Affirming global quality. VAF products have passed the strictest tests to be present in the world\'s leading industrial markets.',
-        'gl_hub1_title': 'Vietnam (HQ)',
-        'gl_hub1_sub': 'Manufacturing & Distribution',
-        'gl_hub1_desc': '5,000m² automated factory in Binh Duong. Serving Samsung, Intel, and national hospital systems.',
-        'gl_hub2_title': 'United States (USA)',
-        'gl_hub2_sub': 'Export Market',
-        'gl_hub2_desc': 'Successfully exported fine and HEPA filters. The VAF brand is officially trademark-protected in the US.',
-        'gl_hub3_title': 'Japan',
-        'gl_hub3_sub': 'Export Market',
-        'gl_hub3_desc': 'Meeting the stringent technical standards of Japanese partners in the semiconductor and medical fields.',
-
-        // 7. ESG
-        'esg_sub': 'Sustainability (ESG)',
-        'esg_title': 'Building a Green <br>Factory Ecosystem',
-        'esg_desc': 'As part of the global supply chain, VAF prioritizes environmental responsibility. We continuously research to create energy-saving filters using recyclable materials, aligning with our partners\' LEED/LOTUS green certifications.',
-        'esg_btn': 'Explore V-Dura Range',
-        'esg_1_title': 'LCC Energy Optimization',
-        'esg_1_desc': 'Aerodynamic design reduces static pressure drop, saving up to 20% in power consumption for HVAC fan systems.',
-        'esg_2_title': 'Fully Incinerable Materials',
-        'esg_2_desc': 'Using specialized ABS plastic frames (V-Dura series) instead of galvanized steel, emitting no heavy metals during disposal.',
-        'esg_3_title': 'Outstanding Lifespan',
-        'esg_3_desc': 'Extending the filter replacement cycle from 6 to 12 months, reducing industrial waste released into the environment by 50%.',
-
-        // 8. CTA
-        'abt_cta_title': 'Ready to Elevate Your <br><span class="text-primary">Cleanroom Quality?</span>',
-        'abt_cta_desc': 'VAF\'s team of engineers is ready to support surveys, provide technical consultation, and deliver the optimal TCO solution for your factory. We welcome our partners to directly visit our production line in Binh Duong.',
-        'abt_cta_btn1': 'Get Consultation Now',
-
-        // 9. Certifications
-        'abt_cert': 'International Standards & Certifications',
-        
-        // Product Detail
-        'prod_specs': 'Specifications',
-        'prod_apps': 'Applications',
-        'tab_dat': 'Technical Data Sheet',
-        'tab_dwg': 'Technical Drawing',
-        'contact_consult': 'Tech Support',
-        
-        // History (Homepage)
-        'ms_2008_title': 'Inception',
-        'ms_2008_sub': 'Establishment of Viet Air Filter Corp.',
-        'ms_2008_desc': 'Established the first factory in Binh Duong with 11 core personnel. Marking the first milestone of Vietnam\'s industrial air filtration manufacturing industry.',
-        
-        'ms_2010_title': 'Technology Leap',
-        'ms_2010_sub': 'Line Investment & ISO Certification.',
-        'ms_2010_desc': 'Strategic investment in an automatic Mini-pleat production line. Officially achieved <strong>ISO 9001:2008</strong> certification. Became the first domestic manufacturer to provide comprehensive cleanroom equipment.',
-        
-        'ms_2020_title': 'Global Reach',
-        'ms_2020_sub': 'Export to USA & Thailand.',
-        'ms_2020_desc': 'Successfully exported HEPA filters to demanding markets such as the USA and Thailand. The VAF brand is officially protected in the <strong>US</strong>, affirming Vietnamese quality on the global map.',
-        
-        'ms_2023_title': 'Medical Standard',
-        'ms_2023_sub': 'Achieved ISO 13485:2016.',
-        'ms_2023_desc': 'Achieved quality management certification for medical devices. Expanded the supply scope to serve major partners in the North, such as Samsung.',
-        
-        'ms_2026_tag': 'Target',
-        'ms_2026_title': 'Future Vision',
-        'ms_2026_sub': 'Smart Factory & Green Manufacturing',
-        'ms_2026_desc': 'Aiming for "GREEN" goals in production. Applying AI in quality control to lead the Southeast Asian clean air market.',
-        
-        'btn_capacity': 'Learn more about production capacity',
-
-        // --- TRANSLATION FOR SECTIONS ---
-        'featured_products_title': 'Featured Products',
-        'featured_products_desc': 'Optimal solutions for all filtration needs.',
-        'filter_fine': 'Fine Filter',
-        'prod_vpak_name': 'V-PAK (Bag Filter)',
-        'prod_vpak_desc': 'F5-F9 efficiency, high dust capacity.',
-        'filter_vbank': 'V-Bank',
-        'prod_vdura_name': 'V-DURA',
-        'prod_vdura_desc': 'Large filtration area, ABS plastic frame.',
-        'filter_hepa': 'HEPA',
-        'prod_ultracel_name': 'ULTRACEL',
-        'prod_ultracel_desc': 'HEPA/ULPA H13-U15 filter standard EN1822.',
-        'filter_equip': 'Equipment',
-        'prod_airshower_name': 'Air Shower',
-        'prod_airshower_desc': 'Clean air shower booth stainless steel 304.',
-        'view_all_products': 'View All',
-        'news_subtitle': 'Latest Updates',
-        'news_title': 'News & Events',
-        'member_title': 'Association Members',
-        'member_nafa': 'NAFA (USA)',
-        'member_saca': 'SACA (VN)',
-        'cert_title': 'Quality Certificates',
-        'partner_title': 'Our Partners',
-        'contact_title': 'Contact VAF',
-        'contact_desc': 'Please leave your information, our technical team will contact you for consultation.',
-        'form_title': 'Request A Quote',
-        'form_submit': 'Submit Request',
-        'footer_company': '© 2026 VIET AIR FILTER CORPORATION (VAF)',
-        
-        // Products Page
-        'page_products_title': 'Product Categories',
-        'page_products_desc': 'Comprehensive air filtration solutions for all cleanliness levels',
-
-        'filter_title': 'Categories',
-        'cat_all': 'All Products',
-        'cat_pre_filter': 'Pre-filter',
-        'cat_fine_filter': 'Fine filter',
-        'cat_hepa': 'HEPA / ULPA Filters',
-        'cat_equip': 'Cleanroom Equipment',
-        'prod_need_consult': 'Need filter consultation?',
-        'prod_call_now': 'Call 1900 8949',
-        'btn_back': 'Back',
-        'btn_view_detail': 'View Details',
-        'prod_click_zoom': '* Click the image to view full size',
-        'prod_custom_title': 'Custom Size Manufacturing',
-        'prod_custom_desc': 'Besides standard sizes, VAF offers custom manufacturing to fit your actual needs.',
-        
-        // Projects Page
-        'page_projects_title': 'Featured Projects',
-        'page_projects_desc': 'Projects executed by VAF',
-        'back_list': 'Back to list',
-        'proj_desc_title': 'Description',
-        'proj_scope_title': 'Scope of Work',
-        'proj_client': 'Client',
-        'proj_loc': 'Location',
-        'proj_scale': 'Scale',
-
-        // =====================================
-        // ABOUT US PAGE
-        // =====================================
-        
-        // 1. Hero
-        'abt_hero_sub': 'Pioneering Brand',
-        'abt_hero_title': 'Defining <span class="text-primary">Clean Air</span><br>Standards in Vietnam',
-        'abt_hero_desc': 'The pioneer manufacturer of cleanroom equipment and industrial air filters in Vietnam, owning an automated factory and Class 100,000 production cleanrooms.',
-        'abt_hero_btn': 'Explore Our Solutions',
-
-        // 2. Story & H&V Material
-        'abt_story_title': 'Our Growth Journey',
-        'abt_story_1': 'Founded in January 2008, <strong>Viet Air Filter (VAF)</strong> began with the pioneering mission of laying the foundation for the industrial air filtration industry in Vietnam. Over 18 years, we have grown from a small workshop into a 5,000m² automated smart factory.',
-        'abt_story_2': 'We are proud to be the only domestic company to fully master the core technology of HEPA/ULPA filter manufacturing using Mini-pleat lines. Assembly and testing are strictly conducted inside a <strong>Class 100,000 (ISO 8) Cleanroom</strong> to ensure sterility.',
-        'abt_story_3': 'Beyond serving strategic domestic partners like Samsung, Intel, and top-tier hospitals, VAF products have successfully conquered demanding international markets such as the USA and Japan.',
-        'abt_material': 'Imported Materials',
-        'abt_mat_desc': '100% premium glass fiber filter media from the world\'s leading corporation Hollingsworth & Vose (USA), ensuring outstanding performance and lifespan.',
-        'abt_hv_1': 'Extremely high static dust holding capacity',
-        'abt_hv_2': 'Low pressure drop, saving energy',
-        'abt_hv_3': 'Superior tensile strength, tear resistant',
-
-        // 3. Numbers
-        'abt_num_1': 'Years of Experience',
-        'abt_num_2': 'Sq. Meters of Production',
-        'abt_num_3': 'Engineers & Experts',
-        'abt_num_4': 'HEPA Leak Tested',
-
-        // 4. Core Technology
-        'abt_cap_sub': 'Core Technology',
-        'abt_cap_title': 'Automated Manufacturing',
-        'cap_1_title': 'Mini-pleat Production Line',
-        'cap_1_desc': 'Fully automated hot-melt dispensing system ensures uniform pleats, reducing air pressure drop and saving LCC energy for HVAC systems.',
-        'cap_2_title': 'EN 1822 Standard Lab',
-        'cap_2_desc': 'Equipped with automatic Aerosol leak scan test machines. Ensuring every HEPA/ULPA filter is absolutely free of leaks before delivery.',
-        'cap_3_title': 'Cleanroom Manufacturing',
-        'cap_3_desc': 'Assembly and packaging areas are strictly located inside a Class 100,000 (ISO 8) cleanroom to prevent particulate cross-contamination.',
-
-        // 5. Transformation History
-        'hist_sub': 'Transformation Journey',
-        'hist_title': '18 Years of Creating <br><span class="text-primary">Clean Standards</span>',
-        'hist_quote': '"The unwavering dedication of hundreds of individuals with a single goal: Never compromise with dirty air."',
-        'hist_author': 'VAF Board of Directors',
-        'hist_2008_title': 'The Very First Steps',
-        'h_08_lbl1': 'Core Personnel',
-        'h_08_lbl2': 'Production Line',
-        'h_08_val2': 'Manual',
-        'h_08_lbl3': 'Filter Products',
-        'h_08_val3': 'Basic',
-        'h_08_lbl4': 'Market Scope',
-        'h_08_val4': 'Domestic',
-        'hist_2026_title': 'Industry Leading Position',
-        'h_26_lbl1': 'Engineers & Experts',
-        'h_26_lbl2': 'Production System',
-        'h_26_val2': 'Automated',
-        'h_26_lbl3': 'Mastering Core Tech',
-        'h_26_lbl4': 'Distribution Market',
-        'h_26_val4': 'Global',
-
-        // 6. Global Footprint
-        'gl_sub': 'Global Footprint',
-        'gl_title': 'From Vietnam <br><span class="text-primary">To The World</span>',
-        'gl_desc': 'Affirming global quality. VAF products have passed the strictest tests to be present in the world\'s leading industrial markets.',
-        'gl_hub1_title': 'Vietnam (HQ)',
-        'gl_hub1_sub': 'Manufacturing & Distribution',
-        'gl_hub1_desc': '5,000m² automated factory in Binh Duong. Serving Samsung, Intel, and national hospital systems.',
-        'gl_hub2_title': 'United States (USA)',
-        'gl_hub2_sub': 'Export Market',
-        'gl_hub2_desc': 'Successfully exported fine and HEPA filters. The VAF brand is officially trademark-protected in the US.',
-        'gl_hub3_title': 'Japan',
-        'gl_hub3_sub': 'Export Market',
-        'gl_hub3_desc': 'Meeting the stringent technical standards of Japanese partners in the semiconductor and medical fields.',
-
-        // 8. CTA
-        'abt_cta_title': 'Ready to Elevate Your <br><span class="text-primary">Cleanroom Quality?</span>',
-        'abt_cta_desc': 'VAF\'s team of engineers is ready to support surveys, provide technical consultation, and deliver the optimal TCO solution for your factory. We welcome our partners to directly visit our production line in Binh Duong.',
-        'abt_cta_btn1': 'Get Consultation Now',
-
-        // 9. Certifications
-        'abt_cert': 'International Standards & Certifications',
-        
-        // Product Detail
-        'prod_specs': 'Specifications',
-        'prod_apps': 'Applications',
-        'tab_dat': 'Technical Data Sheet',
-        'tab_dwg': 'Technical Drawing',
-        'contact_consult': 'Tech Support',
-        'about_desc_1': 'Established in  <strong>January 2008</strong>,Viet Air Filter Manufacturing Joint Stock Company (VAF) proudly stands as a pioneering company laying the foundation for the industrial air filtration manufacturing industry in Vietnam. From humble beginnings, we have grown into a leading company with over <strong>200 experienced personnel and technicians</strong>,operating a large-scale factory with state-of-the-art production lines in Binh Duong.',
-        'about_desc_2': 'VAF is the only company in Vietnam that fully masters the production process of cleanroom equipment meeting <strong>ISO 14644-1</strong> standards. Our mission is to provide world-class clean air solutions, protect human health, and optimize production processes for global partners such as Samsung, Intel, and leading hospitals.',
-        'about_title': 'Pioneering Clean Air Creation <span class="relative inline-block mt-2"><span class="relative z-10 text-primary">In Viet Nam</span><span class="absolute bottom-2 left-0 w-full h-3 bg-primary/10 -z-0"></span></span>',
-        'milestone_start': 'Inception',
-        'milestone_2008_desc': 'Established first factory in Binh Duong with 11 core personnel...',
-        'milestone_tech': 'Technology Leap',
-        'milestone_2010_desc': 'Invested in automatic Mini-pleat production line. Achieved ISO 9001:2008...',
-        'milestone_global': 'Global Reach',
-        'milestone_2020_desc': 'Successfully exported to USA and Thailand. Trademark protected in the US.',
-        'milestone_med': 'Medical Standard',
-        'milestone_2023_desc': 'Achieved ISO 13485:2016 for medical devices. Partnered with Samsung.',
-        'milestone_future': 'Future Vision',
-        'milestone_2026_title': 'Smart Factory & Green Manufacturing',
-        'milestone_2026_desc': 'Aiming for GREEN goals, applying AI in quality control.',
-        'btn_capacity': 'Learn more about production capacity',
-
-        // --- TRANSLATION FOR SECTIONS ---
-        'featured_products_title': 'Featured Products',
-        'featured_products_desc': 'Optimal solutions for all filtration needs.',
-        'view_all_products': 'View All',
-        'news_subtitle': 'Latest Updates',
-        'news_title': 'News & Events',
-        'member_title': 'Association Members',
-        'cert_title': 'Quality Certificates',
-        'partner_title': 'Our Partners',
-        'contact_title': 'Contact VAF',
-        'contact_desc': 'Please leave your information, our technical team will contact you for consultation.',
-        'form_title': 'Request A Quote',
-        'form_submit': 'Submit Request',
-        'footer_company': '© 2026 VIET AIR FILTER CORPORATION (VAF)',
-
-        'cat_title': 'Categories',
-        'cat_all': 'All Products',
-        'cat_pre': 'Pre-filter',
-        'cat_fine': 'Fine filter',
-        'cat_hepa': 'HEPA / ULPA Filters',
-        'cat_equip': 'Cleanroom Equipment',
-        'prod_need_consult': 'Need filter consultation?',
-        'prod_call_now': 'Call 1900 8949',
-        'btn_view_detail': 'View Details',
-
-        // Projects Page (New Consulting Section)
-        'proj_consult_sub': 'Engineering & Consulting',
-        'proj_consult_title': 'Comprehensive & Synchronized <br><span class="text-primary">Cleanroom Solutions</span>',
-        'proj_consult_desc': 'More than just an equipment manufacturer, VAF provides consulting, design, and installation services for air treatment systems meeting international standards (ISO 14644, GMP, FDA).',
-        'step_1_title': 'Survey & Analysis',
-        'step_1_desc': 'Evaluate current factory conditions, measure dust concentration, temperature, humidity, and analyze the actual cleanliness level required.',
-        'step_2_title': 'HVAC & CFD Design',
-        'step_2_desc': 'Calculate airflow rate (ACH), design P&ID spatial diagrams, and simulate CFD airflow to optimize performance.',
-        'step_3_title': 'Manufacturing & Integration',
-        'step_3_desc': 'Fabricate cleanroom equipment (AHU, FFU, Pass Box) and synchronized HEPA/ULPA filters right at VAF automated factory.',
-        'step_4_title': 'Installation & Validation',
-        'step_4_desc': 'On-site installation, conduct particle counting and leakage tests (DOP/PAO Test) to issue ISO standard certificates.',
-        'proj_cta_title': 'Starting your cleanroom project?',
-        'proj_cta_desc': 'VAF expert engineering team is ready to consult solutions and optimize costs (TCO). Contact us now to get a free preliminary design drawing.',
-        'proj_cta_btn': 'Request Consultation',
-    }
+    en: {}
 };
 
+function loadTranslationsScript() {
+    if (window.translations) {
+        translations = window.translations;
+        return Promise.resolve(translations);
+    }
+
+    return new Promise((resolve, reject) => {
+        const existing = document.querySelector('script[src="/translations-data.js"]');
+        if (existing) {
+            existing.addEventListener('load', () => {
+                translations = window.translations || translations;
+                resolve(translations);
+            }, { once: true });
+            existing.addEventListener('error', reject, { once: true });
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = '/translations-data.js';
+        script.onload = () => {
+            translations = window.translations || translations;
+            resolve(translations);
+        };
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+}
+
 // 3. HÀM CHUYỂN NGÔN NGỮ (Logic mới)
-function setLang(lang) {
+async function setLang(lang) {
+    if (!window.translations) await loadTranslationsScript();
+
     currentLang = lang;
     localStorage.setItem('vaf_lang', lang); 
 
@@ -829,258 +98,7 @@ function setLang(lang) {
 // --- 1. DỮ LIỆU DỰ ÁN (PROJECTS) ---
 
 
-const projects = [
-
-    // =========================
-    // ĐIỆN TỬ / BÁN DẪN
-    // =========================
-
-    {
-        id: 'p20',
-        title: 'Samsung Display Vietnam (SDV)',
-        cat: 'Điện Tử',
-        img: 'images/anh-du-an/ssdisplay.webp',
-        client: 'Samsung Display Vietnam',
-        loc: 'Bắc Ninh',
-        scale: 'Nhà máy màn hình OLED',
-        year: '2023',
-        desc: 'Cung cấp giải pháp lọc khí và vật tư phòng sạch cho dây chuyền sản xuất màn hình điện tử.',
-        scope: ['HEPA Filter', 'ULPA Filter', 'FFU'],
-        featured: true
-    },
-
-    {
-        id: 'p17',
-        title: 'Samsung Electronics Vietnam (SEMV)',
-        cat: 'Điện Tử',
-        img: 'images/anh-du-an/sev.webp',
-        client: 'Samsung Electronics Vietnam',
-        loc: 'Bắc Ninh',
-        scale: 'Nhà máy điện tử',
-        year: '2023',
-        desc: 'Cung cấp lọc khí và vật tư phòng sạch cho nhà máy sản xuất điện tử.',
-        scope: ['HEPA Filter', 'Pre Filter', 'Fine Filter']
-     
-    },
-
-    {
-        id: 'p18',
-        title: 'Samsung Electronics Vietnam Thai Nguyen (SEVT)',
-        cat: 'Điện Tử',
-        img: 'images/anh-du-an/sevt.webp',
-        client: 'Samsung Electronics Vietnam Thai Nguyen',
-        loc: 'Thái Nguyên',
-        scale: 'Nhà máy điện tử',
-        year: '2023',
-        desc: 'Cung cấp vật tư tiêu hao lọc khí và thiết bị phòng sạch.',
-        scope: ['HEPA Filter', 'FFU', 'Bag Filter'],
-        featured: true
-    },
-
-    {
-        id: 'p19',
-        title: 'Samsung CE Complex (SEHC)',
-        cat: 'Điện Tử',
-        img: 'images/anh-du-an/sehc.webp',
-        client: 'Samsung CE Complex',
-        loc: 'TP.HCM',
-        scale: 'Nhà máy điện tử',
-        year: '2023',
-        desc: 'Cung cấp giải pháp lọc khí và vật tư phòng sạch cho nhà máy điện tử.',
-        scope: ['HEPA Filter', 'AHU Filter', 'FFU'],
-        featured: true
-    },
-
-  
-    // =========================
-    // Y TẾ
-    // =========================
-
-    {
-        id: 'p01',
-        title: 'Bệnh Viện Gia An 115',
-        cat: 'Y Tế',
-        img: 'images/anh-du-an/ga115.webp',
-        client: 'Bệnh Viện Gia An 115',
-        loc: 'TP HCM',
-        scale: 'Phòng Sạch',
-        year: '2023',
-        desc: 'Thi công phòng LAF ISO CLASS 5 Viện Tế Bào Gốc.',
-        scope: ['HVAC', 'HEPA Box'],
-        featured: true
-    },
-
-    {
-        id: 'p1',
-        title: 'Bệnh Viện Đa Khoa Lâm Đồng',
-        cat: 'Y Tế',
-        img: 'images/anh-du-an/bvld.png',
-        client: 'Bệnh Viện Lâm Đồng',
-        loc: 'Lâm Đồng',
-        scale: '3 Phòng sạch',
-        year: '2022',
-        desc: 'Cung cấp thiết bị phòng mổ áp lực âm.',
-        scope: ['HVAC', 'HEPA Box']
-    },
-
-    {
-        id: 'p5',
-        title: 'Trung Tâm DIAG',
-        cat: 'Y Tế',
-        img: 'images/anh-du-an/diag.webp',
-        client: 'DIAG',
-        loc: 'TP.HCM',
-        scale: 'Lab xét nghiệm',
-        year: '2022',
-        desc: 'Lắp đặt thiết bị phòng xét nghiệm.',
-        scope: ['Pass Box', 'Air Shower']
-    },
-
-    {
-        id: 'p6',
-        title: 'Bệnh Viện Nhân Dân 115',
-        cat: 'Y Tế',
-        img: 'images/anh-du-an/115.webp',
-        client: 'Bệnh Viện 115',
-        loc: 'TP.HCM',
-        scale: 'Khu cách ly',
-        year: '2021',
-        desc: 'Cải tạo phòng áp lực âm.',
-        scope: ['Cải tạo', 'HEPA']
-    },
-
-    {
-        id: 'p7',
-        title: 'Bệnh Viện Long Khánh',
-        cat: 'Y Tế',
-        img: 'images/anh-du-an/bvlk.webp',
-        client: 'Bệnh Viện Long Khánh',
-        loc: 'Đồng Nai',
-        scale: 'Phòng DSA',
-        year: '2021',
-        desc: 'Thi công phòng DSA và khu can thiệp tim mạch.',
-        scope: ['Laminar', 'HVAC', 'Panel']
-    },
-
-    {
-        id: 'p8',
-        title: 'Bệnh Viện Mắt Hải Yến',
-        cat: 'Y Tế',
-        img: 'images/anh-du-an/hy.webp',
-        client: 'Bệnh Viện Mắt Hải Yến',
-        loc: 'TP.HCM',
-        scale: 'Phòng mổ',
-        year: '2021',
-        desc: 'Thi công phòng mổ và khu vô trùng.',
-        scope: ['Laminar', 'HVAC', 'Medical Gas']
-    },
-
-    {
-        id: 'p10',
-        title: 'Bệnh Viện Quân Y 13',
-        cat: 'Y Tế',
-        img: 'images/anh-du-an/qy13.webp',
-        client: 'Bệnh Viện Quân Y 13',
-        loc: 'Bình Định',
-        scale: 'Khu phẫu thuật',
-        year: '2021',
-        desc: 'Thi công HVAC và BMS.',
-        scope: ['HVAC', 'BMS']
-    },
-
-    {
-        id: 'p11',
-        title: 'Bệnh Viện 30/4',
-        cat: 'Y Tế',
-        img: 'images/anh-du-an/bv304.webp',
-        client: 'Bệnh Viện 30/4',
-        loc: 'TP.HCM',
-        scale: 'Khu điều trị',
-        year: '2021',
-        desc: 'Thi công hệ thống HVAC và AHU Housing.',
-        scope: ['HVAC', 'AHU Housing']
-    },
-
-    // =========================
-    // CÔNG NGHIỆP
-    // =========================
-
-    {
-        id: 'p2',
-        title: 'Nhà Máy D PACK',
-        cat: 'Công Nghiệp',
-        img: 'images/anh-du-an/dpack.webp',
-        client: 'D PACK',
-        loc: 'Bình Định',
-        scale: 'Nhà máy',
-        year: '2023',
-        desc: 'Tổng thầu thiết kế thi công phòng sạch.',
-        scope: ['Thiết kế', 'Thi công'],
-        featured: true
-    },
-
-    {
-        id: 'p12',
-        title: 'Daiwa Plastics',
-        cat: 'Công Nghiệp',
-        img: 'images/anh-du-an/daiwa.webp',
-        client: 'Daiwa Plastics',
-        loc: 'TP.HCM',
-        scale: 'Nhà máy',
-        year: '2022',
-        desc: 'Thi công HVAC, Chiller và hệ Panel.',
-        scope: ['HVAC', 'Chiller', 'Panel']
-    },
-
-    {
-        id: 'p13',
-        title: 'Trường Thọ',
-        cat: 'Công Nghiệp',
-        img: 'images/anh-du-an/truongtho.webp',
-        client: 'Trường Thọ',
-        loc: 'TP.HCM',
-        scale: 'Phòng sạch',
-        year: '2022',
-        desc: 'Thi công phòng sạch công nghiệp.',
-        scope: ['Panel', 'HVAC', 'Điện']
-    },
-
-    // =========================
-    // NĂNG LƯỢNG
-    // =========================
-
-    {
-        id: 'p21',
-        title: 'Nhà Máy Nhiệt Điện Phú Mỹ',
-        cat: 'Năng Lượng',
-        img: 'images/anh-du-an/phumy.webp',
-        client: 'Nhiệt Điện Phú Mỹ',
-        loc: 'Bà Rịa - Vũng Tàu',
-        scale: 'Nhà máy điện',
-        year: '2022',
-        desc: 'Cung cấp giải pháp lọc khí công nghiệp cho hệ thống vận hành nhà máy điện.',
-        scope: ['Lọc Khí Công Nghiệp', 'HVAC', 'AHU Filter'],
-        featured: true,
-    },
-
-    // =========================
-    // QUỐC TẾ
-    // =========================
-
-    {
-        id: 'p4',
-        title: 'Bệnh Viện Grand Mandalay',
-        cat: 'Quốc Tế',
-        img: 'images/anh-du-an/gm.webp',
-        client: 'Grand Mandalay Hospital',
-        loc: 'Myanmar',
-        scale: '2 Phòng mổ',
-        year: '2022',
-        desc: 'Xuất khẩu thiết bị phòng mổ và giải pháp phòng sạch.',
-        scope: ['Xuất khẩu', 'Thi công']
-    }
-
-];
+let projects = window.projects || [];
 
 // --- 2. HÀM TIỆN ÍCH ---
 function cleanText(text) { return text ? text.replace(/<[^>]*>?/gm, '') : ''; }
@@ -1197,6 +215,34 @@ function loadNewsScript() {
         const script = document.createElement('script');
         script.src = '/news-data.js';
         script.onload = () => resolve(window.newsData || []);
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+}
+
+function loadProjectsScript() {
+    if (window.projects) {
+        projects = window.projects;
+        return Promise.resolve(projects);
+    }
+
+    return new Promise((resolve, reject) => {
+        const existing = document.querySelector('script[src="/projects-data.js"]');
+        if (existing) {
+            existing.addEventListener('load', () => {
+                projects = window.projects || [];
+                resolve(projects);
+            }, { once: true });
+            existing.addEventListener('error', reject, { once: true });
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = '/projects-data.js';
+        script.onload = () => {
+            projects = window.projects || [];
+            resolve(projects);
+        };
         script.onerror = reject;
         document.head.appendChild(script);
     });
@@ -1540,7 +586,7 @@ if (page === "project") activeTarget = "projects";
 
         document.title = 'Dự Án Tiêu Biểu & Khách Hàng - VAF';
         switchView('view-projects');
-        filterProjects('all'); // <--- Đã sửa thành tên hàm mới
+        await filterProjects('all');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     else if (page === 'projects-all') {
@@ -1549,7 +595,7 @@ if (page === "project") activeTarget = "projects";
             
         switchView('view-projects-all');
 
-        renderAllProjects(1);
+        await renderAllProjects(1);
 
         window.scrollTo({
             top: 0,
@@ -1557,7 +603,7 @@ if (page === "project") activeTarget = "projects";
         });
     }
     else if (page === 'project' && param) {
-    executeProjectDetail(param);
+    await executeProjectDetail(param);
 }
     else if (page === "news" && param) {
     await executeNewsDetail(param);
@@ -1583,7 +629,8 @@ else if (page === "news") {
 }
 // Render Dự án & Tin tức (Giữ nguyên)
 // --- BỘ LỌC DỰ ÁN ---
-function renderProjectFilters(activeCat = 'all') {
+async function renderProjectFilters(activeCat = 'all') {
+    await loadProjectsScript();
     const filterContainer = document.getElementById('project-filters');
     if (!filterContainer) return;
 
@@ -1604,7 +651,8 @@ function renderProjectFilters(activeCat = 'all') {
 const projectsPerPage = 9;
 let currentPage = 1;
 
-function renderAllProjects(page = 1) {
+async function renderAllProjects(page = 1) {
+    await loadProjectsScript();
 
     const grid =
         document.getElementById('all-projects-grid');
@@ -1650,8 +698,9 @@ function renderAllProjects(page = 1) {
 }
 
 // --- HIỂN THỊ DỰ ÁN ---
-function filterProjects(cat) {
-    renderProjectFilters(cat); // Đổi màu nút đang chọn
+async function filterProjects(cat) {
+    await loadProjectsScript();
+    renderProjectFilters(cat);
     const grid = document.getElementById('projects-grid');
     if (!grid) return;
         
@@ -1689,7 +738,8 @@ function filterProjects(cat) {
     applyImageLoadingHints(grid);
 }
 
-function showAllProjects() {
+async function showAllProjects() {
+    await loadProjectsScript();
 
     const grid = document.getElementById('projects-grid');
 
@@ -1893,7 +943,8 @@ function openProjectDetail(id) {
     handleRouting();
 }
 
-function executeProjectDetail(id) {
+async function executeProjectDetail(id) {
+    await loadProjectsScript();
     const p = projects.find(x => x.id === id);
     if (!p) {
         history.replaceState({}, "", "/projects");
@@ -1921,6 +972,7 @@ function executeProjectDetail(id) {
 document.addEventListener('DOMContentLoaded', () => {
     try {
         handleRouting();
+        if (currentLang !== 'vi') setLang(currentLang);
     } catch (e) { console.error(e); }
 
     const prepareBelowFoldImages = () => applyImageLoadingHints();
@@ -2168,3 +1220,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 });
+
+

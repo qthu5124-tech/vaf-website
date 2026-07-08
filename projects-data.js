@@ -1,0 +1,254 @@
+﻿window.projects = [
+
+    // =========================
+    // ĐIỆN TỬ / BÁN DẪN
+    // =========================
+
+    {
+        id: 'p20',
+        title: 'Samsung Display Vietnam (SDV)',
+        cat: 'Điện Tử',
+        img: 'images/anh-du-an/ssdisplay.webp',
+        client: 'Samsung Display Vietnam',
+        loc: 'Bắc Ninh',
+        scale: 'Nhà máy màn hình OLED',
+        year: '2023',
+        desc: 'Cung cấp giải pháp lọc khí và vật tư phòng sạch cho dây chuyền sản xuất màn hình điện tử.',
+        scope: ['HEPA Filter', 'ULPA Filter', 'FFU'],
+        featured: true
+    },
+
+    {
+        id: 'p17',
+        title: 'Samsung Electronics Vietnam (SEMV)',
+        cat: 'Điện Tử',
+        img: 'images/anh-du-an/sev.webp',
+        client: 'Samsung Electronics Vietnam',
+        loc: 'Bắc Ninh',
+        scale: 'Nhà máy điện tử',
+        year: '2023',
+        desc: 'Cung cấp lọc khí và vật tư phòng sạch cho nhà máy sản xuất điện tử.',
+        scope: ['HEPA Filter', 'Pre Filter', 'Fine Filter']
+     
+    },
+
+    {
+        id: 'p18',
+        title: 'Samsung Electronics Vietnam Thai Nguyen (SEVT)',
+        cat: 'Điện Tử',
+        img: 'images/anh-du-an/sevt.webp',
+        client: 'Samsung Electronics Vietnam Thai Nguyen',
+        loc: 'Thái Nguyên',
+        scale: 'Nhà máy điện tử',
+        year: '2023',
+        desc: 'Cung cấp vật tư tiêu hao lọc khí và thiết bị phòng sạch.',
+        scope: ['HEPA Filter', 'FFU', 'Bag Filter'],
+        featured: true
+    },
+
+    {
+        id: 'p19',
+        title: 'Samsung CE Complex (SEHC)',
+        cat: 'Điện Tử',
+        img: 'images/anh-du-an/sehc.webp',
+        client: 'Samsung CE Complex',
+        loc: 'TP.HCM',
+        scale: 'Nhà máy điện tử',
+        year: '2023',
+        desc: 'Cung cấp giải pháp lọc khí và vật tư phòng sạch cho nhà máy điện tử.',
+        scope: ['HEPA Filter', 'AHU Filter', 'FFU'],
+        featured: true
+    },
+
+  
+    // =========================
+    // Y TẾ
+    // =========================
+
+    {
+        id: 'p01',
+        title: 'Bệnh Viện Gia An 115',
+        cat: 'Y Tế',
+        img: 'images/anh-du-an/ga115.webp',
+        client: 'Bệnh Viện Gia An 115',
+        loc: 'TP HCM',
+        scale: 'Phòng Sạch',
+        year: '2023',
+        desc: 'Thi công phòng LAF ISO CLASS 5 Viện Tế Bào Gốc.',
+        scope: ['HVAC', 'HEPA Box'],
+        featured: true
+    },
+
+    {
+        id: 'p1',
+        title: 'Bệnh Viện Đa Khoa Lâm Đồng',
+        cat: 'Y Tế',
+        img: 'images/anh-du-an/bvld.png',
+        client: 'Bệnh Viện Lâm Đồng',
+        loc: 'Lâm Đồng',
+        scale: '3 Phòng sạch',
+        year: '2022',
+        desc: 'Cung cấp thiết bị phòng mổ áp lực âm.',
+        scope: ['HVAC', 'HEPA Box']
+    },
+
+    {
+        id: 'p5',
+        title: 'Trung Tâm DIAG',
+        cat: 'Y Tế',
+        img: 'images/anh-du-an/diag.webp',
+        client: 'DIAG',
+        loc: 'TP.HCM',
+        scale: 'Lab xét nghiệm',
+        year: '2022',
+        desc: 'Lắp đặt thiết bị phòng xét nghiệm.',
+        scope: ['Pass Box', 'Air Shower']
+    },
+
+    {
+        id: 'p6',
+        title: 'Bệnh Viện Nhân Dân 115',
+        cat: 'Y Tế',
+        img: 'images/anh-du-an/115.webp',
+        client: 'Bệnh Viện 115',
+        loc: 'TP.HCM',
+        scale: 'Khu cách ly',
+        year: '2021',
+        desc: 'Cải tạo phòng áp lực âm.',
+        scope: ['Cải tạo', 'HEPA']
+    },
+
+    {
+        id: 'p7',
+        title: 'Bệnh Viện Long Khánh',
+        cat: 'Y Tế',
+        img: 'images/anh-du-an/bvlk.webp',
+        client: 'Bệnh Viện Long Khánh',
+        loc: 'Đồng Nai',
+        scale: 'Phòng DSA',
+        year: '2021',
+        desc: 'Thi công phòng DSA và khu can thiệp tim mạch.',
+        scope: ['Laminar', 'HVAC', 'Panel']
+    },
+
+    {
+        id: 'p8',
+        title: 'Bệnh Viện Mắt Hải Yến',
+        cat: 'Y Tế',
+        img: 'images/anh-du-an/hy.webp',
+        client: 'Bệnh Viện Mắt Hải Yến',
+        loc: 'TP.HCM',
+        scale: 'Phòng mổ',
+        year: '2021',
+        desc: 'Thi công phòng mổ và khu vô trùng.',
+        scope: ['Laminar', 'HVAC', 'Medical Gas']
+    },
+
+    {
+        id: 'p10',
+        title: 'Bệnh Viện Quân Y 13',
+        cat: 'Y Tế',
+        img: 'images/anh-du-an/qy13.webp',
+        client: 'Bệnh Viện Quân Y 13',
+        loc: 'Bình Định',
+        scale: 'Khu phẫu thuật',
+        year: '2021',
+        desc: 'Thi công HVAC và BMS.',
+        scope: ['HVAC', 'BMS']
+    },
+
+    {
+        id: 'p11',
+        title: 'Bệnh Viện 30/4',
+        cat: 'Y Tế',
+        img: 'images/anh-du-an/bv304.webp',
+        client: 'Bệnh Viện 30/4',
+        loc: 'TP.HCM',
+        scale: 'Khu điều trị',
+        year: '2021',
+        desc: 'Thi công hệ thống HVAC và AHU Housing.',
+        scope: ['HVAC', 'AHU Housing']
+    },
+
+    // =========================
+    // CÔNG NGHIỆP
+    // =========================
+
+    {
+        id: 'p2',
+        title: 'Nhà Máy D PACK',
+        cat: 'Công Nghiệp',
+        img: 'images/anh-du-an/dpack.webp',
+        client: 'D PACK',
+        loc: 'Bình Định',
+        scale: 'Nhà máy',
+        year: '2023',
+        desc: 'Tổng thầu thiết kế thi công phòng sạch.',
+        scope: ['Thiết kế', 'Thi công'],
+        featured: true
+    },
+
+    {
+        id: 'p12',
+        title: 'Daiwa Plastics',
+        cat: 'Công Nghiệp',
+        img: 'images/anh-du-an/daiwa.webp',
+        client: 'Daiwa Plastics',
+        loc: 'TP.HCM',
+        scale: 'Nhà máy',
+        year: '2022',
+        desc: 'Thi công HVAC, Chiller và hệ Panel.',
+        scope: ['HVAC', 'Chiller', 'Panel']
+    },
+
+    {
+        id: 'p13',
+        title: 'Trường Thọ',
+        cat: 'Công Nghiệp',
+        img: 'images/anh-du-an/truongtho.webp',
+        client: 'Trường Thọ',
+        loc: 'TP.HCM',
+        scale: 'Phòng sạch',
+        year: '2022',
+        desc: 'Thi công phòng sạch công nghiệp.',
+        scope: ['Panel', 'HVAC', 'Điện']
+    },
+
+    // =========================
+    // NĂNG LƯỢNG
+    // =========================
+
+    {
+        id: 'p21',
+        title: 'Nhà Máy Nhiệt Điện Phú Mỹ',
+        cat: 'Năng Lượng',
+        img: 'images/anh-du-an/phumy.webp',
+        client: 'Nhiệt Điện Phú Mỹ',
+        loc: 'Bà Rịa - Vũng Tàu',
+        scale: 'Nhà máy điện',
+        year: '2022',
+        desc: 'Cung cấp giải pháp lọc khí công nghiệp cho hệ thống vận hành nhà máy điện.',
+        scope: ['Lọc Khí Công Nghiệp', 'HVAC', 'AHU Filter'],
+        featured: true,
+    },
+
+    // =========================
+    // QUỐC TẾ
+    // =========================
+
+    {
+        id: 'p4',
+        title: 'Bệnh Viện Grand Mandalay',
+        cat: 'Quốc Tế',
+        img: 'images/anh-du-an/gm.webp',
+        client: 'Grand Mandalay Hospital',
+        loc: 'Myanmar',
+        scale: '2 Phòng mổ',
+        year: '2022',
+        desc: 'Xuất khẩu thiết bị phòng mổ và giải pháp phòng sạch.',
+        scope: ['Xuất khẩu', 'Thi công']
+    }
+
+];
+
+
