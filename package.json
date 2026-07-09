@@ -5,6 +5,8 @@
   "main": "news-data.js",
   "scripts": {
     "build:css": "tailwindcss -i ./input.css -o ./tailwind.min.css --minify",
+    "build:minify": "node tools/minify-css.cjs && node tools/minify-js.cjs",
+    "build": "npm run build:css && npm run build:minify",
     "preview": "node local-server.js"
   },
   "keywords": [],
@@ -14,5 +16,8 @@
   "dependencies": {
     "@tailwindcss/cli": "^4.3.2",
     "tailwindcss": "^4.3.2"
+  },
+  "devDependencies": {
+    "terser": "^5.49.0"
   }
 }

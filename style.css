@@ -7,12 +7,30 @@ body {
     font-family: 'Inter', sans-serif;
     max-width: 100%;
     overflow-x: hidden;
+    color: #334155;
 }
 
 @supports (overflow: clip) {
     body {
         overflow-x: clip;
     }
+}
+
+.text-gray-300,
+.text-gray-400,
+.text-gray-500,
+.text-slate-400,
+.text-slate-500 {
+    color: #475569 !important;
+}
+
+.bg-secondary .text-gray-300,
+.bg-secondary .text-gray-400,
+.bg-secondary .text-gray-500,
+.bg-slate-900 .text-gray-300,
+.bg-slate-900 .text-gray-400,
+.bg-slate-900 .text-gray-500 {
+    color: #cbd5e1 !important;
 }
 
 h1, h2, h3, h4, h5, h6 {

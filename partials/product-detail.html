@@ -17,6 +17,8 @@
                         <div class="relative w-full h-fit bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm group">
 
                             <img id="pd-img"
+                                 width="2400"
+                                 height="1792"
                                  class="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105 block"
                                  alt="Product Image">
 
@@ -34,14 +36,14 @@
 
                         <div class="grid md:grid-cols-2 gap-8 mb-8">
                             <div>
-                                <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3 border-b pb-1" data-i18n="prod_specs">Thông số kỹ thuật</h3>
+                                <h2 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3 border-b pb-1" data-i18n="prod_specs">Thông số kỹ thuật</h2>
                                 <table class="w-full text-sm text-slate-700">
                                     <tbody id="pd-specs"></tbody>
                                 </table>
                             </div>
 
                             <div>
-                                <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3 border-b pb-1" data-i18n="prod_apps">Ứng dụng</h3>
+                                <h2 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3 border-b pb-1" data-i18n="prod_apps">Ứng dụng</h2>
                                 <ul id="pd-apps" class="space-y-2 text-sm text-slate-700 list-disc pl-4"></ul>
                             </div>
                         </div>
@@ -58,10 +60,10 @@
                 </div>
 
                 <div class="border-t-4 border-secondary pt-10">
-                    <h3 class="text-2xl font-bold text-secondary mb-6 font-heading flex items-center gap-3">
+                    <h2 class="text-2xl font-bold text-secondary mb-6 font-heading flex items-center gap-3">
                         <span class="bg-secondary text-white w-8 h-8 flex items-center justify-center text-sm font-bold rounded">DAT</span>
                         <span data-i18n="tab_dat">Bảng Dữ Liệu Kỹ Thuật (Technical Data)</span>
-                    </h3>
+                    </h2>
 
                     <div class="bg-white overflow-hidden">
                         <div class="tech-table-container" id="pd-table-container">
@@ -69,13 +71,13 @@
                     </div>
 
                     <div id="pd-drawing-wrapper" class="mt-12 hidden">
-                        <h3 class="text-2xl font-bold text-secondary mb-6 font-heading flex items-center gap-3">
+                        <h2 class="text-2xl font-bold text-secondary mb-6 font-heading flex items-center gap-3">
                             <span class="bg-primary text-white w-8 h-8 flex items-center justify-center text-sm font-bold rounded">DWG</span>
                             <span data-i18n="tab_dwg">Bản Vẽ Kỹ Thuật (Drawing)</span>
-                        </h3>
+                        </h2>
 
                         <div class="drawing-container">
-                            <img id="pd-drawing-img" src="" alt="Technical Drawing" class="drawing-img" onclick="window.open(this.src, '_blank')" loading="lazy" decoding="async">
+                            <img id="pd-drawing-img" src="" width="1200" height="800" alt="Technical Drawing" class="drawing-img" onclick="window.open(this.src, '_blank')" loading="lazy" decoding="async">
                         </div>
                         <p class="text-center text-sm text-gray-400 mt-2 italic" data-i18n="prod_click_zoom">* Nhấn vào ảnh để xem kích thước đầy đủ</p>
                     </div>

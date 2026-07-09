@@ -24,7 +24,7 @@ function loadTranslationsScript() {
     }
 
     return new Promise((resolve, reject) => {
-        const existing = document.querySelector('script[src="/translations-data.js"]');
+        const existing = document.querySelector('script[src="/translations-data.min.js"]');
         if (existing) {
             existing.addEventListener('load', () => {
                 translations = window.translations || translations;
@@ -35,7 +35,7 @@ function loadTranslationsScript() {
         }
 
         const script = document.createElement('script');
-        script.src = '/translations-data.js';
+        script.src = '/translations-data.min.js';
         script.onload = () => {
             translations = window.translations || translations;
             resolve(translations);
@@ -175,6 +175,17 @@ function applyImageLoadingHints(scope = document) {
             return;
         }
         if (!img.hasAttribute('loading')) img.loading = 'lazy';
+        if ((!img.hasAttribute('width') || !img.hasAttribute('height')) && img.complete && img.naturalWidth && img.naturalHeight) {
+            img.width = img.naturalWidth;
+            img.height = img.naturalHeight;
+        } else if (!img.hasAttribute('width') || !img.hasAttribute('height')) {
+            img.addEventListener('load', () => {
+                if (img.naturalWidth && img.naturalHeight) {
+                    img.width = img.naturalWidth;
+                    img.height = img.naturalHeight;
+                }
+            }, { once: true });
+        }
     });
 }
 
@@ -216,7 +227,7 @@ function loadProductsScript() {
     if (window.products) return Promise.resolve(window.products);
 
     return new Promise((resolve, reject) => {
-        const existing = document.querySelector('script[src="/products-data.js"]');
+        const existing = document.querySelector('script[src="/products-data.min.js"]');
         if (existing) {
             existing.addEventListener('load', () => resolve(window.products || []), { once: true });
             existing.addEventListener('error', reject, { once: true });
@@ -224,7 +235,7 @@ function loadProductsScript() {
         }
 
         const script = document.createElement('script');
-        script.src = '/products-data.js';
+        script.src = '/products-data.min.js';
         script.onload = () => resolve(window.products || []);
         script.onerror = reject;
         document.head.appendChild(script);
@@ -268,7 +279,7 @@ function loadNewsScript() {
     if (window.newsData) return Promise.resolve(window.newsData);
 
     return new Promise((resolve, reject) => {
-        const existing = document.querySelector('script[src="/news-data.js"]');
+        const existing = document.querySelector('script[src="/news-data.min.js"]');
         if (existing) {
             existing.addEventListener('load', () => resolve(window.newsData || []), { once: true });
             existing.addEventListener('error', reject, { once: true });
@@ -276,7 +287,7 @@ function loadNewsScript() {
         }
 
         const script = document.createElement('script');
-        script.src = '/news-data.js';
+        script.src = '/news-data.min.js';
         script.onload = () => resolve(window.newsData || []);
         script.onerror = reject;
         document.head.appendChild(script);
@@ -290,7 +301,7 @@ function loadProjectsScript() {
     }
 
     return new Promise((resolve, reject) => {
-        const existing = document.querySelector('script[src="/projects-data.js"]');
+        const existing = document.querySelector('script[src="/projects-data.min.js"]');
         if (existing) {
             existing.addEventListener('load', () => {
                 projects = window.projects || [];
@@ -301,7 +312,7 @@ function loadProjectsScript() {
         }
 
         const script = document.createElement('script');
-        script.src = '/projects-data.js';
+        script.src = '/projects-data.min.js';
         script.onload = () => {
             projects = window.projects || [];
             resolve(projects);
@@ -315,7 +326,7 @@ function loadContactFormScript() {
     if (window.bindContactForm) return Promise.resolve();
 
     return new Promise((resolve, reject) => {
-        const existing = document.querySelector('script[src="/contact-form.js"]');
+        const existing = document.querySelector('script[src="/contact-form.min.js"]');
         if (existing) {
             existing.addEventListener('load', resolve, { once: true });
             existing.addEventListener('error', reject, { once: true });
@@ -323,7 +334,7 @@ function loadContactFormScript() {
         }
 
         const script = document.createElement('script');
-        script.src = '/contact-form.js';
+        script.src = '/contact-form.min.js';
         script.defer = true;
         script.onload = resolve;
         script.onerror = reject;
@@ -429,7 +440,7 @@ async function filterProducts(cat, noScroll = false) {
                 <div class="product-card bg-white border rounded-lg overflow-hidden cursor-pointer h-full flex flex-col shadow-sm hover:shadow-xl transition-all duration-300 group" onclick="openProductDetail('${p.id}')">
                     
                     <div class="relative w-full aspect-[2400/1792] overflow-hidden bg-white">
-                        <img src="${p.img}" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" alt="${pName}" onerror="this.src='https://placehold.co/2400x1792?text=VAF+Product'">
+                        <img src="${p.img}" width="2400" height="1792" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" alt="${pName}" onerror="this.src='https://placehold.co/2400x1792?text=VAF+Product'">
                         <div class="absolute top-2 left-2">
                             <span class="text-[10px] font-bold text-white bg-primary/90 px-2 py-1 rounded shadow uppercase tracking-wide backdrop-blur-sm">${translatedCat}</span>
                         </div>
@@ -492,6 +503,8 @@ async function executeProductDetail(id) {
     const imgEl = document.getElementById('pd-img');
     imgEl.src = "/" + p.img;
     imgEl.alt = pName;
+    imgEl.width = 2400;
+    imgEl.height = 1792;
     imgEl.onerror = function () { this.src = 'https://placehold.co/800x600?text=VAF+Product'; };
 
     document.getElementById('pd-cat').innerText = p.cat;
@@ -812,7 +825,7 @@ async function filterProjects(cat) {
     grid.innerHTML = filteredProjects.map(p => `
         <div class="product-card bg-white border rounded-xl overflow-hidden cursor-pointer h-full flex flex-col shadow-sm hover:shadow-xl transition-all duration-300 group" onclick="openProjectDetail('${p.id}')">
             <div class="h-56 bg-gray-100 relative overflow-hidden">
-                <img src="${p.img}" alt="${p.title}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                <img src="${p.img}" width="800" height="600" alt="${p.title}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                 <div class="absolute top-3 left-3 bg-primary/90 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded uppercase tracking-wide shadow">${p.cat}</div>
             </div>
             <div class="p-5">
@@ -856,7 +869,7 @@ function renderHomeNews() {
     if (!container || !news.length) return;
     container.innerHTML = news.map(n => `
         <div class="swiper-slide h-auto"><article class="bg-white h-full rounded-xl overflow-hidden border hover:shadow-lg transition cursor-pointer flex flex-col" onclick="openNewsDetail('${n.id}')">
-            <div class="h-48 relative overflow-hidden"><img src="${resolveAssetPath(n.img)}?w=600" alt="${n.title}" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 hover:scale-110"></div>
+            <div class="h-48 relative overflow-hidden"><img src="${resolveAssetPath(n.img)}?w=600" width="600" height="400" alt="${n.title}" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 hover:scale-110"></div>
             <div class="p-5 flex-grow flex flex-col"><h3 class="font-bold text-lg mb-2 text-secondary leading-tight line-clamp-2">${n.title}</h3></div>
         </article></div>`).join('');
     applyImageLoadingHints(container);
@@ -893,7 +906,7 @@ function renderNewsPage(page = 1) {
     container.innerHTML = itemsToShow.map(n => `
         <article class="news-grid-card group cursor-pointer h-full flex flex-col" onclick="openNewsDetail('${n.id}')">
             <div class="h-56 relative overflow-hidden">
-                <img src="${resolveAssetPath(n.img)}?w=800" alt="${n.title}" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=VAF+News'">
+                <img src="${resolveAssetPath(n.img)}?w=800" width="800" height="500" alt="${n.title}" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=VAF+News'">
                 <div class="absolute top-4 left-4">
                     <span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-wide">${n.cat}</span>
                 </div>
@@ -934,7 +947,7 @@ function renderSidebarNews() {
     container.innerHTML = featuredNews.map(n => `
         <div class="flex gap-4 group cursor-pointer border-b border-gray-100 pb-4 last:border-0 last:pb-0" onclick="openNewsDetail('${n.id}')">
             <div class="w-24 h-20 flex-shrink-0 rounded-lg overflow-hidden relative">
-                <img src="${resolveAssetPath(n.img)}?w=200" alt="${n.title}" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/200?text=News'">
+                <img src="${resolveAssetPath(n.img)}?w=200" width="200" height="150" alt="${n.title}" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/200?text=News'">
             </div>
             
             <div class="flex-grow flex flex-col justify-between">
@@ -966,16 +979,16 @@ function renderPaginationControls(totalPages, currentPage) {
     let html = '';
 
     // Nút Previous
-    html += `<button onclick="renderNewsPage(${currentPage - 1})" class="w-10 h-10 rounded-full border border-gray-300 hover:bg-primary hover:text-white hover:border-primary transition flex items-center justify-center ${currentPage === 1 ? 'opacity-50 pointer-events-none' : ''}"><i class="fas fa-chevron-left"></i></button>`;
+    html += `<button onclick="renderNewsPage(${currentPage - 1})" aria-label="Trang tin tức trước" class="w-10 h-10 rounded-full border border-gray-300 hover:bg-primary hover:text-white hover:border-primary transition flex items-center justify-center ${currentPage === 1 ? 'opacity-50 pointer-events-none' : ''}"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>`;
 
     // Các nút số trang
     for (let i = 1; i <= totalPages; i++) {
         const activeClass = i === currentPage ? 'bg-primary text-white border-primary' : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-100';
-        html += `<button onclick="renderNewsPage(${i})" class="w-10 h-10 rounded-full border font-bold transition flex items-center justify-center ${activeClass}">${i}</button>`;
+        html += `<button onclick="renderNewsPage(${i})" aria-label="Trang tin tức ${i}" class="w-10 h-10 rounded-full border font-bold transition flex items-center justify-center ${activeClass}">${i}</button>`;
     }
 
     // Nút Next
-    html += `<button onclick="renderNewsPage(${currentPage + 1})" class="w-10 h-10 rounded-full border border-gray-300 hover:bg-primary hover:text-white hover:border-primary transition flex items-center justify-center ${currentPage === totalPages ? 'opacity-50 pointer-events-none' : ''}"><i class="fas fa-chevron-right"></i></button>`;
+    html += `<button onclick="renderNewsPage(${currentPage + 1})" aria-label="Trang tin tức tiếp theo" class="w-10 h-10 rounded-full border border-gray-300 hover:bg-primary hover:text-white hover:border-primary transition flex items-center justify-center ${currentPage === totalPages ? 'opacity-50 pointer-events-none' : ''}"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>`;
 
     container.innerHTML = html;
     
@@ -1018,6 +1031,8 @@ async function executeNewsDetail(id) {
     const newsImage = document.getElementById("nd-img");
     newsImage.src = resolveAssetPath(n.img);
     newsImage.alt = n.title;
+    newsImage.width = 1200;
+    newsImage.height = 800;
     const newsContent = document.getElementById('nd-content');
     newsContent.innerHTML = resolveNewsContentAssets(n.content);
     applyImageLoadingHints(newsContent);
@@ -1054,6 +1069,8 @@ async function executeProjectDetail(id) {
     const projectImage = document.getElementById('pjd-img');
     projectImage.src = p.img;
     projectImage.alt = p.title;
+    projectImage.width = 1200;
+    projectImage.height = 800;
     document.getElementById('pjd-client').innerText = p.client;
     document.getElementById('pjd-loc').innerText = p.loc;
     document.getElementById('pjd-scale').innerText = p.scale;

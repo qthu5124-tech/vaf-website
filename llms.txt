@@ -1,0 +1,22 @@
+# Viet Air Filter (VAF)
+
+> Viet Air Filter (VAF) is a Vietnamese manufacturer of industrial air filters, HEPA/ULPA filters, HVAC filtration products, and cleanroom equipment.
+
+## Site
+
+- Home: https://www.vietfil.com/
+- About VAF: https://www.vietfil.com/about
+- Products: https://www.vietfil.com/products
+- Projects: https://www.vietfil.com/projects
+- News: https://www.vietfil.com/news
+- Contact: https://www.vietfil.com/contact
+- Sitemap: https://www.vietfil.com/sitemap.xml
+
+## Key Topics
+
+- HEPA and ULPA filters
+- Pre-filters and fine filters
+- Cleanroom equipment
+- HVAC air filtration
+- ISO 16890 and EN 1822 filtration standards
+- Cleanroom projects for electronics, pharmaceutical, healthcare, and commercial facilities
