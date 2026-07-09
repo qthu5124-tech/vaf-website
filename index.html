@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preload" as="image" href="/images/14.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="/images/VAF-LOGO.webp" fetchpriority="high">
     <title>VAF - Nhà Sản Xuất Lọc Khí & Thiết Bị Phòng Sạch Chuẩn Quốc Tế</title>
 
     <meta name="description" content="Viet Air Filter (VAF) tự hào là nhà sản xuất tiên phong tại Việt Nam, cung cấp giải pháp lọc khí toàn diện (HEPA, ULPA) và thiết bị phòng sạch (FFU, AHU) chuẩn ISO 16890 & EN 1822.">
@@ -65,7 +66,7 @@
 <body class="text-slate-700 bg-white flex flex-col min-h-screen">
 
     <!-- PHẦN 1: THANH TRÊN CÙNG (TOP BAR) -->
-    <div class="bg-secondary text-gray-300 py-2 text-xs md:text-sm">
+    <div class="bg-secondary text-white py-2 text-xs md:text-sm">
         <div class="container mx-auto px-4 flex justify-between items-center">
             <div class="flex space-x-6">
                 <a href="mailto:info@vietfil.com" class="hover:text-white"><i class="fas fa-envelope mr-2 text-primary"></i> info@vietfil.com</a>
@@ -84,7 +85,15 @@
                 <!-- Logo -->
                 <div class="logo">
                     <a href="/" onclick="navigate('home'); return false;">
-                        <img src="images/VAF-LOGO.jpg" width="254" height="170" alt="VAF Logo" class="img-logo" loading="eager" decoding="async" fetchpriority="high">
+                        <img
+    src="/images/VAF-LOGO.webp"
+    width="180"
+    height="70"
+    alt="VAF Logo"
+    class="img-logo"
+    loading="eager"
+    decoding="async"
+    fetchpriority="high">
                     </a>
                 </div>
                 <!-- Desktop Menu -->
@@ -106,7 +115,15 @@
                     <a href="/profile" onclick="showComingSoon(); return false;" class="hidden lg:flex bg-primary hover:bg-primaryDark text-white px-5 py-2 rounded-full font-bold text-xs uppercase shadow-lg items-center transition">
     <i class="fas fa-file-download mr-2"></i> <span data-i18n="btn_profile">Hồ sơ năng lực</span>
 </a>
-                    <button id="mobile-menu-btn" class="lg:hidden text-2xl text-primary" type="button" aria-label="Mở menu điều hướng"><i class="fas fa-bars" aria-hidden="true"></i></button>
+                    <button
+    id="mobile-menu-btn"
+    class="lg:hidden text-2xl text-primary"
+    type="button"
+    aria-label="Mở menu điều hướng"
+    aria-expanded="false"
+    aria-controls="mobile-menu">
+    <i class="fas fa-bars" aria-hidden="true"></i>
+</button>
                 </div>
             </div>
         </div>
@@ -134,7 +151,16 @@
             <!-- Banner Chính -->
             <section class="hero-wrapper relative text-white">
                 <!-- Lớp ảnh nền động -->
-                <div class="hero-bg-animated"></div>
+                <picture class="hero-bg-animated">
+    <img
+        src="/images/14.webp"
+        width="1920"
+        height="900"
+        alt=""
+        loading="eager"
+        decoding="async"
+        fetchpriority="high">
+</picture
 
                 <!-- Lớp phủ màu để chữ dễ đọc -->
                 <div class="hero-overlay"></div>

@@ -71,17 +71,17 @@ h1, h2, h3, h4, h5, h6 {
 /* Lớp ảnh nền có hiệu ứng Zoom */
 .hero-bg-animated {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
+    z-index: 0;
+    display: block;
+    overflow: hidden;
+}
+
+.hero-bg-animated img {
     width: 100%;
     height: 100%;
-    /* Ảnh nền của bạn */
-    background-image: url('images/14.webp');
-    background-size: cover;
-    background-position: center;
-    z-index: 0; /* Nằm dưới cùng */
-    /* Hiệu ứng zoom vào rồi zoom ra chậm rãi trong 30s */
-    animation: kenBurns 30s ease-in-out infinite alternate;
+    object-fit: cover;
+    object-position: center;
 }
 
 @media (max-width: 767px) {
@@ -1139,6 +1139,17 @@ footer .gap-10 {
     .category-btn {
         flex: 0 0 auto;
         min-width: max-content;
+    }
+}
+
+@media (max-width: 767px) {
+    .timeline-item,
+    .product-card,
+    .news-grid-card,
+    .project-card,
+    .cert-item {
+        content-visibility: auto;
+        contain-intrinsic-size: 420px;
     }
 }
 

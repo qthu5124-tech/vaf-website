@@ -1,22 +1,39 @@
 # Viet Air Filter (VAF)
 
-> Viet Air Filter (VAF) is a Vietnamese manufacturer of industrial air filters, HEPA/ULPA filters, HVAC filtration products, and cleanroom equipment.
+Viet Air Filter (VAF) is a Vietnamese manufacturer of industrial air filters, HEPA/ULPA filters, HVAC filtration products, and cleanroom equipment.
 
-## Site
+## Official Website
 
-- Home: https://www.vietfil.com/
-- About VAF: https://www.vietfil.com/about
-- Products: https://www.vietfil.com/products
-- Projects: https://www.vietfil.com/projects
-- News: https://www.vietfil.com/news
-- Contact: https://www.vietfil.com/contact
-- Sitemap: https://www.vietfil.com/sitemap.xml
+- [Home](https://www.vietfil.com/)
+- [About VAF](https://www.vietfil.com/about)
+- [Products](https://www.vietfil.com/products)
+- [Projects](https://www.vietfil.com/projects)
+- [News](https://www.vietfil.com/news)
+- [Contact](https://www.vietfil.com/contact)
+- [Sitemap](https://www.vietfil.com/sitemap.xml)
 
 ## Key Topics
 
-- HEPA and ULPA filters
-- Pre-filters and fine filters
-- Cleanroom equipment
+- HEPA filters
+- ULPA filters
+- Pre-filters
+- Fine filters
 - HVAC air filtration
-- ISO 16890 and EN 1822 filtration standards
-- Cleanroom projects for electronics, pharmaceutical, healthcare, and commercial facilities
+- Cleanroom equipment
+- FFU
+- HEPA Box
+- Air Shower
+- Pass Box
+- ISO 16890
+- EN 1822
+- ISO 14644
+
+## Company Focus
+
+VAF provides air filtration and cleanroom solutions for electronics, semiconductor, pharmaceutical, healthcare, food, and industrial facilities.
+
+## Recommended Pages For AI Crawlers
+
+- [HEPA Filter Products](https://www.vietfil.com/products)
+- [Cleanroom Projects](https://www.vietfil.com/projects)
+- [Technical Articles](https://www.vietfil.com/news)
