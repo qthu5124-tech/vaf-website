@@ -1,0 +1,85 @@
+﻿        <div id="view-product-detail" class="page-section bg-white pt-8 pb-20">
+            <div class="container mx-auto px-4">
+
+                <div class="flex items-center gap-2 mb-6 text-sm text-slate-500 border-b border-gray-100 pb-4">
+                    <button onclick="handleNav('products')" class="hover:text-primary font-bold flex items-center gap-1">
+                        <i class="fas fa-chevron-left text-xs"></i> <span data-i18n="btn_back">Quay lại</span>
+                    </button>
+                    <span class="text-gray-300">/</span>
+                    <span id="pd-cat" class="text-slate-700 font-medium uppercase"></span>
+                    <span class="text-gray-300">/</span>
+                    <span id="pd-name-breadcrumb" class="text-primary font-bold truncate"></span>
+                </div>
+
+                <div class="flex flex-col lg:flex-row gap-10 mb-16 items-start">
+
+                    <div class="lg:w-1/2 sticky top-24 z-10">
+                        <div class="relative w-full h-fit bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm group">
+
+                            <img id="pd-img"
+                                 class="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105 block"
+                                 alt="Product Image">
+
+                            <div class="absolute top-0 left-0 z-20">
+                                <span id="pd-cat-tag" class="bg-primary text-white text-xs font-bold px-4 py-2 rounded-br-xl shadow-md uppercase tracking-wider block">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:w-2/3">
+                        <h1 id="pd-name" class="text-3xl md:text-4xl font-black text-secondary mb-6 leading-tight mt-0 font-heading"></h1>
+
+                        <p id="pd-desc" class="text-slate-600 text-lg mb-8 leading-relaxed border-l-4 border-gray-200 pl-4"></p>
+
+                        <div class="grid md:grid-cols-2 gap-8 mb-8">
+                            <div>
+                                <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3 border-b pb-1" data-i18n="prod_specs">Thông số kỹ thuật</h3>
+                                <table class="w-full text-sm text-slate-700">
+                                    <tbody id="pd-specs"></tbody>
+                                </table>
+                            </div>
+
+                            <div>
+                                <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3 border-b pb-1" data-i18n="prod_apps">Ứng dụng</h3>
+                                <ul id="pd-apps" class="space-y-2 text-sm text-slate-700 list-disc pl-4"></ul>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4 mt-8 pt-8 border-t border-gray-100">
+                            <button onclick="handleNav('contact')" class="bg-primary hover:bg-primaryDark text-white font-bold py-3 px-8 rounded-lg shadow-lg transition uppercase text-sm tracking-wide" data-i18n="btn_quote">
+                                Yêu Cầu Báo Giá
+                            </button>
+                            <a href="tel:19008949" class="border border-slate-300 text-secondary hover:border-primary hover:text-primary font-bold py-3 px-8 rounded-lg transition uppercase text-sm tracking-wide text-center flex items-center justify-center gap-2">
+                                <i class="fas fa-phone-alt"></i> <span data-i18n="contact_consult">Tư vấn: 1900 8949</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t-4 border-secondary pt-10">
+                    <h3 class="text-2xl font-bold text-secondary mb-6 font-heading flex items-center gap-3">
+                        <span class="bg-secondary text-white w-8 h-8 flex items-center justify-center text-sm font-bold rounded">DAT</span>
+                        <span data-i18n="tab_dat">Bảng Dữ Liệu Kỹ Thuật (Technical Data)</span>
+                    </h3>
+
+                    <div class="bg-white overflow-hidden">
+                        <div class="tech-table-container" id="pd-table-container">
+                        </div>
+                    </div>
+
+                    <div id="pd-drawing-wrapper" class="mt-12 hidden">
+                        <h3 class="text-2xl font-bold text-secondary mb-6 font-heading flex items-center gap-3">
+                            <span class="bg-primary text-white w-8 h-8 flex items-center justify-center text-sm font-bold rounded">DWG</span>
+                            <span data-i18n="tab_dwg">Bản Vẽ Kỹ Thuật (Drawing)</span>
+                        </h3>
+
+                        <div class="drawing-container">
+                            <img id="pd-drawing-img" src="" alt="Technical Drawing" class="drawing-img" onclick="window.open(this.src, '_blank')" loading="lazy" decoding="async">
+                        </div>
+                        <p class="text-center text-sm text-gray-400 mt-2 italic" data-i18n="prod_click_zoom">* Nhấn vào ảnh để xem kích thước đầy đủ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- TRANG DỰ ÁN (PROJECTS VIEW) -->

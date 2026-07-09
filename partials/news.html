@@ -1,0 +1,53 @@
+﻿        <div id="view-news" class="page-section bg-slate-50">
+            <div class="bg-secondary py-20 text-center text-white relative overflow-hidden">
+                <div class="absolute inset-0 bg-primary/10"></div>
+                <div class="relative z-10">
+                    <h1 class="text-4xl font-bold mb-4 font-heading">Tin Tức & Sự Kiện</h1>
+                    <p class="text-gray-300 text-lg max-w-2xl mx-auto">Cập nhật hoạt động sản xuất và công nghệ mới nhất từ VAF.</p>
+                </div>
+            </div>
+
+            <div class="container mx-auto px-4 py-16">
+                <div class="flex flex-col lg:flex-row gap-12">
+
+                    <div class="lg:w-2/3">
+
+                        <div class="flex gap-4 mb-8 overflow-x-auto pb-2 no-scrollbar">
+                            <button class="px-5 py-2 bg-primary text-white rounded-full font-bold text-sm shadow-md whitespace-nowrap">Tất cả</button>
+                            <button class="px-5 py-2 bg-white text-gray-600 hover:text-primary rounded-full font-bold text-sm border hover:border-primary transition whitespace-nowrap">Hoạt động</button>
+                            <button class="px-5 py-2 bg-white text-gray-600 hover:text-primary rounded-full font-bold text-sm border hover:border-primary transition whitespace-nowrap">Dự án</button>
+                            <button class="px-5 py-2 bg-white text-gray-600 hover:text-primary rounded-full font-bold text-sm border hover:border-primary transition whitespace-nowrap">Công nghệ</button>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="news-page-grid">
+                        </div>
+
+                        <div class="mt-12 flex justify-center gap-2" id="news-pagination">
+                        </div>
+                    </div>
+
+                    <div class="lg:w-1/3">
+                        <div class="sticky top-24 space-y-8">
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                                <h3 class="font-bold text-lg mb-6 text-secondary border-l-4 border-primary pl-3">
+                                    Bài Viết Nổi Bật
+                                </h3>
+                                <div class="space-y-6" id="sidebar-featured">
+                                </div>
+                            </div>
+
+                            <div class="bg-secondary p-6 rounded-xl shadow-lg text-white text-center">
+                                <i class="fas fa-envelope-open-text text-4xl mb-4 text-primary"></i>
+                                <h4 class="font-bold text-lg mb-2">Đăng ký nhận bản tin</h4>
+                                <p class="text-xs text-gray-400 mb-4">Nhận thông tin kỹ thuật và báo giá mới nhất.</p>
+                                <input type="email" placeholder="Email của bạn..." class="w-full p-2 rounded text-slate-800 text-sm mb-2 outline-none">
+                                <button class="w-full bg-primary hover:bg-primaryDark text-white font-bold py-2 rounded text-sm transition">Đăng Ký</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- TRANG SẢN PHẨM (PRODUCTS VIEW) -->

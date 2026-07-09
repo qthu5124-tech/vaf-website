@@ -45,6 +45,20 @@ function loadTranslationsScript() {
     });
 }
 
+function applyStaticTranslations(scope = document, lang = currentLang) {
+    const elements = scope.querySelectorAll('[data-i18n]');
+    elements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                el.placeholder = translations[lang][key];
+            } else {
+                el.innerHTML = translations[lang][key];
+            }
+        }
+    });
+}
+
 // 3. HÀM CHUYỂN NGÔN NGỮ (Logic mới)
 async function setLang(lang) {
     if (!window.translations) await loadTranslationsScript();
@@ -59,17 +73,7 @@ async function setLang(lang) {
     else if (btns[1]) btns[1].classList.add('active');
 
     // Dịch text tĩnh
-    const elements = document.querySelectorAll('[data-i18n]');
-    elements.forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[lang] && translations[lang][key]) {
-            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                el.placeholder = translations[lang][key];
-            } else {
-                el.innerHTML = translations[lang][key];
-            }
-        }
-    });
+    applyStaticTranslations(document, lang);
 
     // Cập nhật lại Sidebar Menu sang ngôn ngữ mới ngay lập tức
     renderSidebarMenu();
@@ -99,6 +103,53 @@ async function setLang(lang) {
 
 
 let projects = window.projects || [];
+const viewPartials = {
+    'view-about': '/partials/about.html',
+    'view-news': '/partials/news.html',
+    'view-products': '/partials/products.html',
+    'view-product-detail': '/partials/product-detail.html',
+    'view-projects': '/partials/projects.html',
+    'view-projects-all': '/partials/projects-all.html',
+    'view-project-detail': '/partials/project-detail.html',
+    'view-news-detail': '/partials/news-detail.html',
+    'view-contact': '/partials/contact.html'
+};
+const loadedViewPromises = {};
+
+async function ensureView(viewId) {
+    if (document.getElementById(viewId)) return document.getElementById(viewId);
+
+    const partialUrl = viewPartials[viewId];
+    if (!partialUrl) return null;
+    if (!loadedViewPromises[viewId]) {
+        loadedViewPromises[viewId] = fetch(partialUrl)
+            .then(response => {
+                if (!response.ok) throw new Error(`Cannot load ${partialUrl}`);
+                return response.text();
+            })
+            .then(async html => {
+                const host = document.getElementById('lazy-view-root');
+                if (!host) throw new Error('Missing lazy view root');
+                const template = document.createElement('template');
+                template.innerHTML = html.trim();
+                const fragment = template.content;
+                host.appendChild(fragment);
+                const view = document.getElementById(viewId);
+                applyImageLoadingHints(view || host);
+                hydrateDeferredImages(view || host);
+                if (currentLang !== 'vi') {
+                    if (!window.translations) await loadTranslationsScript();
+                    applyStaticTranslations(view || host, currentLang);
+                }
+                if (viewId === 'view-contact') {
+                    await loadContactFormScript();
+                    window.bindContactForm?.();
+                }
+                return view;
+            });
+    }
+    return loadedViewPromises[viewId];
+}
 
 // --- 2. HÀM TIỆN ÍCH ---
 function cleanText(text) { return text ? text.replace(/<[^>]*>?/gm, '') : ''; }
@@ -127,12 +178,24 @@ function applyImageLoadingHints(scope = document) {
     });
 }
 
+const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isCompactViewport = () => window.matchMedia('(max-width: 767px)').matches;
+const scrollBehavior = () => (prefersReducedMotion() || isCompactViewport()) ? 'auto' : 'smooth';
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: scrollBehavior() });
+}
+
+function scrollToY(top) {
+    window.scrollTo({ top, behavior: scrollBehavior() });
+}
+
 function scrollToElement(id) {
     const el = document.getElementById(id);
     if (el) {
         const offset = 80;
         const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
-        window.scrollTo({ top: top, behavior: "smooth" });
+        scrollToY(top);
     }
 }
 
@@ -248,6 +311,26 @@ function loadProjectsScript() {
     });
 }
 
+function loadContactFormScript() {
+    if (window.bindContactForm) return Promise.resolve();
+
+    return new Promise((resolve, reject) => {
+        const existing = document.querySelector('script[src="/contact-form.js"]');
+        if (existing) {
+            existing.addEventListener('load', resolve, { once: true });
+            existing.addEventListener('error', reject, { once: true });
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = '/contact-form.js';
+        script.defer = true;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+}
+
 // Render Menu Danh Mục (Sidebar)
 function renderSidebarMenu() {
     const container = document.getElementById('product-filters');
@@ -306,6 +389,7 @@ function renderSidebarMenu() {
 async function filterProducts(cat, noScroll = false) {
 
     await loadProductsScript();
+    await ensureView('view-products');
 
     const products = window.products || [];
 
@@ -370,7 +454,7 @@ async function filterProducts(cat, noScroll = false) {
         const section = document.getElementById('view-products');
         if(section) {
             const y = section.getBoundingClientRect().top + window.pageYOffset - 100;
-            window.scrollTo({top: y, behavior: 'smooth'});
+            scrollToY(y);
         }
     }
 }
@@ -388,10 +472,12 @@ function openProductDetail(id) {
 
 async function executeProductDetail(id) {
     await loadProductsScript();
+    await ensureView('view-product-detail');
     window.currentProductId = id;
     const p = (window.products || []).find(x => x.id === id);
     if (!p) {
         history.replaceState({}, "", "/products");
+        await ensureView('view-products');
 
         switchView("view-products");
 
@@ -473,7 +559,7 @@ async function executeProductDetail(id) {
     }
 
     switchView('view-product-detail');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToTop();
 }
 
 /// --- 4. HỆ THỐNG ĐỊNH TUYẾN (ROUTING) TẠO URL RIÊNG ---
@@ -565,19 +651,21 @@ if (page === "project") activeTarget = "projects";
         document.title = 'VAF - Nhà Sản Xuất Lọc Khí & Thiết Bị Phòng Sạch Hàng Đầu';
         switchView('view-home');
         hydrateDeferredImages(document.getElementById('view-home') || document);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        scrollToTop();
     }
     else if (page === 'about') {
         document.title = 'Về VAF - Hồ Sơ Năng Lực & Nhà Máy Sản Xuất';
+        await ensureView('view-about');
         switchView('view-about');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        scrollToTop();
         setTimeout(() => runCounterAnimation(), 500);
     }
     else if (page === 'products') {
         document.title = 'Danh Mục Sản Phẩm Lọc Khí - VAF';
+        await ensureView('view-products');
         switchView('view-products');
         if (!window.currentFilterCat) await filterProducts('all', true);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        scrollToTop();
     }
     else if (page === 'product' && param) {
         await executeProductDetail(param);
@@ -585,22 +673,20 @@ if (page === "project") activeTarget = "projects";
     else if (page === 'projects') {
 
         document.title = 'Dự Án Tiêu Biểu & Khách Hàng - VAF';
+        await ensureView('view-projects');
         switchView('view-projects');
         await filterProjects('all');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        scrollToTop();
     }
     else if (page === 'projects-all') {
 
         document.title = 'Tất Cả Dự Án - VAF';
-            
+        await ensureView('view-projects-all');
         switchView('view-projects-all');
 
         await renderAllProjects(1);
 
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        scrollToTop();
     }
     else if (page === 'project' && param) {
     await executeProjectDetail(param);
@@ -610,19 +696,21 @@ if (page === "project") activeTarget = "projects";
 }
 else if (page === "news") {
     document.title = 'Tin Tức & Kiến Thức Phòng Sạch - VAF';
+    await ensureView('view-news');
     switchView('view-news');
     await loadNewsScript();
     renderNewsPage();
     renderSidebarNews();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToTop();
 }
     else if (page === "news-detail" && param) {
         await executeNewsDetail(param);
     }
     else if (page === 'contact') {
         document.title = 'Liên Hệ Tư Vấn & Báo Giá - VAF';
+        await ensureView('view-contact');
         switchView('view-contact');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        scrollToTop();
     }
 // Render Dự án & Tin tức (Giữ nguyên)
 
@@ -653,6 +741,7 @@ let currentPage = 1;
 
 async function renderAllProjects(page = 1) {
     await loadProjectsScript();
+    await ensureView('view-projects-all');
 
     const grid =
         document.getElementById('all-projects-grid');
@@ -700,6 +789,7 @@ async function renderAllProjects(page = 1) {
 // --- HIỂN THỊ DỰ ÁN ---
 async function filterProjects(cat) {
     await loadProjectsScript();
+    await ensureView('view-projects');
     renderProjectFilters(cat);
     const grid = document.getElementById('projects-grid');
     if (!grid) return;
@@ -893,7 +983,7 @@ function renderPaginationControls(totalPages, currentPage) {
     const newsSection = document.getElementById('news-page-grid');
     if(newsSection && currentPage !== 1) { // Chỉ cuộn nếu không phải lần load đầu
          const y = newsSection.getBoundingClientRect().top + window.pageYOffset - 150;
-         window.scrollTo({top: y, behavior: 'smooth'});
+         scrollToY(y);
     }
 }
 
@@ -909,9 +999,11 @@ function openNewsDetail(id) {
 
 async function executeNewsDetail(id) {
     await loadNewsScript();
+    await ensureView('view-news-detail');
     const n = (window.newsData || []).find(x => x.id === id);
     if (!n) {
         history.replaceState({}, "", "/news");
+        await ensureView('view-news');
 
         switchView("view-news");
 
@@ -930,7 +1022,7 @@ async function executeNewsDetail(id) {
     newsContent.innerHTML = resolveNewsContentAssets(n.content);
     applyImageLoadingHints(newsContent);
     switchView('view-news-detail');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToTop();
 }
 
 function openProjectDetail(id) {
@@ -945,9 +1037,11 @@ function openProjectDetail(id) {
 
 async function executeProjectDetail(id) {
     await loadProjectsScript();
+    await ensureView('view-project-detail');
     const p = projects.find(x => x.id === id);
     if (!p) {
         history.replaceState({}, "", "/projects");
+        await ensureView('view-projects');
 
         switchView("view-projects");
 
@@ -965,7 +1059,7 @@ async function executeProjectDetail(id) {
     document.getElementById('pjd-scale').innerText = p.scale;
     document.getElementById('pjd-scope').innerHTML = p.scope.map(s => `<li>${s}</li>`).join('');
     switchView('view-project-detail');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+        scrollToTop();
 }
 
 // --- 5. KHỞI TẠO ---
@@ -1102,10 +1196,16 @@ function lazyInitSwipers() {
 document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
     document.getElementById('mobile-menu').classList.toggle('hidden');
 });
+let navScrollTicking = false;
 window.addEventListener('scroll', () => {
-    const nav = document.getElementById('main-nav');
-    if(nav) window.scrollY > 10 ? nav.classList.add('py-0') : nav.classList.remove('py-0');
-});
+    if (navScrollTicking) return;
+    navScrollTicking = true;
+    requestAnimationFrame(() => {
+        const nav = document.getElementById('main-nav');
+        if (nav) nav.classList.toggle('py-0', window.scrollY > 10);
+        navScrollTicking = false;
+    });
+}, { passive: true });
 // --- HÀM ĐỔI NGÔN NGỮ ---
 
 
@@ -1153,72 +1253,5 @@ function closeComingSoon() {
     }
 }
 
-/* =====================================================================
-   XỬ LÝ GỬI FORM LIÊN HỆ (WEB3FORMS AJAX)
-===================================================================== */
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('vaf-contact-form');
-    const result = document.getElementById('form-result');
-
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Ngăn chặn hành vi load lại trang mặc định
-            
-            // Lấy ngôn ngữ hiện tại để báo lỗi/thành công cho đúng
-            const lang = currentLang || 'vi';
-            const txtSending = lang === 'vi' ? "Đang gửi yêu cầu..." : "Sending request...";
-            const txtSuccess = lang === 'vi' ? "Gửi yêu cầu thành công! Chuyên gia VAF sẽ liên hệ lại sớm nhất." : "Request sent successfully! Our experts will contact you soon.";
-            const txtError = lang === 'vi' ? "Có lỗi xảy ra, vui lòng kiểm tra lại!" : "Something went wrong, please try again!";
-
-            // Hiển thị trạng thái đang gửi
-            result.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> ${txtSending}`;
-            result.classList.remove('hidden', 'text-green-500', 'text-red-500');
-            result.classList.add('text-primary'); // Trạng thái chờ màu đỏ VAF
-
-            // Thu thập dữ liệu
-            const formData = new FormData(form);
-            const object = Object.fromEntries(formData);
-            const json = JSON.stringify(object);
-
-            // Gửi dữ liệu qua API
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: json
-            })
-            .then(async (response) => {
-                let json = await response.json();
-                if (response.status == 200) {
-                    // Thành công
-                    result.innerHTML = `<i class="fas fa-check-circle mr-2"></i> ${txtSuccess}`;
-                    result.classList.replace('text-primary', 'text-green-500'); // Đổi sang màu xanh lá
-                } else {
-                    // Thất bại từ Server
-                    console.log(response);
-                    result.innerHTML = `<i class="fas fa-exclamation-circle mr-2"></i> ${json.message}`;
-                    result.classList.replace('text-primary', 'text-red-500');
-                }
-            })
-            .catch(error => {
-                // Lỗi mạng
-                console.log(error);
-                result.innerHTML = `<i class="fas fa-exclamation-circle mr-2"></i> ${txtError}`;
-                result.classList.replace('text-primary', 'text-red-500');
-            })
-            .then(function() {
-                form.reset(); // Xóa trắng form sau khi gửi
-                // Tự động ẩn thông báo sau 7 giây
-                setTimeout(() => {
-                    result.classList.add('hidden');
-                }, 7000);
-            });
-        });
-    }
-
-
-});
 
 

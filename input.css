@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
 @source "./index.html";
+@source "./partials/*.html";
 @source "./script.js";
+@source "./contact-form.js";
 @source "./products-data.js";
 @source "./news-data.js";
 
