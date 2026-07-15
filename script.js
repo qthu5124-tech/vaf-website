@@ -233,7 +233,7 @@ const isCompactViewport = () => window.matchMedia('(max-width: 767px)').matches;
 const scrollBehavior = () => (prefersReducedMotion() || isCompactViewport()) ? 'auto' : 'smooth';
 
 function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: scrollBehavior() });
+    if (window.scrollY > 0) window.scrollTo({ top: 0, behavior: scrollBehavior() });
 }
 
 function scrollToY(top) {
@@ -1179,7 +1179,7 @@ function runWhenNearViewport(element, callback) {
         if (!entries.some(entry => entry.isIntersecting)) return;
         observer.disconnect();
         callback();
-    }, { rootMargin: '400px 0px' });
+    }, { rootMargin: '0px' });
 
     observer.observe(element);
 }
