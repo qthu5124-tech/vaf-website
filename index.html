@@ -5,8 +5,7 @@
     <link rel="icon" type="image/webp" href="/images/VAF-LOGOfav.webp">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preload" as="image" href="/images/14.webp" fetchpriority="high">
-    <link rel="preload" as="image" href="/images/VAF-LOGO.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="/images/14.webp" type="image/webp" fetchpriority="high">
     <title>VAF - Nhà Sản Xuất Lọc Khí & Thiết Bị Phòng Sạch Chuẩn Quốc Tế</title>
 
     <meta name="description" content="Viet Air Filter (VAF) tự hào là nhà sản xuất tiên phong tại Việt Nam, cung cấp giải pháp lọc khí toàn diện (HEPA, ULPA) và thiết bị phòng sạch (FFU, AHU) chuẩn ISO 16890 & EN 1822.">
@@ -53,7 +52,6 @@
     <!-- Fonts: Liên kết font chữ Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
@@ -68,6 +66,11 @@
 
     <!-- LIÊN KẾT ĐẾN FILE CSS RIÊNG CỦA BẠN -->
     <link rel="stylesheet" href="/style.min.css">
+
+    <!-- Critical mobile rules: make above-the-fold content paint immediately. -->
+    <style>
+        @media (max-width:767px){.animate-fade-up{animation:none!important;opacity:1!important;transform:none!important}.hero-wrapper .backdrop-blur-md{backdrop-filter:none!important}.hero-bg-animated img{object-position:center center}}
+    </style>
 
 </head>
 <body class="text-slate-700 bg-white flex flex-col min-h-screen">
@@ -100,7 +103,7 @@
     class="img-logo"
     loading="eager"
     decoding="async"
-    fetchpriority="high">
+    fetchpriority="auto">
                     </a>
                 </div>
                 <!-- Desktop Menu -->
@@ -161,13 +164,13 @@
                 <picture class="hero-bg-animated">
     <img
         src="/images/14.webp"
-        width="1920"
-        height="900"
+        width="2048"
+        height="571"
         alt=""
         loading="eager"
         decoding="async"
         fetchpriority="high">
-</picture
+</picture>
 
                 <!-- Lớp phủ màu để chữ dễ đọc -->
                 <div class="hero-overlay"></div>
@@ -204,6 +207,7 @@
                             </button>
                         </div>
                     </div>
+                </div>
             </section>
 
             <!-- PHẦN GIỚI THIỆU & LỊCH SỬ (NÂNG CẤP) -->

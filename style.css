@@ -94,6 +94,18 @@ h1, h2, h3, h4, h5, h6 {
         transform: none;
     }
 
+    /* LCP content must be visible on the first frame on constrained devices. */
+    .animate-fade-up {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    .hero-wrapper .backdrop-blur-md {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
     .dragon-image {
         animation: none;
         transform: none;
