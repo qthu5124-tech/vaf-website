@@ -5,7 +5,8 @@
     <link rel="icon" type="image/webp" href="/images/VAF-LOGOfav.webp">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preload" as="image" href="/images/14.webp" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="image" href="/images/14-mobile.webp" type="image/webp" media="(max-width: 767px)" fetchpriority="high">
+    <link rel="preload" as="image" href="/images/14.webp" type="image/webp" media="(min-width: 768px)" fetchpriority="high">
     <title>VAF - Nhà Sản Xuất Lọc Khí & Thiết Bị Phòng Sạch Chuẩn Quốc Tế</title>
 
     <meta name="description" content="Viet Air Filter (VAF) tự hào là nhà sản xuất tiên phong tại Việt Nam, cung cấp giải pháp lọc khí toàn diện (HEPA, ULPA) và thiết bị phòng sạch (FFU, AHU) chuẩn ISO 16890 & EN 1822.">
@@ -49,14 +50,8 @@
     {"@context":"https://schema.org","@type":"Organization","name":"VAF - Viet Air Filter","url":"https://vietfil.com/","logo":"https://vietfil.com/images/VAF-LOGO.webp","description":"Nhà sản xuất lọc khí HEPA, ULPA và thiết bị phòng sạch tại Việt Nam.","contactPoint":{"@type":"ContactPoint","telephone":"1900 8949","contactType":"customer service","areaServed":"VN","availableLanguage":["vi","en"]}}
     </script>
 
-    <!-- Fonts: Liên kết font chữ Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
-
     <!-- Icons: Thư viện icon FontAwesome -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
@@ -67,13 +62,8 @@
     <!-- LIÊN KẾT ĐẾN FILE CSS RIÊNG CỦA BẠN -->
     <link rel="stylesheet" href="/style.min.css">
 
-    <!-- Critical mobile rules: make above-the-fold content paint immediately. -->
-    <style>
-        @media (max-width:767px){.animate-fade-up{animation:none!important;opacity:1!important;transform:none!important}.hero-wrapper .backdrop-blur-md{backdrop-filter:none!important}.hero-bg-animated img{object-position:center center}}
-    </style>
-
 </head>
-<body class="text-slate-700 bg-white flex flex-col min-h-screen">
+<body class="home-deferred-pending text-slate-700 bg-white flex flex-col min-h-screen">
 
     <!-- PHẦN 1: THANH TRÊN CÙNG (TOP BAR) -->
     <div class="bg-secondary text-white py-2 text-xs md:text-sm">
@@ -162,6 +152,7 @@
             <section class="hero-wrapper relative text-white">
                 <!-- Lớp ảnh nền động -->
                 <picture class="hero-bg-animated">
+    <source media="(max-width: 767px)" srcset="/images/14-mobile.webp" width="600" height="900">
     <img
         src="/images/14.webp"
         width="2048"
@@ -210,6 +201,7 @@
                 </div>
             </section>
 
+            <template id="home-deferred-content">
             <!-- PHẦN GIỚI THIỆU & LỊCH SỬ (NÂNG CẤP) -->
             <section id="about" class="py-24 bg-slate-50 scroll-mt-24 timeline-section">
 
@@ -565,6 +557,8 @@
                         </div>
                     </div>
             </section>
+            </template>
+            <div id="home-deferred-anchor" aria-hidden="true"></div>
         </div>
 
 

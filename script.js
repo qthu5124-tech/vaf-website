@@ -1165,8 +1165,41 @@ document.addEventListener('DOMContentLoaded', () => {
     else setTimeout(prepareBelowFoldImages, 1200);
 
     hydrateDeferredImages();
-    lazyInitSwipers();
+    initDeferredHomeContent();
 });    
+
+function initDeferredHomeContent() {
+    const template = document.getElementById('home-deferred-content');
+    const anchor = document.getElementById('home-deferred-anchor');
+    if (window.location.pathname !== '/') {
+        document.body.classList.remove('home-deferred-pending');
+        lazyInitSwipers();
+        return;
+    }
+    if (!template || !anchor) {
+        document.body.classList.remove('home-deferred-pending');
+        lazyInitSwipers();
+        return;
+    }
+
+    let hydrated = false;
+    const hydrate = () => {
+        if (hydrated) return;
+        hydrated = true;
+        anchor.before(template.content);
+        template.remove();
+        document.body.classList.remove('home-deferred-pending');
+        hydrateDeferredImages(document.getElementById('view-home') || document);
+        lazyInitSwipers();
+        ['scroll', 'wheel', 'touchstart'].forEach(type => {
+            window.removeEventListener(type, hydrate);
+        });
+    };
+
+    ['scroll', 'wheel', 'touchstart'].forEach(type => {
+        window.addEventListener(type, hydrate, { once: true, passive: true });
+    });
+}
 
 function runWhenNearViewport(element, callback) {
     if (!element) return;
