@@ -189,6 +189,45 @@ function applyImageLoadingHints(scope = document) {
     });
 }
 
+const SITE_URL = 'https://vietfil.com';
+const DEFAULT_SEO = {
+    title: 'VAF - Nhà Sản Xuất Lọc Khí & Thiết Bị Phòng Sạch Chuẩn Quốc Tế',
+    description: 'Viet Air Filter sản xuất lọc khí HEPA, ULPA và thiết bị phòng sạch chuẩn ISO 16890, EN 1822.',
+    path: '/',
+    image: '/images/vaf-banner.webp',
+    type: 'website'
+};
+
+function setMeta(selector, attribute, value) {
+    const element = document.querySelector(selector);
+    if (element && value) element.setAttribute(attribute, value);
+}
+
+function setPageSeo(options = {}) {
+    const seo = { ...DEFAULT_SEO, ...options };
+    const url = SITE_URL + seo.path;
+    const image = seo.image.startsWith('http') ? seo.image : SITE_URL + resolveAssetPath(seo.image);
+    document.title = seo.title;
+    setMeta('meta[name="description"]', 'content', seo.description);
+    setMeta('link[rel="canonical"]', 'href', url);
+    setMeta('meta[property="og:type"]', 'content', seo.type);
+    setMeta('meta[property="og:url"]', 'content', url);
+    setMeta('meta[property="og:title"]', 'content', seo.title);
+    setMeta('meta[property="og:description"]', 'content', seo.description);
+    setMeta('meta[property="og:image"]', 'content', image);
+    setMeta('meta[name="twitter:card"]', 'content', 'summary_large_image');
+    let structuredData = seo.structuredData;
+    if (!structuredData) {
+        structuredData = { '@context': 'https://schema.org', '@type': 'WebPage', name: seo.title, description: seo.description, url };
+    }
+    document.getElementById('seo-structured-data').textContent = JSON.stringify(structuredData);
+}
+
+function parseVietnameseDate(date) {
+    const parts = String(date || '').split('/');
+    return parts.length === 3 ? `${parts[2]}-${parts[1]}-${parts[0]}` : undefined;
+}
+
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isCompactViewport = () => window.matchMedia('(max-width: 767px)').matches;
 const scrollBehavior = () => (prefersReducedMotion() || isCompactViewport()) ? 'auto' : 'smooth';
@@ -661,7 +700,7 @@ if (page === "project") activeTarget = "projects";
 
     // 3. Xử lý hiển thị trang tương ứng
     if (page === 'home') {
-        document.title = 'VAF - Nhà Sản Xuất Lọc Khí & Thiết Bị Phòng Sạch Hàng Đầu';
+        setPageSeo();
         switchView('view-home');
         hydrateDeferredImages(document.getElementById('view-home') || document);
         scrollToTop();
@@ -708,7 +747,7 @@ if (page === "project") activeTarget = "projects";
     await executeNewsDetail(param);
 }
 else if (page === "news") {
-    document.title = 'Tin Tức & Kiến Thức Phòng Sạch - VAF';
+    setPageSeo({ title: 'Kiến Thức Lọc Khí, HEPA & Phòng Sạch | VAF', description: 'Tổng hợp kiến thức chuyên sâu về lọc khí, lọc HEPA H13 H14, thiết bị và tiêu chuẩn phòng sạch từ đội ngũ kỹ thuật VAF.', path: '/news' });
     await ensureView('view-news');
     switchView('view-news');
     await loadNewsScript();
@@ -868,10 +907,10 @@ function renderHomeNews() {
     const news = window.newsData || [];
     if (!container || !news.length) return;
     container.innerHTML = news.map(n => `
-        <div class="swiper-slide h-auto"><article class="bg-white h-full rounded-xl overflow-hidden border hover:shadow-lg transition cursor-pointer flex flex-col" onclick="openNewsDetail('${n.id}')">
+        <div class="swiper-slide h-auto"><article class="bg-white h-full rounded-xl overflow-hidden border hover:shadow-lg transition flex flex-col"><a href="/news/${n.id}" onclick="openNewsDetail('${n.id}'); return false;" class="h-full flex flex-col">
             <div class="h-48 relative overflow-hidden"><img src="${resolveAssetPath(n.img)}?w=600" width="600" height="400" alt="${n.title}" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 hover:scale-110"></div>
             <div class="p-5 flex-grow flex flex-col"><h3 class="font-bold text-lg mb-2 text-secondary leading-tight line-clamp-2">${n.title}</h3></div>
-        </article></div>`).join('');
+        </a></article></div>`).join('');
     applyImageLoadingHints(container);
     if (window.homeNewsSwiper) window.homeNewsSwiper.update();
 }
@@ -904,7 +943,7 @@ function renderNewsPage(page = 1) {
 
     // A. Render Bài viết
     container.innerHTML = itemsToShow.map(n => `
-        <article class="news-grid-card group cursor-pointer h-full flex flex-col" onclick="openNewsDetail('${n.id}')">
+        <article class="news-grid-card group h-full flex flex-col"><a href="/news/${n.id}" onclick="openNewsDetail('${n.id}'); return false;" class="h-full flex flex-col">
             <div class="h-56 relative overflow-hidden">
                 <img src="${resolveAssetPath(n.img)}?w=800" width="800" height="500" alt="${n.title}" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=VAF+News'">
                 <div class="absolute top-4 left-4">
@@ -926,7 +965,7 @@ function renderNewsPage(page = 1) {
                     <i class="fas fa-long-arrow-alt-right text-primary transform group-hover:translate-x-2 transition"></i>
                 </div>
             </div>
-        </article>
+        </a></article>
     `).join('');
     applyImageLoadingHints(container);
 
@@ -945,7 +984,7 @@ function renderSidebarNews() {
     const featuredNews = news.slice(0, 5); 
 
     container.innerHTML = featuredNews.map(n => `
-        <div class="flex gap-4 group cursor-pointer border-b border-gray-100 pb-4 last:border-0 last:pb-0" onclick="openNewsDetail('${n.id}')">
+        <a href="/news/${n.id}" class="flex gap-4 group border-b border-gray-100 pb-4 last:border-0 last:pb-0" onclick="openNewsDetail('${n.id}'); return false;">
             <div class="w-24 h-20 flex-shrink-0 rounded-lg overflow-hidden relative">
                 <img src="${resolveAssetPath(n.img)}?w=200" width="200" height="150" alt="${n.title}" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/200?text=News'">
             </div>
@@ -961,7 +1000,7 @@ function renderSidebarNews() {
                     <i class="far fa-clock mr-1"></i> ${n.date}
                 </div>
             </div>
-        </div>
+        </a>
     `).join('');
     applyImageLoadingHints(container);
 }
@@ -1013,6 +1052,21 @@ function openNewsDetail(id) {
 async function executeNewsDetail(id) {
     await loadNewsScript();
     await ensureView('view-news-detail');
+    const legacyNewsSlugs = {
+        'seo-1': 'cong-nghe-mini-pleat-loc-khi',
+        'seo-2': 'so-sanh-loc-hepa-h13-va-h14',
+        'seo-3': 'air-shower-buong-tam-khi-phong-sach',
+        'seo-4': 'khi-nao-can-thay-loc-khi',
+        'seo-5': 'fan-filter-unit-ffu-phong-sach',
+        'seo-6': 'tieu-chuan-phong-sach-iso-14644-1',
+        'seo-7': 'quy-trinh-leak-test-loc-hepa',
+        'seo-8': 'ap-luc-duong-ap-luc-am-phong-sach-benh-vien',
+        'seo-9': 'loc-khi-chiu-nhiet-lo-say'
+    };
+    if (legacyNewsSlugs[id]) {
+        id = legacyNewsSlugs[id];
+        history.replaceState({}, '', '/news/' + id);
+    }
     const n = (window.newsData || []).find(x => x.id === id);
     if (!n) {
         history.replaceState({}, "", "/news");
@@ -1023,7 +1077,27 @@ async function executeNewsDetail(id) {
         return;
     }
 
-    document.title = n.title + " | Tin Tức VAF";
+    const canonicalPath = '/news/' + n.id;
+    const published = parseVietnameseDate(n.date);
+    setPageSeo({
+        title: n.title + ' | VAF',
+        description: cleanText(n.desc),
+        path: canonicalPath,
+        image: resolveAssetPath(n.img),
+        type: 'article',
+        structuredData: {
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: n.title,
+            description: cleanText(n.desc),
+            image: SITE_URL + resolveAssetPath(n.img),
+            datePublished: published,
+            dateModified: published,
+            mainEntityOfPage: SITE_URL + canonicalPath,
+            author: { '@type': 'Organization', name: n.author || 'VAF Technical Team', url: SITE_URL },
+            publisher: { '@type': 'Organization', name: 'VAF - Viet Air Filter', logo: { '@type': 'ImageObject', url: SITE_URL + '/images/VAF-LOGO.webp' } }
+        }
+    });
     document.getElementById('nd-cat').innerText = n.cat;
     document.getElementById('nd-date').innerText = n.date;
     document.getElementById('nd-title').innerText = n.title;

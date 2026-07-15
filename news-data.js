@@ -833,7 +833,7 @@ Liên hệ VAF ngay
     
     // --- BÀI 1: CÔNG NGHỆ MINI-PLEAT ---
     {
-        id: 'seo-1',
+        id: 'cong-nghe-mini-pleat-loc-khi',
         title: "Công Nghệ Mini-Pleat Là Gì? Tại Sao VAF Chuyển Đổi Hoàn Toàn Sang Dây Chuyền Tự Động?",
         date: "20/06/2024",
         cat: "Công nghệ",
@@ -858,7 +858,7 @@ Liên hệ VAF ngay
 
     // --- BÀI 2: SO SÁNH HEPA H13 VS H14 ---
     {
-        id: 'seo-2',
+        id: 'so-sanh-loc-hepa-h13-va-h14',
         title: "So Sánh Lọc HEPA H13 và H14: Khi Nào Nên Dùng Loại Nào?",
         date: "18/06/2024",
         cat: "Kiến thức",
@@ -886,7 +886,7 @@ Liên hệ VAF ngay
 
     // --- BÀI 3: AIR SHOWER LÀ GÌ ---
     {
-        id: 'seo-3',
+        id: 'air-shower-buong-tam-khi-phong-sach',
         title: "Air Shower (Buồng Tắm Khí): Lá Chắn Đầu Tiên Của Phòng Sạch",
         date: "15/06/2024",
         cat: "Thiết bị",
@@ -909,7 +909,7 @@ Liên hệ VAF ngay
 
     // --- BÀI 4: QUY TRÌNH BẢO TRÌ ---
     {
-        id: 'seo-4',
+        id: 'khi-nao-can-thay-loc-khi',
         title: "Khi Nào Cần Thay Lọc Khí? Dấu Hiệu Nhận Biết & Quy Trình Bảo Trì",
         date: "10/06/2024",
         cat: "Hướng dẫn",
@@ -938,7 +938,7 @@ Liên hệ VAF ngay
 
     // --- BÀI 5: FFU GIẢI PHÁP LINH HOẠT ---
     {
-        id: 'seo-5',
+        id: 'fan-filter-unit-ffu-phong-sach',
         title: "Fan Filter Unit (FFU): Giải Pháp Phòng Sạch Linh Hoạt & Tiết Kiệm",
         date: "05/06/2024",
         cat: "Công nghệ",
@@ -962,7 +962,7 @@ Liên hệ VAF ngay
 
     // --- BÀI 6: ISO 14644 LÀ GÌ ---
     {
-        id: 'seo-6',
+        id: 'tieu-chuan-phong-sach-iso-14644-1',
         title: "Tiêu Chuẩn Phòng Sạch ISO 14644-1: Những Điều Cần Biết",
         date: "01/06/2024",
         cat: "Kiến thức",
@@ -985,7 +985,7 @@ Liên hệ VAF ngay
 
     // --- BÀI 7: LEAK TEST (KIỂM TRA RÒ RỈ) ---
     {
-        id: 'seo-7',
+        id: 'quy-trinh-leak-test-loc-hepa',
         title: "Quy Trình Leak Test (Kiểm Tra Rò Rỉ) HEPA Tại Nhà Máy VAF",
         date: "28/05/2024",
         cat: "Chất lượng",
@@ -1008,7 +1008,7 @@ Liên hệ VAF ngay
 
     // --- BÀI 8: PHÒNG SẠCH BỆNH VIỆN ---
     {
-        id: 'seo-8',
+        id: 'ap-luc-duong-ap-luc-am-phong-sach-benh-vien',
         title: "Vai Trò Của Áp Lực Dương & Áp Lực Âm Trong Phòng Sạch Bệnh Viện",
         date: "20/05/2024",
         cat: "Y tế",
@@ -1031,7 +1031,7 @@ Liên hệ VAF ngay
 
     // --- BÀI 9: LỌC CHỊU NHIỆT ---
     {
-        id: 'seo-9',
+        id: 'loc-khi-chiu-nhiet-lo-say',
         title: "Giải Pháp Lọc Khí Chịu Nhiệt Cho Lò Sấy Sơn Ô Tô & Thực Phẩm",
         date: "15/05/2024",
         cat: "Công nghiệp",

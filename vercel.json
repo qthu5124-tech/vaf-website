@@ -29,6 +29,15 @@
 		}
 	],
 	"redirects": [
+		{ "source": "/news/seo-1", "destination": "/news/cong-nghe-mini-pleat-loc-khi", "permanent": true },
+		{ "source": "/news/seo-2", "destination": "/news/so-sanh-loc-hepa-h13-va-h14", "permanent": true },
+		{ "source": "/news/seo-3", "destination": "/news/air-shower-buong-tam-khi-phong-sach", "permanent": true },
+		{ "source": "/news/seo-4", "destination": "/news/khi-nao-can-thay-loc-khi", "permanent": true },
+		{ "source": "/news/seo-5", "destination": "/news/fan-filter-unit-ffu-phong-sach", "permanent": true },
+		{ "source": "/news/seo-6", "destination": "/news/tieu-chuan-phong-sach-iso-14644-1", "permanent": true },
+		{ "source": "/news/seo-7", "destination": "/news/quy-trinh-leak-test-loc-hepa", "permanent": true },
+		{ "source": "/news/seo-8", "destination": "/news/ap-luc-duong-ap-luc-am-phong-sach-benh-vien", "permanent": true },
+		{ "source": "/news/seo-9", "destination": "/news/loc-khi-chiu-nhiet-lo-say", "permanent": true },
 		{
 			"source": "/post/:path*",
 			"destination": "/",
