@@ -1,16 +1,9 @@
 {
-  "builds": [
+  "buildCommand": "npm run build",
+  "outputDirectory": ".",
+  "headers": [
     {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "."
-      }
-    }
-  ],
-	"headers": [
-		{
-			"source": "/images/(.*)",
+      "source": "/images/(.*)",
 			"headers": [
 				{
 					"key": "Cache-Control",
