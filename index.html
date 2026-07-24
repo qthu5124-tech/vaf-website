@@ -5,8 +5,39 @@
     <link rel="icon" type="image/webp" href="/images/VAF-LOGOfav.webp">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preload" as="image" href="/images/14-mobile.webp" type="image/webp" media="(max-width: 767px)" fetchpriority="high">
-    <link rel="preload" as="image" href="/images/14.webp" type="image/webp" media="(min-width: 768px)" fetchpriority="high">
+    <script>
+    (() => {
+        const route = location.pathname.replace(/^\/en(?=\/|$)/, '') || '/';
+        const addPreload = (href, as, media) => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = as;
+            link.href = href;
+            if (media) link.media = media;
+            if (as === 'image') link.fetchPriority = 'high';
+            if (as === 'fetch') link.crossOrigin = 'anonymous';
+            document.head.appendChild(link);
+        };
+        if (/^\/tuyen-dung\/?$/.test(route)) {
+            addPreload('/images/anh-tulieu/careers-hero-mobile.webp', 'image', '(max-width: 767px)');
+            addPreload('/images/anh-tulieu/careers-hero-desktop.webp', 'image', '(min-width: 768px)');
+            addPreload('/partials/careers.html?v=20260724-5', 'fetch');
+            addPreload('/careers-data.min.js?v=20260724-5', 'script');
+            addPreload('/careers.min.js?v=20260724-5', 'script');
+        } else if (/^\/tuyen-dung\/[^/]+\/?$/.test(route)) {
+            addPreload('/partials/career-detail.html?v=20260724-5', 'fetch');
+            addPreload('/careers-data.min.js?v=20260724-5', 'script');
+            addPreload('/careers.min.js?v=20260724-5', 'script');
+            if (location.pathname.startsWith('/en/')) {
+                addPreload('/careers-en-data.min.js?v=20260724-5', 'script');
+                addPreload('/careers-ui-en-data.min.js?v=20260724-5', 'script');
+            }
+        } else if (route === '/') {
+            addPreload('/images/14-mobile.webp', 'image', '(max-width: 767px)');
+            addPreload('/images/14.webp', 'image', '(min-width: 768px)');
+        }
+    })();
+    </script>
     <title>VAF - Nhà Sản Xuất Lọc Khí & Thiết Bị Phòng Sạch Chuẩn Quốc Tế</title>
 
     <meta name="description" content="Viet Air Filter (VAF) tự hào là nhà sản xuất tiên phong tại Việt Nam, cung cấp giải pháp lọc khí toàn diện (HEPA, ULPA) và thiết bị phòng sạch (FFU, AHU) chuẩn ISO 16890 & EN 1822.">
@@ -14,6 +45,9 @@
     <meta name="author" content="Viet Air Filter">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://vietfil.com/">
+    <link rel="alternate" hreflang="vi" href="https://vietfil.com/">
+    <link rel="alternate" hreflang="en" href="https://vietfil.com/en/">
+    <link rel="alternate" hreflang="x-default" href="https://vietfil.com/">
 
     <!-- Google tag (gtag.js) - delayed to keep first render fast -->
     <script>
@@ -93,7 +127,7 @@
                 <div class="logo">
                     <a href="/" onclick="navigate('home'); return false;">
                         <img
-    src="/images/VAF-LOGO.webp"
+    src="/images/VAF-LOGO-2x.webp"
     width="180"
     height="70"
     alt="VAF Logo"
@@ -104,22 +138,25 @@
                     </a>
                 </div>
                 <!-- Desktop Menu -->
-                <div class="hidden lg:flex items-center space-x-8">
+                <!-- Menu desktop dùng gap linh hoạt: thoáng trên màn hình lớn, không tràn trên laptop. -->
+                <div class="desktop-main-menu hidden lg:flex items-center">
                     <a href="/" onclick="navigate('home');return false;" class="nav-link active" data-target="home" data-i18n="nav_home">Trang chủ</a>
                     <a href="/about" onclick="navigate('about');return false;" class="nav-link" data-target="about" data-i18n="nav_about">Về VAF</a>
                     <a href="/products" onclick="navigate('products');return false;" class="nav-link" data-target="products" data-i18n="nav_products">Sản phẩm</a>
                     <a href="/projects" onclick="navigate('projects');return false;" class="nav-link" data-target="projects" data-i18n="nav_projects">Dự án</a>
                     <a href="/news" onclick="navigate('news');return false;" class="nav-link" data-target="news" data-i18n="nav_news">Tin tức</a>
+                    <!-- Menu Tuyển dụng desktop -->
+                    <a href="/tuyen-dung" onclick="navigate('tuyen-dung');return false;" class="nav-link" data-target="tuyen-dung" data-i18n="nav_careers">Tuyển dụng</a>
                     <a href="/contact" onclick="navigate('contact');return false;" class="nav-link" data-target="contact" data-i18n="nav_contact">Liên hệ</a>
                 </div>
                 <!-- Bên phải: Ngôn ngữ & Nút bấm -->
-                <div class="flex items-center gap-4">
-                    <div class="flex space-x-2 text-sm font-bold items-center">
-                        <button class="lang-btn active p-1" onclick="setLang('vi')">VN</button>
-                        <span class="text-gray-300">|</span>
-                        <button class="lang-btn p-1" onclick="setLang('en')">EN</button>
+                <div class="header-actions flex items-center gap-3">
+                    <!-- Bộ chuyển ngôn ngữ dạng pill, màu chữ đạt độ tương phản Lighthouse. -->
+                    <div class="language-switcher hidden lg:inline-flex" role="group" aria-label="Chọn ngôn ngữ">
+                        <button class="lang-btn active" type="button" onclick="setLang('vi')" aria-label="VN – Tiếng Việt" aria-pressed="true">VN</button>
+                        <button class="lang-btn" type="button" onclick="setLang('en')" aria-label="EN – English" aria-pressed="false">EN</button>
                     </div>
-                    <a href="/profile" onclick="showComingSoon(); return false;" class="hidden lg:flex bg-primary hover:bg-primaryDark text-white px-5 py-2 rounded-full font-bold text-xs uppercase shadow-lg items-center transition">
+                    <a href="/PROFILE-VAF.pdf" target="_blank" rel="noopener" type="application/pdf" class="hidden xl:flex bg-primary hover:bg-primaryDark text-white px-5 py-2 rounded-full font-bold text-xs uppercase shadow-lg items-center transition">
     <i class="fas fa-file-download mr-2"></i> <span data-i18n="btn_profile">Hồ sơ năng lực</span>
 </a>
                     <button
@@ -137,14 +174,24 @@
         <!-- Mobile Menu (Ẩn hiện) -->
         <div id="mobile-menu" class="lg:hidden hidden bg-white border-t absolute w-full left-0 top-full shadow-xl z-50">
             <div class="p-4 flex flex-col space-y-4 font-bold text-slate-700">
+                <!-- Mobile đặt bộ ngôn ngữ trong menu để thanh logo không bị tràn ngang. -->
+                <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                    <span class="text-xs uppercase tracking-wider text-slate-500">Ngôn ngữ</span>
+                    <div class="language-switcher" role="group" aria-label="Chọn ngôn ngữ trên mobile">
+                        <button class="lang-btn active" type="button" onclick="setLang('vi')" aria-label="VN – Tiếng Việt" aria-pressed="true">VN</button>
+                        <button class="lang-btn" type="button" onclick="setLang('en')" aria-label="EN – English" aria-pressed="false">EN</button>
+                    </div>
+                </div>
                 <a href="/" onclick="handleNav('home'); return false;" data-i18n="nav_home">Trang chủ</a>
                 <a href="/about" onclick="handleNav('about'); return false;" data-i18n="nav_about">Về VAF</a>
                 <a href="/products" onclick="handleNav('products'); return false;" data-i18n="nav_products">Sản phẩm</a>
                 <a href="/projects" onclick="handleNav('projects'); return false;" data-i18n="nav_projects">Dự án</a>
                 <a href="/news" onclick="handleNav('news'); return false;" data-i18n="nav_news">Tin tức</a>
+                <!-- Menu Tuyển dụng mobile -->
+                <a href="/tuyen-dung" onclick="handleNav('tuyen-dung'); return false;" data-i18n="nav_careers">Tuyển dụng</a>
                 <a href="/contact" onclick="handleNav('contact'); return false;" data-i18n="nav_contact">Liên hệ</a>
                 <div class="pt-2 border-t mt-2">
-                    <a href="/profile" onclick="showComingSoon(); return false;" class="block text-center text-primary" data-i18n="btn_profile">Hồ sơ năng lực</a>
+                    <a href="/PROFILE-VAF.pdf" target="_blank" rel="noopener" type="application/pdf" class="block text-center text-primary" data-i18n="btn_profile">Hồ sơ năng lực</a>
                 </div>
             </div>
         </div>
@@ -152,6 +199,25 @@
 
     <!-- PHẦN 3: NỘI DUNG CHÍNH (CONTENT WRAPPER) -->
     <main class="flex-grow pt-0 relative min-h-screen">
+        <!-- Hero tuyển dụng nằm trong HTML chính để trình duyệt hiển thị LCP ngay, không chờ partial/JavaScript. -->
+        <section id="career-route-hero" class="relative overflow-hidden bg-secondary py-24 md:py-32 text-white hidden">
+            <picture class="absolute inset-0 block">
+                <source media="(max-width: 767px)" srcset="/images/anh-tulieu/careers-hero-mobile.webp">
+                <img src="/images/anh-tulieu/careers-hero-desktop.webp" width="1600" height="900" alt="" loading="eager" fetchpriority="high" decoding="async" class="w-full h-full object-cover object-center">
+            </picture>
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/55 to-slate-900/10"></div>
+            <div class="container mx-auto px-4 relative z-10 max-w-7xl">
+                <span class="text-red-300 font-bold uppercase tracking-[0.2em] text-sm">Cơ hội nghề nghiệp tại VAF</span>
+                <h1 class="font-heading text-4xl md:text-6xl font-black mt-4 mb-6 max-w-4xl">Cùng kiến tạo tương lai<br><span class="text-red-300">không khí sạch</span></h1>
+                <p class="text-slate-200 text-lg max-w-2xl leading-relaxed">Gia nhập đội ngũ tiên phong sản xuất lọc khí và thiết bị phòng sạch tại Việt Nam.</p>
+                <button type="button" data-scroll-jobs class="mt-8 bg-primary hover:bg-primaryDark px-7 py-3.5 rounded-xl font-bold transition">Khám phá vị trí <i class="fas fa-arrow-down ml-2"></i></button>
+            </div>
+        </section>
+        <script>
+        if (/^\/(?:en\/)?tuyen-dung\/?$/.test(location.pathname)) {
+            document.getElementById('career-route-hero').classList.remove('hidden');
+        }
+        </script>
 
         <!-- TRANG CHỦ (HOME VIEW) -->
         <div id="view-home" class="page-section active">
@@ -159,9 +225,9 @@
             <section class="hero-wrapper relative text-white">
                 <!-- Lớp ảnh nền động -->
                 <picture class="hero-bg-animated">
-    <source media="(max-width: 767px)" srcset="/images/14-mobile.webp" width="600" height="900">
+    <source media="(max-width: 767px)" data-srcset="/images/14-mobile.webp" width="600" height="900">
     <img
-        src="/images/14.webp"
+        data-src="/images/14.webp"
         width="2048"
         height="571"
         alt=""
@@ -623,7 +689,7 @@
                         <li><button onclick="handleNav('about')" class="hover:text-[#C62127] transition-colors" data-i18n="nav_about">Về VAF</button></li>
                         <li><button onclick="handleNav('projects')" class="hover:text-[#C62127] transition-colors" data-i18n="nav_projects">Dự án dự thầu</button></li>
                         <li><button onclick="handleNav('news')" class="hover:text-[#C62127] transition-colors" data-i18n="nav_news">Tin kỹ thuật</button></li>
-                        <li><button onclick="showComingSoon()" class="px-3 py-1 bg-white border border-slate-200 rounded shadow-sm text-[10px] hover:bg-[#C62127] hover:text-white transition-all" data-i18n="btn_profile">PROFILE VAF</button></li>
+                        <li><a href="/PROFILE-VAF.pdf" target="_blank" rel="noopener" type="application/pdf" class="inline-block px-3 py-1 bg-white border border-slate-200 rounded shadow-sm text-[10px] hover:bg-[#C62127] hover:text-white transition-all" data-i18n="btn_profile">PROFILE VAF</a></li>
                     </ul>
                 </div>
 
@@ -642,7 +708,7 @@
                             <div class="space-y-3">
                                 <div class="flex items-start gap-3 text-slate-700 text-xs leading-relaxed font-bold italic">
                                     <i class="fas fa-map-marker-alt text-[#C62127] mt-1"></i>
-                                    <span data-i18n="contact_add">KCN Đồng An 2, Bình Dương,TP HCM</span>
+                                    <span data-i18n="contact_add">Lô C3.4, đường N14, Khu công nghiệp Đồng An 2, phường Bình Dương, TP HCM</span>
                                 </div>
                                 <div class="flex items-center gap-6 pt-6">
                                     <a href="#" aria-label="Facebook VAF" class="w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-[#1877F2] hover:bg-[#1877F2] hover:text-white transition-all shadow-sm"><i class="fab fa-facebook-f"></i></a>
@@ -671,29 +737,7 @@
         </div>
     </footer>
     <!-- Scripts -->
-    <script defer src="/script.min.js?v=20260715-3"></script>
-
-    <div id="coming-soon-modal" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
-    
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" onclick="closeComingSoon()"></div>
-    
-    <div class="relative bg-white rounded-2xl shadow-2xl p-8 max-w-sm w-full text-center animate-fade-up border border-gray-100">
-        
-        <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-            <i class="far fa-file-lines text-4xl text-primary"></i>
-        </div>
-
-        <h2 class="text-2xl font-bold text-secondary mb-3 font-heading">Tài Liệu Chưa Sẵn Sàng</h2>
-        
-        <p class="text-gray-500 mb-8 leading-relaxed">
-            File <strong>Hồ Sơ Năng Lực</strong> phiên bản mới nhất đang được chúng tôi cập nhật. Vui lòng quay lại tải sau!
-        </p>
-
-        <button onclick="closeComingSoon()" class="w-full bg-secondary hover:bg-primary text-white font-bold py-3 px-6 rounded-lg transition transform active:scale-95 shadow-lg">
-            Đóng Thông Báo
-        </button>
-    </div>
-    </div>
+    <script defer src="/script.min.js?v=20260724-5"></script>
 
 </body>
 </html>

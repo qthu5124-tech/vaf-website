@@ -9,7 +9,7 @@
 ================================================================ 
 */
 
-/* --- FORM MẪU (COPY TỪ DÒNG DƯỚI) ---
+/* --- FORM MẪU TIẾNG VIỆT (COPY TỪ DÒNG DƯỚI) ---
     {
         id: "bai-viet-moi-nhat",  // ID không được trùng (viết liền, không dấu)
         title: "Tiêu đề bài viết nhập ở đây",
@@ -26,6 +26,13 @@
         `
     },
 --- (HẾT FORM MẪU) --- */
+
+/*
+ * BẢN TIẾNG ANH:
+ * Sau khi thêm bài tiếng Việt tại file này, mở news-en-data.js và thêm một
+ * mục có CÙNG `id`, gồm đủ 4 trường: title, cat, desc và content.
+ * Ví dụ URL tiếng Anh: /en/news/bai-viet-moi-nhat
+ */
 
 const newsData = [
 

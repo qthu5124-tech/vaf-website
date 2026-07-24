@@ -6,6 +6,8 @@
 @source "./contact-form.js";
 @source "./products-data.js";
 @source "./news-data.js";
+@source "./careers.js";
+@source "./careers-data.js";
 
 @theme {
     --color-primary: #D6001C;

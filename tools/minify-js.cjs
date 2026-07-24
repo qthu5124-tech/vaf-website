@@ -21,6 +21,11 @@ async function minifyFile(input, output) {
     await minifyFile('contact-form.js', 'contact-form.min.js');
     await minifyFile('products-data.js', 'products-data.min.js');
     await minifyFile('news-data.js', 'news-data.min.js');
+    await minifyFile('news-en-data.js', 'news-en-data.min.js');
     await minifyFile('projects-data.js', 'projects-data.min.js');
     await minifyFile('translations-data.js', 'translations-data.min.js');
+    await minifyFile('careers-data.js', 'careers-data.min.js');
+    await minifyFile('careers-en-data.js', 'careers-en-data.min.js');
+    await minifyFile('careers-ui-en-data.js', 'careers-ui-en-data.min.js');
+    await minifyFile('careers.js', 'careers.min.js');
 })();

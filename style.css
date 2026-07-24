@@ -186,6 +186,17 @@ h1, h2, h3, h4, h5, h6 {
     transition: 0.3s;
 }
 
+/* Menu chính: khoảng thở rõ ràng giữa các mục và cỡ chữ ổn định. */
+.desktop-main-menu {
+    gap: clamp(1.25rem, 1.7vw, 2rem);
+    padding-inline: 1rem;
+}
+
+.desktop-main-menu .nav-link {
+    font-size: .875rem;
+    letter-spacing: .015em;
+}
+
     .nav-link:hover, .nav-link.active {
         color: #D6001C;
     }
@@ -339,22 +350,51 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateX(-50%);
 }
 
-.lang-btn {
-    cursor: pointer;
-    opacity: 0.5;
-    transition: 0.3s;
+/* Bộ chuyển ngôn ngữ có tương phản tốt và vùng bấm đủ lớn. */
+.language-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 3px;
+    border: 1px solid #cbd5e1;
+    border-radius: 999px;
+    background: #f1f5f9;
 }
 
-    .lang-btn:hover {
-        opacity: 1;
-    }
+.lang-btn {
+    min-width: 38px;
+    min-height: 34px;
+    padding: 0 9px;
+    border-radius: 999px;
+    color: #334155;
+    background: transparent;
+    cursor: pointer;
+    font-size: .75rem;
+    font-weight: 800;
+    line-height: 1;
+    transition: color .2s, background-color .2s, box-shadow .2s;
+}
 
-    .lang-btn.active {
-        color: #D6001C;
-        font-weight: 800;
-        opacity: 1;
-        border-bottom: 2px solid #D6001C;
-    }
+.lang-btn:hover {
+    color: #0f172a;
+    background: #e2e8f0;
+}
+
+.lang-btn.active {
+    color: #fff;
+    background: #D6001C;
+    box-shadow: 0 2px 6px rgba(214, 0, 28, .24);
+}
+
+.lang-btn:focus-visible {
+    outline: 3px solid rgba(214, 0, 28, .28);
+    outline-offset: 2px;
+}
+
+@media (max-width: 1199px) {
+    .desktop-main-menu { gap: 1.1rem; padding-inline: .5rem; }
+    .desktop-main-menu .nav-link { font-size: .78rem; }
+}
 
 .swiper-button-next-custom, .swiper-button-prev-custom {
     width: 40px;

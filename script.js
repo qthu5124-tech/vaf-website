@@ -1,5 +1,25 @@
 ﻿// 1. KHAI BÁO BIẾN NGÔN NGỮ TOÀN CỤC
-let currentLang = localStorage.getItem('vaf_lang') || 'vi'; // Mặc định lấy từ bộ nhớ hoặc là tiếng Việt
+const initialPathLang = location.pathname === '/en' || location.pathname.startsWith('/en/') ? 'en' : 'vi';
+let currentLang = initialPathLang;
+
+function stripLanguagePrefix(path = location.pathname) {
+    const cleanPath = path.replace(/^\/en(?=\/|$)/, '');
+    return cleanPath || '/';
+}
+
+function localizedPath(path, lang = currentLang) {
+    const cleanPath = stripLanguagePrefix(path.startsWith('/') ? path : '/' + path);
+    return lang === 'en' ? (cleanPath === '/' ? '/en/' : '/en' + cleanPath) : cleanPath;
+}
+
+function syncLanguageDocumentState() {
+    document.documentElement.lang = currentLang;
+    document.querySelectorAll('a[href^="/"]').forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('//') || /\.(?:pdf|docx?|xlsx?|zip)(?:[?#]|$)/i.test(href)) return;
+        link.setAttribute('href', localizedPath(href));
+    });
+}
 
 // 2. TỪ ĐIỂN UI (Giao diện)
 let translations = window.translations || {
@@ -24,7 +44,7 @@ function loadTranslationsScript() {
     }
 
     return new Promise((resolve, reject) => {
-        const existing = document.querySelector('script[src="/translations-data.min.js"]');
+        const existing = document.querySelector('script[src="/translations-data.min.js?v=20260724-2"]');
         if (existing) {
             existing.addEventListener('load', () => {
                 translations = window.translations || translations;
@@ -35,7 +55,7 @@ function loadTranslationsScript() {
         }
 
         const script = document.createElement('script');
-        script.src = '/translations-data.min.js';
+        script.src = '/translations-data.min.js?v=20260724-2';
         script.onload = () => {
             translations = window.translations || translations;
             resolve(translations);
@@ -65,12 +85,23 @@ async function setLang(lang) {
 
     currentLang = lang;
     localStorage.setItem('vaf_lang', lang); 
+    const nextUrl = localizedPath(stripLanguagePrefix(location.pathname), lang) + location.search + location.hash;
+    history.replaceState({}, '', nextUrl);
+    syncLanguageDocumentState();
+    if (currentLang === 'en' && window.newsData) await loadNewsTranslations();
 
     // Đổi màu nút VN/EN
-    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-    const btns = document.querySelectorAll('.lang-btn');
-    if (lang === 'vi' && btns[0]) btns[0].classList.add('active');
-    else if (btns[1]) btns[1].classList.add('active');
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-pressed', 'false');
+    });
+    // Đồng bộ trạng thái cho cả bộ chuyển ngôn ngữ desktop và mobile.
+    const activeLabel = lang === 'vi' ? 'VN' : 'EN';
+    document.querySelectorAll('.lang-btn').forEach(button => {
+        if (button.textContent.trim() !== activeLabel) return;
+        button.classList.add('active');
+        button.setAttribute('aria-pressed', 'true');
+    });
 
     // Dịch text tĩnh
     applyStaticTranslations(document, lang);
@@ -82,6 +113,9 @@ async function setLang(lang) {
     const prodView = document.getElementById('view-products');
     const newsView = document.getElementById('view-news');
     const prodDetailView = document.getElementById('view-product-detail');
+    const newsDetailView = document.getElementById('view-news-detail');
+    const careersView = document.getElementById('view-careers');
+    const careerDetailView = document.getElementById('view-career-detail');
 
     if (prodView && prodView.style.display !== 'none') {
         // Gắn cờ true để không bị nhảy trang (cuộn chuột) khi chỉ đổi ngôn ngữ
@@ -91,8 +125,17 @@ async function setLang(lang) {
         renderNewsPage(window.currentNewsPage || 1); 
     }
     if (prodDetailView && prodDetailView.style.display !== 'none' && window.currentProductId) {
-        openProductDetail(window.currentProductId); 
+        executeProductDetail(window.currentProductId); 
     }
+    if (newsDetailView && newsDetailView.style.display !== 'none' && window.currentNewsId) {
+        executeNewsDetail(window.currentNewsId);
+    }
+    if ((careersView && careersView.style.display !== 'none') || (careerDetailView && careerDetailView.style.display !== 'none')) {
+        await loadCareersModule();
+        if (careersView && careersView.style.display !== 'none') window.VAFCareers.renderList();
+        if (careerDetailView && careerDetailView.style.display !== 'none') window.VAFCareers.openDetail(stripLanguagePrefix(location.pathname).split('/')[2]);
+    }
+    setPageSeo(lastSeoOptions);
 }
 
 /* ================================================================
@@ -112,7 +155,10 @@ const viewPartials = {
     'view-projects-all': '/partials/projects-all.html',
     'view-project-detail': '/partials/project-detail.html',
     'view-news-detail': '/partials/news-detail.html',
-    'view-contact': '/partials/contact.html'
+    'view-contact': '/partials/contact.html',
+    // Module Tuyển dụng: giữ partial tách biệt để chỉ tải khi người dùng truy cập.
+    'view-careers': '/partials/careers.html?v=20260724-5',
+    'view-career-detail': '/partials/career-detail.html?v=20260724-5'
 };
 const loadedViewPromises = {};
 
@@ -197,6 +243,7 @@ const DEFAULT_SEO = {
     image: '/images/vaf-banner.webp',
     type: 'website'
 };
+let lastSeoOptions = {};
 
 function setMeta(selector, attribute, value) {
     const element = document.querySelector(selector);
@@ -204,12 +251,17 @@ function setMeta(selector, attribute, value) {
 }
 
 function setPageSeo(options = {}) {
+    lastSeoOptions = options;
     const seo = { ...DEFAULT_SEO, ...options };
-    const url = SITE_URL + seo.path;
+    const localizedSeoPath = localizedPath(seo.path);
+    const url = SITE_URL + localizedSeoPath;
     const image = seo.image.startsWith('http') ? seo.image : SITE_URL + resolveAssetPath(seo.image);
     document.title = seo.title;
     setMeta('meta[name="description"]', 'content', seo.description);
     setMeta('link[rel="canonical"]', 'href', url);
+    setMeta('link[rel="alternate"][hreflang="vi"]', 'href', SITE_URL + stripLanguagePrefix(seo.path));
+    setMeta('link[rel="alternate"][hreflang="en"]', 'href', SITE_URL + localizedPath(seo.path, 'en'));
+    setMeta('link[rel="alternate"][hreflang="x-default"]', 'href', SITE_URL + stripLanguagePrefix(seo.path));
     setMeta('meta[property="og:type"]', 'content', seo.type);
     setMeta('meta[property="og:url"]', 'content', url);
     setMeta('meta[property="og:title"]', 'content', seo.title);
@@ -252,6 +304,8 @@ function scrollToElement(id) {
 function switchView(viewId) {
     const target = document.getElementById(viewId);
     if(!target) return;
+    const careerHero = document.getElementById('career-route-hero');
+    if (careerHero) careerHero.style.display = viewId === 'view-careers' ? 'block' : 'none';
     document.querySelectorAll('.page-section').forEach(el => {
         el.classList.remove('active');
         if(el.id !== viewId) el.style.display = 'none';
@@ -287,6 +341,10 @@ function hydrateDeferredImages(scope = document) {
 
     const loadImage = img => {
         if (!img.dataset.src) return;
+        img.closest('picture')?.querySelectorAll('source[data-srcset]').forEach(source => {
+            source.srcset = source.dataset.srcset;
+            source.removeAttribute('data-srcset');
+        });
         img.src = img.dataset.src;
         img.removeAttribute('data-src');
     };
@@ -309,25 +367,51 @@ function hydrateDeferredImages(scope = document) {
 
 function loadDeferredImagesNow(scope = document) {
     scope.querySelectorAll('img[data-src]').forEach(img => {
+        img.closest('picture')?.querySelectorAll('source[data-srcset]').forEach(source => {
+            source.srcset = source.dataset.srcset;
+            source.removeAttribute('data-srcset');
+        });
         img.src = img.dataset.src;
         img.removeAttribute('data-src');
     });
 }
 
+function loadNewsTranslations() {
+    if (currentLang !== 'en' || window.newsTranslationsEn) return Promise.resolve();
+    return new Promise((resolve, reject) => {
+        const existing = document.querySelector('script[src="/news-en-data.min.js"]');
+        if (existing) {
+            existing.addEventListener('load', resolve, { once: true });
+            existing.addEventListener('error', reject, { once: true });
+            return;
+        }
+        const script = document.createElement('script');
+        script.src = '/news-en-data.min.js';
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+}
+
+function localizedNews(article) {
+    if (currentLang !== 'en') return article;
+    return { ...article, ...(window.newsTranslationsEn?.[article.id] || {}) };
+}
+
 function loadNewsScript() {
-    if (window.newsData) return Promise.resolve(window.newsData);
+    if (window.newsData) return loadNewsTranslations().then(() => window.newsData);
 
     return new Promise((resolve, reject) => {
         const existing = document.querySelector('script[src="/news-data.min.js"]');
         if (existing) {
-            existing.addEventListener('load', () => resolve(window.newsData || []), { once: true });
+            existing.addEventListener('load', () => loadNewsTranslations().then(() => resolve(window.newsData || [])), { once: true });
             existing.addEventListener('error', reject, { once: true });
             return;
         }
 
         const script = document.createElement('script');
         script.src = '/news-data.min.js';
-        script.onload = () => resolve(window.newsData || []);
+        script.onload = () => loadNewsTranslations().then(() => resolve(window.newsData || []));
         script.onerror = reject;
         document.head.appendChild(script);
     });
@@ -514,7 +598,7 @@ function openProductDetail(id) {
     history.pushState(
         {},
         "",
-        "/product/" + id
+        localizedPath("/product/" + id)
     );
 
     handleRouting();
@@ -526,7 +610,7 @@ async function executeProductDetail(id) {
     window.currentProductId = id;
     const p = (window.products || []).find(x => x.id === id);
     if (!p) {
-        history.replaceState({}, "", "/products");
+        history.replaceState({}, "", localizedPath("/products"));
         await ensureView('view-products');
 
         switchView("view-products");
@@ -538,7 +622,13 @@ async function executeProductDetail(id) {
     const pName = (typeof p.name === 'object') ? p.name[lang] : p.name;
     const pDesc = (typeof p.desc === 'object') ? p.desc[lang] : p.desc;
 
-    document.title = pName + " | VAF";
+    setPageSeo({
+        title: pName + ' | VAF',
+        description: cleanText(pDesc),
+        path: '/product/' + p.id,
+        image: resolveAssetPath(p.img),
+        type: 'product'
+    });
     const imgEl = document.getElementById('pd-img');
     imgEl.src = "/" + p.img;
     imgEl.alt = pName;
@@ -645,12 +735,16 @@ function navigate(target) {
             url = "/contact";
             break;
 
+        case "tuyen-dung":
+            url = "/tuyen-dung";
+            break;
+
         default:
             url = "/" + target;
             break;
     }
 
-    history.pushState({}, "", url);
+    history.pushState({}, "", localizedPath(url));
 
     handleRouting();
 }
@@ -663,7 +757,16 @@ function handleNav(target) {
 window.addEventListener('popstate', handleRouting);
 
 async function handleRouting() {
-    const path = location.pathname;
+    const hasEnglishPrefix = location.pathname === '/en' || location.pathname.startsWith('/en/');
+    const routeLang = hasEnglishPrefix ? 'en' : 'vi';
+    if (routeLang === 'en' && !window.translations) await loadTranslationsScript();
+    if (currentLang !== routeLang) {
+        currentLang = routeLang;
+        localStorage.setItem('vaf_lang', routeLang);
+    }
+    applyStaticTranslations(document, routeLang);
+    syncLanguageDocumentState();
+    const path = stripLanguagePrefix(location.pathname);
 
     let hash = "";
 
@@ -674,7 +777,7 @@ async function handleRouting() {
 
     // Nếu không có hash (mới vào web), mặc định là home
     if (!hash) {
-        history.replaceState({}, "", "/");
+        history.replaceState({}, "", localizedPath("/"));
         hash = "home";
     }
 
@@ -694,6 +797,7 @@ let activeTarget = page;
 
 if (page === "product") activeTarget = "products";
 if (page === "project") activeTarget = "projects";
+if (page === "tuyen-dung") activeTarget = "tuyen-dung";
 
     const activeLink = document.querySelector(`.nav-link[data-target="${activeTarget}"]`);
     if (activeLink) activeLink.classList.add('active');
@@ -764,8 +868,51 @@ else if (page === "news") {
         switchView('view-contact');
         scrollToTop();
     }
+    else if (page === 'tuyen-dung' && param) {
+        await ensureView('view-career-detail');
+        switchView('view-career-detail');
+        await loadCareersModule();
+        await window.VAFCareers.openDetail(param);
+        scrollToTop();
+    }
+    else if (page === 'tuyen-dung') {
+        await ensureView('view-careers');
+        switchView('view-careers');
+        await loadCareersModule();
+        await window.VAFCareers.renderList();
+        scrollToTop();
+    }
 // Render Dự án & Tin tức (Giữ nguyên)
 
+}
+
+// Nạp dữ liệu và logic tuyển dụng theo nhu cầu, không làm nặng các trang hiện hữu.
+function loadCareersModule() {
+    const loadScript = src => new Promise((resolve, reject) => {
+        const old = document.querySelector(`script[src="${src}"]`);
+        if (old) {
+            old.addEventListener('load', resolve, { once: true });
+            old.addEventListener('error', reject, { once: true });
+            return;
+        }
+        const script = document.createElement('script');
+        script.src = src;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+    if (window.VAFCareers) {
+        if (currentLang !== 'en') return Promise.resolve(window.VAFCareers);
+        const extras = [];
+        if (!window.careersTranslationsEn) extras.push(loadScript('/careers-en-data.min.js?v=20260724-5'));
+        if (!window.careersUiEn) extras.push(loadScript('/careers-ui-en-data.min.js?v=20260724-5'));
+        return Promise.all(extras).then(() => window.VAFCareers);
+    }
+    return loadScript('/careers-data.min.js?v=20260724-5')
+        .then(() => currentLang === 'en' ? loadScript('/careers-en-data.min.js?v=20260724-5') : null)
+        .then(() => currentLang === 'en' ? loadScript('/careers-ui-en-data.min.js?v=20260724-5') : null)
+        .then(() => loadScript('/careers.min.js?v=20260724-5'))
+        .then(() => window.VAFCareers);
 }
 // Render Dự án & Tin tức (Giữ nguyên)
 // --- BỘ LỌC DỰ ÁN ---
@@ -906,11 +1053,14 @@ function renderHomeNews() {
     const container = document.getElementById('home-news-slider-content');
     const news = window.newsData || [];
     if (!container || !news.length) return;
-    container.innerHTML = news.map(n => `
-        <div class="swiper-slide h-auto"><article class="bg-white h-full rounded-xl overflow-hidden border hover:shadow-lg transition flex flex-col"><a href="/news/${n.id}" onclick="openNewsDetail('${n.id}'); return false;" class="h-full flex flex-col">
+    container.innerHTML = news.map(item => {
+        const n = localizedNews(item);
+        return `
+        <div class="swiper-slide h-auto"><article class="bg-white h-full rounded-xl overflow-hidden border hover:shadow-lg transition flex flex-col"><a href="${localizedPath('/news/' + n.id)}" onclick="openNewsDetail('${n.id}'); return false;" class="h-full flex flex-col">
             <div class="h-48 relative overflow-hidden"><img src="${resolveAssetPath(n.img)}?w=600" width="600" height="400" alt="${n.title}" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 hover:scale-110"></div>
             <div class="p-5 flex-grow flex flex-col"><h3 class="font-bold text-lg mb-2 text-secondary leading-tight line-clamp-2">${n.title}</h3></div>
-        </a></article></div>`).join('');
+        </a></article></div>`;
+    }).join('');
     applyImageLoadingHints(container);
     if (window.homeNewsSwiper) window.homeNewsSwiper.update();
 }
@@ -942,8 +1092,10 @@ function renderNewsPage(page = 1) {
     const itemsToShow = news.slice(start, end);
 
     // A. Render Bài viết
-    container.innerHTML = itemsToShow.map(n => `
-        <article class="news-grid-card group h-full flex flex-col"><a href="/news/${n.id}" onclick="openNewsDetail('${n.id}'); return false;" class="h-full flex flex-col">
+    container.innerHTML = itemsToShow.map(item => {
+        const n = localizedNews(item);
+        return `
+        <article class="news-grid-card group h-full flex flex-col"><a href="${localizedPath('/news/' + n.id)}" onclick="openNewsDetail('${n.id}'); return false;" class="h-full flex flex-col">
             <div class="h-56 relative overflow-hidden">
                 <img src="${resolveAssetPath(n.img)}?w=800" width="800" height="500" alt="${n.title}" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" onerror="this.src='https://placehold.co/600x400?text=VAF+News'">
                 <div class="absolute top-4 left-4">
@@ -961,12 +1113,13 @@ function renderNewsPage(page = 1) {
                     ${cleanText(n.desc)}
                 </p>
                 <div class="pt-4 border-t border-gray-100 mt-auto flex justify-between items-center">
-                    <span class="text-primary font-bold text-sm group-hover:underline">Đọc tiếp</span>
+                    <span class="text-primary font-bold text-sm group-hover:underline">${currentLang === 'en' ? 'Read more' : 'Đọc tiếp'}</span>
                     <i class="fas fa-long-arrow-alt-right text-primary transform group-hover:translate-x-2 transition"></i>
                 </div>
             </div>
         </a></article>
-    `).join('');
+    `;
+    }).join('');
     applyImageLoadingHints(container);
 
     // B. Render Nút Phân Trang
@@ -983,8 +1136,10 @@ function renderSidebarNews() {
     // Ở đây mình lấy 5 bài đầu tiên cho đơn giản
     const featuredNews = news.slice(0, 5); 
 
-    container.innerHTML = featuredNews.map(n => `
-        <a href="/news/${n.id}" class="flex gap-4 group border-b border-gray-100 pb-4 last:border-0 last:pb-0" onclick="openNewsDetail('${n.id}'); return false;">
+    container.innerHTML = featuredNews.map(item => {
+        const n = localizedNews(item);
+        return `
+        <a href="${localizedPath('/news/' + n.id)}" class="flex gap-4 group border-b border-gray-100 pb-4 last:border-0 last:pb-0" onclick="openNewsDetail('${n.id}'); return false;">
             <div class="w-24 h-20 flex-shrink-0 rounded-lg overflow-hidden relative">
                 <img src="${resolveAssetPath(n.img)}?w=200" width="200" height="150" alt="${n.title}" loading="lazy" decoding="async" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" onerror="this.src='https://placehold.co/200?text=News'">
             </div>
@@ -1001,7 +1156,8 @@ function renderSidebarNews() {
                 </div>
             </div>
         </a>
-    `).join('');
+    `;
+    }).join('');
     applyImageLoadingHints(container);
 }
 
@@ -1043,7 +1199,7 @@ function openNewsDetail(id) {
     history.pushState(
         {},
         "",
-        "/news/" + id
+        localizedPath("/news/" + id)
     );
 
     handleRouting();
@@ -1065,17 +1221,19 @@ async function executeNewsDetail(id) {
     };
     if (legacyNewsSlugs[id]) {
         id = legacyNewsSlugs[id];
-        history.replaceState({}, '', '/news/' + id);
+        history.replaceState({}, '', localizedPath('/news/' + id));
     }
-    const n = (window.newsData || []).find(x => x.id === id);
-    if (!n) {
-        history.replaceState({}, "", "/news");
+    const article = (window.newsData || []).find(x => x.id === id);
+    if (!article) {
+        history.replaceState({}, "", localizedPath("/news"));
         await ensureView('view-news');
 
         switchView("view-news");
 
         return;
     }
+    const n = localizedNews(article);
+    window.currentNewsId = id;
 
     const canonicalPath = '/news/' + n.id;
     const published = parseVietnameseDate(n.date);
@@ -1093,7 +1251,7 @@ async function executeNewsDetail(id) {
             image: SITE_URL + resolveAssetPath(n.img),
             datePublished: published,
             dateModified: published,
-            mainEntityOfPage: SITE_URL + canonicalPath,
+            mainEntityOfPage: SITE_URL + localizedPath(canonicalPath),
             author: { '@type': 'Organization', name: n.author || 'VAF Technical Team', url: SITE_URL },
             publisher: { '@type': 'Organization', name: 'VAF - Viet Air Filter', logo: { '@type': 'ImageObject', url: SITE_URL + '/images/VAF-LOGO.webp' } }
         }
@@ -1109,6 +1267,7 @@ async function executeNewsDetail(id) {
     newsImage.height = 800;
     const newsContent = document.getElementById('nd-content');
     newsContent.innerHTML = resolveNewsContentAssets(n.content);
+    syncLanguageDocumentState();
     applyImageLoadingHints(newsContent);
     switchView('view-news-detail');
     scrollToTop();
@@ -1118,7 +1277,7 @@ function openProjectDetail(id) {
     history.pushState(
         {},
         "",
-        "/project/" + id
+        localizedPath("/project/" + id)
     );
 
     handleRouting();
@@ -1157,7 +1316,6 @@ async function executeProjectDetail(id) {
 document.addEventListener('DOMContentLoaded', () => {
     try {
         handleRouting();
-        if (currentLang !== 'vi') setLang(currentLang);
     } catch (e) { console.error(e); }
 
     const prepareBelowFoldImages = () => applyImageLoadingHints();
@@ -1325,24 +1483,4 @@ function runCounterAnimation() {
         updateCount();
     });
 }
-
-// --- CHỨC NĂNG COMING SOON ---
-
-// 1. Mở Popup
-function showComingSoon() {
-    const modal = document.getElementById('coming-soon-modal');
-    if (modal) {
-        modal.classList.remove('hidden');
-    }
-}
-
-// 2. Đóng Popup
-function closeComingSoon() {
-    const modal = document.getElementById('coming-soon-modal');
-    if (modal) {
-        modal.classList.add('hidden');
-    }
-}
-
-
 
