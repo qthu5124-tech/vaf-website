@@ -235,6 +235,20 @@
         decoding="async"
         fetchpriority="high">
 </picture>
+                <script>
+                (() => {
+                    const route = location.pathname.replace(/^\/en(?=\/|$)/, '') || '/';
+                    if (route !== '/') return;
+                    const picture = document.currentScript.previousElementSibling;
+                    picture.querySelectorAll('source[data-srcset]').forEach(source => {
+                        source.srcset = source.dataset.srcset;
+                        source.removeAttribute('data-srcset');
+                    });
+                    const image = picture.querySelector('img[data-src]');
+                    image.src = image.dataset.src;
+                    image.removeAttribute('data-src');
+                })();
+                </script>
 
                 <!-- Lớp phủ màu để chữ dễ đọc -->
                 <div class="hero-overlay"></div>
