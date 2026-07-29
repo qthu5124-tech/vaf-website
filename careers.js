@@ -89,7 +89,7 @@
 
     function applicationFormHtml(jobId) {
         const suffix = String(jobId || 'general').replace(/[^a-z0-9-]/gi, '-');
-        return `<form class="career-application-form space-y-4" data-job-id="${escapeHtml(jobId || 'general')}" enctype="multipart/form-data" novalidate>
+        return `<form class="career-application-form space-y-4" data-job-id="${escapeHtml(jobId || 'general')}" action="https://formsubmit.co/sales6@vietfil.com" method="POST" enctype="multipart/form-data" novalidate>
             <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
             <div><label for="career-name-${suffix}" class="block text-sm font-bold text-secondary mb-1">${t('fullName')} *</label><input id="career-name-${suffix}" name="name" autocomplete="name" required minlength="2" class="w-full px-4 py-3 border border-slate-200 rounded-xl outline-none focus:border-primary"></div>
             <div class="grid sm:grid-cols-2 gap-4"><div><label for="career-email-${suffix}" class="block text-sm font-bold text-secondary mb-1">Email *</label><input id="career-email-${suffix}" name="email" type="email" autocomplete="email" required class="w-full px-4 py-3 border border-slate-200 rounded-xl outline-none focus:border-primary"></div><div><label for="career-phone-${suffix}" class="block text-sm font-bold text-secondary mb-1">${t('phone')} *</label><input id="career-phone-${suffix}" name="phone" type="tel" inputmode="tel" autocomplete="tel" required pattern="[0-9+ .-]{9,15}" class="w-full px-4 py-3 border border-slate-200 rounded-xl outline-none focus:border-primary"></div></div>
@@ -106,7 +106,19 @@
             host.innerHTML = applicationFormHtml(host.dataset.jobId);
             host.dataset.bound = 'true';
             const form = host.querySelector('form');
-            form.addEventListener('submit', async event => {
+            const returnedFromSubmission = new URLSearchParams(location.search).get('application') === 'success';
+            if (returnedFromSubmission) {
+                const successMessage = form.querySelector('.form-message');
+                successMessage.classList.remove('hidden', 'text-red-600');
+                successMessage.classList.add('text-green-600');
+                successMessage.textContent = currentLang === 'en'
+                    ? 'Application sent successfully! VAF will contact you if your profile is suitable.'
+                    : 'Gửi hồ sơ thành công! VAF sẽ liên hệ khi hồ sơ của bạn phù hợp.';
+                const cleanUrl = new URL(location.href);
+                cleanUrl.searchParams.delete('application');
+                history.replaceState(history.state, '', cleanUrl);
+            }
+            form.addEventListener('submit', event => {
                 event.preventDefault();
                 const message = form.querySelector('.form-message');
                 const button = form.querySelector('button[type="submit"]');
@@ -124,50 +136,32 @@
                     return;
                 }
 
-                const data = new FormData(form);
                 const job = getJobs().find(item => item.id === form.dataset.jobId);
                 const position = job?.title || (currentLang === 'en' ? 'General application' : 'Ứng tuyển tự do');
-                data.set('Vị trí ứng tuyển', position);
-                data.set('Trang ứng tuyển', location.href);
-                data.set('_subject', `[VAF Careers] ${position} - ${form.elements.name.value.trim()}`);
-                data.set('_template', 'table');
-                data.set('_captcha', 'false');
+                const setHiddenField = (name, value) => {
+                    let field = form.querySelector(`input[type="hidden"][name="${name}"]`);
+                    if (!field) {
+                        field = document.createElement('input');
+                        field.type = 'hidden';
+                        field.name = name;
+                        form.appendChild(field);
+                    }
+                    field.value = value;
+                };
+                const returnUrl = new URL(location.href);
+                returnUrl.searchParams.set('application', 'success');
+                setHiddenField('Vị trí ứng tuyển', position);
+                setHiddenField('Trang ứng tuyển', location.href);
+                setHiddenField('_subject', `[VAF Careers] ${position} - ${form.elements.name.value.trim()}`);
+                setHiddenField('_template', 'table');
+                setHiddenField('_captcha', 'false');
+                setHiddenField('_next', returnUrl.href);
 
-                const controller = new AbortController();
-                const timeout = setTimeout(() => controller.abort(), 30000);
                 button.disabled = true;
                 button.setAttribute('aria-busy', 'true');
                 buttonLabel.textContent = currentLang === 'en' ? 'Sending application…' : 'Đang gửi hồ sơ…';
                 message.classList.add('hidden');
-
-                try {
-                    const response = await fetch('https://formsubmit.co/ajax/sales6@vietfil.com', {
-                        method: 'POST',
-                        headers: { Accept: 'application/json' },
-                        body: data,
-                        signal: controller.signal
-                    });
-                    const result = await response.json().catch(() => ({}));
-                    if (!response.ok || result.success === false || result.success === 'false') throw new Error(result.message || `HTTP ${response.status}`);
-                    message.classList.remove('hidden', 'text-red-600');
-                    message.classList.add('text-green-600');
-                    message.textContent = currentLang === 'en'
-                        ? 'Application sent successfully! VAF will contact you if your profile is suitable.'
-                        : 'Gửi hồ sơ thành công! VAF sẽ liên hệ khi hồ sơ của bạn phù hợp.';
-                    form.reset();
-                } catch (submitError) {
-                    console.error('Career application failed:', submitError);
-                    message.classList.remove('hidden', 'text-green-600');
-                    message.classList.add('text-red-600');
-                    message.textContent = currentLang === 'en'
-                        ? 'Unable to send your application. Please email your CV to sales6@vietfil.com.'
-                        : 'Chưa thể gửi hồ sơ. Vui lòng gửi CV trực tiếp đến sales6@vietfil.com.';
-                } finally {
-                    clearTimeout(timeout);
-                    button.disabled = false;
-                    button.removeAttribute('aria-busy');
-                    buttonLabel.textContent = t('submit');
-                }
+                form.submit();
             });
         });
     }
