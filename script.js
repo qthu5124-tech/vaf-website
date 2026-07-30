@@ -235,7 +235,7 @@ function applyImageLoadingHints(scope = document) {
     });
 }
 
-const SITE_URL = 'https://vietfil.com';
+const SITE_URL = 'https://www.vietfil.com';
 const DEFAULT_SEO = {
     title: 'VAF - Nhà Sản Xuất Lọc Khí & Thiết Bị Phòng Sạch Chuẩn Quốc Tế',
     description: 'Viet Air Filter sản xuất lọc khí HEPA, ULPA và thiết bị phòng sạch chuẩn ISO 16890, EN 1822.',

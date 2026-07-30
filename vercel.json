@@ -46,14 +46,8 @@
 	"redirects": [
 		{
 			"source": "/:path*",
-			"has": [{ "type": "host", "value": "www.vietfil.com" }],
-			"destination": "https://vietfil.com/:path*",
-			"permanent": true
-		},
-		{
-			"source": "/:path*",
 			"has": [{ "type": "host", "value": "vi.vietfil.com" }],
-			"destination": "https://vietfil.com/:path*",
+			"destination": "https://www.vietfil.com/:path*",
 			"permanent": true
 		},
 		{ "source": "/vi", "destination": "/", "permanent": true },

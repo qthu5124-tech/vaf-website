@@ -1,7 +1,7 @@
 const fs = require('fs');
 const vm = require('vm');
 
-const SITE_URL = 'https://vietfil.com';
+const SITE_URL = 'https://www.vietfil.com';
 const DEFAULT_LASTMOD = '2026-07-30';
 
 function loadBrowserData(file) {
