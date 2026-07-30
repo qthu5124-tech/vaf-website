@@ -949,14 +949,14 @@ function loadCareersModule() {
     if (window.VAFCareers) {
         if (currentLang !== 'en') return Promise.resolve(window.VAFCareers);
         const extras = [];
-        if (!window.careersTranslationsEn) extras.push(loadScript('/careers-en-data.min.js?v=20260724-5'));
-        if (!window.careersUiEn) extras.push(loadScript('/careers-ui-en-data.min.js?v=20260724-5'));
+        if (!window.careersTranslationsEn) extras.push(loadScript('/careers-en-data.min.js?v=20260730-1'));
+        if (!window.careersUiEn) extras.push(loadScript('/careers-ui-en-data.min.js?v=20260730-1'));
         return Promise.all(extras).then(() => window.VAFCareers);
     }
-    return loadScript('/careers-data.min.js?v=20260724-5')
-        .then(() => currentLang === 'en' ? loadScript('/careers-en-data.min.js?v=20260724-5') : null)
-        .then(() => currentLang === 'en' ? loadScript('/careers-ui-en-data.min.js?v=20260724-5') : null)
-        .then(() => loadScript('/careers.min.js?v=20260724-5'))
+    return loadScript('/careers-data.min.js?v=20260730-1')
+        .then(() => currentLang === 'en' ? loadScript('/careers-en-data.min.js?v=20260730-1') : null)
+        .then(() => currentLang === 'en' ? loadScript('/careers-ui-en-data.min.js?v=20260730-1') : null)
+        .then(() => loadScript('/careers.min.js?v=20260730-1'))
         .then(() => window.VAFCareers);
 }
 // Render Dự án & Tin tức (Giữ nguyên)

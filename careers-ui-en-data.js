@@ -8,6 +8,7 @@ window.careersUiEn = {
   "Về đội ngũ VAF": "About the VAF team",
   "Nơi chuyên môn tạo nên giá trị bền vững": "Where expertise creates sustainable value",
   "Tại VAF, đội ngũ kinh doanh, kỹ sư và sản xuất cùng làm chủ công nghệ lọc khí, tạo ra sản phẩm đạt tiêu chuẩn quốc tế cho điện tử, dược phẩm, y tế và nhiều ngành công nghiệp trọng yếu.": "At VAF, the sales, engineering and production teams jointly master air filtration technology, creating products that meet international standards for electronics, pharmaceuticals, healthcare and many key industries.",
+  "VAF đang tập trung tuyển dụng ba vị trí trọng điểm: QC phòng sạch – kiểm tra chất lượng lọc HEPA, bảo trì và nhân sự. Mỗi vị trí góp phần trực tiếp duy trì chất lượng sản phẩm, sự ổn định của nhà máy và môi trường làm việc chuyên nghiệp.": "VAF is currently focused on three priority roles: Cleanroom QC and HEPA Filter Quality Inspector, Maintenance Technician, and Human Resources Officer. Each role directly supports product quality, factory reliability, and a professional workplace.",
   "Vị trí đang mở": "Position is open",
   "Tìm công việc phù hợp": "Find suitable jobs",
   "Tìm kiếm vị trí": "Search location",

@@ -12,7 +12,7 @@
         noMatch: ['Chưa có vị trí phù hợp với bộ lọc.', 'No positions match your filters.'],
         matches: ['vị trí phù hợp', 'matching positions'], jobDescription: ['Mô tả công việc', 'Job description'],
         requirements: ['Yêu cầu ứng viên', 'Candidate requirements'], benefits: ['Quyền lợi', 'Benefits'],
-        workplace: ['Địa điểm làm việc', 'Work location'], applicationDeadline: ['Hạn nộp hồ sơ', 'Application deadline'],
+        workplace: ['Địa điểm làm việc', 'Work location'], workSchedule: ['Lịch làm việc', 'Work schedule'], applicationDeadline: ['Hạn nộp hồ sơ', 'Application deadline'],
         openings: ['vị trí', 'openings']
     };
     const t = key => ui[key][currentLang === 'en' ? 1 : 0];
@@ -58,6 +58,7 @@
         return String(value || '').replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
     }
     function formatDate(value) {
+        if (!value) return currentLang === 'en' ? 'Until filled' : 'Đến khi tuyển đủ';
         return new Intl.DateTimeFormat(currentLang === 'en' ? 'en-GB' : 'vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(`${value}T00:00:00`));
     }
     function optionHtml(values) {
@@ -215,10 +216,44 @@
             return;
         }
         header.innerHTML = `<span class="text-red-300 font-bold uppercase tracking-wider">${escapeHtml(job.department)}</span><h1 class="font-heading text-4xl md:text-6xl font-black mt-3 mb-7">${escapeHtml(job.title)}</h1><div class="flex flex-wrap gap-3 text-sm"><span class="bg-white/10 px-4 py-2 rounded-full"><i class="fas fa-location-dot mr-2 text-red-300"></i>${escapeHtml(job.location)}</span><span class="bg-white/10 px-4 py-2 rounded-full"><i class="far fa-clock mr-2 text-red-300"></i>${escapeHtml(job.type)}</span><span class="bg-white/10 px-4 py-2 rounded-full"><i class="fas fa-user-group mr-2 text-red-300"></i>${job.openings} ${t('openings')}</span></div>`;
-        content.innerHTML = `<p class="text-lg text-slate-600 leading-8 mb-9">${escapeHtml(job.summary)}</p>${listSection(t('jobDescription'), job.description)}${listSection(t('requirements'), job.requirements)}${listSection(t('benefits'), job.benefits)}<section class="grid sm:grid-cols-2 gap-4 pt-7 border-t"><div><span class="text-xs font-bold uppercase text-slate-400">${t('workplace')}</span><p class="font-bold text-secondary mt-1">${escapeHtml(job.location)}</p></div><div><span class="text-xs font-bold uppercase text-slate-400">${t('applicationDeadline')}</span><p class="font-bold text-primary mt-1">${formatDate(job.deadline)}</p></div></section>`;
+        content.innerHTML = `<p class="text-lg text-slate-600 leading-8 mb-9">${escapeHtml(job.summary)}</p>${listSection(t('jobDescription'), job.description)}${listSection(t('requirements'), job.requirements)}${listSection(t('benefits'), job.benefits)}<section class="grid sm:grid-cols-3 gap-4 pt-7 border-t"><div><span class="text-xs font-bold uppercase text-slate-400">${t('workplace')}</span><p class="font-bold text-secondary mt-1">${escapeHtml(job.location)}</p></div><div><span class="text-xs font-bold uppercase text-slate-400">${t('workSchedule')}</span><p class="font-bold text-secondary mt-1">${escapeHtml(job.workingHours)}</p></div><div><span class="text-xs font-bold uppercase text-slate-400">${t('applicationDeadline')}</span><p class="font-bold text-primary mt-1">${formatDate(job.deadline)}</p></div></section>`;
         const formHost = document.getElementById('career-detail-form'); formHost.dataset.jobId = job.id; delete formHost.dataset.bound; bindForms(document.getElementById('view-career-detail'));
         const path = `/tuyen-dung/${job.id}`;
-        setPageSeo({ title: `${job.title} | ${currentLang === 'en' ? 'VAF Careers' : 'Tuyển dụng VAF'}`, description: currentLang === 'en' ? `${job.summary} Work location: ${job.location}. Deadline: ${formatDate(job.deadline)}.` : `${job.summary} Làm việc tại ${job.location}. Hạn nộp ${formatDate(job.deadline)}.`, path, type: 'website', structuredData: { '@context': 'https://schema.org', '@type': 'JobPosting', title: job.title, description: `${job.summary}\n${job.description.join('\n')}`, datePosted: '2026-07-16', validThrough: `${job.deadline}T23:59:59+07:00`, employmentType: /intern|thực tập/i.test(job.type) ? 'INTERN' : 'FULL_TIME', hiringOrganization: { '@type': 'Organization', name: 'VAF - Viet Air Filter', sameAs: SITE_URL, logo: `${SITE_URL}/images/VAF-LOGO.webp` }, jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: job.location, addressCountry: 'VN' } }, applicantLocationRequirements: { '@type': 'Country', name: currentLang === 'en' ? 'Vietnam' : 'Việt Nam' }, directApply: true } });
+        setPageSeo({
+            title: `${job.title} | ${currentLang === 'en' ? 'VAF Careers' : 'Tuyển dụng VAF'}`,
+            description: currentLang === 'en'
+                ? `${job.summary} Work location: ${job.location}. Applications are open until the position is filled.`
+                : `${job.summary} Làm việc tại ${job.location}. Nhận hồ sơ đến khi tuyển đủ.`,
+            path,
+            type: 'website',
+            structuredData: {
+                '@context': 'https://schema.org',
+                '@type': 'JobPosting',
+                title: job.title,
+                description: [job.summary, ...job.description, ...job.requirements, ...job.benefits].join('\n'),
+                datePosted: job.datePosted || '2026-07-30',
+                ...(job.deadline ? { validThrough: `${job.deadline}T23:59:59+07:00` } : {}),
+                employmentType: 'FULL_TIME',
+                workHours: job.workingHours,
+                hiringOrganization: {
+                    '@type': 'Organization',
+                    name: 'VAF - Viet Air Filter',
+                    sameAs: SITE_URL,
+                    logo: `${SITE_URL}/images/VAF-LOGO.webp`
+                },
+                jobLocation: {
+                    '@type': 'Place',
+                    address: {
+                        '@type': 'PostalAddress',
+                        streetAddress: 'Lô C3.4, Đường N14, Khu công nghiệp Đồng An 2, phường Hòa Phú',
+                        addressLocality: 'Thành phố Hồ Chí Minh',
+                        addressCountry: 'VN'
+                    }
+                },
+                applicantLocationRequirements: { '@type': 'Country', name: currentLang === 'en' ? 'Vietnam' : 'Việt Nam' },
+                directApply: true
+            }
+        });
     }
     window.VAFCareers = { renderList, openDetail };
 })();
