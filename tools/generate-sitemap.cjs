@@ -34,38 +34,56 @@ const careersEn = loadBrowserData('careers-en-data.js').careersTranslationsEn ||
 
 const urls = [];
 const seen = new Set();
+const seoPages = new Map();
 
-function add(path, lastmod = DEFAULT_LASTMOD) {
+function add(path, lastmod = DEFAULT_LASTMOD, seo = {}) {
     const normalized = path === '/' ? '/' : '/' + String(path).replace(/^\/+|\/+$/g, '');
     if (seen.has(normalized)) return;
     seen.add(normalized);
     urls.push({ loc: SITE_URL + normalized, lastmod });
+    seoPages.set(normalized, seo);
 }
 
-['/', '/about', '/products', '/projects', '/news', '/contact', '/tuyen-dung'].forEach(path => add(path));
-['/en/', '/en/about', '/en/products', '/en/news', '/en/contact', '/en/tuyen-dung'].forEach(path => add(path));
+add('/', DEFAULT_LASTMOD, { title: 'VAF - Nhà Sản Xuất Lọc Khí & Thiết Bị Phòng Sạch', description: 'VAF sản xuất lọc khí HEPA, ULPA, lọc túi và thiết bị phòng sạch đạt tiêu chuẩn quốc tế.', language: 'vi', alternate: '/en' });
+add('/about', DEFAULT_LASTMOD, { title: 'Về VAF | Nhà Máy Sản Xuất Lọc Khí', description: 'Tìm hiểu VAF, năng lực nhà máy sản xuất lọc khí, hệ thống quản lý chất lượng và giải pháp phòng sạch.', language: 'vi', alternate: '/en/about' });
+add('/products', DEFAULT_LASTMOD, { title: 'Sản Phẩm Lọc Khí & Thiết Bị Phòng Sạch | VAF', description: 'Danh mục lọc thô, lọc túi, HEPA, ULPA, FFU, Air Shower và thiết bị phòng sạch do VAF sản xuất.', language: 'vi', alternate: '/en/products' });
+add('/projects', DEFAULT_LASTMOD, { title: 'Dự Án Lọc Khí & Phòng Sạch Tiêu Biểu | VAF', description: 'Các dự án lọc khí, HEPA, ULPA và thiết bị phòng sạch của VAF cho điện tử, bệnh viện và công nghiệp.', language: 'vi' });
+add('/news', DEFAULT_LASTMOD, { title: 'Kiến Thức Lọc Khí, HEPA & Phòng Sạch | VAF', description: 'Kiến thức chuyên sâu về lọc khí, HEPA H13 H14, thiết bị và tiêu chuẩn phòng sạch từ đội ngũ kỹ thuật VAF.', language: 'vi', alternate: '/en/news' });
+add('/contact', DEFAULT_LASTMOD, { title: 'Liên Hệ Tư Vấn & Báo Giá Lọc Khí | VAF', description: 'Liên hệ VAF để được tư vấn và báo giá lọc khí, HEPA, HVAC cùng thiết bị phòng sạch theo yêu cầu.', language: 'vi', alternate: '/en/contact' });
+add('/tuyen-dung', DEFAULT_LASTMOD, { title: 'Tuyển Dụng VAF | Cơ Hội Nghề Nghiệp HVAC', description: 'Cơ hội việc làm tại VAF trong lĩnh vực lọc khí, HVAC, sản xuất và công nghệ phòng sạch.', language: 'vi', alternate: '/en/tuyen-dung' });
+
+add('/en', DEFAULT_LASTMOD, { title: 'VAF | Air Filters & Cleanroom Equipment Manufacturer', description: 'VAF manufactures pre-filters, bag filters, HEPA and ULPA filters, FFU and cleanroom equipment.', language: 'en', alternate: '/' });
+add('/en/about', DEFAULT_LASTMOD, { title: 'About VAF | Air Filter Manufacturer', description: 'Learn about VAF, our air filter manufacturing facilities, quality systems and cleanroom solutions.', language: 'en', alternate: '/about' });
+add('/en/products', DEFAULT_LASTMOD, { title: 'Air Filters & Cleanroom Equipment | VAF', description: 'Explore VAF pre-filters, bag filters, HEPA and ULPA filters, FFU, air showers and cleanroom equipment.', language: 'en', alternate: '/products' });
+add('/en/news', DEFAULT_LASTMOD, { title: 'Air Filtration, HEPA & Cleanroom Knowledge | VAF', description: 'Technical knowledge about air filters, HEPA, cleanroom equipment and standards from the VAF technical team.', language: 'en', alternate: '/news' });
+add('/en/contact', DEFAULT_LASTMOD, { title: 'Contact VAF | Air Filter Consultation', description: 'Contact VAF for air filter, HVAC and cleanroom equipment consultation and quotations.', language: 'en', alternate: '/contact' });
+add('/en/tuyen-dung', DEFAULT_LASTMOD, { title: 'VAF Careers | Air Filtration & HVAC Opportunities', description: 'Explore careers at VAF in air filtration, HVAC, manufacturing and cleanroom technology.', language: 'en', alternate: '/tuyen-dung' });
 
 for (const product of products) {
     if (!product.id) continue;
-    add(`/product/${product.id}`);
-    if (product.name && typeof product.name === 'object' && product.name.en) add(`/en/product/${product.id}`);
+    const viName = typeof product.name === 'object' ? product.name.vi : product.name;
+    const viDesc = typeof product.desc === 'object' ? product.desc.vi : product.desc;
+    add(`/product/${product.id}`, DEFAULT_LASTMOD, { title: `${viName} | VAF`, description: viDesc, image: product.img, language: 'vi', alternate: `/en/product/${product.id}`, type: 'Product' });
+    if (product.name && typeof product.name === 'object' && product.name.en) {
+        add(`/en/product/${product.id}`, DEFAULT_LASTMOD, { title: `${product.name.en} | VAF`, description: product.desc.en, image: product.img, language: 'en', alternate: `/product/${product.id}`, type: 'Product' });
+    }
 }
 
 for (const project of projects) {
-    if (project.id) add(`/project/${project.id}`);
+    if (project.id) add(`/project/${project.id}`, DEFAULT_LASTMOD, { title: `${project.title} | Dự Án VAF`, description: project.desc, image: project.img, language: 'vi', type: 'Article' });
 }
 
 for (const article of news) {
     if (!article.id) continue;
     const lastmod = isoDateFromVietnamese(article.date);
-    add(`/news/${article.id}`, lastmod);
-    if (newsEn[article.id]) add(`/en/news/${article.id}`, lastmod);
+    add(`/news/${article.id}`, lastmod, { title: `${article.seoTitle || article.title} | VAF`, description: article.desc, image: article.img, language: 'vi', alternate: newsEn[article.id] ? `/en/news/${article.id}` : null, type: 'Article' });
+    if (newsEn[article.id]) add(`/en/news/${article.id}`, lastmod, { title: `${newsEn[article.id].title} | VAF`, description: newsEn[article.id].desc, image: article.img, language: 'en', alternate: `/news/${article.id}`, type: 'Article' });
 }
 
 for (const job of careers) {
     if (!job.id) continue;
-    add(`/tuyen-dung/${job.id}`);
-    if (careersEn[job.id]) add(`/en/tuyen-dung/${job.id}`);
+    add(`/tuyen-dung/${job.id}`, DEFAULT_LASTMOD, { title: `${job.title} | Tuyển Dụng VAF`, description: job.summary, language: 'vi', alternate: careersEn[job.id] ? `/en/tuyen-dung/${job.id}` : null });
+    if (careersEn[job.id]) add(`/en/tuyen-dung/${job.id}`, DEFAULT_LASTMOD, { title: `${careersEn[job.id].title} | VAF Careers`, description: careersEn[job.id].summary, language: 'en', alternate: `/tuyen-dung/${job.id}` });
 }
 
 const xml = [
@@ -77,4 +95,56 @@ const xml = [
 ].join('\n');
 
 fs.writeFileSync('sitemap.xml', xml, 'utf8');
+
+function replaceMeta(html, selectorPattern, replacement) {
+    return html.replace(selectorPattern, replacement);
+}
+
+function renderSeoHtml(path, seo) {
+    const canonical = SITE_URL + path;
+    const title = escapeXml(seo.title || 'VAF - Viet Air Filter');
+    const description = escapeXml(seo.description || '');
+    const image = SITE_URL + '/' + String(seo.image || 'images/vaf-banner.webp').replace(/^\/+/, '');
+    const type = seo.type || 'WebPage';
+    const schema = {
+        '@context': 'https://schema.org',
+        '@type': type,
+        name: seo.title,
+        headline: type === 'Article' ? seo.title : undefined,
+        description: seo.description,
+        url: canonical,
+        image,
+        publisher: type === 'Article' ? { '@type': 'Organization', name: 'VAF - Viet Air Filter', url: SITE_URL } : undefined
+    };
+    Object.keys(schema).forEach(key => schema[key] === undefined && delete schema[key]);
+
+    let html = fs.readFileSync('index.html', 'utf8');
+    html = html.replace('<html lang="vi">', `<html lang="${seo.language || 'vi'}">`);
+    html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${title}</title>`);
+    html = replaceMeta(html, /<meta name="description" content="[^"]*">/, `<meta name="description" content="${description}">`);
+    html = replaceMeta(html, /<meta name="robots" content="[^"]*">/, '<meta name="robots" content="index, follow">');
+    html = replaceMeta(html, /<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${escapeXml(canonical)}">`);
+    html = replaceMeta(html, /<meta property="og:type" content="[^"]*">/, `<meta property="og:type" content="${type === 'Article' ? 'article' : type === 'Product' ? 'product' : 'website'}">`);
+    html = replaceMeta(html, /<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${escapeXml(canonical)}">`);
+    html = replaceMeta(html, /<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${title}">`);
+    html = replaceMeta(html, /<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${description}">`);
+    html = replaceMeta(html, /<meta property="og:image" content="[^"]*">/, `<meta property="og:image" content="${escapeXml(image)}">`);
+    html = html.replace(/<script id="seo-structured-data" type="application\/ld\+json">[\s\S]*?<\/script>/, `<script id="seo-structured-data" type="application/ld+json">${JSON.stringify(schema)}</script>`);
+
+    const viPath = seo.language === 'en' ? seo.alternate : path;
+    const enPath = seo.language === 'en' ? path : seo.alternate;
+    html = replaceMeta(html, /<link rel="alternate" hreflang="vi" href="[^"]*">/, viPath ? `<link rel="alternate" hreflang="vi" href="${escapeXml(SITE_URL + viPath)}">` : '');
+    html = replaceMeta(html, /<link rel="alternate" hreflang="en" href="[^"]*">/, enPath ? `<link rel="alternate" hreflang="en" href="${escapeXml(SITE_URL + enPath)}">` : '');
+    html = replaceMeta(html, /<link rel="alternate" hreflang="x-default" href="[^"]*">/, `<link rel="alternate" hreflang="x-default" href="${escapeXml(SITE_URL + (viPath || path))}">`);
+    return html;
+}
+
+for (const [path, seo] of seoPages) {
+    if (path === '/') continue;
+    const output = path.replace(/^\//, '') + '.html';
+    fs.mkdirSync(require('path').dirname(output), { recursive: true });
+    fs.writeFileSync(output, renderSeoHtml(path, seo), 'utf8');
+}
+
 console.log(`Generated sitemap.xml with ${urls.length} canonical URLs.`);
+console.log(`Generated ${seoPages.size - 1} route-specific SEO HTML files.`);
