@@ -5,8 +5,9 @@
   "main": "news-data.js",
   "scripts": {
     "build:css": "node ./node_modules/@tailwindcss/cli/dist/index.mjs -i ./input.css -o ./tailwind.min.css --minify",
+    "build:sitemap": "node tools/generate-sitemap.cjs",
     "build:minify": "node tools/minify-css.cjs && node tools/minify-js.cjs",
-    "build": "npm run build:css && npm run build:minify",
+    "build": "npm run build:sitemap && npm run build:css && npm run build:minify",
     "vercel-build": "npm run build",
     "preview": "node local-server.js"
   },

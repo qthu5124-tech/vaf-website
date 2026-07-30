@@ -2513,7 +2513,7 @@ const products = [
     },
     //u1hc
     {
-        iid: 'ultracel-i-hc', 
+        id: 'ultracel-i-hc',
         cat: 'Phòng Sạch',
         img: 'images/san-pham/u1s.webp',
 

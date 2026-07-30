@@ -258,9 +258,14 @@ function setPageSeo(options = {}) {
     const image = seo.image.startsWith('http') ? seo.image : SITE_URL + resolveAssetPath(seo.image);
     document.title = seo.title;
     setMeta('meta[name="description"]', 'content', seo.description);
+    setMeta('meta[name="robots"]', 'content', seo.indexable === false ? 'noindex, follow' : 'index, follow');
     setMeta('link[rel="canonical"]', 'href', url);
     setMeta('link[rel="alternate"][hreflang="vi"]', 'href', SITE_URL + stripLanguagePrefix(seo.path));
-    setMeta('link[rel="alternate"][hreflang="en"]', 'href', SITE_URL + localizedPath(seo.path, 'en'));
+    const englishAlternate = document.querySelector('link[rel="alternate"][hreflang="en"]');
+    if (englishAlternate) {
+        if (seo.includeEnglishAlternate === false) englishAlternate.removeAttribute('href');
+        else englishAlternate.setAttribute('href', SITE_URL + localizedPath(seo.path, 'en'));
+    }
     setMeta('link[rel="alternate"][hreflang="x-default"]', 'href', SITE_URL + stripLanguagePrefix(seo.path));
     setMeta('meta[property="og:type"]', 'content', seo.type);
     setMeta('meta[property="og:url"]', 'content', url);
@@ -627,7 +632,18 @@ async function executeProductDetail(id) {
         description: cleanText(pDesc),
         path: '/product/' + p.id,
         image: resolveAssetPath(p.img),
-        type: 'product'
+        type: 'product',
+        structuredData: {
+            '@context': 'https://schema.org',
+            '@type': 'Product',
+            name: pName,
+            description: cleanText(pDesc),
+            image: SITE_URL + resolveAssetPath(p.img),
+            url: SITE_URL + localizedPath('/product/' + p.id),
+            category: p.cat,
+            brand: { '@type': 'Brand', name: 'VAF - Viet Air Filter' },
+            manufacturer: { '@type': 'Organization', name: 'VAF - Viet Air Filter', url: SITE_URL }
+        }
     });
     const imgEl = document.getElementById('pd-img');
     imgEl.src = "/" + p.img;
@@ -804,20 +820,32 @@ if (page === "tuyen-dung") activeTarget = "tuyen-dung";
 
     // 3. Xử lý hiển thị trang tương ứng
     if (page === 'home') {
-        setPageSeo();
+        setPageSeo(currentLang === 'en' ? {
+            title: 'VAF | Air Filters & Cleanroom Equipment Manufacturer',
+            description: 'VAF manufactures pre-filters, bag filters, HEPA and ULPA filters, FFU and cleanroom equipment for industrial applications.',
+            path: '/'
+        } : {});
         switchView('view-home');
         hydrateDeferredImages(document.getElementById('view-home') || document);
         scrollToTop();
     }
     else if (page === 'about') {
-        document.title = 'Về VAF - Hồ Sơ Năng Lực & Nhà Máy Sản Xuất';
+        setPageSeo({
+            title: currentLang === 'en' ? 'About VAF | Air Filter Manufacturer' : 'Về VAF | Nhà Máy Sản Xuất Lọc Khí',
+            description: currentLang === 'en' ? 'Learn about VAF, our air filter manufacturing facilities, quality systems and cleanroom solutions.' : 'Tìm hiểu VAF, năng lực nhà máy sản xuất lọc khí, hệ thống quản lý chất lượng và giải pháp phòng sạch.',
+            path: '/about'
+        });
         await ensureView('view-about');
         switchView('view-about');
         scrollToTop();
         setTimeout(() => runCounterAnimation(), 500);
     }
     else if (page === 'products') {
-        document.title = 'Danh Mục Sản Phẩm Lọc Khí - VAF';
+        setPageSeo({
+            title: currentLang === 'en' ? 'Air Filters & Cleanroom Equipment | VAF' : 'Sản Phẩm Lọc Khí & Thiết Bị Phòng Sạch | VAF',
+            description: currentLang === 'en' ? 'Explore VAF pre-filters, bag filters, HEPA and ULPA filters, FFU, air showers and cleanroom equipment.' : 'Danh mục lọc thô, lọc túi, HEPA, ULPA, FFU, Air Shower và thiết bị phòng sạch do VAF sản xuất.',
+            path: '/products'
+        });
         await ensureView('view-products');
         switchView('view-products');
         if (!window.currentFilterCat) await filterProducts('all', true);
@@ -827,8 +855,13 @@ if (page === "tuyen-dung") activeTarget = "tuyen-dung";
         await executeProductDetail(param);
     }
     else if (page === 'projects') {
-
-        document.title = 'Dự Án Tiêu Biểu & Khách Hàng - VAF';
+        setPageSeo({
+            title: 'Dự Án Lọc Khí & Phòng Sạch Tiêu Biểu | VAF',
+            description: 'Các dự án cung cấp lọc khí, HEPA, ULPA và thiết bị phòng sạch của VAF cho điện tử, bệnh viện, dược phẩm và công nghiệp.',
+            path: '/projects',
+            includeEnglishAlternate: false,
+            indexable: currentLang !== 'en'
+        });
         await ensureView('view-projects');
         switchView('view-projects');
         await filterProjects('all');
@@ -851,7 +884,15 @@ if (page === "tuyen-dung") activeTarget = "tuyen-dung";
     await executeNewsDetail(param);
 }
 else if (page === "news") {
-    setPageSeo({ title: 'Kiến Thức Lọc Khí, HEPA & Phòng Sạch | VAF', description: 'Tổng hợp kiến thức chuyên sâu về lọc khí, lọc HEPA H13 H14, thiết bị và tiêu chuẩn phòng sạch từ đội ngũ kỹ thuật VAF.', path: '/news' });
+    setPageSeo(currentLang === 'en' ? {
+        title: 'Air Filtration, HEPA & Cleanroom Knowledge | VAF',
+        description: 'Technical knowledge about air filters, HEPA H13 H14, cleanroom equipment and standards from the VAF technical team.',
+        path: '/news'
+    } : {
+        title: 'Kiến Thức Lọc Khí, HEPA & Phòng Sạch | VAF',
+        description: 'Tổng hợp kiến thức chuyên sâu về lọc khí, lọc HEPA H13 H14, thiết bị và tiêu chuẩn phòng sạch từ đội ngũ kỹ thuật VAF.',
+        path: '/news'
+    });
     await ensureView('view-news');
     switchView('view-news');
     await loadNewsScript();
@@ -863,7 +904,11 @@ else if (page === "news") {
         await executeNewsDetail(param);
     }
     else if (page === 'contact') {
-        document.title = 'Liên Hệ Tư Vấn & Báo Giá - VAF';
+        setPageSeo({
+            title: currentLang === 'en' ? 'Contact VAF | Air Filter Consultation' : 'Liên Hệ Tư Vấn & Báo Giá Lọc Khí | VAF',
+            description: currentLang === 'en' ? 'Contact VAF for air filter, HVAC and cleanroom equipment consultation and quotations.' : 'Liên hệ VAF để được tư vấn và báo giá lọc khí, HEPA, HVAC cùng thiết bị phòng sạch theo yêu cầu.',
+            path: '/contact'
+        });
         await ensureView('view-contact');
         switchView('view-contact');
         scrollToTop();
@@ -1237,23 +1282,46 @@ async function executeNewsDetail(id) {
 
     const canonicalPath = '/news/' + n.id;
     const published = parseVietnameseDate(n.date);
+    const hasEnglishTranslation = Boolean(window.newsTranslationsEn?.[article.id]);
     setPageSeo({
-        title: n.title + ' | VAF',
+        title: (n.seoTitle || n.title) + ' | VAF',
         description: cleanText(n.desc),
         path: canonicalPath,
         image: resolveAssetPath(n.img),
         type: 'article',
+        includeEnglishAlternate: currentLang === 'en' || hasEnglishTranslation,
+        indexable: currentLang !== 'en' || hasEnglishTranslation,
         structuredData: {
             '@context': 'https://schema.org',
-            '@type': 'Article',
-            headline: n.title,
-            description: cleanText(n.desc),
-            image: SITE_URL + resolveAssetPath(n.img),
-            datePublished: published,
-            dateModified: published,
-            mainEntityOfPage: SITE_URL + localizedPath(canonicalPath),
-            author: { '@type': 'Organization', name: n.author || 'VAF Technical Team', url: SITE_URL },
-            publisher: { '@type': 'Organization', name: 'VAF - Viet Air Filter', logo: { '@type': 'ImageObject', url: SITE_URL + '/images/VAF-LOGO.webp' } }
+            '@graph': [
+                {
+                    '@type': 'Article',
+                    headline: n.title,
+                    description: cleanText(n.desc),
+                    image: SITE_URL + resolveAssetPath(n.img),
+                    datePublished: published,
+                    dateModified: published,
+                    mainEntityOfPage: SITE_URL + localizedPath(canonicalPath),
+                    author: { '@type': 'Organization', name: n.author || 'VAF Technical Team', url: SITE_URL },
+                    publisher: { '@type': 'Organization', name: 'VAF - Viet Air Filter', logo: { '@type': 'ImageObject', url: SITE_URL + '/images/VAF-LOGO.webp' } }
+                },
+                {
+                    '@type': 'BreadcrumbList',
+                    itemListElement: [
+                        { '@type': 'ListItem', position: 1, name: currentLang === 'en' ? 'Home' : 'Trang chủ', item: SITE_URL + localizedPath('/') },
+                        { '@type': 'ListItem', position: 2, name: currentLang === 'en' ? 'News' : 'Tin tức', item: SITE_URL + localizedPath('/news') },
+                        { '@type': 'ListItem', position: 3, name: n.title, item: SITE_URL + localizedPath(canonicalPath) }
+                    ]
+                },
+                ...(Array.isArray(n.faq) && n.faq.length ? [{
+                    '@type': 'FAQPage',
+                    mainEntity: n.faq.map(item => ({
+                        '@type': 'Question',
+                        name: item.question,
+                        acceptedAnswer: { '@type': 'Answer', text: item.answer }
+                    }))
+                }] : [])
+            ]
         }
     });
     document.getElementById('nd-cat').innerText = n.cat;
@@ -1263,8 +1331,8 @@ async function executeNewsDetail(id) {
     const newsImage = document.getElementById("nd-img");
     newsImage.src = resolveAssetPath(n.img);
     newsImage.alt = n.title;
-    newsImage.width = 1200;
-    newsImage.height = 800;
+    newsImage.width = n.imgWidth || 1200;
+    newsImage.height = n.imgHeight || 800;
     const newsContent = document.getElementById('nd-content');
     newsContent.innerHTML = resolveNewsContentAssets(n.content);
     syncLanguageDocumentState();
@@ -1296,7 +1364,25 @@ async function executeProjectDetail(id) {
         return;
     }
 
-    document.title = "Dự Án: " + p.title + " | VAF";
+    setPageSeo({
+        title: p.title + ' | Dự Án VAF',
+        description: cleanText(p.desc),
+        path: '/project/' + p.id,
+        image: resolveAssetPath(p.img),
+        type: 'article',
+        includeEnglishAlternate: false,
+        indexable: currentLang !== 'en',
+        structuredData: {
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: p.title,
+            description: cleanText(p.desc),
+            image: SITE_URL + resolveAssetPath(p.img),
+            mainEntityOfPage: SITE_URL + '/project/' + p.id,
+            author: { '@type': 'Organization', name: 'VAF - Viet Air Filter', url: SITE_URL },
+            publisher: { '@type': 'Organization', name: 'VAF - Viet Air Filter', logo: { '@type': 'ImageObject', url: SITE_URL + '/images/VAF-LOGO.webp' } }
+        }
+    });
     document.getElementById('pjd-title').innerText = p.title;
     document.getElementById('pjd-desc').innerText = p.desc;
     const projectImage = document.getElementById('pjd-img');

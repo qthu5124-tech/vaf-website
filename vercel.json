@@ -44,6 +44,27 @@
 		}
 	],
 	"redirects": [
+		{
+			"source": "/:path*",
+			"has": [{ "type": "host", "value": "www.vietfil.com" }],
+			"destination": "https://vietfil.com/:path*",
+			"permanent": true
+		},
+		{
+			"source": "/:path*",
+			"has": [{ "type": "host", "value": "vi.vietfil.com" }],
+			"destination": "https://vietfil.com/:path*",
+			"permanent": true
+		},
+		{ "source": "/vi", "destination": "/", "permanent": true },
+		{ "source": "/vi/:path*", "destination": "/:path*", "permanent": true },
+		{ "source": "/products/air-shower", "destination": "/product/air-shower", "permanent": true },
+		{ "source": "/products/blower-filter-init-bfu-thiet-bi-phong-sach", "destination": "/product/bfu", "permanent": true },
+		{ "source": "/products/loc-tho-pre-fine-v-ra", "destination": "/product/v-ra", "permanent": true },
+		{ "source": "/air-filter-supply", "destination": "/projects", "permanent": true },
+		{ "source": "/blog/categories/:path*", "destination": "/news", "permanent": true },
+		{ "source": "/amp/:path*", "destination": "/news", "permanent": true },
+		{ "source": "/post/loc-khi-viet-tuyen-dung-ke-toan", "destination": "/tuyen-dung", "permanent": true },
 		{ "source": "/news/seo-1", "destination": "/news/cong-nghe-mini-pleat-loc-khi", "permanent": true },
 		{ "source": "/news/seo-2", "destination": "/news/so-sanh-loc-hepa-h13-va-h14", "permanent": true },
 		{ "source": "/news/seo-3", "destination": "/news/air-shower-buong-tam-khi-phong-sach", "permanent": true },
@@ -53,16 +74,34 @@
 		{ "source": "/news/seo-7", "destination": "/news/quy-trinh-leak-test-loc-hepa", "permanent": true },
 		{ "source": "/news/seo-8", "destination": "/news/ap-luc-duong-ap-luc-am-phong-sach-benh-vien", "permanent": true },
 		{ "source": "/news/seo-9", "destination": "/news/loc-khi-chiu-nhiet-lo-say", "permanent": true },
-		{
-			"source": "/post/:path*",
-			"destination": "/",
-			"permanent": true
-		}
+		{ "source": "/post/tieu-chuan-gmp-la-gi-trong-san-xuat-duoc-pham", "destination": "/news", "permanent": true },
+		{ "source": "/post/su-thay-the-cua-tieu-chuan-iso-16890-trong-nganh-cong-nghiep-loc-khi", "destination": "/news/bag-filter-la-gi", "permanent": true }
 	],
 	"rewrites": [
-		{
-			"source": "/(.*)",
-			"destination": "/index.html"
-		}
+		{ "source": "/", "destination": "/index.html" },
+		{ "source": "/about", "destination": "/index.html" },
+		{ "source": "/products", "destination": "/index.html" },
+		{ "source": "/product/:id", "destination": "/index.html" },
+		{ "source": "/projects", "destination": "/index.html" },
+		{ "source": "/projects-all", "destination": "/index.html" },
+		{ "source": "/project/:id", "destination": "/index.html" },
+		{ "source": "/news", "destination": "/index.html" },
+		{ "source": "/news/:id", "destination": "/index.html" },
+		{ "source": "/contact", "destination": "/index.html" },
+		{ "source": "/tuyen-dung", "destination": "/index.html" },
+		{ "source": "/tuyen-dung/:id", "destination": "/index.html" },
+		{ "source": "/en", "destination": "/index.html" },
+		{ "source": "/en/", "destination": "/index.html" },
+		{ "source": "/en/about", "destination": "/index.html" },
+		{ "source": "/en/products", "destination": "/index.html" },
+		{ "source": "/en/product/:id", "destination": "/index.html" },
+		{ "source": "/en/projects", "destination": "/index.html" },
+		{ "source": "/en/projects-all", "destination": "/index.html" },
+		{ "source": "/en/project/:id", "destination": "/index.html" },
+		{ "source": "/en/news", "destination": "/index.html" },
+		{ "source": "/en/news/:id", "destination": "/index.html" },
+		{ "source": "/en/contact", "destination": "/index.html" },
+		{ "source": "/en/tuyen-dung", "destination": "/index.html" },
+		{ "source": "/en/tuyen-dung/:id", "destination": "/index.html" }
 	]
 }

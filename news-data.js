@@ -36,6 +36,280 @@
 
 const newsData = [
 
+    {
+        id: 'bag-filter-la-gi',
+        title: 'Bag Filter Là Gì? Cấu Tạo, Phân Loại Và Cách Lựa Chọn',
+        seoTitle: 'Bag Filter Là Gì? Cấu Tạo, Phân Loại M5–F9',
+        cat: 'Kiến Thức',
+        img: 'images/san-pham/vpf7.webp',
+        imgWidth: 2400,
+        imgHeight: 1792,
+        author: 'VAF Technical Team',
+        date: '30/07/2026',
+        desc: 'Bag Filter là gì? Tìm hiểu cấu tạo, nguyên lý, cấp M5, M6, F7–F9, ISO 16890, ứng dụng, cách chọn và thời điểm thay lọc túi HVAC.',
+        faq: [
+            {
+                question: 'Bag Filter có giặt và tái sử dụng được không?',
+                answer: 'Phần lớn Bag Filter dùng trong HVAC không được thiết kế để giặt. Việc giặt có thể làm biến dạng vật liệu, suy giảm hiệu suất và gây rò lọt khí. Chỉ vệ sinh hoặc tái sử dụng khi tài liệu kỹ thuật của nhà sản xuất cho phép.'
+            },
+            {
+                question: 'Bao lâu nên thay Bag Filter?',
+                answer: 'Không có một chu kỳ cố định cho mọi hệ thống. Nên quyết định dựa trên chênh áp, lưu lượng gió, mức độ ô nhiễm và giới hạn do nhà sản xuất hoặc thiết kế HVAC quy định.'
+            },
+            {
+                question: 'Bag Filter có thay thế HEPA Filter được không?',
+                answer: 'Không. Bag Filter thường là cấp lọc trung gian để giữ bụi mịn và giảm tải cho HEPA; HEPA vẫn là cấp lọc cuối trong các khu vực yêu cầu độ sạch cao.'
+            },
+            {
+                question: 'VAF có sản xuất Bag Filter theo kích thước yêu cầu không?',
+                answer: 'Có. VAF có thể tư vấn cấp lọc, vật liệu, số túi, kích thước và khung theo lưu lượng gió, không gian lắp đặt và yêu cầu kỹ thuật của hệ thống.'
+            }
+        ],
+        content: `
+            <nav aria-label="Mục lục bài viết" class="bg-slate-50 border border-slate-200 rounded-2xl p-6 mb-10">
+                <h2 class="text-xl font-bold text-secondary mb-4">Nội dung chính</h2>
+                <ol class="list-decimal pl-6 space-y-2">
+                    <li><a class="text-primary hover:underline" href="#bag-filter-la-gi">Bag Filter là gì?</a></li>
+                    <li><a class="text-primary hover:underline" href="#cau-tao">Cấu tạo và nguyên lý hoạt động</a></li>
+                    <li><a class="text-primary hover:underline" href="#phan-loai">Phân loại M5, M6, F7–F9 và ISO 16890</a></li>
+                    <li><a class="text-primary hover:underline" href="#ung-dung">Ứng dụng thực tế</a></li>
+                    <li><a class="text-primary hover:underline" href="#cach-chon">Cách lựa chọn và thời điểm thay</a></li>
+                    <li><a class="text-primary hover:underline" href="#faq">Câu hỏi thường gặp</a></li>
+                </ol>
+            </nav>
+
+            <p class="mb-5 leading-8"><strong>Bag Filter</strong> (Pocket Filter hay lọc túi) là một trong những dòng lọc khí phổ biến trong AHU và hệ thống HVAC. Nhờ cấu trúc nhiều túi có diện tích bề mặt lớn, bộ lọc giữ được lượng bụi cao, duy trì lưu lượng ổn định và thường được dùng làm cấp lọc trung gian để bảo vệ bộ lọc HEPA phía sau.</p>
+
+            <h2 id="bag-filter-la-gi" class="text-3xl font-bold text-secondary mt-10 mb-6">Bag Filter là gì?</h2>
+            <p class="mb-5 leading-8">Bag Filter là bộ lọc không khí gồm nhiều túi lọc được may từ vật liệu sợi tổng hợp, microfiber hoặc vật liệu chuyên dụng. Không khí đi vào miệng túi, xuyên qua lớp vật liệu; bụi và hạt ô nhiễm bị giữ lại trong khi luồng khí đã lọc tiếp tục đi qua hệ thống.</p>
+            <p class="mb-5 leading-8">So với lọc tấm phẳng, thiết kế nhiều túi tạo ra diện tích lọc lớn trong cùng một tiết diện khung. Nhờ vậy Bag Filter có khả năng chứa bụi tốt và phù hợp với lưu lượng gió lớn. Trong cấu hình nhiều cấp, vị trí điển hình là:</p>
+            <div class="bg-primary/5 border-l-4 border-primary rounded-xl p-6 my-8 text-center font-semibold leading-8">
+                Không khí ngoài trời → Pre Filter → Bag Filter → HEPA Filter → Khu vực sử dụng
+            </div>
+            <p class="mb-5 leading-8">Cách bố trí thực tế phải theo thiết kế HVAC và yêu cầu chất lượng không khí của từng khu vực. Bạn có thể đọc thêm bài <a class="text-primary font-semibold hover:underline" href="/news/hepa-filter-la-gi" onclick="openNewsDetail('hepa-filter-la-gi'); return false;">HEPA Filter là gì</a> để hiểu vai trò của cấp lọc cuối.</p>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">Vì sao còn gọi là Pocket Filter?</h3>
+            <p class="mb-5 leading-8">Tên gọi <strong>Pocket Filter</strong> xuất phát từ các khoang lọc dạng túi được treo song song trong khung. Mỗi pocket vừa là bề mặt lọc vừa là khoang chứa bụi. Tùy kích thước và lưu lượng, một bộ lọc có thể có 3, 4, 5, 6, 8 hoặc 10 túi. Nhiều túi hơn thường tạo diện tích lọc lớn hơn, nhưng không có nghĩa lúc nào cũng tốt hơn: chiều rộng túi, chiều sâu túi và khoảng cách giữa các túi phải đủ để túi bung đều ở lưu lượng thiết kế.</p>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">Vai trò của Bag Filter trong AHU</h3>
+            <ul class="list-disc pl-6 space-y-3 mb-8">
+                <li>Giữ lại phần bụi mịn mà cấp lọc thô phía trước chưa loại bỏ.</li>
+                <li>Hạn chế bụi bám trên coil, quạt, ống gió và các thiết bị phía sau.</li>
+                <li>Giảm tải bụi cho HEPA Filter, từ đó kéo dài chu kỳ sử dụng của cấp lọc cuối.</li>
+                <li>Góp phần duy trì lưu lượng, chất lượng không khí và độ sạch ổn định hơn.</li>
+                <li>Tạo một cấp lọc trung gian có chi phí thay thế thấp hơn so với thay HEPA quá sớm.</li>
+            </ul>
+
+            <figure class="my-10 max-w-2xl mx-auto">
+                <img src="images/san-pham/vpm5.webp" alt="Hình ảnh thực tế Bag Filter V-PAK M5 do VAF sản xuất" width="2400" height="1792" loading="lazy" class="w-full h-auto rounded-xl shadow-lg">
+                <figcaption class="text-center text-sm text-slate-500 mt-3">Hình ảnh sản phẩm thực tế V-PAK M5 của VAF.</figcaption>
+            </figure>
+
+            <figure class="my-10 max-w-2xl mx-auto">
+                <img src="images/san-pham/vpf7.webp" alt="Bag Filter F7 V-PAK của VAF dùng trong hệ thống HVAC" width="2400" height="1792" loading="lazy" class="w-full h-auto rounded-xl shadow-lg">
+                <figcaption class="text-center text-sm text-slate-500 mt-3">Bag Filter F7 V-PAK của VAF với cấu trúc nhiều túi lọc.</figcaption>
+            </figure>
+
+            <h2 id="cau-tao" class="text-3xl font-bold text-secondary mt-10 mb-6">Cấu tạo Bag Filter</h2>
+            <div class="grid md:grid-cols-2 gap-5 my-8">
+                <div class="bg-white border rounded-xl p-5 shadow-sm"><h3 class="text-xl font-bold text-secondary mb-2">Khung lọc</h3><p>Giữ toàn bộ kết cấu, thường làm từ thép mạ kẽm, nhôm hoặc inox tùy môi trường.</p></div>
+                <div class="bg-white border rounded-xl p-5 shadow-sm"><h3 class="text-xl font-bold text-secondary mb-2">Vật liệu lọc</h3><p>Thường là sợi tổng hợp hoặc microfiber, có cấu trúc phù hợp với hiệu suất và chênh áp thiết kế.</p></div>
+                <div class="bg-white border rounded-xl p-5 shadow-sm"><h3 class="text-xl font-bold text-secondary mb-2">Các túi lọc</h3><p>Nhiều túi bố trí song song giúp tăng diện tích tiếp xúc và khả năng chứa bụi.</p></div>
+                <div class="bg-white border rounded-xl p-5 shadow-sm"><h3 class="text-xl font-bold text-secondary mb-2">Đường may, keo và gioăng</h3><p>Giữ túi ổn định, hạn chế khí đi tắt qua khe hở giữa vật liệu và khung.</p></div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">Nguyên lý hoạt động</h3>
+            <p class="mb-5 leading-8">Khi quạt tạo dòng khí qua bộ lọc, các hạt được giữ lại nhờ tổng hợp nhiều cơ chế như va đập quán tính, chặn bắt và khuếch tán. Bụi tích tụ dần làm chênh áp tăng. Một lớp bụi ban đầu có thể cải thiện khả năng giữ hạt, nhưng khi chênh áp vượt giới hạn thiết kế, lưu lượng giảm và quạt phải tiêu thụ nhiều năng lượng hơn.</p>
+
+            <figure class="my-10 max-w-3xl mx-auto">
+                <img src="images/anh-tin-tin/nguyen-ly-bag-filter-vaf-ai.webp" alt="Ảnh AI dựa trên sản phẩm VAF minh họa nguyên lý giữ bụi của Bag Filter sáu túi" width="1537" height="1023" loading="lazy" class="w-full h-auto rounded-xl shadow-lg">
+                <figcaption class="text-center text-sm text-slate-500 mt-3">Minh họa nguyên lý lọc dựa trên cấu tạo thực tế của Bag Filter sáu túi VAF: khí bẩn đi vào miệng túi, bụi bị giữ trong vật liệu và khí sạch đi ra phía sau.</figcaption>
+            </figure>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">Chênh áp thay đổi như thế nào?</h3>
+            <p class="mb-5 leading-8">Chênh áp là độ chênh áp suất giữa phía trước và phía sau bộ lọc. Khi Bag Filter sạch, chênh áp ở mức ban đầu. Trong quá trình vận hành, bụi lấp dần các khoảng trống trong vật liệu khiến sức cản tăng. Nếu tiếp tục vận hành sau giới hạn khuyến nghị, hệ thống có thể thiếu gió, mất cân bằng áp suất phòng và tăng điện năng của quạt. Vì vậy đồng hồ chênh áp hoặc cảm biến áp suất là công cụ theo dõi đáng tin cậy hơn việc chỉ quan sát màu túi.</p>
+
+            <h2 id="phan-loai" class="text-3xl font-bold text-secondary mt-10 mb-6">Phân loại Bag Filter M5, M6, F7–F9 và ISO 16890</h2>
+            <p class="mb-5 leading-8">Theo cách gọi của EN 779:2012, các cấp lọc túi phổ biến gồm <strong>M5, M6, F7, F8 và F9</strong>. M5 và M6 thuộc nhóm lọc trung bình; F7–F9 thuộc nhóm lọc tinh. Với bộ lọc thông gió chung, <a class="text-primary font-semibold hover:underline" href="https://www.iso.org/standard/57864.html" target="_blank" rel="noopener noreferrer">ISO 16890-1:2016</a> phân nhóm bộ lọc theo hiệu suất đối với ePM1, ePM2.5, ePM10 hoặc ISO Coarse. Vì hai phương pháp đánh giá khác nhau, không nên quy đổi chỉ dựa vào tên cấp lọc; cần xem báo cáo thử nghiệm của đúng model.</p>
+            <div class="overflow-x-auto my-8">
+                <table class="w-full border-collapse text-left">
+                    <thead><tr class="bg-secondary text-white"><th class="p-4">Cấp gọi phổ biến</th><th class="p-4">Đặc điểm sử dụng</th><th class="p-4">Ứng dụng tham khảo</th></tr></thead>
+                    <tbody>
+                        <tr class="border-b"><td class="p-4 font-bold">M5</td><td class="p-4">Cấp lọc trung bình, khả năng chứa bụi lớn</td><td class="p-4">Tòa nhà, nhà xưởng, AHU thông thường</td></tr>
+                        <tr class="border-b bg-slate-50"><td class="p-4 font-bold">M6</td><td class="p-4">Hiệu suất cao hơn M5, dùng làm lọc trung gian</td><td class="p-4">Thực phẩm, linh kiện điện tử, hệ thống điều hòa</td></tr>
+                        <tr class="border-b"><td class="p-4 font-bold">F7</td><td class="p-4">Cân bằng giữa hiệu suất, khả năng chứa bụi và năng lượng</td><td class="p-4">Điện tử, thực phẩm, bệnh viện, tiền lọc HEPA</td></tr>
+                        <tr class="border-b"><td class="p-4 font-bold">F8–F9</td><td class="p-4">Hiệu suất cao hơn, cần kiểm tra chênh áp thiết kế</td><td class="p-4">Dược phẩm, phòng sạch và khu vực kiểm soát bụi nghiêm ngặt</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">Chọn M5, M6, F7, F8 hay F9?</h3>
+            <p class="mb-5 leading-8"><strong>M5</strong> phù hợp khi ưu tiên khả năng chứa bụi và mức cản thấp ở hệ thống tiện nghi hoặc môi trường có tải bụi tương đối lớn. <strong>M6</strong> là bước nâng hiệu suất cho các AHU cần chất lượng khí tốt hơn. <strong>F7</strong> thường được lựa chọn làm cấp trung gian trước HEPA nhờ cân bằng hiệu suất và chi phí năng lượng. <strong>F8–F9</strong> phục vụ yêu cầu lọc nghiêm ngặt hơn nhưng cần kiểm tra khả năng quạt và chênh áp cho phép. Cấp lọc cuối cùng phải căn cứ vào yêu cầu đầu ra, không gian lắp và toàn bộ chuỗi lọc.</p>
+
+            <div class="grid md:grid-cols-2 gap-6 my-10 max-w-3xl mx-auto">
+                <figure><img src="images/san-pham/vpf8.webp" alt="Lọc túi Bag Filter V-PAK F8 VAF" width="2400" height="1792" loading="lazy" class="w-full h-auto rounded-xl shadow-md"><figcaption class="text-sm text-center text-slate-500 mt-2">V-PAK F8.</figcaption></figure>
+                <figure><img src="images/san-pham/vpf9.webp" alt="Lọc túi Bag Filter V-PAK F9 VAF" width="2400" height="1792" loading="lazy" class="w-full h-auto rounded-xl shadow-md"><figcaption class="text-sm text-center text-slate-500 mt-2">V-PAK F9.</figcaption></figure>
+            </div>
+
+            <h2 class="text-3xl font-bold text-secondary mt-10 mb-6">Ưu điểm và giới hạn của lọc túi</h2>
+            <div class="grid md:grid-cols-2 gap-6 my-8">
+                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-6"><h3 class="text-xl font-bold text-emerald-800 mb-3">Ưu điểm</h3><ul class="list-disc pl-6 space-y-2"><li>Diện tích lọc và khả năng chứa bụi lớn.</li><li>Nhiều lựa chọn cấp lọc, số túi và kích thước.</li><li>Giúp giảm tải và kéo dài tuổi thọ cấp HEPA.</li><li>Thay thế thuận tiện khi chọn đúng khung lắp.</li></ul></div>
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-6"><h3 class="text-xl font-bold text-amber-800 mb-3">Giới hạn</h3><ul class="list-disc pl-6 space-y-2"><li>Không thay thế HEPA trong khu vực yêu cầu độ sạch cao.</li><li>Hiệu quả giảm khi vận hành sai lưu lượng thiết kế.</li><li>Cần đủ khoảng trống để túi bung và dòng khí phân bố đều.</li><li>Phần lớn sản phẩm không phù hợp để giặt tái sử dụng.</li></ul></div>
+            </div>
+
+            <h2 id="ung-dung" class="text-3xl font-bold text-secondary mt-10 mb-6">Ứng dụng thực tế</h2>
+            <p class="mb-5 leading-8">Bag Filter được dùng trong AHU của tòa nhà thương mại, nhà máy điện tử và bán dẫn, bệnh viện, dược phẩm, thực phẩm, trung tâm dữ liệu và các dây chuyền cần kiểm soát bụi. Vai trò cụ thể có thể là lọc chính cho khu vực tiện nghi hoặc lọc trung gian trước HEPA trong hệ thống yêu cầu cao hơn.</p>
+            <div class="grid md:grid-cols-2 gap-5 my-8">
+                <div class="border rounded-xl p-5"><h3 class="text-xl font-bold text-secondary mb-2">Bệnh viện và phòng khám</h3><p>Hỗ trợ giảm tải bụi trước cấp lọc cuối tại khu điều trị, phòng xét nghiệm và các AHU phục vụ khu vực kiểm soát.</p></div>
+                <div class="border rounded-xl p-5"><h3 class="text-xl font-bold text-secondary mb-2">Điện tử và bán dẫn</h3><p>Giữ bụi mịn trước HEPA để hạn chế nguy cơ hạt ảnh hưởng tới linh kiện và quy trình chính xác.</p></div>
+                <div class="border rounded-xl p-5"><h3 class="text-xl font-bold text-secondary mb-2">Dược phẩm và thực phẩm</h3><p>Được tích hợp vào hệ thống thông gió nhằm hỗ trợ kiểm soát bụi và bảo vệ khu vực sản xuất.</p></div>
+                <div class="border rounded-xl p-5"><h3 class="text-xl font-bold text-secondary mb-2">Tòa nhà và trung tâm dữ liệu</h3><p>Cải thiện chất lượng khí cấp, hạn chế bụi bám thiết bị và duy trì điều kiện vận hành ổn định.</p></div>
+            </div>
+            <p class="mb-5 leading-8">Để tham khảo cách VAF triển khai giải pháp lọc khí trong thực tế, xem <a class="text-primary font-semibold hover:underline" href="/projects" onclick="handleNav('projects'); return false;">các dự án tiêu biểu</a>.</p>
+
+            <h2 id="cach-chon" class="text-3xl font-bold text-secondary mt-10 mb-6">Cách lựa chọn Bag Filter phù hợp</h2>
+            <ol class="list-decimal pl-6 space-y-5 mb-8">
+                <li><strong>Xác định yêu cầu chất lượng không khí:</strong> chọn nhóm ISO 16890 hoặc cấp theo hồ sơ thiết kế, không chỉ dựa vào thói quen gọi F7/F8.</li>
+                <li><strong>Kiểm tra lưu lượng và vận tốc mặt:</strong> đối chiếu lưu lượng danh định của bộ lọc với AHU. Vận hành vượt thiết kế có thể tăng chênh áp và làm túi biến dạng.</li>
+                <li><strong>Đúng kích thước và số túi:</strong> đo chính xác rộng × cao × sâu; đảm bảo đủ không gian để các túi không chạm nhau hoặc chạm vỏ máy.</li>
+                <li><strong>So sánh chênh áp:</strong> xem cả chênh áp ban đầu và giới hạn thay khuyến nghị. Chênh áp thấp hơn có thể giúp giảm năng lượng quạt trong vòng đời sử dụng.</li>
+                <li><strong>Xem điều kiện môi trường:</strong> nhiệt độ, độ ẩm, hóa chất và yêu cầu vệ sinh quyết định vật liệu khung, vật liệu lọc và gioăng.</li>
+                <li><strong>Yêu cầu dữ liệu thử nghiệm:</strong> lựa chọn dựa trên tài liệu của đúng model, đúng kích thước và điều kiện thử.</li>
+            </ol>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">Các kích thước và lưu lượng thường gặp</h3>
+            <p class="mb-5 leading-8">Các hệ thống có thể sử dụng kích thước như 592 × 592 mm, 592 × 490 mm hoặc 592 × 287 mm, với chiều sâu túi thay đổi theo thiết kế. Lưu lượng tham khảo thường gặp là khoảng 3.400 m³/h cho khổ đầy và 1.700 m³/h cho khổ nửa, nhưng giá trị áp dụng phải lấy từ datasheet của đúng model. Không nên chọn bộ lọc chỉ vì “lắp vừa khung” mà bỏ qua lưu lượng danh định.</p>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">Sai lầm thường gặp khi lựa chọn</h3>
+            <ul class="list-disc pl-6 space-y-3 mb-8">
+                <li>Chọn cấp lọc cao nhất nhưng không kiểm tra cột áp còn lại của quạt.</li>
+                <li>Dùng túi quá sâu trong khoang lắp ngắn khiến túi bị gập hoặc chạm vách.</li>
+                <li>Chọn quá ít túi làm diện tích lọc nhỏ và chênh áp tăng nhanh.</li>
+                <li>Không kiểm tra độ kín của khung, gioăng và cơ cấu ép lọc.</li>
+                <li>Đánh giá tình trạng lọc chỉ bằng màu sắc thay vì chênh áp và lưu lượng.</li>
+            </ul>
+
+            <div class="bg-secondary text-white rounded-2xl p-7 my-10">
+                <h3 class="text-2xl font-bold mb-3">Các dòng Bag Filter VAF</h3>
+                <p class="mb-5">Tham khảo đúng trang sản phẩm: <a class="text-cyan-300 font-bold hover:underline" href="/product/v-pakm5" onclick="openProductDetail('v-pakm5'); return false;">V-PAK M5</a>, <a class="text-cyan-300 font-bold hover:underline" href="/product/v-pakm6" onclick="openProductDetail('v-pakm6'); return false;">V-PAK M6</a>, <a class="text-cyan-300 font-bold hover:underline" href="/product/v-pakf7" onclick="openProductDetail('v-pakf7'); return false;">V-PAK F7</a>, <a class="text-cyan-300 font-bold hover:underline" href="/product/v-pakf8" onclick="openProductDetail('v-pakf8'); return false;">V-PAK F8</a> và <a class="text-cyan-300 font-bold hover:underline" href="/product/v-pakf9" onclick="openProductDetail('v-pakf9'); return false;">V-PAK F9</a>.</p>
+                <a href="/contact" onclick="handleNav('contact'); return false;" class="inline-block bg-primary text-white font-bold px-6 py-3 rounded-lg hover:opacity-90">Liên hệ VAF để được tư vấn</a>
+            </div>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">Khi nào cần thay Bag Filter?</h3>
+            <p class="mb-5 leading-8">Không nên áp dụng một mốc thời gian cố định cho mọi hệ thống. Hãy thay khi chênh áp đạt giới hạn trong tài liệu kỹ thuật hoặc hồ sơ thiết kế; lưu lượng không còn đáp ứng; túi bị rách, ẩm, biến dạng; hoặc theo yêu cầu kiểm soát chất lượng của cơ sở. Theo dõi chênh áp giúp tránh thay quá sớm và hạn chế vận hành quá lâu gây tốn điện.</p>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">Quy trình kiểm tra và thay thế an toàn</h3>
+            <ol class="list-decimal pl-6 space-y-3 mb-8">
+                <li>Ghi nhận chênh áp, lưu lượng và tình trạng vận hành trước khi dừng AHU.</li>
+                <li>Ngắt và khóa nguồn theo quy trình an toàn của cơ sở trước khi mở khoang lọc.</li>
+                <li>Quan sát rách túi, ẩm mốc, biến dạng, bụi lọt qua và độ kín của khung.</li>
+                <li>Tháo lọc cũ nhẹ nhàng, đóng gói phù hợp để tránh phát tán bụi trong khu vực.</li>
+                <li>Vệ sinh khoang lọc, kiểm tra gioăng và lắp đúng chiều dòng khí của lọc mới.</li>
+                <li>Khởi động lại hệ thống, kiểm tra rò lọt và ghi nhận chênh áp ban đầu làm mốc theo dõi.</li>
+            </ol>
+
+            <h2 class="text-3xl font-bold text-secondary mt-10 mb-6">So sánh Bag Filter với Panel Filter và HEPA</h2>
+            <div class="overflow-x-auto my-8">
+                <table class="w-full border-collapse text-left">
+                    <thead><tr class="bg-secondary text-white"><th class="p-4">Tiêu chí</th><th class="p-4">Panel Filter</th><th class="p-4">Bag Filter</th><th class="p-4">HEPA Filter</th></tr></thead>
+                    <tbody>
+                        <tr class="border-b"><td class="p-4 font-bold">Vai trò thường gặp</td><td class="p-4">Lọc thô/tiền lọc</td><td class="p-4">Lọc trung gian</td><td class="p-4">Lọc cuối</td></tr>
+                        <tr class="border-b bg-slate-50"><td class="p-4 font-bold">Diện tích lọc</td><td class="p-4">Thấp đến trung bình</td><td class="p-4">Lớn nhờ nhiều túi</td><td class="p-4">Rất lớn nhờ vật liệu xếp nếp</td></tr>
+                        <tr class="border-b"><td class="p-4 font-bold">Khả năng chứa bụi</td><td class="p-4">Phù hợp bụi thô</td><td class="p-4">Cao</td><td class="p-4">Không nên nhận tải bụi thô lớn</td></tr>
+                        <tr class="border-b bg-slate-50"><td class="p-4 font-bold">Mục tiêu chính</td><td class="p-4">Bảo vệ cấp sau</td><td class="p-4">Giữ bụi mịn và bảo vệ HEPA</td><td class="p-4">Đạt hiệu suất lọc cuối cao</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="mb-5 leading-8">Ba loại lọc không thay thế lẫn nhau mà bổ trợ trong một chuỗi lọc được thiết kế đúng. Nếu tải bụi đầu vào cao, một Pre Filter phù hợp sẽ giúp Bag Filter bền hơn; tương tự, Bag Filter được chọn đúng sẽ giảm tải đáng kể cho HEPA.</p>
+
+            <h2 class="text-3xl font-bold text-secondary mt-10 mb-6">Phân tích chi tiết từng cấp Bag Filter</h2>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">Bag Filter M5</h3>
+            <p class="mb-5 leading-8">M5 là cấp đầu tiên trong nhóm lọc trung bình theo cách phân loại EN 779:2012. Dòng này thường được cân nhắc cho hệ thống điều hòa tiện nghi, nhà xưởng, khu vực có độ ẩm tương đối cao hoặc vị trí cần một bộ lọc có khả năng chứa bụi lớn nhưng sức cản ban đầu không quá cao. M5 không nhằm thay thế cấp lọc tinh hoặc HEPA. Nhiệm vụ chính là giảm tải bụi cho các thiết bị và cấp lọc phía sau.</p>
+            <p class="mb-5 leading-8">Trong một AHU có tải bụi ngoài trời lớn, M5 có thể được bố trí sau lọc thô. Tuy nhiên, hiệu quả thực tế phụ thuộc vào lưu lượng, diện tích vật liệu, số túi và tình trạng kín khít. Nếu chọn túi quá ngắn hoặc diện tích lọc nhỏ, chênh áp có thể tăng nhanh dù tên cấp lọc vẫn là M5. Vì vậy cần xem đầy đủ datasheet thay vì chỉ so sánh tên cấp.</p>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">Bag Filter M6</h3>
+            <p class="mb-5 leading-8">M6 có hiệu suất cao hơn M5 và thường được sử dụng khi hệ thống cần chất lượng khí cấp tốt hơn nhưng chưa cần chuyển ngay sang F7. Các ứng dụng tham khảo gồm hệ thống điều hòa công nghiệp, nhà máy thực phẩm, khu sản xuất linh kiện và một số AHU dùng M6 làm cấp trung gian. Khi nâng từ M5 lên M6, người thiết kế phải kiểm tra lại chênh áp và khả năng đáp ứng của quạt.</p>
+            <p class="mb-5 leading-8">Không nên hiểu M6 là lựa chọn luôn tốt hơn M5 trong mọi tình huống. Nếu mục tiêu chỉ là bảo vệ coil ở khu vực tải bụi thô cao, một cấu hình M5 có diện tích lọc lớn đôi khi phù hợp hơn về năng lượng và chu kỳ thay. Ngược lại, nếu cần giảm hạt nhỏ trước cấp sau, M6 có thể tạo giá trị rõ ràng hơn.</p>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">Bag Filter F7</h3>
+            <p class="mb-5 leading-8">F7 là một trong những cấp Bag Filter được dùng phổ biến trong các hệ thống yêu cầu kiểm soát bụi tốt. Sản phẩm thường xuất hiện ở AHU của bệnh viện, nhà máy điện tử, dược phẩm, thực phẩm và các khu vực có HEPA phía sau. Lý do F7 được lựa chọn nhiều là khả năng cân bằng giữa hiệu suất lọc, khả năng chứa bụi và mức tiêu thụ năng lượng khi bộ lọc được thiết kế đúng.</p>
+            <p class="mb-5 leading-8">Với phòng sạch, F7 chỉ là một phần của chuỗi kiểm soát ô nhiễm. Hiệu quả cuối cùng còn phụ thuộc vào cấp HEPA, độ kín hệ thống, số lần trao đổi khí, áp suất phòng, vệ sinh và quy trình vận hành. Việc ghi “F7” trên bộ lọc không đồng nghĩa toàn bộ hệ thống mặc nhiên đạt một cấp sạch cụ thể.</p>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">Bag Filter F8</h3>
+            <p class="mb-5 leading-8">F8 được dùng khi yêu cầu kiểm soát hạt nghiêm ngặt hơn F7 hoặc khi cần giảm tải bụi mịn trước HEPA. Do vật liệu và hiệu suất cao hơn, chênh áp của F8 cần được đưa vào bài toán lựa chọn quạt và năng lượng. Một bộ lọc hiệu suất cao nhưng vận hành ở lưu lượng vượt danh định có thể làm tăng sức cản, biến dạng túi và rút ngắn chu kỳ sử dụng.</p>
+            <p class="mb-5 leading-8">Trong hệ thống hiện hữu, không nên tự ý thay F7 bằng F8 chỉ vì muốn “lọc sạch hơn”. Trước khi thay đổi cần kiểm tra cột áp dự phòng, lưu lượng thiết kế, yêu cầu chất lượng không khí và giới hạn chênh áp. Nếu quạt không đủ khả năng bù sức cản, lưu lượng cấp có thể giảm và ảnh hưởng tới cân bằng áp suất của khu vực.</p>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">Bag Filter F9</h3>
+            <p class="mb-5 leading-8">F9 là cấp cao nhất trong nhóm lọc tinh của hệ phân loại EN 779 được đề cập trong bài. Dòng này có thể được xem xét cho các ứng dụng yêu cầu cao trước HEPA như dược phẩm, điện tử chính xác, bệnh viện hoặc khu nghiên cứu. Dù vậy, F9 vẫn không phải HEPA và không thể thay thế phép đánh giá hiệu suất theo tiêu chuẩn dành cho HEPA.</p>
+            <p class="mb-5 leading-8">Khi sử dụng F9, thiết kế khung lắp và gioăng càng quan trọng. Một khe hở nhỏ tạo đường bypass có thể làm giảm hiệu quả của toàn bộ cấp lọc, dù bản thân vật liệu có hiệu suất cao. Bảo trì vì thế phải kiểm tra đồng thời bề mặt túi, khung, gioăng, kẹp giữ và vách ngăn quanh bộ lọc.</p>
+
+            <h2 class="text-3xl font-bold text-secondary mt-10 mb-6">Vật liệu Bag Filter và ảnh hưởng tới vận hành</h2>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">Sợi tổng hợp</h3>
+            <p class="mb-5 leading-8">Sợi tổng hợp là vật liệu phổ biến nhờ độ bền, khả năng chịu ẩm tương đối tốt và tính linh hoạt trong thiết kế. Nhà sản xuất có thể tổ chức nhiều lớp sợi với mật độ khác nhau để bụi được phân bố theo chiều sâu thay vì tập trung ngay trên bề mặt. Cấu trúc này hỗ trợ khả năng chứa bụi và giúp chênh áp tăng có kiểm soát hơn trong vòng đời sử dụng.</p>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">Microfiber và vật liệu chuyên dụng</h3>
+            <p class="mb-5 leading-8">Microfiber có kích thước sợi nhỏ hơn, tạo điều kiện tăng khả năng giữ hạt mịn. Một số ứng dụng đặc biệt có thể sử dụng vật liệu khác tùy nhiệt độ, độ ẩm hoặc hóa chất. Không nên chọn vật liệu chỉ theo hiệu suất danh nghĩa; cần xác nhận giới hạn nhiệt độ, khả năng chịu ẩm, độ bền cơ học và tính tương thích với môi trường vận hành.</p>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">Đường may và thanh định hình</h3>
+            <p class="mb-5 leading-8">Đường may không chỉ đóng kín túi mà còn giúp kiểm soát hình dạng khi có gió. Các đường chia hoặc thanh định hình hạn chế hai mặt túi dính vào nhau, giữ khoảng cách giữa các pocket và phân bố luồng khí đều hơn. Nếu túi bị xẹp hoặc chạm nhau, một phần diện tích vật liệu không được sử dụng hiệu quả, tạo vùng vận tốc cao và làm chênh áp tăng cục bộ.</p>
+
+            <h2 class="text-3xl font-bold text-secondary mt-10 mb-6">Hiểu đúng EN 779 và ISO 16890</h2>
+            <p class="mb-5 leading-8">EN 779 từng được sử dụng rộng rãi để phân loại lọc khí thông gió thành các nhóm G, M và F. Vì tài liệu thiết kế, hồ sơ thầu và tên thương mại cũ vẫn còn phổ biến, người dùng hiện nay vẫn thường nói M5, M6, F7, F8 hoặc F9. Tuy nhiên, cách gọi này không phản ánh trực tiếp hiệu quả đối với từng nhóm bụi PM trong không khí thực tế.</p>
+            <p class="mb-5 leading-8">ISO 16890 đánh giá bộ lọc thông gió chung dựa trên khả năng loại bỏ các nhóm hạt ePM1, ePM2.5, ePM10 hoặc ISO Coarse. Cách tiếp cận theo kích thước hạt giúp người thiết kế liên hệ rõ hơn giữa bộ lọc và mục tiêu kiểm soát bụi. Ví dụ, ứng dụng quan tâm nhiều tới hạt nhỏ có thể ưu tiên xem dữ liệu ePM1; khu vực tiện nghi hoặc tải bụi lớn có thể xem đồng thời ePM2.5, ePM10 và sức cản.</p>
+            <p class="mb-5 leading-8">Không tồn tại phép quy đổi một-một hoàn toàn chính xác giữa mọi cấp EN 779 và ISO 16890. Hai bộ lọc cùng được gọi F7 có thể có kết quả ISO 16890 khác nhau do vật liệu, thiết kế và trạng thái phóng tĩnh điện. Cách làm an toàn là yêu cầu báo cáo thử nghiệm của đúng sản phẩm, đúng kích thước và đọc cả hiệu suất lẫn chênh áp.</p>
+
+            <div class="bg-slate-50 border-l-4 border-primary rounded-xl p-6 my-8">
+                <h3 class="text-xl font-bold text-secondary mb-3">Thông tin nên có trong hồ sơ lựa chọn</h3>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>Nhóm hiệu suất theo tiêu chuẩn được dự án yêu cầu.</li>
+                    <li>Kích thước khung, chiều sâu túi và số lượng túi.</li>
+                    <li>Lưu lượng danh định và vận tốc mặt tại điều kiện vận hành.</li>
+                    <li>Chênh áp ban đầu và chênh áp cuối khuyến nghị.</li>
+                    <li>Vật liệu lọc, vật liệu khung, gioăng và giới hạn nhiệt độ.</li>
+                    <li>Báo cáo thử nghiệm hoặc dữ liệu kỹ thuật của đúng model.</li>
+                </ul>
+            </div>
+
+            <h2 class="text-3xl font-bold text-secondary mt-10 mb-6">Tính toán chi phí vòng đời thay vì chỉ nhìn giá mua</h2>
+            <p class="mb-5 leading-8">Giá mua ban đầu chỉ là một phần trong tổng chi phí của Bag Filter. Trong suốt thời gian sử dụng, quạt phải thắng sức cản của bộ lọc; chênh áp càng cao và thời gian vận hành càng dài thì điện năng liên quan càng lớn. Bên cạnh đó còn có chi phí nhân công thay, dừng máy, xử lý lọc cũ và ảnh hưởng tới HEPA phía sau.</p>
+            <p class="mb-5 leading-8">Một bộ lọc có diện tích vật liệu lớn, chênh áp hợp lý và khả năng chứa bụi tốt có thể tạo chi phí vòng đời thấp hơn dù giá mua không phải thấp nhất. Để so sánh công bằng, cần đặt các lựa chọn ở cùng lưu lượng, cùng yêu cầu hiệu suất và cùng điều kiện bụi. So sánh chênh áp của hai sản phẩm ở các lưu lượng khác nhau sẽ dẫn tới kết luận sai.</p>
+            <p class="mb-5 leading-8">Cũng không nên kéo dài thời gian sử dụng chỉ để giảm số lần thay. Khi chênh áp tăng quá cao, chi phí điện và nguy cơ thiếu lưu lượng có thể lớn hơn giá trị tiết kiệm từ việc trì hoãn. Mốc thay tối ưu cần cân bằng năng lượng, chất lượng không khí, yêu cầu sản xuất và khuyến nghị kỹ thuật.</p>
+
+            <h2 class="text-3xl font-bold text-secondary mt-10 mb-6">Bảo quản và lắp đặt Bag Filter đúng cách</h2>
+            <ul class="list-disc pl-6 space-y-3 mb-8">
+                <li>Bảo quản trong bao bì sạch, khô, tránh nắng trực tiếp, nước và vật sắc nhọn làm thủng túi.</li>
+                <li>Không đặt vật nặng lên các túi vì nếp gấp sâu có thể cản trở việc bung túi khi khởi động.</li>
+                <li>Kiểm tra chiều dòng khí, kích thước và tình trạng gioăng trước khi đưa vào khung.</li>
+                <li>Đưa từng túi vào khoang cẩn thận, tránh kéo lê hoặc để túi mắc vào cạnh kim loại.</li>
+                <li>Đảm bảo các túi tách đều, không xoắn, không bị kẹp và có đủ chiều sâu để bung hết.</li>
+                <li>Ép khung kín trên toàn bộ chu vi; không dùng khe hở để “bù” sai kích thước.</li>
+                <li>Ghi ngày lắp, mã sản phẩm và chênh áp ban đầu để phục vụ theo dõi vòng đời.</li>
+            </ul>
+
+            <h2 class="text-3xl font-bold text-secondary mt-10 mb-6">Dấu hiệu Bag Filter đang vận hành không đúng</h2>
+            <p class="mb-5 leading-8"><strong>Túi rung mạnh hoặc xẹp:</strong> có thể liên quan tới lưu lượng không phù hợp, phân bố gió không đều hoặc khoảng cách túi không đủ. <strong>Chênh áp tăng rất nhanh:</strong> cần kiểm tra tải bụi, tình trạng Pre Filter, diện tích lọc và khả năng túi bung. <strong>Bụi xuất hiện phía sạch:</strong> phải kiểm tra rách vật liệu, đường may, gioăng, khung ép và hiện tượng bypass.</p>
+            <p class="mb-5 leading-8"><strong>Lưu lượng giảm nhưng chênh áp không cao:</strong> nguyên nhân có thể nằm ở quạt, damper, coil hoặc đường ống chứ không chỉ ở bộ lọc. <strong>Túi bị ướt:</strong> cần tìm nguồn ẩm, nước ngưng hoặc nước cuốn theo trước khi thay lọc mới. Nếu không xử lý nguyên nhân gốc, bộ lọc mới sẽ nhanh chóng gặp lại tình trạng tương tự.</p>
+
+            <h2 class="text-3xl font-bold text-secondary mt-10 mb-6">Thông tin cần cung cấp khi yêu cầu VAF tư vấn</h2>
+            <p class="mb-5 leading-8">Để lựa chọn nhanh và chính xác, khách hàng nên cung cấp ảnh khoang lọc hiện tại, kích thước rộng × cao × sâu, số lượng bộ lọc, lưu lượng AHU, cấp lọc hoặc nhóm ISO yêu cầu, chênh áp hiện tại, nhiệt độ, độ ẩm, đặc điểm bụi và ngành ứng dụng. Nếu thay thế một model đang dùng, ảnh nhãn sản phẩm và datasheet cũ cũng rất hữu ích.</p>
+            <p class="mb-5 leading-8">Đội ngũ kỹ thuật VAF có thể đối chiếu các thông tin này để đề xuất kích thước, số túi, vật liệu khung và cấp hiệu suất phù hợp. Việc tư vấn dựa trên dữ liệu vận hành giúp hạn chế tình trạng lọc lắp vừa nhưng sai lưu lượng, hoặc hiệu suất cao nhưng quạt không đủ cột áp.</p>
+
+            <h2 id="faq" class="text-3xl font-bold text-secondary mt-10 mb-6">Câu hỏi thường gặp</h2>
+            <div class="space-y-5">
+                <section class="border rounded-xl p-5"><h3 class="text-xl font-bold text-secondary mb-2">Bag Filter có giặt và tái sử dụng được không?</h3><p>Phần lớn Bag Filter HVAC không được thiết kế để giặt. Chỉ vệ sinh khi tài liệu của nhà sản xuất cho phép.</p></section>
+                <section class="border rounded-xl p-5"><h3 class="text-xl font-bold text-secondary mb-2">Bao lâu nên thay Bag Filter?</h3><p>Nên dựa vào chênh áp, lưu lượng, mức độ ô nhiễm và giới hạn của thiết kế thay vì chỉ dựa vào số tháng vận hành.</p></section>
+                <section class="border rounded-xl p-5"><h3 class="text-xl font-bold text-secondary mb-2">Bag Filter có thay thế HEPA Filter được không?</h3><p>Không. Bag Filter thường là cấp lọc trung gian; HEPA vẫn là cấp cuối cho khu vực yêu cầu độ sạch cao.</p></section>
+                <section class="border rounded-xl p-5"><h3 class="text-xl font-bold text-secondary mb-2">VAF có làm Bag Filter theo kích thước yêu cầu không?</h3><p>Có. VAF tư vấn kích thước, cấp lọc, số túi và vật liệu theo thông số vận hành thực tế.</p></section>
+            </div>
+
+            <h2 class="text-3xl font-bold text-secondary mt-10 mb-6">Kết luận</h2>
+            <p class="mb-5 leading-8">Bag Filter là cấp lọc quan trọng trong nhiều hệ thống HVAC nhờ diện tích bề mặt lớn, khả năng chứa bụi cao và nhiều lựa chọn hiệu suất. Để hệ thống vận hành ổn định, cần chọn đúng hiệu suất, lưu lượng, kích thước, chênh áp và điều kiện môi trường; đồng thời theo dõi chênh áp để xác định thời điểm thay phù hợp.</p>
+            <p class="text-sm text-slate-500 mt-8">Tài liệu tham khảo: <a class="text-primary hover:underline" href="https://www.iso.org/standard/57864.html" target="_blank" rel="noopener noreferrer">ISO 16890-1:2016 — Air filters for general ventilation</a>.</p>
+        `
+    },
+
         {
         id: 'hepa-filter-la-gi',
         title: 'HEPA Filter Là Gì? Cấu Tạo, Nguyên Lý Hoạt Động Và Ứng Dụng',
