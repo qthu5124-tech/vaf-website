@@ -82,8 +82,11 @@ for (const article of news) {
 
 for (const job of careers) {
     if (!job.id) continue;
-    add(`/tuyen-dung/${job.id}`, DEFAULT_LASTMOD, { title: `${job.title} | Tuyển Dụng VAF`, description: job.summary, language: 'vi', alternate: careersEn[job.id] ? `/en/tuyen-dung/${job.id}` : null });
-    if (careersEn[job.id]) add(`/en/tuyen-dung/${job.id}`, DEFAULT_LASTMOD, { title: `${careersEn[job.id].title} | VAF Careers`, description: careersEn[job.id].summary, language: 'en', alternate: `/tuyen-dung/${job.id}` });
+    add(`/tuyen-dung/${job.id}`, DEFAULT_LASTMOD, { title: `${job.title} | Tuyển Dụng VAF`, description: job.summary, language: 'vi', alternate: careersEn[job.id] ? `/en/tuyen-dung/${job.id}` : null, type: 'JobPosting', job });
+    if (careersEn[job.id]) {
+        const translatedJob = { ...job, ...careersEn[job.id] };
+        add(`/en/tuyen-dung/${job.id}`, DEFAULT_LASTMOD, { title: `${translatedJob.title} | VAF Careers`, description: translatedJob.summary, language: 'en', alternate: `/tuyen-dung/${job.id}`, type: 'JobPosting', job: translatedJob });
+    }
 }
 
 const xml = [
@@ -106,7 +109,7 @@ function renderSeoHtml(path, seo) {
     const description = escapeXml(seo.description || '');
     const image = SITE_URL + '/' + String(seo.image || 'images/vaf-banner.webp').replace(/^\/+/, '');
     const type = seo.type || 'WebPage';
-    const schema = {
+    let schema = {
         '@context': 'https://schema.org',
         '@type': type,
         name: seo.title,
@@ -117,6 +120,38 @@ function renderSeoHtml(path, seo) {
         publisher: type === 'Article' ? { '@type': 'Organization', name: 'VAF - Viet Air Filter', url: SITE_URL } : undefined
     };
     Object.keys(schema).forEach(key => schema[key] === undefined && delete schema[key]);
+    if (type === 'JobPosting' && seo.job) {
+        const job = seo.job;
+        schema = {
+            '@context': 'https://schema.org',
+            '@type': 'JobPosting',
+            title: job.title,
+            description: [job.summary, ...(job.description || []), ...(job.requirements || []), ...(job.benefits || [])].join(' '),
+            identifier: { '@type': 'PropertyValue', name: 'VAF - Viet Air Filter', value: job.id },
+            datePosted: job.datePosted || DEFAULT_LASTMOD,
+            ...(job.deadline ? { validThrough: `${job.deadline}T23:59:59+07:00` } : {}),
+            employmentType: 'FULL_TIME',
+            workHours: job.workingHours,
+            directApply: true,
+            hiringOrganization: {
+                '@type': 'Organization',
+                name: 'Công ty Cổ phần Sản xuất Lọc khí Việt (VAF)',
+                sameAs: SITE_URL,
+                logo: `${SITE_URL}/images/logo.png`
+            },
+            jobLocation: {
+                '@type': 'Place',
+                address: {
+                    '@type': 'PostalAddress',
+                    streetAddress: 'Lô C3.4, Đường N14, Khu công nghiệp Đồng An 2',
+                    addressLocality: 'Phường Hòa Phú',
+                    addressRegion: 'Thành phố Hồ Chí Minh',
+                    addressCountry: 'VN'
+                }
+            },
+            url: canonical
+        };
+    }
 
     let html = fs.readFileSync('index.html', 'utf8');
     html = html.replace('<html lang="vi">', `<html lang="${seo.language || 'vi'}">`);
