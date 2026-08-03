@@ -45,8 +45,35 @@
 		}
 	],
 	"redirects": [
+		{
+			"source": "/:path*",
+			"has": [{ "type": "host", "value": "vi.vietfil.com" }],
+			"destination": "https://www.vietfil.com/:path*",
+			"permanent": true
+		},
 		{ "source": "/vi", "destination": "/", "permanent": true },
 		{ "source": "/vi/:path*", "destination": "/:path*", "permanent": true },
+		{ "source": "/products/air-shower", "destination": "/product/air-shower", "permanent": true },
+		{ "source": "/products/blower-filter-init-bfu-thiet-bi-phong-sach", "destination": "/product/bfu", "permanent": true },
+		{ "source": "/products/loc-tho-pre-fine-v-ra", "destination": "/product/v-ra", "permanent": true },
+		{ "source": "/air-filter-supply", "destination": "/projects", "permanent": true },
+		{ "source": "/blog/categories/:path*", "destination": "/news", "permanent": true },
+		{ "source": "/amp/:path*", "destination": "/news", "permanent": true },
+		{ "source": "/post/loc-khi-viet-tuyen-dung-ke-toan", "destination": "/tuyen-dung", "permanent": true },
+		{ "source": "/tuyen-dung/nhan-vien-kinh-doanh-ky-thuat", "destination": "/tuyen-dung", "permanent": true },
+		{ "source": "/tuyen-dung/ky-su-hvac", "destination": "/tuyen-dung", "permanent": true },
+		{ "source": "/tuyen-dung/nhan-vien-san-xuat", "destination": "/tuyen-dung", "permanent": true },
+		{ "source": "/tuyen-dung/ky-thuat-kiem-tra-hepa", "destination": "/tuyen-dung/nhan-vien-qc-phong-sach", "permanent": true },
+		{ "source": "/tuyen-dung/thuc-tap-sinh-marketing", "destination": "/tuyen-dung", "permanent": true },
+		{ "source": "/en/tuyen-dung/nhan-vien-kinh-doanh-ky-thuat", "destination": "/en/tuyen-dung", "permanent": true },
+		{ "source": "/en/tuyen-dung/ky-su-hvac", "destination": "/en/tuyen-dung", "permanent": true },
+		{ "source": "/en/tuyen-dung/nhan-vien-san-xuat", "destination": "/en/tuyen-dung", "permanent": true },
+		{ "source": "/en/tuyen-dung/ky-thuat-kiem-tra-hepa", "destination": "/en/tuyen-dung/nhan-vien-qc-phong-sach", "permanent": true },
+		{ "source": "/en/tuyen-dung/thuc-tap-sinh-marketing", "destination": "/en/tuyen-dung", "permanent": true },
+		{ "source": "/projects-all", "destination": "/projects", "permanent": true },
+		{ "source": "/en/projects", "destination": "/projects", "permanent": true },
+		{ "source": "/en/projects-all", "destination": "/projects", "permanent": true },
+		{ "source": "/en/project/:id", "destination": "/project/:id", "permanent": true },
 		{ "source": "/blog", "destination": "/news", "permanent": true },
 		{ "source": "/blog/:path*", "destination": "/news", "permanent": true },
 		{ "source": "/category/:path*", "destination": "/products", "permanent": true },
@@ -61,7 +88,9 @@
 		{ "source": "/news/seo-6", "destination": "/news/tieu-chuan-phong-sach-iso-14644-1", "permanent": true },
 		{ "source": "/news/seo-7", "destination": "/news/quy-trinh-leak-test-loc-hepa", "permanent": true },
 		{ "source": "/news/seo-8", "destination": "/news/ap-luc-duong-ap-luc-am-phong-sach-benh-vien", "permanent": true },
-		{ "source": "/news/seo-9", "destination": "/news/loc-khi-chiu-nhiet-lo-say", "permanent": true }
+		{ "source": "/news/seo-9", "destination": "/news/loc-khi-chiu-nhiet-lo-say", "permanent": true },
+		{ "source": "/post/tieu-chuan-gmp-la-gi-trong-san-xuat-duoc-pham", "destination": "/news", "permanent": true },
+		{ "source": "/post/su-thay-the-cua-tieu-chuan-iso-16890-trong-nganh-cong-nghiep-loc-khi", "destination": "/news/bag-filter-la-gi", "permanent": true }
 	],
 	"rewrites": []
 }

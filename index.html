@@ -22,15 +22,15 @@
             addPreload('/images/anh-tulieu/careers-hero-mobile.webp', 'image', '(max-width: 767px)');
             addPreload('/images/anh-tulieu/careers-hero-desktop.webp', 'image', '(min-width: 768px)');
             addPreload('/partials/careers.html?v=20260724-5', 'fetch');
-            addPreload('/careers-data.min.js?v=20260724-5', 'script');
-            addPreload('/careers.min.js?v=20260724-5', 'script');
+            addPreload('/careers-data.min.js?v=20260730-1', 'script');
+            addPreload('/careers.min.js?v=20260730-1', 'script');
         } else if (/^\/tuyen-dung\/[^/]+\/?$/.test(route)) {
             addPreload('/partials/career-detail.html?v=20260724-5', 'fetch');
-            addPreload('/careers-data.min.js?v=20260724-5', 'script');
-            addPreload('/careers.min.js?v=20260724-5', 'script');
+            addPreload('/careers-data.min.js?v=20260730-1', 'script');
+            addPreload('/careers.min.js?v=20260730-1', 'script');
             if (location.pathname.startsWith('/en/')) {
-                addPreload('/careers-en-data.min.js?v=20260724-5', 'script');
-                addPreload('/careers-ui-en-data.min.js?v=20260724-5', 'script');
+                addPreload('/careers-en-data.min.js?v=20260730-1', 'script');
+                addPreload('/careers-ui-en-data.min.js?v=20260730-1', 'script');
             }
         } else if (route === '/') {
             addPreload('/images/14-mobile.webp', 'image', '(max-width: 767px)');
