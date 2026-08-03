@@ -1,6 +1,7 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": ".",
+  "cleanUrls": true,
   "headers": [
     {
       "source": "/PROFILE-VAF.pdf",
@@ -44,6 +45,14 @@
 		}
 	],
 	"redirects": [
+		{ "source": "/vi", "destination": "/", "permanent": true },
+		{ "source": "/vi/:path*", "destination": "/:path*", "permanent": true },
+		{ "source": "/blog", "destination": "/news", "permanent": true },
+		{ "source": "/blog/:path*", "destination": "/news", "permanent": true },
+		{ "source": "/category/:path*", "destination": "/products", "permanent": true },
+		{ "source": "/fine-filters", "destination": "/products", "permanent": true },
+		{ "source": "/pre-filters", "destination": "/products", "permanent": true },
+		{ "source": "/hepa-filters", "destination": "/products", "permanent": true },
 		{ "source": "/news/seo-1", "destination": "/news/cong-nghe-mini-pleat-loc-khi", "permanent": true },
 		{ "source": "/news/seo-2", "destination": "/news/so-sanh-loc-hepa-h13-va-h14", "permanent": true },
 		{ "source": "/news/seo-3", "destination": "/news/air-shower-buong-tam-khi-phong-sach", "permanent": true },
@@ -52,17 +61,7 @@
 		{ "source": "/news/seo-6", "destination": "/news/tieu-chuan-phong-sach-iso-14644-1", "permanent": true },
 		{ "source": "/news/seo-7", "destination": "/news/quy-trinh-leak-test-loc-hepa", "permanent": true },
 		{ "source": "/news/seo-8", "destination": "/news/ap-luc-duong-ap-luc-am-phong-sach-benh-vien", "permanent": true },
-		{ "source": "/news/seo-9", "destination": "/news/loc-khi-chiu-nhiet-lo-say", "permanent": true },
-		{
-			"source": "/post/:path*",
-			"destination": "/",
-			"permanent": true
-		}
+		{ "source": "/news/seo-9", "destination": "/news/loc-khi-chiu-nhiet-lo-say", "permanent": true }
 	],
-	"rewrites": [
-		{
-			"source": "/(.*)",
-			"destination": "/index.html"
-		}
-	]
+	"rewrites": []
 }

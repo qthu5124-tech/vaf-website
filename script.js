@@ -235,7 +235,7 @@ function applyImageLoadingHints(scope = document) {
     });
 }
 
-const SITE_URL = 'https://vietfil.com';
+const SITE_URL = 'https://www.vietfil.com';
 const DEFAULT_SEO = {
     title: 'VAF - Nhà Sản Xuất Lọc Khí & Thiết Bị Phòng Sạch Chuẩn Quốc Tế',
     description: 'Viet Air Filter sản xuất lọc khí HEPA, ULPA và thiết bị phòng sạch chuẩn ISO 16890, EN 1822.',
@@ -810,14 +810,14 @@ if (page === "tuyen-dung") activeTarget = "tuyen-dung";
         scrollToTop();
     }
     else if (page === 'about') {
-        document.title = 'Về VAF - Hồ Sơ Năng Lực & Nhà Máy Sản Xuất';
+        setPageSeo({ title: 'Về VAF - Hồ Sơ Năng Lực & Nhà Máy Sản Xuất', description: 'Tìm hiểu hành trình phát triển, năng lực nhà máy và tiêu chuẩn sản xuất lọc khí, thiết bị phòng sạch của VAF.', path: '/about' });
         await ensureView('view-about');
         switchView('view-about');
         scrollToTop();
         setTimeout(() => runCounterAnimation(), 500);
     }
     else if (page === 'products') {
-        document.title = 'Danh Mục Sản Phẩm Lọc Khí - VAF';
+        setPageSeo({ title: 'Danh Mục Sản Phẩm Lọc Khí & Thiết Bị Phòng Sạch | VAF', description: 'Khám phá lọc thô, lọc tinh, lọc HEPA ULPA và thiết bị phòng sạch do VAF sản xuất theo tiêu chuẩn quốc tế.', path: '/products' });
         await ensureView('view-products');
         switchView('view-products');
         if (!window.currentFilterCat) await filterProducts('all', true);
@@ -827,16 +827,14 @@ if (page === "tuyen-dung") activeTarget = "tuyen-dung";
         await executeProductDetail(param);
     }
     else if (page === 'projects') {
-
-        document.title = 'Dự Án Tiêu Biểu & Khách Hàng - VAF';
+        setPageSeo({ title: 'Dự Án Tiêu Biểu & Khách Hàng | VAF', description: 'Các dự án lọc khí và phòng sạch VAF đã triển khai cho nhà máy điện tử, dược phẩm, thực phẩm và bệnh viện.', path: '/projects' });
         await ensureView('view-projects');
         switchView('view-projects');
         await filterProjects('all');
         scrollToTop();
     }
     else if (page === 'projects-all') {
-
-        document.title = 'Tất Cả Dự Án - VAF';
+        setPageSeo({ title: 'Tất Cả Dự Án Lọc Khí & Phòng Sạch | VAF', description: 'Danh sách dự án cung cấp lọc khí, thiết bị và giải pháp phòng sạch tiêu biểu của VAF.', path: '/projects-all' });
         await ensureView('view-projects-all');
         switchView('view-projects-all');
 
@@ -863,7 +861,7 @@ else if (page === "news") {
         await executeNewsDetail(param);
     }
     else if (page === 'contact') {
-        document.title = 'Liên Hệ Tư Vấn & Báo Giá - VAF';
+        setPageSeo({ title: 'Liên Hệ Tư Vấn & Báo Giá | VAF', description: 'Liên hệ VAF để được tư vấn lựa chọn lọc khí, thiết bị phòng sạch và nhận báo giá cho dự án của bạn.', path: '/contact' });
         await ensureView('view-contact');
         switchView('view-contact');
         scrollToTop();
@@ -1296,7 +1294,12 @@ async function executeProjectDetail(id) {
         return;
     }
 
-    document.title = "Dự Án: " + p.title + " | VAF";
+    setPageSeo({
+        title: p.title + (currentLang === 'en' ? ' | VAF Project' : ' | Dự án VAF'),
+        description: cleanText(p.desc),
+        path: '/project/' + p.id,
+        image: resolveAssetPath(p.img)
+    });
     document.getElementById('pjd-title').innerText = p.title;
     document.getElementById('pjd-desc').innerText = p.desc;
     const projectImage = document.getElementById('pjd-img');

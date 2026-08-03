@@ -6,7 +6,8 @@
   "scripts": {
     "build:css": "node ./node_modules/@tailwindcss/cli/dist/index.mjs -i ./input.css -o ./tailwind.min.css --minify",
     "build:minify": "node tools/minify-css.cjs && node tools/minify-js.cjs",
-    "build": "npm run build:css && npm run build:minify",
+    "build:seo": "node tools/generate-seo-pages.cjs",
+    "build": "npm run build:css && npm run build:minify && npm run build:seo",
     "vercel-build": "npm run build",
     "preview": "node local-server.js"
   },
