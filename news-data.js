@@ -37,6 +37,197 @@
 const newsData = [
 
     {
+        id: 'chung-chi-tieu-chuan-chat-luong-vaf',
+        title: 'Chứng Chỉ Và Tiêu Chuẩn Chất Lượng VAF – Nền Tảng Cho Giải Pháp Lọc Khí',
+        seoTitle: 'Chứng Chỉ VAF: ISO 9001, ISO 13485, EN 1822, ISO 16890',
+        cat: 'Chứng Chỉ',
+        img: 'images/anh-tin-tin/chung-chi-tieu-chuan-vaf-cover.webp',
+        imgWidth: 1200,
+        imgHeight: 675,
+        author: 'VAF Technical Team',
+        date: '10/08/2026',
+        desc: 'Tìm hiểu chứng chỉ VAF và các tiêu chuẩn ISO 9001, ISO 13485, EN 1822, ISO 16890 áp dụng trong sản xuất lọc khí, HEPA và thiết bị phòng sạch.',
+        faq: [
+            {
+                question: 'VAF có chứng chỉ ISO 9001 không?',
+                answer: 'VAF công bố áp dụng hệ thống quản lý chất lượng theo ISO 9001:2015. Khách hàng nên đối chiếu bản chứng chỉ hiện hành để xác nhận phạm vi, tổ chức chứng nhận và thời hạn hiệu lực.'
+            },
+            {
+                question: 'VAF có chứng chỉ ISO 13485 không?',
+                answer: 'VAF công bố chứng nhận ISO 13485:2016 liên quan đến hệ thống quản lý chất lượng trong phạm vi được ghi cụ thể trên chứng chỉ.'
+            },
+            {
+                question: 'Lọc HEPA VAF được đánh giá theo tiêu chuẩn nào?',
+                answer: 'Các sản phẩm HEPA và ULPA của VAF được phát triển cho những ứng dụng sử dụng phương pháp thử và phân loại theo EN 1822. Tiêu chuẩn và hồ sơ thử nghiệm cần được xác nhận theo từng model, đơn hàng hoặc dự án.'
+            },
+            {
+                question: 'ISO 16890 dùng cho loại lọc nào?',
+                answer: 'ISO 16890 chủ yếu dùng để đánh giá lọc khí thông gió theo hiệu suất đối với các nhóm hạt ePM1, ePM2.5, ePM10 và ISO Coarse.'
+            },
+            {
+                question: 'Lọc HEPA có chứng nhận GMP không?',
+                answer: 'GMP là hệ thống nguyên tắc thực hành sản xuất tốt áp dụng cho cơ sở và toàn bộ quá trình sản xuất, không phải cấp hiệu suất hay chứng nhận riêng của một bộ lọc HEPA. HEPA là một thành phần của giải pháp HVAC và phòng sạch hỗ trợ cơ sở đáp ứng yêu cầu kiểm soát môi trường theo GMP.'
+            },
+            {
+                question: 'Chứng chỉ ISO có thay thế Test Report của bộ lọc không?',
+                answer: 'Không. Chứng chỉ ISO xác nhận hệ thống quản lý trong một phạm vi cụ thể, còn Test Report ghi nhận kết quả thử nghiệm của mẫu hoặc sản phẩm theo phương pháp và điều kiện xác định.'
+            }
+        ],
+        content: `
+            <nav aria-label="Mục lục bài viết" class="bg-slate-50 border border-slate-200 rounded-2xl p-6 mb-10">
+                <h2 class="text-xl font-bold text-secondary mb-4">Nội dung chính</h2>
+                <ol class="list-decimal pl-6 space-y-2">
+                    <li><a class="text-primary hover:underline" href="#vai-tro-tieu-chuan">Vai trò của chứng chỉ và tiêu chuẩn lọc khí</a></li>
+                    <li><a class="text-primary hover:underline" href="#iso-9001">ISO 9001:2015</a></li>
+                    <li><a class="text-primary hover:underline" href="#iso-13485">ISO 13485:2016</a></li>
+                    <li><a class="text-primary hover:underline" href="#en-1822">EN 1822 dành cho HEPA và ULPA</a></li>
+                    <li><a class="text-primary hover:underline" href="#iso-16890">ISO 16890 cho lọc khí thông gió</a></li>
+                    <li><a class="text-primary hover:underline" href="#gmp">GMP và kiểm soát môi trường dược phẩm</a></li>
+                    <li><a class="text-primary hover:underline" href="#kiem-soat-chat-luong">Kiểm soát chất lượng tại VAF</a></li>
+                    <li><a class="text-primary hover:underline" href="#phan-biet-ho-so">Phân biệt CO, CQ, COA và Test Report</a></li>
+                    <li><a class="text-primary hover:underline" href="#faq">Câu hỏi thường gặp</a></li>
+                </ol>
+            </nav>
+
+            <p class="mb-5 leading-8"><strong>Chứng chỉ VAF</strong> và các tiêu chuẩn kỹ thuật là một phần quan trọng trong quá trình kiểm soát chất lượng lọc khí, thiết bị phòng sạch. Với những môi trường yêu cầu nghiêm ngặt như điện tử, dược phẩm, thực phẩm, bệnh viện và nhà máy công nghiệp, chất lượng sản phẩm không thể chỉ được đánh giá qua hình thức bên ngoài hoặc thông số trên catalogue.</p>
+            <p class="mb-5 leading-8">Tại VAF – Viet Air Filter, hệ thống quản lý và các giải pháp lọc khí được phát triển dựa trên những tiêu chuẩn phù hợp như ISO 9001:2015, ISO 13485:2016, EN 1822 và ISO 16890. Đây là nền tảng để kiểm soát nguyên vật liệu, quá trình sản xuất, thử nghiệm, hoàn thiện và hồ sơ bàn giao.</p>
+
+            <aside class="bg-amber-50 border-l-4 border-amber-500 rounded-xl p-6 my-8 leading-8">
+                <strong>Lưu ý quan trọng:</strong> ISO 9001 và ISO 13485 là tiêu chuẩn về hệ thống quản lý chất lượng. EN 1822 và ISO 16890 là tiêu chuẩn kỹ thuật dùng để thử nghiệm hoặc phân loại các nhóm lọc khí. Chứng nhận hệ thống quản lý không thay thế báo cáo thử nghiệm của một sản phẩm cụ thể.
+            </aside>
+
+            <h2 id="vai-tro-tieu-chuan" class="text-3xl font-bold text-secondary mt-10 mb-6">Vì sao chứng chỉ và tiêu chuẩn quan trọng với lọc khí?</h2>
+            <p class="mb-5 leading-8">Hai bộ lọc có thể giống nhau về kích thước, vật liệu khung và hình thức nhưng khác biệt đáng kể về hiệu suất vận hành. Khi lựa chọn lọc cho HVAC hoặc phòng sạch, kỹ sư cần xem xét đồng thời nhiều yếu tố:</p>
+            <ul class="list-disc pl-6 space-y-3 mb-8">
+                <li>Hiệu suất giữ bụi theo từng nhóm kích thước hạt.</li>
+                <li>Hiệu suất tại MPPS đối với lọc HEPA và ULPA.</li>
+                <li>Chênh áp ban đầu và giới hạn chênh áp cuối.</li>
+                <li>Lưu lượng khí thiết kế và khả năng chứa bụi.</li>
+                <li>Độ đồng đều của vật liệu lọc và độ kín của sản phẩm.</li>
+                <li>Khả năng kiểm soát rò rỉ, truy xuất và duy trì chất lượng giữa các lô.</li>
+            </ul>
+            <p class="mb-5 leading-8">Áp dụng đúng tiêu chuẩn giúp tạo ra một phương pháp đánh giá có cơ sở và có thể kiểm chứng. Tuy nhiên, tiêu chuẩn phù hợp phải được lựa chọn theo loại sản phẩm và điều kiện vận hành, thay vì sử dụng một chứng chỉ chung để đại diện cho mọi đặc tính kỹ thuật.</p>
+
+            <h2 id="iso-9001" class="text-3xl font-bold text-secondary mt-10 mb-6">ISO 9001:2015 – Hệ thống quản lý chất lượng</h2>
+            <p class="mb-5 leading-8">ISO 9001:2015 là tiêu chuẩn hệ thống quản lý chất lượng được áp dụng rộng rãi. Đối với doanh nghiệp sản xuất lọc khí, tiêu chuẩn này không chỉ đề cập đến chất lượng một sản phẩm riêng lẻ mà hướng đến cách tổ chức kiểm soát toàn bộ quá trình.</p>
+            <div class="grid md:grid-cols-2 gap-5 my-8">
+                <div class="border rounded-xl p-5"><h3 class="text-xl font-bold text-secondary mb-2">Kiểm soát đầu vào</h3><p>Tiếp nhận yêu cầu khách hàng, đánh giá nhà cung cấp và kiểm soát nguyên vật liệu.</p></div>
+                <div class="border rounded-xl p-5"><h3 class="text-xl font-bold text-secondary mb-2">Quản lý sản xuất</h3><p>Chuẩn hóa công đoạn, tài liệu kỹ thuật và tiêu chí kiểm tra trong quá trình.</p></div>
+                <div class="border rounded-xl p-5"><h3 class="text-xl font-bold text-secondary mb-2">Kiểm tra thành phẩm</h3><p>Đánh giá ngoại quan, kích thước và các thông số kỹ thuật theo phạm vi áp dụng.</p></div>
+                <div class="border rounded-xl p-5"><h3 class="text-xl font-bold text-secondary mb-2">Truy xuất và cải tiến</h3><p>Quản lý hồ sơ, sản phẩm không phù hợp và hoạt động cải tiến quy trình.</p></div>
+            </div>
+            <figure class="my-10 max-w-3xl mx-auto">
+                <img src="images/chung-chi/iso9001.webp" alt="Chứng chỉ ISO 9001 2015 của VAF Viet Air Filter" width="1536" height="1090" loading="lazy" class="w-full h-auto rounded-xl shadow-lg">
+                <figcaption class="text-center text-sm text-slate-500 mt-3">Hình ảnh chứng chỉ ISO 9001:2015 được VAF công bố.</figcaption>
+            </figure>
+            <p class="mb-5 leading-8">Với khách hàng công nghiệp, giá trị thực tế nằm ở khả năng duy trì sự ổn định giữa nhiều lần đặt hàng: đúng kích thước, vật liệu, cấu tạo, hiệu suất, chênh áp và chất lượng hoàn thiện theo yêu cầu đã thống nhất.</p>
+
+            <h2 id="iso-13485" class="text-3xl font-bold text-secondary mt-10 mb-6">ISO 13485:2016 – Quản lý chất lượng liên quan đến thiết bị y tế</h2>
+            <p class="mb-5 leading-8">ISO 13485:2016 là tiêu chuẩn về hệ thống quản lý chất lượng dành cho các tổ chức hoạt động trong lĩnh vực thiết bị y tế và chuỗi cung ứng liên quan. Môi trường y tế và phòng sạch thường yêu cầu kiểm soát hồ sơ, truy xuất và tính nhất quán cao hơn hệ thống thông gió tiện nghi thông thường.</p>
+            <p class="mb-5 leading-8">Các khu vực có thể yêu cầu giải pháp kiểm soát không khí nghiêm ngặt gồm phòng mổ, phòng xét nghiệm, khu vực sạch trong bệnh viện, nhà máy dược phẩm, phòng nghiên cứu và hệ thống sử dụng HEPA terminal filter. Phạm vi áp dụng cụ thể luôn cần được đối chiếu trên chứng chỉ hiện hành.</p>
+            <figure class="my-10 max-w-3xl mx-auto">
+                <img src="images/chung-chi/iso13485.webp" alt="Chứng chỉ ISO 13485 2016 của VAF" width="1536" height="1090" loading="lazy" class="w-full h-auto rounded-xl shadow-lg">
+                <figcaption class="text-center text-sm text-slate-500 mt-3">Chứng chỉ ISO 13485:2016 trong hệ thống hồ sơ chất lượng VAF.</figcaption>
+            </figure>
+
+            <h2 id="en-1822" class="text-3xl font-bold text-secondary mt-10 mb-6">EN 1822 – Tiêu chuẩn dành cho lọc EPA, HEPA và ULPA</h2>
+            <p class="mb-5 leading-8">Khác với ISO 9001, EN 1822 liên quan trực tiếp đến việc thử nghiệm và phân loại lọc khí hiệu suất cao EPA, HEPA và ULPA. Tiêu chuẩn này có ý nghĩa với HEPA Filter, ULPA Filter, Mini-pleat HEPA, HEPA sử dụng trong FFU, HEPA Box và các thiết bị phòng sạch tích hợp cấp lọc cuối.</p>
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">MPPS là gì?</h3>
+            <p class="mb-5 leading-8"><strong>MPPS</strong> là viết tắt của Most Penetrating Particle Size, tức kích thước hạt có khả năng xuyên qua vật liệu lọc cao nhất trong điều kiện thử xác định. Phương pháp đánh giá theo EN 1822 xem xét hiệu suất tại vùng kích thước hạt khó lọc nhất, vì vậy hiệu suất tại MPPS là thông số quan trọng khi phân loại HEPA và ULPA.</p>
+            <div class="grid md:grid-cols-2 gap-6 my-8">
+                <div class="bg-primary/5 border border-primary/20 rounded-xl p-6"><h3 class="text-xl font-bold text-secondary mb-3">HEPA H13</h3><p>Được sử dụng trong nhiều hệ thống phòng sạch, bệnh viện, dược phẩm, điện tử và HVAC yêu cầu độ sạch cao.</p></div>
+                <div class="bg-primary/5 border border-primary/20 rounded-xl p-6"><h3 class="text-xl font-bold text-secondary mb-3">HEPA H14</h3><p>Có hiệu suất cao hơn H13, phù hợp với khu vực cần kiểm soát hạt nghiêm ngặt hơn khi hệ thống đáp ứng yêu cầu lưu lượng và chênh áp.</p></div>
+            </div>
+            <p class="mb-5 leading-8">Không nên mặc định cấp lọc càng cao thì càng phù hợp. Hiệu suất, chênh áp, công suất quạt và chi phí vận hành phải được đánh giá như một hệ thống hoàn chỉnh. Xem thêm bài <a class="text-primary font-semibold hover:underline" href="/news/hepa-filter-la-gi" onclick="openNewsDetail('hepa-filter-la-gi'); return false;">HEPA Filter là gì</a>.</p>
+            <figure class="my-10 max-w-3xl mx-auto">
+                <img src="images/anh-tulieu/dop-test.webp" alt="Kiểm tra độ kín và rò rỉ lọc HEPA tại VAF" width="1920" height="1280" loading="lazy" class="w-full h-auto rounded-xl shadow-lg">
+                <figcaption class="text-center text-sm text-slate-500 mt-3">Hoạt động kiểm tra lọc khí tại VAF.</figcaption>
+            </figure>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">Vì sao cần kiểm tra rò rỉ lọc HEPA?</h3>
+            <p class="mb-5 leading-8">Hiệu suất của media chưa phải yếu tố duy nhất quyết định chất lượng bộ lọc hoàn chỉnh. Rò rỉ có thể xuất hiện trên media, tại điểm nối nếp gấp, vị trí tiếp giáp giữa media và khung, lớp keo làm kín hoặc điểm hư hỏng do vận chuyển. Với ứng dụng phù hợp, phương pháp aerosol như PAO có thể được dùng để đánh giá tính toàn vẹn và phát hiện vị trí rò rỉ.</p>
+
+            <h2 id="iso-16890" class="text-3xl font-bold text-secondary mt-10 mb-6">ISO 16890 – Tiêu chuẩn cho lọc khí thông gió</h2>
+            <p class="mb-5 leading-8">ISO 16890 đánh giá lọc khí thông gió dựa trên hiệu suất đối với các nhóm hạt <strong>ePM1, ePM2.5, ePM10 và ISO Coarse</strong>. Cách tiếp cận này phản ánh gần hơn đặc điểm bụi trong môi trường thực tế, nơi các hạt tồn tại ở nhiều kích thước khác nhau.</p>
+            <p class="mb-5 leading-8">Tiêu chuẩn có ý nghĩa đối với AHU, HVAC, MAU, hệ thống cấp khí tươi, nhà máy sản xuất, tòa nhà thương mại, trung tâm dữ liệu và các cơ sở thực phẩm, điện tử. Các dòng <a class="text-primary font-semibold hover:underline" href="/news/bag-filter-la-gi" onclick="openNewsDetail('bag-filter-la-gi'); return false;">Bag Filter</a>, Pre Filter, Fine Filter và V-Bank Filter cần được lựa chọn dựa trên hiệu suất, lưu lượng, chênh áp và yêu cầu chất lượng không khí.</p>
+            <figure class="my-10 max-w-3xl mx-auto">
+                <img src="images/chung-chi/16890.webp" alt="Tiêu chuẩn ISO 16890 cho lọc khí thông gió VAF" width="1536" height="1090" loading="lazy" class="w-full h-auto rounded-xl shadow-lg">
+                <figcaption class="text-center text-sm text-slate-500 mt-3">Tài liệu ISO 16890 được giới thiệu trong khu vực chứng chỉ chất lượng VAF.</figcaption>
+            </figure>
+
+            <h3 class="text-2xl font-bold text-secondary mt-8 mb-4">EN 779 và ISO 16890 có giống nhau không?</h3>
+            <p class="mb-5 leading-8">Không. EN 779 là hệ thống phân loại cũ với các cấp quen thuộc G3, G4, M5, M6, F7, F8 và F9. ISO 16890 sử dụng phương pháp đánh giá theo các nhóm hạt PM. Vì vậy, không nên chuyển đổi giữa hai hệ thống chỉ bằng một bảng tương đương đơn giản mà bỏ qua hiệu suất yêu cầu, lưu lượng, chênh áp, kích thước và điều kiện vận hành.</p>
+
+            <h2 id="gmp" class="text-3xl font-bold text-secondary mt-10 mb-6">GMP – Kiểm soát môi trường trong sản xuất dược phẩm</h2>
+            <p class="mb-5 leading-8"><strong>GMP</strong> (Good Manufacturing Practice – Thực hành tốt sản xuất) là hệ thống nguyên tắc nhằm bảo đảm sản phẩm được sản xuất và kiểm soát nhất quán trong những điều kiện phù hợp. Trong ngành dược phẩm, HVAC, lọc khí và phòng sạch là các thành phần quan trọng của giải pháp kiểm soát môi trường.</p>
+            <p class="mb-5 leading-8">Tùy sản phẩm, quy trình và cấp độ sạch, thiết kế môi trường có thể cần kiểm soát:</p>
+            <ul class="list-disc pl-6 space-y-3 mb-8">
+                <li>Nồng độ hạt trong không khí và cấp độ sạch của khu vực.</li>
+                <li>Hướng dòng khí và số lần trao đổi không khí.</li>
+                <li>Chênh áp giữa các phòng hoặc các vùng chức năng.</li>
+                <li>Nhiệt độ, độ ẩm và điều kiện tiện nghi của quá trình.</li>
+                <li>Nguy cơ nhiễm chéo và khả năng kiểm soát vi sinh.</li>
+                <li>Hoạt động giám sát, thẩm định và bảo trì hệ thống.</li>
+            </ul>
+            <div class="bg-primary/5 border-l-4 border-primary rounded-xl p-6 my-8 leading-8">
+                <strong>Cần hiểu đúng:</strong> GMP không phải cấp lọc và cũng không phải chứng nhận riêng dành cho một bộ lọc HEPA. Một bộ lọc HEPA đạt yêu cầu kỹ thuật chỉ là một thành phần trong hệ thống. Khả năng đáp ứng GMP phụ thuộc vào thiết kế tổng thể, phân vùng, HVAC, vận hành, thẩm định, giám sát và hệ thống quản lý chất lượng của cơ sở.
+            </div>
+            <p class="mb-5 leading-8">Các sản phẩm như HEPA Filter, HEPA Box, Fan Filter Unit (FFU), Air Shower, Pass Box và Laminar Air Flow có thể được tích hợp vào giải pháp phòng sạch dược phẩm. Việc lựa chọn phải dựa trên yêu cầu của khu vực, đánh giá rủi ro và hồ sơ thiết kế thay vì chỉ dựa vào tên thiết bị.</p>
+            <figure class="my-10 max-w-3xl mx-auto">
+                <img src="images/chung-chi/GMP.webp" alt="GMP và giải pháp kiểm soát môi trường phòng sạch dược phẩm VAF" width="990" height="1408" loading="lazy" class="w-full h-auto rounded-xl shadow-lg">
+                <figcaption class="text-center text-sm text-slate-500 mt-3">GMP liên quan đến toàn bộ hệ thống sản xuất và kiểm soát môi trường, không phải chứng nhận riêng của bộ lọc.</figcaption>
+            </figure>
+
+            <h2 id="kiem-soat-chat-luong" class="text-3xl font-bold text-secondary mt-10 mb-6">Từ tiêu chuẩn đến kiểm soát chất lượng thực tế tại VAF</h2>
+            <p class="mb-5 leading-8">Chứng chỉ chỉ thực sự có ý nghĩa khi các nguyên tắc quản lý được chuyển thành hoạt động kiểm soát trong sản xuất. Tùy từng sản phẩm và phạm vi kỹ thuật, quy trình có thể gồm:</p>
+            <ol class="list-decimal pl-6 space-y-4 mb-8">
+                <li><strong>Kiểm soát nguyên vật liệu:</strong> media, khung nhôm hoặc GI, keo sealant, gasket, lưới bảo vệ, separator và vật liệu túi.</li>
+                <li><strong>Kiểm soát quá trình:</strong> kích thước, số lượng và khoảng cách nếp gấp, độ chắc chắn của khung, độ kín và chất lượng liên kết.</li>
+                <li><strong>Kiểm tra thành phẩm:</strong> ngoại quan, kích thước, lưu lượng, chênh áp, hiệu suất và kiểm tra rò rỉ khi áp dụng.</li>
+                <li><strong>Quản lý hồ sơ:</strong> ghi nhận kết quả, nhận diện sản phẩm và duy trì thông tin truy xuất theo yêu cầu.</li>
+            </ol>
+            <figure class="my-10 max-w-4xl mx-auto">
+                <img src="images/anh-tulieu/Nhamayfront.webp" alt="Nhà máy sản xuất lọc khí VAF Viet Air Filter" width="1920" height="1080" loading="lazy" class="w-full h-auto rounded-xl shadow-lg">
+                <figcaption class="text-center text-sm text-slate-500 mt-3">Hình ảnh nhà máy VAF – Viet Air Filter.</figcaption>
+            </figure>
+
+            <h2 id="phan-biet-ho-so" class="text-3xl font-bold text-secondary mt-10 mb-6">CO, CQ, COA và Test Report khác chứng chỉ ISO thế nào?</h2>
+            <div class="overflow-x-auto my-8">
+                <table class="w-full border-collapse text-left">
+                    <thead><tr class="bg-secondary text-white"><th class="p-4">Tài liệu</th><th class="p-4">Ý nghĩa chính</th></tr></thead>
+                    <tbody>
+                        <tr class="border-b"><td class="p-4 font-bold">CO</td><td class="p-4">Certificate of Origin – tài liệu về xuất xứ hàng hóa trong trường hợp áp dụng.</td></tr>
+                        <tr class="border-b bg-slate-50"><td class="p-4 font-bold">CQ</td><td class="p-4">Certificate of Quality – xác nhận chất lượng hoặc sự phù hợp trong phạm vi công bố.</td></tr>
+                        <tr class="border-b"><td class="p-4 font-bold">COA</td><td class="p-4">Certificate of Analysis – ghi nhận kết quả phân tích hoặc kiểm tra sản phẩm, lô sản phẩm.</td></tr>
+                        <tr class="border-b bg-slate-50"><td class="p-4 font-bold">Test Report</td><td class="p-4">Báo cáo kết quả thử nghiệm theo phương pháp, thiết bị và điều kiện cụ thể.</td></tr>
+                        <tr class="border-b"><td class="p-4 font-bold">ISO Certificate</td><td class="p-4">Chứng nhận hệ thống quản lý đáp ứng phạm vi của tiêu chuẩn tương ứng.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="mb-5 leading-8">Ví dụ, ISO 9001:2015 phản ánh hệ thống quản lý chất lượng, trong khi Test Report theo EN 1822 có thể phản ánh kết quả thử hoặc phân loại của một mẫu lọc HEPA cụ thể. Bộ phận kỹ thuật, mua hàng và QA/QC cần xác định chính xác loại hồ sơ phải cung cấp ngay từ giai đoạn báo giá.</p>
+
+            <h2 class="text-3xl font-bold text-secondary mt-10 mb-6">Giải pháp lọc khí VAF phục vụ những lĩnh vực nào?</h2>
+            <p class="mb-5 leading-8">Hệ thống quản lý chất lượng và tiêu chuẩn kỹ thuật đặc biệt quan trọng với các ngành điện tử, bán dẫn, dược phẩm, bệnh viện, thực phẩm, đồ uống, nhà máy công nghiệp, tòa nhà thương mại và trung tâm dữ liệu.</p>
+            <p class="mb-5 leading-8">Danh mục giải pháp VAF gồm Pre Filter, Pleated Filter, Bag Filter, Fine Filter, V-Bank Filter, HEPA/ULPA Filter, Chemical Filter, FFU, HEPA Box, Air Shower, Pass Box, Laminar Air Flow và nhiều thiết bị phòng sạch khác. Xem <a class="text-primary font-semibold hover:underline" href="/products" onclick="handleNav('products'); return false;">danh mục sản phẩm lọc khí VAF</a> hoặc <a class="text-primary font-semibold hover:underline" href="/projects" onclick="handleNav('projects'); return false;">các dự án tiêu biểu</a>.</p>
+
+            <h2 id="faq" class="text-3xl font-bold text-secondary mt-10 mb-6">Câu hỏi thường gặp về chứng chỉ VAF</h2>
+            <div class="space-y-5 mb-10">
+                <section class="border rounded-xl p-6"><h3 class="text-xl font-bold text-secondary mb-3">VAF có chứng chỉ ISO 9001 không?</h3><p>VAF công bố áp dụng hệ thống quản lý chất lượng theo ISO 9001:2015. Khách hàng nên đối chiếu bản chứng chỉ hiện hành để xác nhận phạm vi, tổ chức chứng nhận và thời hạn hiệu lực.</p></section>
+                <section class="border rounded-xl p-6"><h3 class="text-xl font-bold text-secondary mb-3">VAF có chứng chỉ ISO 13485 không?</h3><p>VAF công bố chứng nhận ISO 13485:2016 liên quan đến hệ thống quản lý chất lượng trong phạm vi được ghi cụ thể trên chứng chỉ.</p></section>
+                <section class="border rounded-xl p-6"><h3 class="text-xl font-bold text-secondary mb-3">Lọc HEPA VAF được đánh giá theo tiêu chuẩn nào?</h3><p>Các sản phẩm HEPA và ULPA được phát triển cho ứng dụng sử dụng phương pháp thử, phân loại theo EN 1822. Hồ sơ cụ thể cần được xác nhận theo từng model hoặc dự án.</p></section>
+                <section class="border rounded-xl p-6"><h3 class="text-xl font-bold text-secondary mb-3">Lọc HEPA có chứng nhận GMP không?</h3><p>Không nên mô tả một bộ lọc riêng lẻ là “được chứng nhận GMP”. GMP áp dụng cho cơ sở và toàn bộ quá trình sản xuất; HEPA là một thành phần hỗ trợ hệ thống HVAC và phòng sạch kiểm soát môi trường theo yêu cầu thiết kế.</p></section>
+                <section class="border rounded-xl p-6"><h3 class="text-xl font-bold text-secondary mb-3">Có thể yêu cầu hồ sơ kỹ thuật khi mua lọc không?</h3><p>Tùy sản phẩm và phạm vi cung cấp, khách hàng có thể trao đổi trước với VAF về catalogue, thông số kỹ thuật, chứng chỉ, CO, CQ, COA hoặc báo cáo thử nghiệm cần thiết cho quá trình nghiệm thu.</p></section>
+            </div>
+
+            <section class="bg-secondary text-white rounded-2xl p-8 my-10">
+                <h2 class="text-3xl font-bold mb-4">Lựa chọn giải pháp lọc khí phù hợp cùng VAF</h2>
+                <p class="leading-8 mb-5">Mỗi hệ thống HVAC và phòng sạch có yêu cầu riêng về hiệu suất, lưu lượng, chênh áp, kích thước, vật liệu và điều kiện môi trường. Đội ngũ VAF hỗ trợ đánh giá các thông số này để lựa chọn giải pháp phù hợp và xác định hồ sơ kỹ thuật cần thiết.</p>
+                <p class="font-semibold">VAF – Viet Air Filter · Hotline: 1900 8949 · Website: vietfil.com</p>
+            </section>
+        `
+    },
+
+    {
         id: 'bag-filter-la-gi',
         title: 'Bag Filter Là Gì? Cấu Tạo, Phân Loại Và Cách Lựa Chọn',
         seoTitle: 'Bag Filter Là Gì? Cấu Tạo, Phân Loại M5–F9',

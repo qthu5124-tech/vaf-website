@@ -82,10 +82,11 @@ for (const article of news) {
 
 for (const job of careers) {
     if (!job.id) continue;
-    add(`/tuyen-dung/${job.id}`, DEFAULT_LASTMOD, { title: `${job.title} | Tuyển Dụng VAF`, description: job.summary, language: 'vi', alternate: careersEn[job.id] ? `/en/tuyen-dung/${job.id}` : null, type: 'JobPosting', job });
+    const jobLastmod = job.datePosted || DEFAULT_LASTMOD;
+    add(`/tuyen-dung/${job.id}`, jobLastmod, { title: `${job.title} | Tuyển Dụng VAF`, description: job.summary, language: 'vi', alternate: careersEn[job.id] ? `/en/tuyen-dung/${job.id}` : null, type: job.isMultiPosition ? 'CollectionPage' : 'JobPosting', job });
     if (careersEn[job.id]) {
         const translatedJob = { ...job, ...careersEn[job.id] };
-        add(`/en/tuyen-dung/${job.id}`, DEFAULT_LASTMOD, { title: `${translatedJob.title} | VAF Careers`, description: translatedJob.summary, language: 'en', alternate: `/tuyen-dung/${job.id}`, type: 'JobPosting', job: translatedJob });
+        add(`/en/tuyen-dung/${job.id}`, jobLastmod, { title: `${translatedJob.title} | VAF Careers`, description: translatedJob.summary, language: 'en', alternate: `/tuyen-dung/${job.id}`, type: translatedJob.isMultiPosition ? 'CollectionPage' : 'JobPosting', job: translatedJob });
     }
 }
 
@@ -150,6 +151,26 @@ function renderSeoHtml(path, seo) {
                 }
             },
             url: canonical
+        };
+    }
+    if (type === 'CollectionPage' && seo.job) {
+        const job = seo.job;
+        schema = {
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: job.title,
+            description: job.summary,
+            url: canonical,
+            datePublished: job.datePosted || DEFAULT_LASTMOD,
+            about: {
+                '@type': 'ItemList',
+                itemListElement: (job.roleTitles || []).map((title, index) => ({
+                    '@type': 'ListItem',
+                    position: index + 1,
+                    item: { '@type': 'Occupation', name: title, occupationLocation: { '@type': 'City', name: job.location } }
+                }))
+            },
+            publisher: { '@type': 'Organization', name: 'VAF - Viet Air Filter', url: SITE_URL }
         };
     }
 

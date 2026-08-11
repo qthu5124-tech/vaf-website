@@ -5,6 +5,50 @@
  */
 window.careersData = [
     {
+        id: 'tuyen-dung-nhieu-vi-tri-san-xuat',
+        isMultiPosition: true,
+        roleTitles: ['Tổ trưởng/Tổ phó sản xuất', 'Công nhân sản xuất phòng sạch', 'Công nhân sản xuất tổ lọc', 'Thợ hàn/Nhân viên hàn'],
+        title: 'VAF tuyển dụng nhiều vị trí sản xuất',
+        department: 'Sản xuất',
+        type: 'Toàn thời gian',
+        location: 'TP. Hồ Chí Minh',
+        datePosted: '2026-08-11',
+        deadline: null,
+        experience: 'Có vị trí không yêu cầu kinh nghiệm',
+        salary: 'Thỏa thuận',
+        contactPhone: '0866540986',
+        openings: '6–7',
+        workingHours: 'Trao đổi khi phỏng vấn',
+        summary: 'VAF tuyển 6–7 nhân sự sản xuất gồm Tổ trưởng/Tổ phó, công nhân phòng sạch, công nhân tổ lọc và thợ hàn; có vị trí được đào tạo từ đầu.',
+        description: [
+            'TỔ TRƯỞNG / TỔ PHÓ SẢN XUẤT – 02 người: Hỗ trợ quản lý, điều phối và phân công công việc trong tổ; theo dõi tiến độ, phối hợp bảo đảm chất lượng sản phẩm; tổng hợp thông tin, báo cáo và hướng dẫn công nhân trong quá trình sản xuất.',
+            'CÔNG NHÂN SẢN XUẤT PHÒNG SẠCH – 01 người: Tham gia gia công, lắp ráp sản phẩm và thiết bị phòng sạch; làm việc theo quy trình, sử dụng dụng cụ sản xuất, tự kiểm tra sản phẩm và phối hợp hoàn thành kế hoạch của tổ.',
+            'CÔNG NHÂN SẢN XUẤT TỔ LỌC – 01 người: Tham gia các công đoạn gia công, lắp ráp và hoàn thiện sản phẩm lọc khí; kiểm tra chất lượng trong quá trình sản xuất; sắp xếp nguyên vật liệu, giữ khu vực làm việc gọn gàng và tuân thủ an toàn lao động.',
+            'THỢ HÀN / NHÂN VIÊN HÀN – 02 đến 03 người: Thực hiện hàn, gia công và lắp ráp sản phẩm theo bản vẽ hoặc hướng dẫn; sử dụng dụng cụ, thiết bị hàn; bảo đảm mối hàn đạt yêu cầu và phối hợp với các bộ phận để hoàn thành đúng tiến độ.',
+            'Địa điểm làm việc: Nhà máy VAF, Lô C3.4, đường N14, Khu công nghiệp Đồng An 2, phường Hòa Phú, Thành phố Hồ Chí Minh.',
+            'Ứng viên vui lòng ghi rõ vị trí muốn ứng tuyển trong hồ sơ để bộ phận tuyển dụng thuận tiện liên hệ và sắp xếp phỏng vấn.'
+        ],
+        requirements: [
+            'Tổ trưởng/Tổ phó: Có kinh nghiệm quản lý nhóm sản xuất ở vị trí tương đương; biết sử dụng máy tính, Microsoft Excel và Word; có khả năng tổ chức, sắp xếp và phối hợp công việc.',
+            'Công nhân phòng sạch: Biết sử dụng máy tính cơ bản, có sức khỏe tốt, chăm chỉ và có khả năng tiếp thu công việc mới; kinh nghiệm sản xuất, cơ khí hoặc phòng sạch là một lợi thế.',
+            'Công nhân tổ lọc: Lao động phổ thông, không yêu cầu kinh nghiệm chuyên môn; có sức khỏe tốt, chịu khó, trách nhiệm và mong muốn làm việc ổn định.',
+            'Thợ hàn: Trình độ phổ thông trở lên; ưu tiên người có kinh nghiệm hoặc tay nghề hàn. Ứng viên chưa có tay nghề nhưng chăm chỉ, năng nổ và ham học hỏi có thể được xem xét đào tạo.',
+            'Có tinh thần trách nhiệm, chủ động, tuân thủ quy trình và phối hợp tốt với đồng nghiệp.',
+            'Mong muốn gắn bó lâu dài và sẵn sàng học hỏi kỹ năng mới trong môi trường nhà máy.'
+        ],
+        benefits: [
+            'Lương thỏa thuận theo năng lực và kinh nghiệm thực tế.',
+            'Tham gia đầy đủ BHXH, BHYT và bảo hiểm tai nạn lao động theo chính sách áp dụng.',
+            'Được xem xét tăng lương hằng năm dựa trên năng lực và kết quả làm việc.',
+            'Hưởng các khoản phụ cấp như cơm, công tác phí và xăng xe khi đáp ứng điều kiện áp dụng.',
+            'Môi trường làm việc thân thiện, chuyên nghiệp và ổn định trong lĩnh vực sản xuất lọc khí, thiết bị phòng sạch.',
+            'Được hướng dẫn công việc và đào tạo nâng cao tay nghề; ứng viên phù hợp chưa có nhiều kinh nghiệm vẫn có cơ hội được đào tạo từ đầu.',
+            'Lộ trình phát triển và cơ hội thăng tiến rõ ràng dành cho nhân sự có năng lực, trách nhiệm và khả năng quản lý tốt.',
+            'ỨNG TUYỂN DỄ DÀNG – PHỎNG VẤN LIỀN TAY: Không cần hồ sơ phức tạp; VAF chào đón ứng viên có tinh thần làm việc tốt và mong muốn phát triển lâu dài.',
+            'Ứng tuyển trực tuyến trên website hoặc liên hệ số điện thoại 0866 540 986 để được hỗ trợ.'
+        ]
+    },
+    {
         id: 'nhan-vien-qc-phong-sach',
         title: 'Nhân viên QC phòng sạch – Kiểm tra chất lượng lọc HEPA',
         department: 'Chất lượng',
