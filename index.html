@@ -156,8 +156,15 @@
                 <div class="desktop-main-menu hidden lg:flex items-center">
                     <a href="/" onclick="navigate('home');return false;" class="nav-link active" data-target="home" data-i18n="nav_home">Trang chủ</a>
                     <a href="/about" onclick="navigate('about');return false;" class="nav-link" data-target="about" data-i18n="nav_about">Về VAF</a>
-                    <a href="/products" onclick="navigate('products');return false;" class="nav-link" data-target="products" data-i18n="nav_products">Sản phẩm</a>
-                    <a href="/loc-khi-cong-nghiep" onclick="navigate('loc-khi-cong-nghiep');return false;" class="nav-link" data-target="loc-khi-cong-nghiep" title="Giải pháp lọc khí công nghiệp">Lọc khí CN</a>
+                    <div class="relative group">
+                        <a href="/products" onclick="navigate('products');return false;" class="nav-link inline-flex items-center" data-target="products"><span data-i18n="nav_products">Sản phẩm</span><i class="fas fa-chevron-down text-[9px] ml-1.5 opacity-60" aria-hidden="true"></i></a>
+                        <div class="absolute left-0 top-full pt-2 w-64 invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0 transition z-50">
+                            <div class="bg-white rounded-xl border border-slate-100 shadow-xl p-2">
+                                <a href="/products" onclick="navigate('products');return false;" class="block px-4 py-3 rounded-lg text-sm font-bold text-slate-700 hover:bg-slate-50 hover:text-primary">Tất cả sản phẩm</a>
+                                <a href="/loc-khi-cong-nghiep" onclick="navigate('loc-khi-cong-nghiep');return false;" class="block px-4 py-3 rounded-lg text-sm font-bold text-slate-700 hover:bg-red-50 hover:text-primary">Giải pháp lọc khí công nghiệp</a>
+                            </div>
+                        </div>
+                    </div>
                     <a href="/projects" onclick="navigate('projects');return false;" class="nav-link" data-target="projects" data-i18n="nav_projects">Dự án</a>
                     <a href="/news" onclick="navigate('news');return false;" class="nav-link" data-target="news" data-i18n="nav_news">Tin tức</a>
                     <!-- Menu Tuyển dụng desktop -->
@@ -200,7 +207,7 @@
                 <a href="/" onclick="handleNav('home'); return false;" data-i18n="nav_home">Trang chủ</a>
                 <a href="/about" onclick="handleNav('about'); return false;" data-i18n="nav_about">Về VAF</a>
                 <a href="/products" onclick="handleNav('products'); return false;" data-i18n="nav_products">Sản phẩm</a>
-                <a href="/loc-khi-cong-nghiep" onclick="handleNav('loc-khi-cong-nghiep'); return false;">Lọc khí công nghiệp</a>
+                <a href="/loc-khi-cong-nghiep" onclick="handleNav('loc-khi-cong-nghiep'); return false;" class="ml-4 pl-4 border-l-2 border-red-100 text-sm text-primary">↳ Giải pháp lọc khí công nghiệp</a>
                 <a href="/projects" onclick="handleNav('projects'); return false;" data-i18n="nav_projects">Dự án</a>
                 <a href="/news" onclick="handleNav('news'); return false;" data-i18n="nav_news">Tin tức</a>
                 <!-- Menu Tuyển dụng mobile -->
