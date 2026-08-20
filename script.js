@@ -831,7 +831,6 @@ async function handleRouting() {
 let activeTarget = page;
 
 if (page === "product") activeTarget = "products";
-if (page === "loc-khi-cong-nghiep") activeTarget = "products";
 if (page === "project") activeTarget = "projects";
 if (page === "tuyen-dung") activeTarget = "tuyen-dung";
 
