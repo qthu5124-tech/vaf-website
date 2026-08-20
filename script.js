@@ -879,7 +879,7 @@ if (page === "tuyen-dung") activeTarget = "tuyen-dung";
             title: 'Lọc Khí Công Nghiệp Cho Nhà Máy & Phòng Sạch | VAF',
             description: 'VAF sản xuất và tư vấn lọc khí công nghiệp: lọc thô, lọc tinh, HEPA ULPA và carbon cho AHU, FFU, nhà máy và phòng sạch.',
             path: '/loc-khi-cong-nghiep',
-            image: '/images/anh-tulieu/Nhamayfront.webp',
+            image: '/images/anh-tulieu/industrial-air-filtration-hero-ai.jpg',
             includeEnglishAlternate: false,
             indexable: currentLang !== 'en',
             structuredData: {

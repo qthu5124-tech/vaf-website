@@ -55,7 +55,7 @@ add('/tuyen-dung', DEFAULT_LASTMOD, { title: 'Tuyển Dụng VAF | Cơ Hội Ngh
 add('/loc-khi-cong-nghiep', '2026-08-20', {
     title: 'Lọc Khí Công Nghiệp Cho Nhà Máy & Phòng Sạch | VAF',
     description: 'VAF sản xuất và tư vấn lọc khí công nghiệp: lọc thô, lọc tinh, HEPA ULPA và carbon cho AHU, FFU, nhà máy và phòng sạch.',
-    image: 'images/anh-tulieu/Nhamayfront.webp',
+    image: 'images/anh-tulieu/industrial-air-filtration-hero-ai.jpg',
     language: 'vi',
     type: 'Service'
 });
