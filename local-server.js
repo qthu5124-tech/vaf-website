@@ -20,6 +20,12 @@ http.createServer((req, res) => {
     const urlPath = decodeURIComponent(req.url.split('?')[0]);
     let filePath = path.join(root, urlPath === '/' ? 'index.html' : urlPath);
 
+    // Match Vercel's cleanUrls behavior so route-specific SEO HTML can be
+    // inspected locally at /route instead of only at /route.html.
+    if (!path.extname(filePath) && fs.existsSync(`${filePath}.html`)) {
+        filePath = `${filePath}.html`;
+    }
+
     if (!filePath.startsWith(root) || !fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
         filePath = path.join(root, 'index.html');
     }

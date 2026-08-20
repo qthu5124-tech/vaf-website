@@ -147,6 +147,7 @@ async function setLang(lang) {
 
 let projects = window.projects || [];
 const viewPartials = {
+    'view-industrial-air-filtration': '/partials/industrial-air-filtration.html',
     'view-about': '/partials/about.html',
     'view-news': '/partials/news.html',
     'view-products': '/partials/products.html',
@@ -753,6 +754,10 @@ function navigate(target) {
             url = "/products";
             break;
 
+        case "loc-khi-cong-nghiep":
+            url = "/loc-khi-cong-nghiep";
+            break;
+
         case "projects":
             url = "/projects";
             break;
@@ -826,6 +831,7 @@ async function handleRouting() {
 let activeTarget = page;
 
 if (page === "product") activeTarget = "products";
+if (page === "loc-khi-cong-nghiep") activeTarget = "products";
 if (page === "project") activeTarget = "projects";
 if (page === "tuyen-dung") activeTarget = "tuyen-dung";
 
@@ -867,6 +873,47 @@ if (page === "tuyen-dung") activeTarget = "tuyen-dung";
     }
     else if (page === 'product' && param) {
         await executeProductDetail(param);
+    }
+    else if (page === 'loc-khi-cong-nghiep') {
+        setPageSeo({
+            title: 'Lọc Khí Công Nghiệp Cho Nhà Máy & Phòng Sạch | VAF',
+            description: 'VAF sản xuất và tư vấn lọc khí công nghiệp: lọc thô, lọc tinh, HEPA ULPA và carbon cho AHU, FFU, nhà máy và phòng sạch.',
+            path: '/loc-khi-cong-nghiep',
+            image: '/images/anh-tulieu/Nhamayfront.webp',
+            includeEnglishAlternate: false,
+            indexable: currentLang !== 'en',
+            structuredData: {
+                '@context': 'https://schema.org',
+                '@graph': [
+                    {
+                        '@type': 'Service',
+                        name: 'Giải pháp lọc khí công nghiệp',
+                        description: 'Tư vấn và sản xuất bộ lọc khí công nghiệp nhiều cấp cho AHU, FFU, nhà máy và phòng sạch.',
+                        provider: { '@type': 'Organization', name: 'VAF - Viet Air Filter', url: SITE_URL },
+                        areaServed: { '@type': 'Country', name: 'Việt Nam' },
+                        url: SITE_URL + '/loc-khi-cong-nghiep'
+                    },
+                    {
+                        '@type': 'BreadcrumbList',
+                        itemListElement: [
+                            { '@type': 'ListItem', position: 1, name: 'Trang chủ', item: SITE_URL + '/' },
+                            { '@type': 'ListItem', position: 2, name: 'Lọc khí công nghiệp', item: SITE_URL + '/loc-khi-cong-nghiep' }
+                        ]
+                    },
+                    {
+                        '@type': 'FAQPage',
+                        mainEntity: [
+                            { '@type': 'Question', name: 'Bao lâu cần thay bộ lọc khí?', acceptedAnswer: { '@type': 'Answer', text: 'Thời điểm thay lọc cần dựa trên chênh áp, tải bụi, thời gian vận hành và yêu cầu vệ sinh.' } },
+                            { '@type': 'Question', name: 'Có nên chọn HEPA H14 thay H13 trong mọi trường hợp?', acceptedAnswer: { '@type': 'Answer', text: 'Không. Cấp lọc phải phù hợp tiêu chuẩn khu vực, lưu lượng, chênh áp và thiết kế quạt.' } },
+                            { '@type': 'Question', name: 'VAF có sản xuất kích thước theo yêu cầu không?', acceptedAnswer: { '@type': 'Answer', text: 'Có. Khách hàng nên cung cấp kích thước, lưu lượng, cấp lọc, vật liệu khung và điều kiện vận hành.' } }
+                        ]
+                    }
+                ]
+            }
+        });
+        await ensureView('view-industrial-air-filtration');
+        switchView('view-industrial-air-filtration');
+        scrollToTop();
     }
     else if (page === 'projects') {
         setPageSeo({

@@ -52,6 +52,14 @@ add('/news', DEFAULT_LASTMOD, { title: 'Kiến Thức Lọc Khí, HEPA & Phòng 
 add('/contact', DEFAULT_LASTMOD, { title: 'Liên Hệ Tư Vấn & Báo Giá Lọc Khí | VAF', description: 'Liên hệ VAF để được tư vấn và báo giá lọc khí, HEPA, HVAC cùng thiết bị phòng sạch theo yêu cầu.', language: 'vi', alternate: '/en/contact' });
 add('/tuyen-dung', DEFAULT_LASTMOD, { title: 'Tuyển Dụng VAF | Cơ Hội Nghề Nghiệp HVAC', description: 'Cơ hội việc làm tại VAF trong lĩnh vực lọc khí, HVAC, sản xuất và công nghệ phòng sạch.', language: 'vi', alternate: '/en/tuyen-dung' });
 
+add('/loc-khi-cong-nghiep', '2026-08-20', {
+    title: 'Lọc Khí Công Nghiệp Cho Nhà Máy & Phòng Sạch | VAF',
+    description: 'VAF sản xuất và tư vấn lọc khí công nghiệp: lọc thô, lọc tinh, HEPA ULPA và carbon cho AHU, FFU, nhà máy và phòng sạch.',
+    image: 'images/anh-tulieu/Nhamayfront.webp',
+    language: 'vi',
+    type: 'Service'
+});
+
 add('/en', DEFAULT_LASTMOD, { title: 'VAF | Air Filters & Cleanroom Equipment Manufacturer', description: 'VAF manufactures pre-filters, bag filters, HEPA and ULPA filters, FFU and cleanroom equipment.', language: 'en', alternate: '/' });
 add('/en/about', DEFAULT_LASTMOD, { title: 'About VAF | Air Filter Manufacturer', description: 'Learn about VAF, our air filter manufacturing facilities, quality systems and cleanroom solutions.', language: 'en', alternate: '/about' });
 add('/en/products', DEFAULT_LASTMOD, { title: 'Air Filters & Cleanroom Equipment | VAF', description: 'Explore VAF pre-filters, bag filters, HEPA and ULPA filters, FFU, air showers and cleanroom equipment.', language: 'en', alternate: '/products' });
@@ -175,6 +183,19 @@ function renderSeoHtml(path, seo) {
     }
 
     let html = fs.readFileSync('index.html', 'utf8');
+    if (path === '/loc-khi-cong-nghiep') {
+        const landingPage = fs.readFileSync('partials/industrial-air-filtration.html', 'utf8')
+            .replace('class="page-section bg-white"', 'class="page-section active bg-white"');
+        const homeStart = html.indexOf('<div id="view-home"');
+        const lazyRoot = '<div id="lazy-view-root"></div>';
+        const lazyStart = html.indexOf(lazyRoot);
+        if (homeStart !== -1 && lazyStart !== -1) {
+            html = html.slice(0, homeStart) + `<div id="lazy-view-root">${landingPage}</div>` + html.slice(lazyStart + lazyRoot.length);
+        }
+        // The shared shell contains a hidden careers hero. It must not introduce
+        // a second H1 into the server-rendered landing page document outline.
+        html = html.replace(/<h1([^>]*)>([\s\S]*?)<\/h1>/, '<div$1>$2</div>');
+    }
     html = html.replace('<html lang="vi">', `<html lang="${seo.language || 'vi'}">`);
     html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${title}</title>`);
     html = replaceMeta(html, /<meta name="description" content="[^"]*">/, `<meta name="description" content="${description}">`);
