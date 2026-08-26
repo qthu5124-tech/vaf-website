@@ -129,7 +129,9 @@ function renderProductHtml(product, language) {
         ? product.apps
         : ((product.apps && (product.apps[language] || product.apps.vi || product.apps.en)) || []);
     const apps = applications.map(item => `<li class="marker:text-primary">${escapeXml(item)}</li>`).join('');
-    const related = products.filter(item => item.id !== product.id && item.cat === product.cat).slice(0, 3);
+    const related = Array.isArray(product.relatedIds)
+        ? product.relatedIds.map(id => products.find(item => item.id === id)).filter(Boolean).slice(0, 3)
+        : products.filter(item => item.id !== product.id && item.cat === product.cat).slice(0, 3);
     const relatedCards = related.map(item => {
         const relatedName = localized(item.name, language);
         const prefix = language === 'en' ? '/en' : '';

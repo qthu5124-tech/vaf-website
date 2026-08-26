@@ -2569,9 +2569,17 @@ const products = [
             vi: 'Ultracel I - HC (HEPA Lưu Lượng Cao)',
             en: 'Ultracel I - HC (High Capacity HEPA)'
         },
+        seoTitle: {
+            vi: 'Lọc HEPA H13 H14 Lưu Lượng Cao Ultracel I-HC | VAF',
+            en: 'Ultracel I-HC High Capacity H13 H14 HEPA Filter | VAF'
+        },
+        seoDescription: {
+            vi: 'Lọc HEPA Ultracel I-HC cấp H13/H14 cho hệ thống lưu lượng cao, vận tốc 1,5–2,5 m/s, lưu lượng đến 4.180 m³/h. Xem thông số và báo giá VAF.',
+            en: 'Ultracel I-HC H13/H14 high-capacity HEPA filter for 1.5–2.5 m/s velocity and airflow up to 4,180 m³/h. View technical data and request a quote.'
+        },
         desc: {
-            vi: 'HEPA vách nhôm lưu lượng gió cao, tiết kiệm không gian lắp đặt.',
-            en: 'High capacity HEPA filter with aluminum separators for higher airflow requirements.'
+            vi: 'Ultracel I-HC là lọc HEPA vách nhôm dành cho hệ thống cần lưu lượng lớn trong không gian lắp đặt giới hạn. Cấu hình H13/H14 có nhiều kích thước và chiều sâu, phù hợp lắp trên đường ống hoặc tại vị trí lọc cuối.',
+            en: 'Ultracel I-HC is an aluminum-separator HEPA filter for systems requiring higher airflow within limited installation space. H13/H14 configurations are available in multiple dimensions and depths for in-duct or terminal filtration.'
         },
         apps: {
             vi: ['Hệ thống cần lưu lượng gió lớn', 'Lọc đầu cuối hoặc trên đường ống'],
@@ -2797,9 +2805,17 @@ const products = [
             vi: 'Ultracel I - HT (HEPA Chịu Nhiệt)',
             en: 'Ultracel I - HT (High Temp HEPA)'
         },
+        seoTitle: {
+            vi: 'Lọc HEPA Chịu Nhiệt H13 H14 Đến 400°C | VAF',
+            en: 'Ultracel I-HT H13 H14 High Temperature HEPA | VAF'
+        },
+        seoDescription: {
+            vi: 'Lọc HEPA chịu nhiệt Ultracel I-HT cấp H13/H14, khung inox, vật liệu làm kín chuyên dụng cho lò sấy và đường hầm sấy vô trùng đến 400°C.',
+            en: 'Ultracel I-HT H13/H14 high-temperature HEPA filter with stainless-steel frame and specialist sealant for ovens and depyrogenation tunnels up to 400°C.'
+        },
         desc: {
-            vi: 'HEPA chịu nhiệt độ cao (250°C - 400°C), keo Ceramic chuyên dụng.',
-            en: 'High temperature resistant HEPA (up to 400°C) with Ceramic sealant.'
+            vi: 'Ultracel I-HT là lọc HEPA H13/H14 chịu nhiệt cho lò sấy, đường hầm sấy vô trùng và quy trình nhiệt độ cao. Khung inox cùng vật liệu làm kín chuyên dụng được lựa chọn theo nhiệt độ vận hành và chu kỳ gia nhiệt thực tế.',
+            en: 'Ultracel I-HT is an H13/H14 high-temperature HEPA filter for ovens, depyrogenation tunnels and thermal processes. The stainless-steel frame and specialist sealing system are selected according to operating temperature and heating cycle.'
         },
         apps: {
             vi: ['Đường hầm sấy vô trùng (Depyrogenation tunnels)', 'Lò sấy dược phẩm', 'Công nghiệp thực phẩm'],
@@ -3025,9 +3041,18 @@ const products = [
             vi: 'Ultracel II - SC (HEPA Mini-pleat)',
             en: 'Ultracel II - SC (Standard Capacity Mini-pleat)'
         },
+        seoTitle: {
+            vi: 'Lọc HEPA Mini-Pleat H13 H14 U15 Cho FFU | VAF',
+            en: 'Mini-Pleat H13 H14 U15 HEPA Filter for FFU | VAF'
+        },
+        seoDescription: {
+            vi: 'Lọc HEPA mini-pleat Ultracel II-SC dày 69 mm, cấp H13, H14, U15 cho FFU và trần phòng sạch, vận tốc mặt 0,45 m/s.',
+            en: 'Ultracel II-SC 69 mm mini-pleat H13, H14 and U15 filter for FFU and cleanroom ceilings at 0.45 m/s face velocity.'
+        },
+        relatedIds: ['ffu', 'ultracel-ii-gel', 'ultracel-i-sc'],
         desc: {
-            vi: 'HEPA mỏng 69mm, công nghệ Mini-pleat, lưu lượng tiêu chuẩn (0.45m/s).',
-            en: 'Slim 69mm Mini-pleat HEPA, Standard airflow capacity (0.45m/s).'
+            vi: 'Ultracel II-SC là lọc HEPA/ULPA mini-pleat dày 69 mm, tối ưu cho FFU và hệ trần phòng sạch. Kết cấu không vách nhôm giúp tăng diện tích vật liệu, giảm khối lượng và phù hợp các cấp H13, H14 hoặc U15.',
+            en: 'Ultracel II-SC is a 69 mm mini-pleat HEPA/ULPA filter for FFU and cleanroom ceiling systems. Its separator-free construction increases media area, reduces weight and supports H13, H14 or U15 classes.'
         },
         apps: {
             vi: ['Phòng sạch Class 1 - 1.000', 'Lắp cho FFU hoặc trần phòng sạch'],
@@ -3628,9 +3653,17 @@ const products = [
             vi: 'Ultracel II - GEL (Gel Seal)',
             en: 'Ultracel II - GEL (Gel Seal HEPA)'
         },
+        seoTitle: {
+            vi: 'Lọc HEPA Gel Seal H13 H14 U15 Cho Phòng Sạch | VAF',
+            en: 'H13 H14 U15 Gel Seal HEPA Filter for Cleanrooms | VAF'
+        },
+        seoDescription: {
+            vi: 'Lọc HEPA gel seal Ultracel II cấp H13, H14, U15 cho phòng sạch dược phẩm, phòng mổ và công nghệ sinh học, thiết kế hạn chế rò khí tại vị trí lắp.',
+            en: 'Ultracel II H13, H14 and U15 gel-seal HEPA filter for pharmaceutical cleanrooms, operating rooms and biotechnology applications.'
+        },
         desc: {
-            vi: 'HEPA rãnh Gel giúp làm kín tuyệt đối, ngăn ngừa rò rỉ khí.',
-            en: 'Gel Seal HEPA filter for 100% leak-free sealing performance.'
+            vi: 'Ultracel II-GEL sử dụng rãnh gel urethane để tạo bề mặt làm kín liên tục giữa lọc và hộp lắp. Thiết kế mini-pleat cấp H13/H14/U15 phù hợp khu vực cần kiểm soát độ kín và thuận tiện tháo lắp bảo trì.',
+            en: 'Ultracel II-GEL uses a urethane gel channel to create a continuous seal between the filter and housing. Its H13/H14/U15 mini-pleat design suits areas requiring controlled sealing and serviceability.'
         },
         apps: {
             vi: ['Phòng sạch dược phẩm (GMP)', 'Phòng mổ áp lực dương', 'Công nghệ sinh học'],
@@ -4316,6 +4349,7 @@ const products = [
             vi: 'Fan Filter Unit (FFU)',
             en: 'Fan Filter Unit (FFU)'
         },
+        relatedIds: ['ultracel-ii-sc', 'ultracel-ii-gel', 'bfu'],
         seoTitle: {
             vi: 'FFU Phòng Sạch Tích Hợp HEPA H13, ULPA U15 | VAF',
             en: 'Cleanroom FFU with H13 HEPA or U15 ULPA | VAF'

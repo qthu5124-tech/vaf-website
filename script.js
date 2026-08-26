@@ -701,9 +701,11 @@ async function executeProductDetail(id) {
 
     const relatedContainer = document.getElementById('pd-related-products');
     if (relatedContainer) {
-        relatedContainer.innerHTML = (window.products || [])
-            .filter(item => item.id !== p.id && item.cat === p.cat)
-            .slice(0, 3)
+        const allProducts = window.products || [];
+        const relatedProducts = Array.isArray(p.relatedIds)
+            ? p.relatedIds.map(id => allProducts.find(item => item.id === id)).filter(Boolean).slice(0, 3)
+            : allProducts.filter(item => item.id !== p.id && item.cat === p.cat).slice(0, 3);
+        relatedContainer.innerHTML = relatedProducts
             .map(item => {
                 const relatedName = typeof item.name === 'object' ? (item.name[lang] || item.name.vi) : item.name;
                 return `<a href="${localizedPath('/product/' + item.id)}" onclick="openProductDetail('${item.id}');return false" class="group rounded-2xl border border-slate-200 bg-white p-4 hover:border-primary hover:shadow-lg transition"><img src="/${item.img}" width="480" height="360" alt="${relatedName}" loading="lazy" decoding="async" class="w-full aspect-[4/3] object-contain"><strong class="block text-secondary group-hover:text-primary mt-3">${relatedName}</strong></a>`;
