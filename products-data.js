@@ -1332,9 +1332,17 @@ const products = [
             vi: 'V-PAK F8 (Túi lọc khí)',
             en: 'V-PAK F8 (Bag Filter)'
         },
+        seoTitle: {
+            vi: 'Lọc Túi Khí F8 V-PAK ePM1 70% Cho AHU | VAF',
+            en: 'V-PAK F8 ePM1 70% Bag Filter for AHU | VAF'
+        },
+        seoDescription: {
+            vi: 'Lọc túi V-PAK F8/ePM1 70% cho AHU, HVAC và tiền lọc HEPA, nhiều số túi và kích thước, khung GI, nhôm hoặc inox. Liên hệ VAF nhận báo giá.',
+            en: 'V-PAK F8/ePM1 70% bag filter for AHU, HVAC and HEPA pre-filtration, with multiple pocket counts, frame materials and custom sizes.'
+        },
         desc: {
-            vi: 'Lọc túi hiệu suất F8, khả năng chứa bụi lớn, phù hợp cho phòng sạch.',
-            en: 'F8 high efficiency bag filter, high dust holding capacity, suitable for cleanrooms.'
+            vi: 'V-PAK F8 là lọc túi cấp tinh ePM1 70% dùng trong AHU và HVAC có yêu cầu kiểm soát bụi mịn cao. Thiết kế nhiều túi tạo diện tích lọc lớn, hỗ trợ giữ bụi và bảo vệ cấp HEPA phía sau.',
+            en: 'V-PAK F8 is an ePM1 70% fine bag filter for AHU and HVAC systems requiring stronger fine-particle control. Its multi-pocket design provides a large filtration area and protects downstream HEPA filters.'
         },
         apps: {
             vi: ['Bệnh viện, Dược phẩm', 'Nhà máy điện tử', 'Tòa nhà thương mại cao cấp'],
@@ -1591,9 +1599,17 @@ const products = [
             vi: 'V-PAK F9 (Túi lọc khí)',
             en: 'V-PAK F9 (Bag Filter)'
         },
+        seoTitle: {
+            vi: 'Lọc Túi Khí F9 V-PAK ePM1 80% Cho AHU | VAF',
+            en: 'V-PAK F9 ePM1 80% Bag Filter for AHU | VAF'
+        },
+        seoDescription: {
+            vi: 'Lọc túi V-PAK F9/ePM1 80% cho AHU, HVAC và khu vực yêu cầu kiểm soát bụi mịn. Xem kích thước, lưu lượng, chênh áp và nhận báo giá VAF.',
+            en: 'V-PAK F9/ePM1 80% bag filter for AHU, HVAC and fine-particle control applications. View airflow, dimensions and pressure-drop data.'
+        },
         desc: {
-            vi: 'Lọc túi hiệu suất cao nhất F9, lọc bụi mịn cực tốt.',
-            en: 'F9 highest efficiency bag filter, excellent fine dust filtration.'
+            vi: 'V-PAK F9 là lọc túi ePM1 80% dành cho cấp lọc tinh có yêu cầu kiểm soát bụi mịn cao trước HEPA. Sản phẩm có nhiều lựa chọn số túi, chiều sâu và vật liệu khung để phù hợp cấu hình AHU.',
+            en: 'V-PAK F9 is an ePM1 80% bag filter for high-efficiency fine filtration upstream of HEPA filters. Multiple pocket counts, depths and frame materials support different AHU configurations.'
         },
         apps: {
             vi: ['Phòng mổ, Phòng thí nghiệm', 'Sản xuất chip bán dẫn', 'Công nghệ sinh học'],
@@ -4300,9 +4316,17 @@ const products = [
             vi: 'Fan Filter Unit (FFU)',
             en: 'Fan Filter Unit (FFU)'
         },
+        seoTitle: {
+            vi: 'FFU Phòng Sạch Tích Hợp HEPA H13, ULPA U15 | VAF',
+            en: 'Cleanroom FFU with H13 HEPA or U15 ULPA | VAF'
+        },
+        seoDescription: {
+            vi: 'FFU VAF tích hợp quạt và lọc HEPA H13 hoặc ULPA U15, vận tốc 0,45 m/s ±20%, độ ồn ≤58 dB(A), dùng cho trần phòng sạch.',
+            en: 'VAF fan filter unit with H13 HEPA or U15 ULPA, 0.45 m/s ±20% airflow velocity and noise level up to 58 dB(A) for cleanroom ceilings.'
+        },
         desc: {
-            vi: 'Hộp lọc tích hợp quạt, cung cấp khí sạch cục bộ hoặc toàn phần.',
-            en: 'Motorized air filtering unit for supplying purified air to cleanrooms.'
+            vi: 'FFU là thiết bị lọc khí tích hợp quạt và bộ lọc HEPA/ULPA, lắp độc lập hoặc theo module trên trần phòng sạch. Thiết bị cung cấp dòng khí sạch ổn định cho khu vực điện tử, dược phẩm và các vùng sản xuất có kiểm soát.',
+            en: 'The FFU combines a fan and HEPA/ULPA filter for standalone or modular cleanroom ceiling installation. It provides stable clean airflow for electronics, pharmaceutical and other controlled production areas.'
         },
         apps: {
             vi: ['Phòng sạch điện tử, Dược phẩm', 'Lắp ghép thành trần phòng sạch (Clean ceiling)'],
