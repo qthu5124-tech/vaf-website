@@ -520,13 +520,21 @@ const products = [
             vi: 'V-DI (Lọc thô khung giấy)',
             en: 'V-DI (Disposable Cardboard Filter)'
         },
+        seoTitle: {
+            vi: 'Lọc Thô Khung Giấy V-DI G4 Cho AHU, HVAC | VAF',
+            en: 'V-DI G4 Cardboard Pre-Filter for AHU & HVAC | VAF'
+        },
+        seoDescription: {
+            vi: 'Lọc thô V-DI G4 khung giấy chống ẩm, lưu lượng 1.700–4.200 m³/h, dùng cho AHU, HVAC và cửa gió hồi. VAF sản xuất kích thước theo yêu cầu.',
+            en: 'V-DI G4 moisture-resistant cardboard pre-filter for AHU, HVAC and return air systems, available in standard and custom sizes.'
+        },
         desc: {
-            vi: 'Lọc thô dùng một lần, khung giấy, giải pháp kinh tế.',
-            en: 'Disposable primary filter, moisture-resistant cardboard frame, economical solution.'
+            vi: 'V-DI là lọc thô dùng một lần với vật liệu sợi tổng hợp, khung giấy chống ẩm và lưới kẽm định hình. Sản phẩm giúp giữ bụi lớn, bảo vệ coil và các cấp lọc phía sau trong AHU, HVAC.',
+            en: 'V-DI is a disposable pre-filter using synthetic media, a moisture-resistant cardboard frame and galvanized support grid. It captures coarse dust and protects coils and downstream filters in AHU and HVAC systems.'
         },
         apps: {
-            vi: ['Hệ thống HVAC tòa nhà', 'Lọc cửa gió hồi', 'Thông gió nhà bếp'],
-            en: ['Building HVAC systems', 'Return air grilles', 'Kitchen ventilation']
+            vi: ['Tiền lọc cho AHU và hệ thống HVAC', 'Lọc cửa gió hồi', 'Nhà máy thực phẩm, dược phẩm và điện tử', 'Hệ thống thông gió nhà bếp'],
+            en: ['AHU and HVAC pre-filtration', 'Return air grilles', 'Food, pharmaceutical and electronics facilities', 'Kitchen ventilation systems']
         },
         specs: [
             [{vi: 'Tiêu chuẩn', en: 'Class'}, 'G4 (EN779)'],
@@ -1057,13 +1065,21 @@ const products = [
             vi: 'V-PAK F7 (Túi lọc khí)',
             en: 'V-PAK F7 (Bag Filter)'
         },
+        seoTitle: {
+            vi: 'Lọc Túi Khí F7 V-PAK Cho AHU, HVAC | VAF',
+            en: 'V-PAK F7 Bag Filter for AHU & HVAC | VAF'
+        },
+        seoDescription: {
+            vi: 'Lọc túi khí V-PAK F7/ePM1 55% cho AHU và HVAC, lưu lượng đến 3.400 m³/h, nhiều số túi và kích thước. Xem thông số và nhận báo giá từ VAF.',
+            en: 'V-PAK F7/ePM1 55% bag filter for AHU and HVAC systems, with multiple pocket counts, standard airflow up to 3,400 m³/h and custom sizes.'
+        },
         desc: {
-            vi: 'Lọc túi hiệu suất cao F7, lọc sạch bụi mịn trước khi vào phòng sạch.',
-            en: 'F7 high efficiency bag filter, pre-filtration for cleanrooms.'
+            vi: 'V-PAK F7 là lọc túi sợi tổng hợp dành cho cấp lọc tinh trong AHU và HVAC. Diện tích vật liệu lớn giúp giữ bụi mịn, giảm tải cho HEPA và kéo dài thời gian vận hành của hệ thống lọc cuối.',
+            en: 'V-PAK F7 is a synthetic-media bag filter for fine filtration in AHU and HVAC systems. Its large media area captures fine dust, reduces the load on HEPA filters and supports longer final-filter service life.'
         },
         apps: {
-            vi: ['Bệnh viện', 'Dược phẩm', 'Điện tử bán dẫn'],
-            en: ['Hospitals', 'Pharmaceuticals', 'Semiconductors']
+            vi: ['Lọc tinh cho AHU và HVAC trung tâm', 'Tiền lọc bảo vệ HEPA', 'Bệnh viện và nhà máy dược phẩm', 'Điện tử, bán dẫn và thực phẩm'],
+            en: ['Fine filtration for central AHU and HVAC', 'HEPA pre-filtration', 'Hospitals and pharmaceutical plants', 'Electronics, semiconductor and food facilities']
         },
         specs: [
             [{vi: 'Cấp độ', en: 'Class'}, 'F7 (EN779) / ePM1 55%'],
@@ -1830,9 +1846,17 @@ const products = [
             vi: 'V-DURA CARBON (Khử mùi)',
             en: 'V-DURA CARBON (Chemical Filter)'
         },
+        seoTitle: {
+            vi: 'Lọc Than Hoạt Tính Khử Mùi V-DURA Carbon | VAF',
+            en: 'V-DURA Activated Carbon Odor & Gas Filter | VAF'
+        },
+        seoDescription: {
+            vi: 'Lọc than hoạt tính V-DURA Carbon dạng V-Bank cho hệ thống HVAC, hỗ trợ xử lý mùi và khí ô nhiễm theo vật liệu hấp phụ được lựa chọn.',
+            en: 'V-DURA Carbon V-bank filter for HVAC odor and gaseous contaminant control, configured with selected activated or impregnated carbon media.'
+        },
         desc: {
-            vi: 'Lọc V-Bank chứa than hoạt tính khử mùi H2S, Acid, Amoniac, khí độc.',
-            en: 'Activated carbon V-Bank filter for removing odors, H2S, Acid, Ammonia, VOCs.'
+            vi: 'V-DURA Carbon là lọc pha khí dạng V-Bank sử dụng vật liệu than hoạt tính hoặc than tẩm hóa chất. Cấu hình vật liệu được lựa chọn theo loại mùi, nồng độ chất ô nhiễm, lưu lượng và thời gian tiếp xúc yêu cầu.',
+            en: 'V-DURA Carbon is a V-bank gas-phase filter using activated or impregnated carbon media. Media selection depends on the odor or contaminant, concentration, airflow and required contact time.'
         },
         apps: {
             vi: ['Sân bay, Nhà ga', 'Kiểm soát khí thải', 'Khử mùi hóa chất'],
@@ -2292,9 +2316,17 @@ const products = [
             vi: 'Ultracel I - SC (HEPA Tiêu Chuẩn)',
             en: 'Ultracel I - SC (Standard Capacity HEPA)'
         },
+        seoTitle: {
+            vi: 'Lọc HEPA H13 H14 Ultracel I Cho Phòng Sạch | VAF',
+            en: 'Ultracel I H13 H14 HEPA Filter for Cleanrooms | VAF'
+        },
+        seoDescription: {
+            vi: 'Lọc HEPA Ultracel I cấp H13, H14 và U15 theo EN 1822, dùng cho phòng sạch và lọc đầu cuối. Nhiều kích thước, khung GI, nhôm hoặc inox.',
+            en: 'Ultracel I H13, H14 and U15 filter to EN 1822 for cleanroom terminal filtration, available with GI, aluminum or stainless-steel frames.'
+        },
         desc: {
-            vi: 'HEPA vách nhôm lưu lượng tiêu chuẩn, khả năng giữ bụi cao.',
-            en: 'Standard capacity HEPA filter with aluminum separators, high dust holding capacity.'
+            vi: 'Ultracel I - SC là lọc HEPA/ULPA vách nhôm cho lưu lượng tiêu chuẩn, thiết kế dành cho lọc đầu cuối và khu vực kiểm soát độ sạch. Các cấp H13, H14 và U15 được lựa chọn theo yêu cầu hiệu suất, lưu lượng và chênh áp của hệ thống.',
+            en: 'Ultracel I - SC is an aluminum-separator HEPA/ULPA filter for standard airflow, terminal filtration and controlled clean areas. H13, H14 and U15 classes are selected according to system efficiency, airflow and pressure-drop requirements.'
         },
         apps: {
             vi: ['Phòng sạch Class 1.000 - 100.000', 'Nhà máy bán dẫn, Dược phẩm', 'Lọc đầu cuối (Terminal Filter)'],

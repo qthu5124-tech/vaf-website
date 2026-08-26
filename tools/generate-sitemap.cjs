@@ -71,9 +71,9 @@ for (const product of products) {
     if (!product.id) continue;
     const viName = typeof product.name === 'object' ? product.name.vi : product.name;
     const viDesc = typeof product.desc === 'object' ? product.desc.vi : product.desc;
-    add(`/product/${product.id}`, DEFAULT_LASTMOD, { title: `${viName} | VAF`, description: viDesc, image: product.img, language: 'vi', alternate: `/en/product/${product.id}`, type: 'Product' });
+    add(`/product/${product.id}`, DEFAULT_LASTMOD, { title: product.seoTitle?.vi || `${viName} | VAF`, description: product.seoDescription?.vi || viDesc, image: product.img, language: 'vi', alternate: `/en/product/${product.id}`, type: 'Product', product });
     if (product.name && typeof product.name === 'object' && product.name.en) {
-        add(`/en/product/${product.id}`, DEFAULT_LASTMOD, { title: `${product.name.en} | VAF`, description: product.desc.en, image: product.img, language: 'en', alternate: `/product/${product.id}`, type: 'Product' });
+        add(`/en/product/${product.id}`, DEFAULT_LASTMOD, { title: product.seoTitle?.en || `${product.name.en} | VAF`, description: product.seoDescription?.en || product.desc.en, image: product.img, language: 'en', alternate: `/product/${product.id}`, type: 'Product', product });
     }
 }
 
@@ -112,6 +112,45 @@ function replaceMeta(html, selectorPattern, replacement) {
     return html.replace(selectorPattern, replacement);
 }
 
+function localized(value, language) {
+    return value && typeof value === 'object' && !Array.isArray(value)
+        ? (value[language] || value.vi || value.en || '')
+        : (value || '');
+}
+
+function renderProductHtml(product, language) {
+    const name = localized(product.name, language);
+    const description = localized(product.desc, language);
+    const specs = Array.isArray(product.specs) ? product.specs.map(spec => {
+        if (!Array.isArray(spec)) return '';
+        return `<tr class="border-b border-gray-100 last:border-0"><td class="py-2 pr-4 font-bold text-slate-800 w-[40%] align-top">${escapeXml(localized(spec[0], language))}</td><td class="py-2 text-slate-600 align-top">${escapeXml(localized(spec[1], language))}</td></tr>`;
+    }).join('') : '';
+    const applications = Array.isArray(product.apps)
+        ? product.apps
+        : ((product.apps && (product.apps[language] || product.apps.vi || product.apps.en)) || []);
+    const apps = applications.map(item => `<li class="marker:text-primary">${escapeXml(item)}</li>`).join('');
+    const related = products.filter(item => item.id !== product.id && item.cat === product.cat).slice(0, 3);
+    const relatedCards = related.map(item => {
+        const relatedName = localized(item.name, language);
+        const prefix = language === 'en' ? '/en' : '';
+        return `<a href="${prefix}/product/${escapeXml(item.id)}" class="group rounded-2xl border border-slate-200 bg-white p-4 hover:border-primary hover:shadow-lg transition"><img src="/${escapeXml(item.img)}" width="480" height="360" alt="${escapeXml(relatedName)}" loading="lazy" decoding="async" class="w-full aspect-[4/3] object-contain"><strong class="block text-secondary group-hover:text-primary mt-3">${escapeXml(relatedName)}</strong></a>`;
+    }).join('');
+
+    let productHtml = fs.readFileSync('partials/product-detail.html', 'utf8')
+        .replace('class="page-section bg-white pt-8 pb-20"', 'class="page-section active bg-white pt-8 pb-20"')
+        .replace('<img id="pd-img"', `<img id="pd-img" src="/${escapeXml(product.img)}"`)
+        .replace('<span id="pd-cat" class="text-slate-700 font-medium uppercase"></span>', `<span id="pd-cat" class="text-slate-700 font-medium uppercase">${escapeXml(product.cat)}</span>`)
+        .replace('<span id="pd-name-breadcrumb" class="text-primary font-bold truncate"></span>', `<span id="pd-name-breadcrumb" class="text-primary font-bold truncate">${escapeXml(name)}</span>`)
+        .replace('<h1 id="pd-name" class="text-3xl md:text-4xl font-black text-secondary mb-6 leading-tight mt-0 font-heading"></h1>', `<h1 id="pd-name" class="text-3xl md:text-4xl font-black text-secondary mb-6 leading-tight mt-0 font-heading">${escapeXml(name)}</h1>`)
+        .replace('<p id="pd-desc" class="text-slate-600 text-lg mb-8 leading-relaxed border-l-4 border-gray-200 pl-4"></p>', `<p id="pd-desc" class="text-slate-600 text-lg mb-8 leading-relaxed border-l-4 border-gray-200 pl-4">${escapeXml(description)}</p>`)
+        .replace('<tbody id="pd-specs"></tbody>', `<tbody id="pd-specs">${specs}</tbody>`)
+        .replace('<ul id="pd-apps" class="space-y-2 text-sm text-slate-700 list-disc pl-4"></ul>', `<ul id="pd-apps" class="space-y-2 text-sm text-slate-700 list-disc pl-4">${apps}</ul>`)
+        .replace('<div class="tech-table-container" id="pd-table-container">\n                        </div>', `<div class="tech-table-container" id="pd-table-container">${product.table || ''}</div>`)
+        .replace('<div id="pd-related-products" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>', `<div id="pd-related-products" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">${relatedCards}</div>`)
+        .replace('<span id="pd-cat-tag" class="bg-primary text-white text-xs font-bold px-4 py-2 rounded-br-xl shadow-md uppercase tracking-wider block">\n                                </span>', `<span id="pd-cat-tag" class="bg-primary text-white text-xs font-bold px-4 py-2 rounded-br-xl shadow-md uppercase tracking-wider block">${escapeXml(product.cat)}</span>`);
+    return productHtml;
+}
+
 function renderSeoHtml(path, seo) {
     const canonical = SITE_URL + path;
     const title = escapeXml(seo.title || 'VAF - Viet Air Filter');
@@ -129,6 +168,20 @@ function renderSeoHtml(path, seo) {
         publisher: type === 'Article' ? { '@type': 'Organization', name: 'VAF - Viet Air Filter', url: SITE_URL } : undefined
     };
     Object.keys(schema).forEach(key => schema[key] === undefined && delete schema[key]);
+    if (type === 'Product' && seo.product) {
+        schema = {
+            '@context': 'https://schema.org',
+            '@type': 'Product',
+            name: localized(seo.product.name, seo.language || 'vi'),
+            description: seo.description,
+            sku: seo.product.id,
+            image,
+            url: canonical,
+            category: seo.product.cat,
+            brand: { '@type': 'Brand', name: 'VAF' },
+            manufacturer: { '@type': 'Organization', name: 'VAF - Viet Air Filter', url: SITE_URL }
+        };
+    }
     if (type === 'JobPosting' && seo.job) {
         const job = seo.job;
         schema = {
@@ -194,6 +247,16 @@ function renderSeoHtml(path, seo) {
         }
         // The shared shell contains a hidden careers hero. It must not introduce
         // a second H1 into the server-rendered landing page document outline.
+        html = html.replace(/<h1([^>]*)>([\s\S]*?)<\/h1>/, '<div$1>$2</div>');
+    }
+    if (seo.type === 'Product' && seo.product) {
+        const productPage = renderProductHtml(seo.product, seo.language || 'vi');
+        const homeStart = html.indexOf('<div id="view-home"');
+        const lazyRoot = '<div id="lazy-view-root"></div>';
+        const lazyStart = html.indexOf(lazyRoot);
+        if (homeStart !== -1 && lazyStart !== -1) {
+            html = html.slice(0, homeStart) + `<div id="lazy-view-root">${productPage}</div>` + html.slice(lazyStart + lazyRoot.length);
+        }
         html = html.replace(/<h1([^>]*)>([\s\S]*?)<\/h1>/, '<div$1>$2</div>');
     }
     html = html.replace('<html lang="vi">', `<html lang="${seo.language || 'vi'}">`);

@@ -68,6 +68,9 @@
         'prod_click_zoom': '* Nhấn vào ảnh để xem kích thước đầy đủ',
         'prod_custom_title': 'Sản xuất kích thước theo yêu cầu',
         'prod_custom_desc': 'Ngoài quy cách chuẩn, VAF nhận sản xuất theo thực tế.',
+        'prod_related_label': 'Sản phẩm liên quan',
+        'prod_related_title': 'Hoàn thiện hệ thống lọc nhiều cấp',
+        'prod_solution_link': 'Xem giải pháp lọc khí công nghiệp →',
 
         // =====================================
         // TRANG GIỚI THIỆU (ABOUT US)
@@ -643,6 +646,9 @@
         'btn_view_detail': 'View Details',
         'prod_click_zoom': '* Click the image to view full size',
         'prod_custom_title': 'Custom Size Manufacturing',
+        'prod_related_label': 'Related products',
+        'prod_related_title': 'Complete a multi-stage filtration system',
+        'prod_solution_link': 'View industrial air filtration solutions →',
         'prod_custom_desc': 'Besides standard sizes, VAF offers custom manufacturing to fit your actual needs.',
         
         // Projects Page

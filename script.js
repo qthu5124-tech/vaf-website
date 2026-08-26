@@ -641,10 +641,12 @@ async function executeProductDetail(id) {
     const lang = currentLang;
     const pName = (typeof p.name === 'object') ? p.name[lang] : p.name;
     const pDesc = (typeof p.desc === 'object') ? p.desc[lang] : p.desc;
+    const pSeoTitle = p.seoTitle && (p.seoTitle[lang] || p.seoTitle.vi);
+    const pSeoDescription = p.seoDescription && (p.seoDescription[lang] || p.seoDescription.vi);
 
     setPageSeo({
-        title: pName + ' | VAF',
-        description: cleanText(pDesc),
+        title: pSeoTitle || (pName + ' | VAF'),
+        description: cleanText(pSeoDescription || pDesc),
         path: '/product/' + p.id,
         image: resolveAssetPath(p.img),
         type: 'product',
@@ -696,6 +698,17 @@ async function executeProductDetail(id) {
     }
 
     document.getElementById('pd-table-container').innerHTML = p.table || '<div class="p-4 text-gray-400 italic text-center">Liên hệ để nhận thông số chi tiết.</div>';
+
+    const relatedContainer = document.getElementById('pd-related-products');
+    if (relatedContainer) {
+        relatedContainer.innerHTML = (window.products || [])
+            .filter(item => item.id !== p.id && item.cat === p.cat)
+            .slice(0, 3)
+            .map(item => {
+                const relatedName = typeof item.name === 'object' ? (item.name[lang] || item.name.vi) : item.name;
+                return `<a href="${localizedPath('/product/' + item.id)}" onclick="openProductDetail('${item.id}');return false" class="group rounded-2xl border border-slate-200 bg-white p-4 hover:border-primary hover:shadow-lg transition"><img src="/${item.img}" width="480" height="360" alt="${relatedName}" loading="lazy" decoding="async" class="w-full aspect-[4/3] object-contain"><strong class="block text-secondary group-hover:text-primary mt-3">${relatedName}</strong></a>`;
+            }).join('');
+    }
 
     const drawingWrapper = document.getElementById('pd-drawing-wrapper');
     const drawingImg = document.getElementById('pd-drawing-img');
