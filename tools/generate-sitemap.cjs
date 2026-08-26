@@ -46,7 +46,7 @@ function add(path, lastmod = DEFAULT_LASTMOD, seo = {}) {
 
 add('/', DEFAULT_LASTMOD, { title: 'VAF - Nhà Sản Xuất Lọc Khí & Thiết Bị Phòng Sạch', description: 'VAF sản xuất lọc khí HEPA, ULPA, lọc túi và thiết bị phòng sạch đạt tiêu chuẩn quốc tế.', language: 'vi', alternate: '/en' });
 add('/about', DEFAULT_LASTMOD, { title: 'Về VAF | Nhà Máy Sản Xuất Lọc Khí', description: 'Tìm hiểu VAF, năng lực nhà máy sản xuất lọc khí, hệ thống quản lý chất lượng và giải pháp phòng sạch.', language: 'vi', alternate: '/en/about' });
-add('/products', DEFAULT_LASTMOD, { title: 'Sản Phẩm Lọc Khí & Thiết Bị Phòng Sạch | VAF', description: 'Danh mục lọc thô, lọc túi, HEPA, ULPA, FFU, Air Shower và thiết bị phòng sạch do VAF sản xuất.', language: 'vi', alternate: '/en/products' });
+add('/products', DEFAULT_LASTMOD, { title: 'Sản Phẩm Lọc Khí & Thiết Bị Phòng Sạch | VAF', description: 'Danh mục lọc thô, lọc túi, HEPA, ULPA, FFU, Air Shower và thiết bị phòng sạch do VAF sản xuất.', language: 'vi', alternate: '/en/products', type: 'CollectionPage', productCollection: products });
 add('/projects', DEFAULT_LASTMOD, { title: 'Dự Án Lọc Khí & Phòng Sạch Tiêu Biểu | VAF', description: 'Các dự án lọc khí, HEPA, ULPA và thiết bị phòng sạch của VAF cho điện tử, bệnh viện và công nghiệp.', language: 'vi' });
 add('/news', DEFAULT_LASTMOD, { title: 'Kiến Thức Lọc Khí, HEPA & Phòng Sạch | VAF', description: 'Kiến thức chuyên sâu về lọc khí, HEPA H13 H14, thiết bị và tiêu chuẩn phòng sạch từ đội ngũ kỹ thuật VAF.', language: 'vi', alternate: '/en/news' });
 add('/contact', DEFAULT_LASTMOD, { title: 'Liên Hệ Tư Vấn & Báo Giá Lọc Khí | VAF', description: 'Liên hệ VAF để được tư vấn và báo giá lọc khí, HEPA, HVAC cùng thiết bị phòng sạch theo yêu cầu.', language: 'vi', alternate: '/en/contact' });
@@ -62,7 +62,7 @@ add('/loc-khi-cong-nghiep', '2026-08-20', {
 
 add('/en', DEFAULT_LASTMOD, { title: 'VAF | Air Filters & Cleanroom Equipment Manufacturer', description: 'VAF manufactures pre-filters, bag filters, HEPA and ULPA filters, FFU and cleanroom equipment.', language: 'en', alternate: '/' });
 add('/en/about', DEFAULT_LASTMOD, { title: 'About VAF | Air Filter Manufacturer', description: 'Learn about VAF, our air filter manufacturing facilities, quality systems and cleanroom solutions.', language: 'en', alternate: '/about' });
-add('/en/products', DEFAULT_LASTMOD, { title: 'Air Filters & Cleanroom Equipment | VAF', description: 'Explore VAF pre-filters, bag filters, HEPA and ULPA filters, FFU, air showers and cleanroom equipment.', language: 'en', alternate: '/products' });
+add('/en/products', DEFAULT_LASTMOD, { title: 'Air Filters & Cleanroom Equipment | VAF', description: 'Explore VAF pre-filters, bag filters, HEPA and ULPA filters, FFU, air showers and cleanroom equipment.', language: 'en', alternate: '/products', type: 'CollectionPage', productCollection: products });
 add('/en/news', DEFAULT_LASTMOD, { title: 'Air Filtration, HEPA & Cleanroom Knowledge | VAF', description: 'Technical knowledge about air filters, HEPA, cleanroom equipment and standards from the VAF technical team.', language: 'en', alternate: '/news' });
 add('/en/contact', DEFAULT_LASTMOD, { title: 'Contact VAF | Air Filter Consultation', description: 'Contact VAF for air filter, HVAC and cleanroom equipment consultation and quotations.', language: 'en', alternate: '/contact' });
 add('/en/tuyen-dung', DEFAULT_LASTMOD, { title: 'VAF Careers | Air Filtration & HVAC Opportunities', description: 'Explore careers at VAF in air filtration, HVAC, manufacturing and cleanroom technology.', language: 'en', alternate: '/tuyen-dung' });
@@ -153,6 +153,24 @@ function renderProductHtml(product, language) {
     return productHtml;
 }
 
+function renderProductsHtml(language) {
+    const categoryNames = language === 'en'
+        ? { 'Lọc Thô': 'Pre-filter', 'Lọc Tinh': 'Fine filter', 'Phòng Sạch': 'HEPA / ULPA', 'Thiết Bị': 'Cleanroom equipment' }
+        : { 'Lọc Thô': 'Lọc thô', 'Lọc Tinh': 'Lọc tinh', 'Phòng Sạch': 'HEPA / ULPA', 'Thiết Bị': 'Thiết bị phòng sạch' };
+    const detailText = language === 'en' ? 'View details' : 'Xem chi tiết';
+    const prefix = language === 'en' ? '/en' : '';
+    const cards = products.map(product => {
+        const name = localized(product.name, language);
+        const description = localized(product.desc, language);
+        const category = categoryNames[product.cat] || product.cat;
+        return `<a href="${prefix}/product/${escapeXml(product.id)}" class="product-card bg-white border rounded-lg overflow-hidden h-full flex flex-col shadow-sm hover:shadow-xl transition-all duration-300 group"><div class="relative w-full aspect-[2400/1792] overflow-hidden bg-white"><img src="/${escapeXml(product.img)}" width="480" height="360" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" alt="${escapeXml(name)}"><div class="absolute top-2 left-2"><span class="text-[10px] font-bold text-white bg-primary/90 px-2 py-1 rounded shadow uppercase tracking-wide">${escapeXml(category)}</span></div></div><div class="p-5 flex-grow flex flex-col"><h2 class="font-bold text-lg text-secondary mb-2 leading-snug group-hover:text-primary transition">${escapeXml(name)}</h2><p class="text-sm text-gray-500 line-clamp-2 leading-relaxed mb-4">${escapeXml(description)}</p><div class="mt-auto pt-4 border-t border-gray-50 flex justify-between items-center text-xs font-bold text-gray-400 group-hover:text-primary transition"><span>${detailText}</span><span aria-hidden="true">→</span></div></div></a>`;
+    }).join('');
+
+    return fs.readFileSync('partials/products.html', 'utf8')
+        .replace('class="page-section"', 'class="page-section active"')
+        .replace(/<div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6" id="products-grid">\s*<\/div>/, `<div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6" id="products-grid">${cards}</div>`);
+}
+
 function renderSeoHtml(path, seo) {
     const canonical = SITE_URL + path;
     const title = escapeXml(seo.title || 'VAF - Viet Air Filter');
@@ -182,6 +200,25 @@ function renderSeoHtml(path, seo) {
             category: seo.product.cat,
             brand: { '@type': 'Brand', name: 'VAF' },
             manufacturer: { '@type': 'Organization', name: 'VAF - Viet Air Filter', url: SITE_URL }
+        };
+    }
+    if (type === 'CollectionPage' && seo.productCollection) {
+        schema = {
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: seo.title,
+            description: seo.description,
+            url: canonical,
+            mainEntity: {
+                '@type': 'ItemList',
+                numberOfItems: seo.productCollection.length,
+                itemListElement: seo.productCollection.map((product, index) => ({
+                    '@type': 'ListItem',
+                    position: index + 1,
+                    url: `${SITE_URL}${seo.language === 'en' ? '/en' : ''}/product/${product.id}`,
+                    name: localized(product.name, seo.language || 'vi')
+                }))
+            }
         };
     }
     if (type === 'JobPosting' && seo.job) {
@@ -258,6 +295,16 @@ function renderSeoHtml(path, seo) {
         const lazyStart = html.indexOf(lazyRoot);
         if (homeStart !== -1 && lazyStart !== -1) {
             html = html.slice(0, homeStart) + `<div id="lazy-view-root">${productPage}</div>` + html.slice(lazyStart + lazyRoot.length);
+        }
+        html = html.replace(/<h1([^>]*)>([\s\S]*?)<\/h1>/, '<div$1>$2</div>');
+    }
+    if (seo.type === 'CollectionPage' && seo.productCollection) {
+        const productsPage = renderProductsHtml(seo.language || 'vi');
+        const homeStart = html.indexOf('<div id="view-home"');
+        const lazyRoot = '<div id="lazy-view-root"></div>';
+        const lazyStart = html.indexOf(lazyRoot);
+        if (homeStart !== -1 && lazyStart !== -1) {
+            html = html.slice(0, homeStart) + `<div id="lazy-view-root">${productsPage}</div>` + html.slice(lazyStart + lazyRoot.length);
         }
         html = html.replace(/<h1([^>]*)>([\s\S]*?)<\/h1>/, '<div$1>$2</div>');
     }
