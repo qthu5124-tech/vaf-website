@@ -84,8 +84,8 @@ for (const project of projects) {
 for (const article of news) {
     if (!article.id) continue;
     const lastmod = isoDateFromVietnamese(article.date);
-    add(`/news/${article.id}`, lastmod, { title: `${article.seoTitle || article.title} | VAF`, description: article.desc, image: article.img, language: 'vi', alternate: newsEn[article.id] ? `/en/news/${article.id}` : null, type: 'Article' });
-    if (newsEn[article.id]) add(`/en/news/${article.id}`, lastmod, { title: `${newsEn[article.id].title} | VAF`, description: newsEn[article.id].desc, image: article.img, language: 'en', alternate: `/news/${article.id}`, type: 'Article' });
+    add(`/news/${article.id}`, lastmod, { title: `${article.seoTitle || article.title} | VAF`, description: article.desc, image: article.img, language: 'vi', alternate: newsEn[article.id] ? `/en/news/${article.id}` : null, type: 'Article', article });
+    if (newsEn[article.id]) add(`/en/news/${article.id}`, lastmod, { title: `${newsEn[article.id].seoTitle || newsEn[article.id].title} | VAF`, description: newsEn[article.id].desc, image: article.img, language: 'en', alternate: `/news/${article.id}`, type: 'Article', article });
 }
 
 for (const job of careers) {
@@ -171,6 +171,28 @@ function renderProductsHtml(language) {
         .replace(/<div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6" id="products-grid">\s*<\/div>/, `<div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6" id="products-grid">${cards}</div>`);
 }
 
+function renderNewsHtml(article, language) {
+    const translation = language === 'en' ? (newsEn[article.id] || {}) : {};
+    const localizedArticle = { ...article, ...translation };
+    const prefix = language === 'en' ? '/en' : '';
+    const backText = language === 'en' ? 'Back to news' : 'Quay lại danh sách tin tức';
+    const shareText = language === 'en' ? 'Share this article:' : 'Chia sẻ bài viết:';
+    const content = String(localizedArticle.content || '')
+        .replace(/(src|href)="images\//g, '$1="/images/');
+
+    return fs.readFileSync('partials/news-detail.html', 'utf8')
+        .replace('class="page-section bg-white pb-20"', 'class="page-section active bg-white pb-20"')
+        .replace('href="/news"', `href="${prefix}/news"`)
+        .replace('<span data-i18n="news_back">Quay lại danh sách tin tức</span>', `<span data-i18n="news_back">${backText}</span>`)
+        .replace('<span id="nd-cat" class="bg-primary/10 text-primary font-bold px-4 py-1 rounded-full text-sm uppercase tracking-wide"></span>', `<span id="nd-cat" class="bg-primary/10 text-primary font-bold px-4 py-1 rounded-full text-sm uppercase tracking-wide">${escapeXml(localizedArticle.cat)}</span>`)
+        .replace('<span id="nd-date"></span>', `<span id="nd-date">${escapeXml(article.date)}</span>`)
+        .replace('<h1 id="nd-title" class="text-3xl md:text-5xl font-bold text-secondary leading-tight mb-6"></h1>', `<h1 id="nd-title" class="text-3xl md:text-5xl font-bold text-secondary leading-tight mb-6">${escapeXml(localizedArticle.title)}</h1>`)
+        .replace('<p id="nd-desc" class="text-xl text-gray-500 font-light leading-relaxed italic border-l-4 border-primary pl-4 mx-auto max-w-3xl text-left"></p>', `<p id="nd-desc" class="text-xl text-gray-500 font-light leading-relaxed italic border-l-4 border-primary pl-4 mx-auto max-w-3xl text-left">${escapeXml(localizedArticle.desc)}</p>`)
+        .replace('<img id="nd-img" width="1200" height="800" alt=""', `<img id="nd-img" src="/${escapeXml(article.img)}" width="${Number(article.imgWidth) || 1200}" height="${Number(article.imgHeight) || 800}" alt="${escapeXml(localizedArticle.title)}"`)
+        .replace(/<article id="nd-content" class="prose prose-lg max-w-none text-slate-700 leading-8">\s*<\/article>/, `<article id="nd-content" class="prose prose-lg max-w-none text-slate-700 leading-8">${content}</article>`)
+        .replace('<div class="font-bold text-secondary" data-i18n="news_share">Chia sẻ bài viết:</div>', `<div class="font-bold text-secondary" data-i18n="news_share">${shareText}</div>`);
+}
+
 function renderSeoHtml(path, seo) {
     const canonical = SITE_URL + path;
     const title = escapeXml(seo.title || 'VAF - Viet Air Filter');
@@ -201,6 +223,44 @@ function renderSeoHtml(path, seo) {
             brand: { '@type': 'Brand', name: 'VAF' },
             manufacturer: { '@type': 'Organization', name: 'VAF - Viet Air Filter', url: SITE_URL }
         };
+    }
+    if (type === 'Article' && seo.article) {
+        const article = seo.article;
+        const translation = seo.language === 'en' ? (newsEn[article.id] || {}) : {};
+        const localizedArticle = { ...article, ...translation };
+        const published = isoDateFromVietnamese(article.date);
+        const graph = [
+            {
+                '@type': 'Article',
+                headline: localizedArticle.title,
+                description: localizedArticle.desc,
+                image,
+                datePublished: published,
+                dateModified: published,
+                mainEntityOfPage: canonical,
+                author: { '@type': 'Organization', name: article.author || 'VAF Technical Team', url: SITE_URL },
+                publisher: { '@type': 'Organization', name: 'VAF - Viet Air Filter', logo: { '@type': 'ImageObject', url: `${SITE_URL}/images/VAF-LOGO.webp` } }
+            },
+            {
+                '@type': 'BreadcrumbList',
+                itemListElement: [
+                    { '@type': 'ListItem', position: 1, name: seo.language === 'en' ? 'Home' : 'Trang chủ', item: `${SITE_URL}${seo.language === 'en' ? '/en' : ''}` },
+                    { '@type': 'ListItem', position: 2, name: seo.language === 'en' ? 'News' : 'Tin tức', item: `${SITE_URL}${seo.language === 'en' ? '/en/news' : '/news'}` },
+                    { '@type': 'ListItem', position: 3, name: localizedArticle.title, item: canonical }
+                ]
+            }
+        ];
+        if (Array.isArray(localizedArticle.faq) && localizedArticle.faq.length) {
+            graph.push({
+                '@type': 'FAQPage',
+                mainEntity: localizedArticle.faq.map(item => ({
+                    '@type': 'Question',
+                    name: item.question,
+                    acceptedAnswer: { '@type': 'Answer', text: item.answer }
+                }))
+            });
+        }
+        schema = { '@context': 'https://schema.org', '@graph': graph };
     }
     if (type === 'CollectionPage' && seo.productCollection) {
         schema = {
@@ -305,6 +365,16 @@ function renderSeoHtml(path, seo) {
         const lazyStart = html.indexOf(lazyRoot);
         if (homeStart !== -1 && lazyStart !== -1) {
             html = html.slice(0, homeStart) + `<div id="lazy-view-root">${productsPage}</div>` + html.slice(lazyStart + lazyRoot.length);
+        }
+        html = html.replace(/<h1([^>]*)>([\s\S]*?)<\/h1>/, '<div$1>$2</div>');
+    }
+    if (seo.type === 'Article' && seo.article) {
+        const newsPage = renderNewsHtml(seo.article, seo.language || 'vi');
+        const homeStart = html.indexOf('<div id="view-home"');
+        const lazyRoot = '<div id="lazy-view-root"></div>';
+        const lazyStart = html.indexOf(lazyRoot);
+        if (homeStart !== -1 && lazyStart !== -1) {
+            html = html.slice(0, homeStart) + `<div id="lazy-view-root">${newsPage}</div>` + html.slice(lazyStart + lazyRoot.length);
         }
         html = html.replace(/<h1([^>]*)>([\s\S]*?)<\/h1>/, '<div$1>$2</div>');
     }

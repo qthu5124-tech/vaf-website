@@ -37,6 +37,144 @@
 const newsData = [
 
     {
+        id: 'cach-chon-loc-tui-f7-f8-f9-cho-ahu',
+        title: 'Cách Chọn Lọc Túi F7, F8, F9 Cho AHU: So Sánh Và Thông Số Cần Biết',
+        seoTitle: 'Cách Chọn Lọc Túi F7, F8, F9 Cho AHU',
+        cat: 'Kiến Thức',
+        img: 'images/san-pham/vpf8.webp',
+        imgWidth: 2400,
+        imgHeight: 1792,
+        author: 'VAF Technical Team',
+        date: '09/09/2026',
+        desc: 'So sánh lọc túi F7, F8, F9 cho AHU theo ISO 16890, lưu lượng và chênh áp; kèm checklist chọn đúng model và yêu cầu báo giá.',
+        faq: [
+            {
+                question: 'Nên chọn lọc túi F7, F8 hay F9 cho AHU?',
+                answer: 'Cấp lọc phải theo chất lượng khí đầu ra, chuỗi lọc và khả năng quạt. F7 thường phù hợp làm lọc tinh hoặc tiền lọc HEPA; F8 và F9 dùng khi cần hiệu suất ePM1 cao hơn, nhưng phải kiểm tra chênh áp và lưu lượng của đúng model.'
+            },
+            {
+                question: 'F7, F8, F9 có tương đương trực tiếp với ISO ePM1 không?',
+                answer: 'Không nên quy đổi chung cho mọi sản phẩm vì EN 779 và ISO 16890 dùng phương pháp thử khác nhau. Theo catalogue V-PAK của VAF, các model F7, F8 và F9 được công bố lần lượt là ePM1 55%, ePM1 70% và ePM1 80%; cần đối chiếu tài liệu của đúng model đặt hàng.'
+            },
+            {
+                question: 'Chỉ cần đúng kích thước khung là có thể thay lọc túi không?',
+                answer: 'Chưa đủ. Ngoài rộng, cao và sâu, cần kiểm tra số túi, lưu lượng danh định, chênh áp ban đầu, giới hạn chênh áp cuối, hướng lắp, vật liệu khung và khoảng trống để túi bung đều.'
+            },
+            {
+                question: 'Khi nào cần thay lọc túi trong AHU?',
+                answer: 'Nên thay theo chênh áp giới hạn của thiết kế hoặc nhà sản xuất, kết hợp kiểm tra lưu lượng, tình trạng túi và yêu cầu vệ sinh. Không nên chỉ thay theo màu lọc hoặc một lịch cố định cho mọi AHU.'
+            },
+            {
+                question: 'Cần gửi thông tin gì để VAF báo giá lọc túi?',
+                answer: 'Hãy gửi cấp lọc hoặc ePM yêu cầu, kích thước rộng × cao × sâu, số túi, số lượng, lưu lượng nếu có, vật liệu khung, ảnh tem và ảnh vị trí lắp. VAF có thể hỗ trợ đối chiếu khi thông tin hiện trường chưa đầy đủ.'
+            }
+        ],
+        content: `
+            <nav aria-label="Mục lục bài viết" class="bg-slate-50 border border-slate-200 rounded-2xl p-6 mb-10">
+                <h2 class="text-xl font-bold text-secondary mb-4">Nội dung chính</h2>
+                <ol class="list-decimal pl-6 space-y-2">
+                    <li><a class="text-primary hover:underline" href="#chon-nhanh">Chọn nhanh F7, F8 hay F9</a></li>
+                    <li><a class="text-primary hover:underline" href="#so-sanh">Bảng so sánh F7, F8 và F9</a></li>
+                    <li><a class="text-primary hover:underline" href="#thong-so">6 thông số phải kiểm tra</a></li>
+                    <li><a class="text-primary hover:underline" href="#cau-hinh">Gợi ý theo cấu hình AHU</a></li>
+                    <li><a class="text-primary hover:underline" href="#bao-gia">Checklist yêu cầu báo giá</a></li>
+                    <li><a class="text-primary hover:underline" href="#faq">Câu hỏi thường gặp</a></li>
+                </ol>
+            </nav>
+
+            <p class="mb-5 leading-8">Chọn <strong>lọc túi F7, F8 hay F9 cho AHU</strong> không nên chỉ dựa vào tên cấp lọc hoặc kích thước khung. Một model phù hợp phải đồng thời đáp ứng chất lượng khí đầu ra, lưu lượng, chênh áp, không gian lắp và khả năng của quạt. Chọn cấp quá thấp có thể không đạt yêu cầu; chọn cấp cao nhưng không kiểm tra sức cản có thể làm AHU thiếu gió và tăng điện năng.</p>
+            <p class="mb-5 leading-8">Bài viết này đi thẳng vào quyết định lựa chọn. Nếu cần kiến thức nền về cấu tạo và nguyên lý, bạn có thể xem trước bài <a class="text-primary font-semibold hover:underline" href="/news/bag-filter-la-gi">Bag Filter là gì?</a>.</p>
+
+            <section id="chon-nhanh" class="mt-10">
+                <h2 class="text-3xl font-bold text-secondary mb-6">Chọn nhanh: khi nào dùng F7, F8 hay F9?</h2>
+                <div class="grid md:grid-cols-3 gap-5 my-8">
+                    <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><div class="text-primary text-3xl font-black mb-3">F7</div><p class="leading-7">Phương án cân bằng cho nhiều AHU: dùng làm lọc tinh hoặc tiền lọc nhằm giảm tải bụi cho HEPA phía sau.</p><a class="inline-block mt-4 text-primary font-bold hover:underline" href="/product/v-pakf7">Xem V-PAK F7 →</a></div>
+                    <div class="rounded-2xl border-2 border-primary bg-red-50 p-6 shadow-sm"><div class="text-primary text-3xl font-black mb-3">F8</div><p class="leading-7">Phù hợp khi cần tăng khả năng giữ hạt mịn so với F7 nhưng vẫn phải cân đối chênh áp và năng lực quạt.</p><a class="inline-block mt-4 text-primary font-bold hover:underline" href="/product/v-pakf8">Xem V-PAK F8 →</a></div>
+                    <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><div class="text-primary text-3xl font-black mb-3">F9</div><p class="leading-7">Dùng cho yêu cầu lọc tinh cao hơn hoặc bảo vệ cấp cuối nhạy cảm; cần kiểm tra kỹ tổn thất áp suất.</p><a class="inline-block mt-4 text-primary font-bold hover:underline" href="/product/v-pakf9">Xem V-PAK F9 →</a></div>
+                </div>
+                <div class="bg-amber-50 border-l-4 border-amber-500 rounded-xl p-6 my-8"><strong>Lưu ý:</strong> F7–F9 là cách gọi quen thuộc theo EN 779. ISO 16890 đánh giá theo ePM1, ePM2.5, ePM10 hoặc ISO Coarse và có phương pháp thử khác. Vì vậy, hãy đối chiếu kết quả của đúng model thay vì dùng một bảng quy đổi chung.</div>
+            </section>
+
+            <figure class="my-10 max-w-3xl mx-auto">
+                <img src="images/san-pham/vpf8.webp" alt="Lọc túi V-PAK F8 cho AHU do VAF sản xuất" width="2400" height="1792" loading="lazy" class="w-full h-auto rounded-xl shadow-lg">
+                <figcaption class="text-center text-sm text-slate-500 mt-3">Lọc túi V-PAK F8 dùng cho hệ thống AHU và HVAC.</figcaption>
+            </figure>
+
+            <section id="so-sanh" class="mt-10">
+                <h2 class="text-3xl font-bold text-secondary mb-6">Bảng so sánh lọc túi F7, F8 và F9 của VAF</h2>
+                <p class="mb-5 leading-8">Theo catalogue V-PAK hiện hành của VAF, ba dòng sản phẩm sử dụng vật liệu lọc sợi tổng hợp, có lựa chọn khung thép mạ kẽm, nhôm hoặc inox 304 và nhiệt độ làm việc tối đa được công bố là 100°C. Hiệu suất ISO 16890 dưới đây là thông số công bố theo từng dòng sản phẩm.</p>
+                <div class="overflow-x-auto my-8 rounded-xl border border-slate-200">
+                    <table class="w-full border-collapse text-left min-w-[720px]">
+                        <thead><tr class="bg-secondary text-white"><th class="p-4">Tiêu chí</th><th class="p-4">V-PAK F7</th><th class="p-4">V-PAK F8</th><th class="p-4">V-PAK F9</th></tr></thead>
+                        <tbody>
+                            <tr class="border-b"><td class="p-4 font-bold">Cấp gọi EN 779</td><td class="p-4">F7</td><td class="p-4">F8</td><td class="p-4">F9</td></tr>
+                            <tr class="border-b bg-slate-50"><td class="p-4 font-bold">Công bố ISO 16890</td><td class="p-4">ePM1 55%</td><td class="p-4">ePM1 70%</td><td class="p-4">ePM1 80%</td></tr>
+                            <tr class="border-b"><td class="p-4 font-bold">Số túi</td><td class="p-4">3–10</td><td class="p-4">3–10</td><td class="p-4">3–10</td></tr>
+                            <tr class="border-b bg-slate-50"><td class="p-4 font-bold">Vật liệu khung</td><td class="p-4">GI / Al / SS304</td><td class="p-4">GI / Al / SS304</td><td class="p-4">GI / Al / SS304</td></tr>
+                            <tr><td class="p-4 font-bold">Định hướng lựa chọn</td><td class="p-4">Cân bằng hiệu suất và sức cản</td><td class="p-4">Tăng hiệu suất hạt mịn</td><td class="p-4">Yêu cầu lọc tinh cao hơn</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-sm text-slate-500 leading-6">Thông số có thể thay đổi theo kích thước và cấu hình. Cần dùng bảng dữ liệu của đúng mã hàng để chốt lưu lượng và chênh áp.</p>
+            </section>
+
+            <section id="thong-so" class="mt-10">
+                <h2 class="text-3xl font-bold text-secondary mb-6">6 thông số phải kiểm tra trước khi đặt lọc</h2>
+                <ol class="list-decimal pl-6 space-y-5 mb-8">
+                    <li><strong>Cấp lọc và tiêu chuẩn:</strong> ghi rõ F7/F8/F9 theo hồ sơ cũ và nhóm ePM theo ISO 16890 nếu dự án có yêu cầu. Đừng giả định hai cách phân loại tương đương tuyệt đối.</li>
+                    <li><strong>Kích thước rộng × cao × sâu:</strong> đo lọc đang dùng và ô lắp. Chỉ sai vài milimét cũng có thể gây khó lắp hoặc tạo khe hở cho khí đi tắt.</li>
+                    <li><strong>Lưu lượng danh định:</strong> tổng lưu lượng AHU chia cho số ô lọc chỉ là bước kiểm tra ban đầu; cần đối chiếu lưu lượng của đúng kích thước và số túi.</li>
+                    <li><strong>Chênh áp ban đầu và chênh áp cuối:</strong> chênh áp ban đầu ảnh hưởng năng lượng quạt, còn giới hạn cuối giúp xác định thời điểm thay. Không dùng một ngưỡng chung cho mọi hệ thống.</li>
+                    <li><strong>Số túi và chiều sâu túi:</strong> phải đủ diện tích lọc nhưng vẫn có khoảng trống để từng túi bung đều, không cọ vào vỏ AHU hoặc túi kế bên.</li>
+                    <li><strong>Khung, gioăng và môi trường:</strong> chọn GI, nhôm hay SS304 theo độ ẩm, ăn mòn và yêu cầu vệ sinh; xác nhận vị trí gioăng và hướng dòng khí.</li>
+                </ol>
+                <div class="bg-slate-900 text-white rounded-2xl p-7 my-8"><h3 class="text-2xl font-bold mb-3">Đừng chọn chỉ bằng giá mua ban đầu</h3><p class="leading-8 text-slate-200">Chi phí thực tế còn gồm điện năng của quạt, tần suất thay, thời gian dừng máy và ảnh hưởng tới HEPA phía sau. Hai lọc cùng cấp và cùng kích thước có thể có chênh áp, khả năng chứa bụi và tuổi thọ khác nhau.</p></div>
+            </section>
+
+            <section id="cau-hinh" class="mt-10">
+                <h2 class="text-3xl font-bold text-secondary mb-6">Gợi ý theo cấu hình AHU</h2>
+                <div class="space-y-5 my-8">
+                    <div class="border-l-4 border-primary bg-slate-50 rounded-xl p-6"><h3 class="text-xl font-bold text-secondary mb-2">AHU tiện nghi hoặc nhà xưởng thông thường</h3><p class="leading-7">Có thể bắt đầu từ lọc thô phía trước và F7 ở cấp tinh, sau đó xác nhận lại theo chất lượng khí ngoài trời, yêu cầu trong phòng và năng lực quạt.</p></div>
+                    <div class="border-l-4 border-primary bg-slate-50 rounded-xl p-6"><h3 class="text-xl font-bold text-secondary mb-2">AHU cần kiểm soát bụi mịn cao hơn</h3><p class="leading-7">Cân nhắc F8 hoặc F9 khi yêu cầu ePM1 cao hơn. Trước khi nâng cấp từ F7, cần kiểm tra cột áp dự phòng của quạt và lưu lượng thực tế sau khi lắp.</p></div>
+                    <div class="border-l-4 border-primary bg-slate-50 rounded-xl p-6"><h3 class="text-xl font-bold text-secondary mb-2">AHU có HEPA ở cấp cuối</h3><p class="leading-7">F7–F9 có thể đóng vai trò tiền lọc nhằm giảm tải cho HEPA. Cấp phù hợp phụ thuộc tải bụi đầu vào, yêu cầu sạch, chi phí năng lượng và chu kỳ bảo trì mục tiêu.</p></div>
+                </div>
+                <p class="mb-5 leading-8">Nếu đang thiết kế toàn bộ chuỗi lọc, xem thêm <a class="text-primary font-semibold hover:underline" href="/loc-khi-cong-nghiep">giải pháp lọc khí công nghiệp</a> và bài <a class="text-primary font-semibold hover:underline" href="/news/hepa-filter-la-gi">HEPA Filter là gì?</a>.</p>
+            </section>
+
+            <section id="bao-gia" class="mt-10">
+                <h2 class="text-3xl font-bold text-secondary mb-6">Checklist gửi VAF để nhận báo giá đúng ngay từ đầu</h2>
+                <div class="grid md:grid-cols-2 gap-5 my-8">
+                    <ul class="list-disc pl-6 space-y-3 rounded-xl border border-slate-200 p-6"><li>Cấp F7, F8, F9 hoặc ePM yêu cầu</li><li>Kích thước rộng × cao × sâu</li><li>Số túi và số lượng bộ lọc</li><li>Lưu lượng mỗi bộ hoặc tổng lưu lượng AHU</li></ul>
+                    <ul class="list-disc pl-6 space-y-3 rounded-xl border border-slate-200 p-6"><li>Chênh áp yêu cầu nếu hồ sơ có quy định</li><li>Vật liệu khung và vị trí gioăng</li><li>Ảnh tem của lọc cũ</li><li>Ảnh ô lắp và điều kiện môi trường</li></ul>
+                </div>
+                <p class="mb-5 leading-8">Nếu chưa có đủ dữ liệu, hãy gửi ảnh tem và kích thước thực tế; đội ngũ VAF sẽ hỗ trợ đối chiếu trước khi chốt cấu hình.</p>
+            </section>
+
+            <section id="faq" class="mt-10">
+                <h2 class="text-3xl font-bold text-secondary mb-6">Câu hỏi thường gặp</h2>
+                <div class="space-y-5">
+                    <div class="rounded-xl border border-slate-200 p-6"><h3 class="text-xl font-bold text-secondary mb-2">Nên chọn lọc túi F7, F8 hay F9 cho AHU?</h3><p>Cấp lọc phải theo chất lượng khí đầu ra, chuỗi lọc và khả năng quạt. F7 thường phù hợp làm lọc tinh hoặc tiền lọc HEPA; F8 và F9 dùng khi cần hiệu suất ePM1 cao hơn, nhưng phải kiểm tra chênh áp và lưu lượng của đúng model.</p></div>
+                    <div class="rounded-xl border border-slate-200 p-6"><h3 class="text-xl font-bold text-secondary mb-2">F7, F8, F9 có tương đương trực tiếp với ISO ePM1 không?</h3><p>Không nên quy đổi chung cho mọi sản phẩm vì EN 779 và ISO 16890 dùng phương pháp thử khác nhau. Theo catalogue V-PAK của VAF, các model F7, F8 và F9 được công bố lần lượt là ePM1 55%, ePM1 70% và ePM1 80%; cần đối chiếu tài liệu của đúng model đặt hàng.</p></div>
+                    <div class="rounded-xl border border-slate-200 p-6"><h3 class="text-xl font-bold text-secondary mb-2">Chỉ cần đúng kích thước khung là có thể thay lọc túi không?</h3><p>Chưa đủ. Ngoài rộng, cao và sâu, cần kiểm tra số túi, lưu lượng danh định, chênh áp ban đầu, giới hạn chênh áp cuối, hướng lắp, vật liệu khung và khoảng trống để túi bung đều.</p></div>
+                    <div class="rounded-xl border border-slate-200 p-6"><h3 class="text-xl font-bold text-secondary mb-2">Khi nào cần thay lọc túi trong AHU?</h3><p>Nên thay theo chênh áp giới hạn của thiết kế hoặc nhà sản xuất, kết hợp kiểm tra lưu lượng, tình trạng túi và yêu cầu vệ sinh. Không nên chỉ thay theo màu lọc hoặc một lịch cố định cho mọi AHU.</p></div>
+                    <div class="rounded-xl border border-slate-200 p-6"><h3 class="text-xl font-bold text-secondary mb-2">Cần gửi thông tin gì để VAF báo giá lọc túi?</h3><p>Hãy gửi cấp lọc hoặc ePM yêu cầu, kích thước rộng × cao × sâu, số túi, số lượng, lưu lượng nếu có, vật liệu khung, ảnh tem và ảnh vị trí lắp. VAF có thể hỗ trợ đối chiếu khi thông tin hiện trường chưa đầy đủ.</p></div>
+                </div>
+            </section>
+
+            <section class="bg-secondary text-white rounded-2xl p-8 my-10">
+                <h2 class="text-3xl font-bold mb-4">Gửi thông số để VAF chọn lọc túi phù hợp</h2>
+                <p class="leading-8 mb-6 text-slate-200">VAF hỗ trợ đối chiếu F7, F8, F9 theo kích thước, lưu lượng, chênh áp và điều kiện AHU. Bạn có thể gửi ảnh tem hoặc danh sách quy cách để được kiểm tra nhanh.</p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="tel:0817250442" class="bg-primary text-white font-bold px-5 py-3 rounded-full hover:opacity-90">Gọi trực tiếp 0817 250 442</a>
+                    <a href="https://zalo.me/0817250442" target="_blank" rel="noopener noreferrer" class="bg-blue-600 text-white font-bold px-5 py-3 rounded-full hover:opacity-90">Nhắn Zalo 0817 250 442</a>
+                    <a href="/contact" class="bg-white text-secondary font-bold px-5 py-3 rounded-full hover:bg-slate-100">Gửi yêu cầu báo giá</a>
+                </div>
+                <p class="mt-5 text-sm text-slate-300">Hotline VAF: 1900 8949</p>
+            </section>
+        `
+    },
+
+    {
         id: 'chung-chi-tieu-chuan-chat-luong-vaf',
         title: 'Chứng Chỉ Và Tiêu Chuẩn Chất Lượng VAF – Nền Tảng Cho Giải Pháp Lọc Khí',
         seoTitle: 'Chứng Chỉ VAF: ISO 9001, ISO 13485, EN 1822, ISO 16890',
