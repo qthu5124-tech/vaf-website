@@ -75,13 +75,14 @@
 
                     <div class="lg:w-7/12 p-10 md:p-14 bg-white relative">
                         <h2 class="text-3xl font-black text-secondary font-heading mb-2" data-i18n="form_pro_title">Gửi Yêu Cầu Chuyên Gia</h2>
-                        <p class="text-slate-500 text-sm mb-10" data-i18n="form_pro_desc">Vui lòng cung cấp chi tiết nhu cầu, VAF sẽ phản hồi và báo giá trong 24 giờ.</p>
+                        <p class="text-slate-500 text-sm mb-10" data-i18n="form_pro_desc">Vui lòng cung cấp chi tiết nhu cầu, đội ngũ VAF sẽ tiếp nhận và phản hồi trong giờ làm việc.</p>
 
                         <form id="vaf-contact-form" class="space-y-6 relative z-10">
 
                             <input type="hidden" name="access_key" value="74715d24-cfc0-456a-96cd-6efcd5a221d5">
                             <input type="hidden" name="subject" value="🔔 Có yêu cầu tư vấn mới từ Website VAF">
                             <input type="hidden" name="from_name" value="Hệ Thống Website VAF">
+                            <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off">
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
@@ -100,8 +101,39 @@
                                     <input type="email" name="Email Khách Hàng" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition font-medium text-slate-700">
                                 </div>
                                 <div>
-                                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2" data-i18n="lbl_company">Tên Công Ty / Sản Phẩm Quan Tâm</label>
+                                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2" data-i18n="lbl_company">Tên Công Ty</label>
                                     <input type="text" name="Tên Công Ty" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition font-medium text-slate-700">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">Sản Phẩm Quan Tâm *</label>
+                                    <select name="Sản Phẩm Quan Tâm" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition font-medium text-slate-700">
+                                        <option value="">Chọn nhu cầu</option>
+                                        <option value="loc-theo-kich-thuoc">Lọc khí theo kích thước</option>
+                                        <option value="hepa-h13-h14">Lọc HEPA H13 / H14</option>
+                                        <option value="loc-tui-f7-f8-f9">Lọc túi F7 / F8 / F9</option>
+                                        <option value="loc-tho-g3-g4">Lọc thô G3 / G4</option>
+                                        <option value="loc-carbon">Lọc carbon khử mùi</option>
+                                        <option value="thiet-bi-phong-sach">Thiết bị phòng sạch</option>
+                                        <option value="khac">Nhu cầu khác</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">Kích Thước Lọc</label>
+                                    <input type="text" name="Kích Thước" placeholder="Rộng × Cao × Dày (mm)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition font-medium text-slate-700">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">Số Lượng</label>
+                                    <input type="number" min="1" name="Số Lượng" placeholder="Ví dụ: 20" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition font-medium text-slate-700">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">Tỉnh / Thành Giao Hàng</label>
+                                    <input type="text" name="Địa Điểm Giao Hàng" placeholder="Ví dụ: Bình Dương" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition font-medium text-slate-700">
                                 </div>
                             </div>
 
@@ -120,6 +152,14 @@
                                     <a href="tel:0817250442" class="border border-slate-200 rounded-xl py-3 px-4 text-center font-bold text-secondary hover:border-primary hover:text-primary transition"><i class="fas fa-phone-alt mr-2"></i><span data-i18n="contact_direct_call">Gọi 0817 250 442</span></a>
                                     <a href="https://zalo.me/0817250442" target="_blank" rel="noopener" class="bg-[#0068ff] rounded-xl py-3 px-4 text-center font-bold text-white hover:bg-[#0057d9] transition flex items-center justify-center gap-2"><img src="https://stc-zaloprofile.zdn.vn/pc/v1/images/zalo_sharelogo.png" width="24" height="24" alt="" loading="lazy" decoding="async" class="w-6 h-6 rounded-full"><span data-i18n="contact_zalo">Nhắn Zalo báo giá</span></a>
                                 </div>
+                            </div>
+
+                            <div class="rounded-2xl border border-[#0068ff]/20 bg-blue-50 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                <div>
+                                    <p class="font-bold text-secondary">Có ảnh nhãn lọc hoặc bản vẽ?</p>
+                                    <p class="text-sm text-slate-500 mt-1">Gửi trực tiếp qua Zalo để kỹ sư kiểm tra nhanh hơn.</p>
+                                </div>
+                                <a href="https://zalo.me/0817250442" target="_blank" rel="noopener" class="shrink-0 bg-[#0068ff] text-white font-bold px-5 py-3 rounded-xl hover:bg-[#0057d9] transition">Gửi ảnh qua Zalo</a>
                             </div>
                         </form>
                     </div>

@@ -44,7 +44,7 @@ function loadTranslationsScript() {
     }
 
     return new Promise((resolve, reject) => {
-        const existing = document.querySelector('script[src="/translations-data.min.js?v=20260724-2"]');
+        const existing = document.querySelector('script[src="/translations-data.min.js?v=20260909-1"]');
         if (existing) {
             existing.addEventListener('load', () => {
                 translations = window.translations || translations;
@@ -55,7 +55,7 @@ function loadTranslationsScript() {
         }
 
         const script = document.createElement('script');
-        script.src = '/translations-data.min.js?v=20260724-2';
+        script.src = '/translations-data.min.js?v=20260909-1';
         script.onload = () => {
             translations = window.translations || translations;
             resolve(translations);
@@ -147,16 +147,17 @@ async function setLang(lang) {
 
 let projects = window.projects || [];
 const viewPartials = {
-    'view-industrial-air-filtration': '/partials/industrial-air-filtration.html',
+    'view-industrial-air-filtration': '/partials/industrial-air-filtration.html?v=20260909-2',
+    'view-custom-filter-quote': '/partials/custom-filter-quote.html?v=20260909-1',
     'view-about': '/partials/about.html',
     'view-news': '/partials/news.html',
     'view-products': '/partials/products.html',
-    'view-product-detail': '/partials/product-detail.html',
+    'view-product-detail': '/partials/product-detail.html?v=20260909-1',
     'view-projects': '/partials/projects.html',
     'view-projects-all': '/partials/projects-all.html',
     'view-project-detail': '/partials/project-detail.html',
     'view-news-detail': '/partials/news-detail.html',
-    'view-contact': '/partials/contact.html',
+    'view-contact': '/partials/contact.html?v=20260909-1',
     // Module Tuyển dụng: giữ partial tách biệt để chỉ tải khi người dùng truy cập.
     'view-careers': '/partials/careers.html?v=20260724-5',
     'view-career-detail': '/partials/career-detail.html?v=20260724-5'
@@ -304,6 +305,47 @@ function scrollToTop() {
         root.style.scrollBehavior = previousBehavior;
     });
 }
+
+function trackVafEvent(eventName, parameters = {}) {
+    if (typeof window.gtag !== 'function') return;
+    window.gtag('event', eventName, {
+        page_path: location.pathname,
+        page_title: document.title,
+        ...parameters
+    });
+}
+
+function bindLeadTracking() {
+    if (document.documentElement.dataset.leadTrackingBound === 'true') return;
+    document.documentElement.dataset.leadTrackingBound = 'true';
+
+    document.addEventListener('click', event => {
+        const link = event.target.closest('a[href]');
+        if (!link) return;
+        const href = link.getAttribute('href') || '';
+
+        if (href.startsWith('tel:')) {
+            trackVafEvent('click_to_call', {
+                contact_method: 'phone',
+                contact_value: href.replace(/^tel:/, ''),
+                link_text: cleanText(link.textContent).trim().slice(0, 100)
+            });
+        } else if (/zalo\.me/i.test(href)) {
+            trackVafEvent('click_zalo', {
+                contact_method: 'zalo',
+                contact_value: '0817250442',
+                link_text: cleanText(link.textContent).trim().slice(0, 100)
+            });
+        } else if (href.startsWith('mailto:')) {
+            trackVafEvent('click_email', {
+                contact_method: 'email',
+                contact_value: href.replace(/^mailto:/, '').split('?')[0]
+            });
+        }
+    });
+}
+
+window.trackVafEvent = trackVafEvent;
 
 function scrollToY(top) {
     window.scrollTo({ top, behavior: scrollBehavior() });
@@ -550,7 +592,7 @@ function loadContactFormScript() {
     if (window.bindContactForm) return Promise.resolve();
 
     return new Promise((resolve, reject) => {
-        const existing = document.querySelector('script[src="/contact-form.min.js"]');
+        const existing = document.querySelector('script[src="/contact-form.min.js?v=20260909-2"]');
         if (existing) {
             existing.addEventListener('load', resolve, { once: true });
             existing.addEventListener('error', reject, { once: true });
@@ -558,7 +600,7 @@ function loadContactFormScript() {
         }
 
         const script = document.createElement('script');
-        script.src = '/contact-form.min.js';
+        script.src = '/contact-form.min.js?v=20260909-2';
         script.defer = true;
         script.onload = resolve;
         script.onerror = reject;
@@ -930,6 +972,7 @@ let activeTarget = page;
 
 if (page === "product") activeTarget = "products";
 if (page === "loc-khi-cong-nghiep") activeTarget = "products";
+if (page === "bao-gia-loc-khi-theo-kich-thuoc") activeTarget = "products";
 if (page === "project") activeTarget = "projects";
 if (page === "tuyen-dung") activeTarget = "tuyen-dung";
 
@@ -1011,6 +1054,39 @@ if (page === "tuyen-dung") activeTarget = "tuyen-dung";
         });
         await ensureView('view-industrial-air-filtration');
         switchView('view-industrial-air-filtration');
+        scrollToTop();
+    }
+    else if (page === 'bao-gia-loc-khi-theo-kich-thuoc') {
+        setPageSeo({
+            title: 'Báo Giá Lọc Khí Theo Kích Thước Cho AHU & Phòng Sạch | VAF',
+            description: 'Nhận tư vấn và báo giá lọc khí theo kích thước: lọc thô, lọc túi F7 F8 F9, HEPA H13 H14 và lọc carbon cho AHU, HVAC, phòng sạch.',
+            path: '/bao-gia-loc-khi-theo-kich-thuoc',
+            image: '/images/anh-tulieu/industrial-air-filtration-hero-ai.jpg',
+            includeEnglishAlternate: false,
+            indexable: currentLang !== 'en',
+            structuredData: {
+                '@context': 'https://schema.org',
+                '@graph': [
+                    {
+                        '@type': 'Service',
+                        name: 'Sản xuất lọc khí theo kích thước',
+                        description: 'Tư vấn và sản xuất lọc khí theo kích thước cho AHU, HVAC và phòng sạch.',
+                        provider: { '@type': 'Organization', name: 'VAF - Viet Air Filter', url: SITE_URL },
+                        areaServed: { '@type': 'Country', name: 'Việt Nam' },
+                        url: SITE_URL + '/bao-gia-loc-khi-theo-kich-thuoc'
+                    },
+                    {
+                        '@type': 'FAQPage',
+                        mainEntity: [
+                            { '@type': 'Question', name: 'Không biết cấp lọc thì có báo giá được không?', acceptedAnswer: { '@type': 'Answer', text: 'Có thể bắt đầu bằng ảnh nhãn lọc, ảnh vị trí lắp, kích thước và ứng dụng để kỹ sư kiểm tra.' } },
+                            { '@type': 'Question', name: 'Chỉ gửi kích thước có đủ không?', acceptedAnswer: { '@type': 'Answer', text: 'Cần kiểm tra thêm cấp hiệu suất, lưu lượng, chênh áp, vật liệu khung, gioăng và điều kiện vận hành.' } }
+                        ]
+                    }
+                ]
+            }
+        });
+        await ensureView('view-custom-filter-quote');
+        switchView('view-custom-filter-quote');
         scrollToTop();
     }
     else if (page === 'projects') {
@@ -1587,6 +1663,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     hydrateDeferredImages();
     lazyInitSwipers();
+    bindLeadTracking();
     requestAnimationFrame(() => initScrollReveal(document));
     setTimeout(() => initScrollReveal(document), 120);
 });

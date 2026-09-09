@@ -60,6 +60,15 @@ add('/loc-khi-cong-nghiep', '2026-08-20', {
     type: 'Service'
 });
 
+add('/bao-gia-loc-khi-theo-kich-thuoc', '2026-09-09', {
+    title: 'Báo Giá Lọc Khí Theo Kích Thước Cho AHU & Phòng Sạch | VAF',
+    description: 'Nhận tư vấn và báo giá lọc khí theo kích thước: lọc thô, lọc túi F7 F8 F9, HEPA H13 H14 và lọc carbon cho AHU, HVAC, phòng sạch.',
+    image: 'images/anh-tulieu/industrial-air-filtration-hero-ai.jpg',
+    language: 'vi',
+    type: 'Service',
+    partial: 'partials/custom-filter-quote.html'
+});
+
 add('/en', DEFAULT_LASTMOD, { title: 'VAF | Air Filters & Cleanroom Equipment Manufacturer', description: 'VAF manufactures pre-filters, bag filters, HEPA and ULPA filters, FFU and cleanroom equipment.', language: 'en', alternate: '/' });
 add('/en/about', DEFAULT_LASTMOD, { title: 'About VAF | Air Filter Manufacturer', description: 'Learn about VAF, our air filter manufacturing facilities, quality systems and cleanroom solutions.', language: 'en', alternate: '/about' });
 add('/en/products', DEFAULT_LASTMOD, { title: 'Air Filters & Cleanroom Equipment | VAF', description: 'Explore VAF pre-filters, bag filters, HEPA and ULPA filters, FFU, air showers and cleanroom equipment.', language: 'en', alternate: '/products', type: 'CollectionPage', productCollection: products });
@@ -346,6 +355,17 @@ function renderSeoHtml(path, seo) {
         }
         // The shared shell contains a hidden careers hero. It must not introduce
         // a second H1 into the server-rendered landing page document outline.
+        html = html.replace(/<h1([^>]*)>([\s\S]*?)<\/h1>/, '<div$1>$2</div>');
+    }
+    if (seo.partial) {
+        const landingPage = fs.readFileSync(seo.partial, 'utf8')
+            .replace('class="page-section bg-white"', 'class="page-section active bg-white"');
+        const homeStart = html.indexOf('<div id="view-home"');
+        const lazyRoot = '<div id="lazy-view-root"></div>';
+        const lazyStart = html.indexOf(lazyRoot);
+        if (homeStart !== -1 && lazyStart !== -1) {
+            html = html.slice(0, homeStart) + `<div id="lazy-view-root">${landingPage}</div>` + html.slice(lazyStart + lazyRoot.length);
+        }
         html = html.replace(/<h1([^>]*)>([\s\S]*?)<\/h1>/, '<div$1>$2</div>');
     }
     if (seo.type === 'Product' && seo.product) {
