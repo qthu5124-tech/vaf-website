@@ -299,7 +299,7 @@ function scrollToTop() {
     const root = document.documentElement;
     const previousBehavior = root.style.scrollBehavior;
     root.style.scrollBehavior = 'auto';
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     requestAnimationFrame(() => {
         root.style.scrollBehavior = previousBehavior;
     });

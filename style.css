@@ -1,8 +1,4 @@
 ﻿/* --- CẤU HÌNH CHUNG --- */
-html {
-    scroll-behavior: smooth;
-}
-
 body {
     font-family: 'Inter', sans-serif;
     max-width: 100%;
