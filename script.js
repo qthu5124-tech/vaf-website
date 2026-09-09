@@ -518,13 +518,14 @@ function loadNewsScript() {
 }
 
 function loadProjectsScript() {
+    const projectsDataSrc = '/projects-data.min.js?v=20260909-1';
     if (window.projects) {
         projects = window.projects;
         return Promise.resolve(projects);
     }
 
     return new Promise((resolve, reject) => {
-        const existing = document.querySelector('script[src="/projects-data.min.js"]');
+        const existing = document.querySelector(`script[src="${projectsDataSrc}"]`);
         if (existing) {
             existing.addEventListener('load', () => {
                 projects = window.projects || [];
@@ -535,7 +536,7 @@ function loadProjectsScript() {
         }
 
         const script = document.createElement('script');
-        script.src = '/projects-data.min.js';
+        script.src = projectsDataSrc;
         script.onload = () => {
             projects = window.projects || [];
             resolve(projects);
