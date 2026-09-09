@@ -333,6 +333,59 @@ function scrollToArticleAnchor(hash, updateHistory = false) {
 }
 
 let viewTransitionToken = 0;
+let scrollRevealObserver;
+
+function initScrollReveal(scope = document) {
+    if (!scope || prefersReducedMotion() || !('IntersectionObserver' in window)) return;
+
+    if (!scrollRevealObserver) {
+        scrollRevealObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-revealed');
+                scrollRevealObserver.unobserve(entry.target);
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+    }
+
+    const selector = [
+        '[data-scroll-reveal]',
+        '.product-card',
+        '.news-grid-card',
+        '.info-card',
+        '.cert-item',
+        '.timeline-content',
+        '.counter-box',
+        '.custom-size-banner',
+        '#products-grid > *',
+        '#projects-grid > *',
+        '#all-projects-grid .grid > *',
+        '#news-page-grid > *',
+        '#sidebar-featured > *',
+        '#nd-content > .grid > *',
+        '#nd-content > .space-y-5 > *',
+        '.page-section section .grid > div'
+    ].join(',');
+    const elements = [];
+    if (scope.matches?.(selector)) elements.push(scope);
+    elements.push(...scope.querySelectorAll?.(selector) || []);
+
+    let staggerIndex = 0;
+    [...new Set(elements)].forEach(element => {
+        if (element.dataset.scrollRevealBound === 'true') return;
+        element.dataset.scrollRevealBound = 'true';
+
+        // Do not hide or animate content already visible when a route opens.
+        if (element.getBoundingClientRect().top < window.innerHeight * 0.92) return;
+
+        element.classList.add('scroll-reveal');
+        element.style.opacity = '0';
+        element.style.translate = '0 24px';
+        element.style.setProperty('--scroll-reveal-delay', `${(staggerIndex % 4) * 65}ms`);
+        staggerIndex += 1;
+        scrollRevealObserver.observe(element);
+    });
+}
 
 function switchView(viewId) {
     const target = document.getElementById(viewId);
@@ -355,7 +408,9 @@ function switchView(viewId) {
     });
     target.style.display = 'block';
     requestAnimationFrame(() => requestAnimationFrame(() => {
-        if (transitionToken === viewTransitionToken) target.classList.add('active');
+        if (transitionToken !== viewTransitionToken) return;
+        target.classList.add('active');
+        initScrollReveal(target);
     }));
 }
 
@@ -626,6 +681,7 @@ async function filterProducts(cat, noScroll = false) {
             `}).join('');
         }
         applyImageLoadingHints(grid);
+        initScrollReveal(grid);
     }
 
     // Nếu người dùng chủ động bấm thì cuộn chuột lên đầu lưới, nếu do hệ thống auto-đổi ngôn ngữ thì giữ yên
@@ -1128,6 +1184,7 @@ async function renderAllProjects(page = 1) {
         </div>
     `;
 
+    initScrollReveal(grid);
     renderPagination();
 }
 
@@ -1171,6 +1228,7 @@ async function filterProjects(cat) {
             </div>
         </div>`).join('');
     applyImageLoadingHints(grid);
+    initScrollReveal(grid);
 }
 
 async function showAllProjects() {
@@ -1208,6 +1266,7 @@ function renderHomeNews() {
         </a></article></div>`;
     }).join('');
     applyImageLoadingHints(container);
+    initScrollReveal(container);
     if (window.homeNewsSwiper) window.homeNewsSwiper.update();
 }
 
@@ -1267,6 +1326,7 @@ function renderNewsPage(page = 1) {
     `;
     }).join('');
     applyImageLoadingHints(container);
+    initScrollReveal(container);
 
     // B. Render Nút Phân Trang
     renderPaginationControls(totalPages, page);
@@ -1305,6 +1365,7 @@ function renderSidebarNews() {
     `;
     }).join('');
     applyImageLoadingHints(container);
+    initScrollReveal(container);
 }
 
 // 2. Hàm tạo nút bấm (1, 2, 3, Next, Prev)
@@ -1525,7 +1586,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     hydrateDeferredImages();
     lazyInitSwipers();
-});    
+    requestAnimationFrame(() => initScrollReveal(document));
+    setTimeout(() => initScrollReveal(document), 120);
+});
 
 function runWhenNearViewport(element, callback) {
     if (!element) return;
