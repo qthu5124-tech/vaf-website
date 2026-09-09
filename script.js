@@ -344,6 +344,9 @@ function switchView(viewId) {
     }
 
     const transitionToken = ++viewTransitionToken;
+    // Reset before the new view is painted, so it can never flash at the
+    // previous page's scroll position while its content is being rendered.
+    scrollToTop();
     const careerHero = document.getElementById('career-route-hero');
     if (careerHero) careerHero.style.display = viewId === 'view-careers' ? 'block' : 'none';
     document.querySelectorAll('.page-section').forEach(el => {
