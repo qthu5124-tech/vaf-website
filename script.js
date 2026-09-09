@@ -291,7 +291,18 @@ const isCompactViewport = () => window.matchMedia('(max-width: 767px)').matches;
 const scrollBehavior = () => (prefersReducedMotion() || isCompactViewport()) ? 'auto' : 'smooth';
 
 function scrollToTop() {
-    if (window.scrollY > 0) window.scrollTo({ top: 0, behavior: scrollBehavior() });
+    if (window.scrollY <= 0) return;
+
+    // Route changes must not animate all the way back from the bottom of a
+    // long page. Temporarily override the global smooth-scroll rule, while
+    // keeping smooth scrolling for anchors and in-page controls.
+    const root = document.documentElement;
+    const previousBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    requestAnimationFrame(() => {
+        root.style.scrollBehavior = previousBehavior;
+    });
 }
 
 function scrollToY(top) {
@@ -321,9 +332,18 @@ function scrollToArticleAnchor(hash, updateHistory = false) {
     return true;
 }
 
+let viewTransitionToken = 0;
+
 function switchView(viewId) {
     const target = document.getElementById(viewId);
     if(!target) return;
+    const current = document.querySelector('.page-section.active');
+    if (current === target) {
+        target.style.display = 'block';
+        return;
+    }
+
+    const transitionToken = ++viewTransitionToken;
     const careerHero = document.getElementById('career-route-hero');
     if (careerHero) careerHero.style.display = viewId === 'view-careers' ? 'block' : 'none';
     document.querySelectorAll('.page-section').forEach(el => {
@@ -331,7 +351,9 @@ function switchView(viewId) {
         if(el.id !== viewId) el.style.display = 'none';
     });
     target.style.display = 'block';
-    setTimeout(() => target.classList.add('active'), 10);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+        if (transitionToken === viewTransitionToken) target.classList.add('active');
+    }));
 }
 
 // --- 3. LOGIC SẢN PHẨM & MENU ---
@@ -804,6 +826,7 @@ function handleNav(target) {
 }
 
 // Lắng nghe sự kiện khi URL thay đổi (Bấm nút Back/Forward trình duyệt)
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 window.addEventListener('popstate', handleRouting);
 
 async function handleRouting() {

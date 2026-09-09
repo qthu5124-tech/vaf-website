@@ -220,13 +220,22 @@ h1, h2, h3, h4, h5, h6 {
 .page-section {
     display: none;
     opacity: 0;
-    transition: opacity 0.3s;
+    transform: translateY(6px);
+    transition: opacity 0.22s ease-out, transform 0.22s ease-out;
 }
 
     .page-section.active {
         display: block;
         opacity: 1;
+        transform: translateY(0);
     }
+
+@media (prefers-reduced-motion: reduce) {
+    .page-section {
+        transform: none;
+        transition: none;
+    }
+}
 
 .product-card {
     transition: transform 0.3s, box-shadow 0.3s;
