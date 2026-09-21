@@ -521,14 +521,14 @@ function loadDeferredImagesNow(scope = document) {
 function loadNewsTranslations() {
     if (currentLang !== 'en' || window.newsTranslationsEn) return Promise.resolve();
     return new Promise((resolve, reject) => {
-        const existing = document.querySelector('script[src="/news-en-data.min.js"]');
+        const existing = document.querySelector('script[src="/news-en-data.min.js?v=20260921-1"]');
         if (existing) {
             existing.addEventListener('load', resolve, { once: true });
             existing.addEventListener('error', reject, { once: true });
             return;
         }
         const script = document.createElement('script');
-        script.src = '/news-en-data.min.js';
+        script.src = '/news-en-data.min.js?v=20260921-1';
         script.onload = resolve;
         script.onerror = reject;
         document.head.appendChild(script);
@@ -544,7 +544,7 @@ function loadNewsScript() {
     if (window.newsData) return loadNewsTranslations().then(() => window.newsData);
 
     return new Promise((resolve, reject) => {
-        const existing = document.querySelector('script[src="/news-data.min.js"]');
+        const existing = document.querySelector('script[src="/news-data.min.js?v=20260921-1"]');
         if (existing) {
             existing.addEventListener('load', () => loadNewsTranslations().then(() => resolve(window.newsData || [])), { once: true });
             existing.addEventListener('error', reject, { once: true });
@@ -552,7 +552,7 @@ function loadNewsScript() {
         }
 
         const script = document.createElement('script');
-        script.src = '/news-data.min.js';
+        script.src = '/news-data.min.js?v=20260921-1';
         script.onload = () => loadNewsTranslations().then(() => resolve(window.newsData || []));
         script.onerror = reject;
         document.head.appendChild(script);
