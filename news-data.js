@@ -40,9 +40,9 @@ const newsData = [
         title: 'Cách Đo Kích Thước Lọc Khí AHU, HEPA Để Đặt Hàng Đúng',
         seoTitle: 'Cách Đo Kích Thước Lọc Khí AHU, HEPA | Hướng Dẫn',
         cat: 'Kiến Thức',
-        img: 'images/san-pham/u2gel.webp',
-        imgWidth: 2400,
-        imgHeight: 1792,
+        img: 'images/anh-tin-tin/do-kich-thuoc-loc-khi-ahu-hepa-ai.webp',
+        imgWidth: 1536,
+        imgHeight: 1024,
         author: 'VAF Technical Team',
         date: '21/09/2026',
         desc: 'Hướng dẫn đo kích thước lọc khí AHU, HEPA, phân biệt kích thước khung và gioăng; kèm checklist ảnh nhãn lọc và thông số cần gửi để nhận báo giá.',
@@ -52,6 +52,7 @@ const newsData = [
             { question: 'Không còn nhãn lọc cũ thì có đặt hàng được không?', answer: 'Có thể gửi ảnh bộ lọc, khung giữ, kích thước và ứng dụng để VAF tư vấn. Cấp lọc, lưu lượng và chênh áp vẫn cần xác nhận từ hồ sơ thiết kế hoặc người phụ trách kỹ thuật trước khi chốt cấu hình.' }
         ],
         content: `
+            <p class="text-sm text-slate-500 mb-5">Ảnh bìa minh họa bằng AI về đo khung lọc; số trên thước không dùng làm thông số đặt hàng.</p>
             <p class="mb-5 leading-8">Để <strong>đo kích thước lọc khí AHU hoặc HEPA</strong>, hãy ghi đủ rộng × cao × sâu, đơn vị mm, đo trên phần khung và mô tả riêng gioăng hoặc rãnh gel. Với lọc túi, cần thêm chiều dài túi và số túi. Kích thước giúp kiểm tra khả năng lắp vừa; cấp hiệu suất, lưu lượng và chênh áp quyết định bộ lọc có phù hợp với hệ thống hay không.</p>
             <p class="mb-5 leading-8">Hướng dẫn này dành cho bộ phận bảo trì và mua hàng đang chuẩn bị thay lọc. Nếu đã có đủ thông số, bạn có thể chuyển ngay đến <a href="/bao-gia-loc-khi-theo-kich-thuoc" class="text-primary font-bold hover:underline">trang báo giá lọc khí theo kích thước</a>.</p>
             <nav aria-label="Mục lục bài viết" class="bg-slate-50 rounded-2xl border border-slate-200 p-6 mb-10"><h2 class="text-xl font-bold text-secondary mb-4">Nội dung chính</h2><ol class="list-decimal pl-6 space-y-2"><li><a href="#quy-uoc" class="text-primary hover:underline">Kích thước danh nghĩa và kích thước thực</a></li><li><a href="#cach-do" class="text-primary hover:underline">Các bước đo tại hiện trường</a></li><li><a href="#tung-loai" class="text-primary hover:underline">Lưu ý cho lọc thô, lọc túi và HEPA</a></li><li><a href="#mau-bao-gia" class="text-primary hover:underline">Mẫu thông tin gửi báo giá</a></li><li><a href="#faq" class="text-primary hover:underline">Câu hỏi thường gặp</a></li></ol></nav>

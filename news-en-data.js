@@ -18,6 +18,7 @@ window.newsTranslationsEn = {
       { question: "Can I request a replacement without the old label?", answer: "Send photos, dimensions and the application for initial advice. Confirm the required efficiency, airflow and pressure drop from design records or the responsible engineer before ordering." }
     ],
     content: `
+      <p class="text-sm text-slate-500 mb-5">AI-generated cover illustration of filter-frame measurement; tape markings are not ordering specifications.</p>
       <p class="mb-5 leading-8">To measure an <strong>AHU or HEPA replacement filter</strong>, record the outside frame width, height and depth in millimetres. Describe the gasket, flange or gel channel separately. Bag filters also require the pocket length and number of pockets. Matching the frame size alone does not establish performance compatibility.</p>
       <nav aria-label="Article contents" class="bg-slate-50 border rounded-2xl p-6 my-8"><h2 class="text-xl font-bold mb-4">Contents</h2><ol class="list-decimal pl-6 space-y-2"><li><a href="#dimensions" class="text-primary">Nominal and actual dimensions</a></li><li><a href="#measurement" class="text-primary">Measurement steps</a></li><li><a href="#quotation" class="text-primary">Quotation checklist</a></li><li><a href="#faq" class="text-primary">Frequently asked questions</a></li></ol></nav>
       <h2 id="dimensions" class="text-3xl font-bold mt-10 mb-6">Nominal and actual filter dimensions</h2>
